@@ -1,0 +1,1676 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Time Series Analysis &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/21_Time_Series_Analysis_Intro';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Unsupervised Learning - Dimensionality Reduction" href="22_Dimensionality_Reduction.html" />
+    <link rel="prev" title="Capstone Phase" href="20_Capstone_Phase.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Time Series Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda">Agenda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-time-series">What is a Time Series?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">What is a Time Series?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-temperature-data">Some temperature data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-special-in-time-series-data">What is special in time series data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">What is special in time series data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-the-future-mhm">Predicting the future… mhm</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-for-timeseries">EDA for Timeseries</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trends">Trends</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eliminating-trends">Eliminating trends</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cycles-and-on-and-on-it-goes">Cycles - and on and on it goes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eliminating-cycles">Eliminating cycles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triggerwarning">Triggerwarning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#timeseries">Timeseries?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-panic">DON’T PANIC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-tools-in-tsa">Common Tools in TSA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imputation">Imputation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-split">Train - Test - Split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Train - Test - Split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crossvalidation">Crossvalidation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stationarity">Stationarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-it-mean-for-a-ts-to-be-stationary">What does it mean for a TS to be stationary?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-mean">Rolling Mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-smoothing-methods">Exponential Smoothing Methods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-time-series">Modelling Time Series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-oldschool-stuff-decomposition">The oldschool stuff - Decomposition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-makes-a-time-series">What makes a time series?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additive-vs-multiplicative">Additive vs Multiplicative</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components-of-ts">Components of TS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signal">Signal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend">Trend</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonality">Seasonality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals">Residuals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Components of TS</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-oldschool-stuff-arma">The oldschool stuff - ARMA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generating-arma-process-example">Data Generating ARMA process example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Data Generating ARMA process example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Data Generating ARMA process example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Data Generating ARMA process example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-arma">Forecasting with ARMA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-models-from-arma-class">Other models from ARMA class</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-normal-stuff">The “normal” stuff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fancy-stuff">The fancy stuff</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facebooks-prophet">Facebook’s Prophet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rocket">Rocket</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-networks">Convolutional neural networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#long-short-term-memory-networks">Long-Short-Term-Memory networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer-models">Transformer models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#many-models-where-to-start">Many models - where to start</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acf-pacf">ACF / PACF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">ACF / PACF</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="time-series-analysis">
+<h1>Time Series Analysis<a class="headerlink" href="#time-series-analysis" title="Link to this heading">#</a></h1>
+<section id="agenda">
+<h2>Agenda<a class="headerlink" href="#agenda" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Introduction</p></li>
+<li><p>ARIMA-Family</p></li>
+<li><p>TSA Decomposition</p></li>
+<li><p>Smoothing</p></li>
+<li><p>Fancy models</p></li>
+</ul>
+</section>
+<section id="what-is-a-time-series">
+<h2>What is a Time Series?<a class="headerlink" href="#what-is-a-time-series" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">
+<p>A series of data points over time</p>
+<p>Q: Examples</p>
+  </div>
+  <div class="images">
+    <img src="../images/time_series_analysis_intro/img_p2_1.png">
+  </div>
+</div>
+<section id="id1">
+<h3>What is a Time Series?<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>A series of data points over time</p>
+<p>Q: Which is a time series?</p>
+<ul>
+<li><p>average monthly temperatures 1980-2021</p></li>
+<li><p>average sales of sneakers in January 2021</p></li>
+<li><p>the latest song by Billie Eilish</p>
+</div>
+<div class="images">
+  <img src="../images/time_series_analysis_intro/img_p2_1.png">
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="some-temperature-data">
+<h3>Some temperature data<a class="headerlink" href="#some-temperature-data" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="images">
+<img src="../images/time_series_analysis_intro/img_p4_1.png">
+  </div>
+  <div class="text">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head text-right"><p>Date</p></th>
+<th class="head text-right"><p>Mean</p></th>
+<th class="head text-right"><p>Year</p></th>
+<th class="head text-right"><p>Month</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>794</p></td>
+<td class="text-right"><p>1950-10-06</p></td>
+<td class="text-right"><p>-0.20</p></td>
+<td class="text-right"><p>1950</p></td>
+<td class="text-right"><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>795</p></td>
+<td class="text-right"><p>1950-09-06</p></td>
+<td class="text-right"><p>-0.10</p></td>
+<td class="text-right"><p>1950</p></td>
+<td class="text-right"><p>9</p></td>
+</tr>
+<tr class="row-even"><td><p>796</p></td>
+<td class="text-right"><p>1950-08-06</p></td>
+<td class="text-right"><p>-0.18</p></td>
+<td class="text-right"><p>1950</p></td>
+<td class="text-right"><p>8</p></td>
+</tr>
+<tr class="row-odd"><td><p>797</p></td>
+<td class="text-right"><p>1950-07-06</p></td>
+<td class="text-right"><p>-0.09</p></td>
+<td class="text-right"><p>1950</p></td>
+<td class="text-right"><p>7</p></td>
+</tr>
+<tr class="row-even"><td><p>798</p></td>
+<td class="text-right"><p>1950-06-06</p></td>
+<td class="text-right"><p>-0.06</p></td>
+<td class="text-right"><p>1950</p></td>
+<td class="text-right"><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>799</p></td>
+<td class="text-right"><p>1950-05-06</p></td>
+<td class="text-right"><p>-0.12</p></td>
+<td class="text-right"><p>1950</p></td>
+<td class="text-right"><p>5</p></td>
+</tr>
+<tr class="row-even"><td><p>800</p></td>
+<td class="text-right"><p>1950-04-06</p></td>
+<td class="text-right"><p>-0.21</p></td>
+<td class="text-right"><p>1950</p></td>
+<td class="text-right"><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p>801</p></td>
+<td class="text-right"><p>1950-03-06</p></td>
+<td class="text-right"><p>-0.06</p></td>
+<td class="text-right"><p>1950</p></td>
+<td class="text-right"><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>802</p></td>
+<td class="text-right"><p>1950-02-06</p></td>
+<td class="text-right"><p>-0.26</p></td>
+<td class="text-right"><p>1950</p></td>
+<td class="text-right"><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>803</p></td>
+<td class="text-right"><p>1950-01-06</p></td>
+<td class="text-right"><p>-0.30</p></td>
+<td class="text-right"><p>1950</p></td>
+<td class="text-right"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+  </div>
+</div></section>
+<section id="what-is-special-in-time-series-data">
+<h3>What is special in time series data?<a class="headerlink" href="#what-is-special-in-time-series-data" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p>It can (needs to) be ordered by time</p>
+<p>Actual values depend on historical ones</p>
+<ul class="simple">
+<li><p>Dependent variable stands on both sides of the equation</p></li>
+<li><p>Even the error terms can depend on historical values</p></li>
+</ul>
+<p><strong>85% of today’s temperature can be explained by yesterdays!</strong></p>
+  </div>
+  <div class="images_30">
+<img src="../images/time_series_analysis_intro/img_p8_2.png">
+<p><sub><a class="reference external" href="https://www.mycomics.de/fileadmin/comicpages/_processed_/csm_4022_karikatur-schwarwel3012same-col800_3d9acb2f3f.jpg">Image source</a></sub></p>
+  </div>
+</div>
+</section>
+<section id="id2">
+<h3>What is special in time series data?<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p>It can (needs to) be ordered by time</p>
+<p>Actual values depend on historical ones</p>
+<ul class="simple">
+<li><p>Dependent variable stands on both sides of the equation</p></li>
+<li><p>Even the error terms can depend on historical values</p></li>
+</ul>
+<p>Distributions can change over time</p>
+<ul>
+<li><p>non-stationarity (hard)</p>
+</div>
+<div class="images_30">
+</li>
+</ul>
+<img src="../images/time_series_analysis_intro/img_p8_2.png">
+<p><sub><a class="reference external" href="https://www.mycomics.de/fileadmin/comicpages/_processed_/csm_4022_karikatur-schwarwel3012same-col800_3d9acb2f3f.jpg">Image source</a></sub></p>
+  </div>
+</div>
+</section>
+<section id="predicting-the-future-mhm">
+<h3>Predicting the future… mhm<a class="headerlink" href="#predicting-the-future-mhm" title="Link to this heading">#</a></h3>
+<p>We have <strong>no way of knowing</strong> (or seriously guessing for that matter) the next outcome of a <strong>random experiment</strong>. But there is some stuff that we can do!</p>
+<p><strong>Pry all information from our data</strong> that is not random, and make forecasts from that. Ideally, the remaining error should only be white noise.</p>
+<p><strong>Job of a good TSA</strong></p>
+<ul class="simple">
+<li><p>split the systematic and the unsystematic</p></li>
+<li><p>identify both</p></li>
+<li><p>forecast the systematic</p></li>
+<li><p>define the unsystematic</p></li>
+</ul>
+</section>
+</section>
+<section id="eda-for-timeseries">
+<h2>EDA for Timeseries<a class="headerlink" href="#eda-for-timeseries" title="Link to this heading">#</a></h2>
+<section id="visualization">
+<h3>Visualization<a class="headerlink" href="#visualization" title="Link to this heading">#</a></h3>
+<p>Visualization is the most important (EDA) tool</p>
+<ul class="simple">
+<li><p>Gives a good impression of stylized facts</p></li>
+<li><p>Trends and/or cycles?</p></li>
+<li><p>Are there missing values? Are there patterns in missing values?</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/601a2fc5bf0e1c720f47b2470e70624d7dd2b605fd1a5f6a183fd3b4fdfe9c87.png" src="../_images/601a2fc5bf0e1c720f47b2470e70624d7dd2b605fd1a5f6a183fd3b4fdfe9c87.png" />
+<img alt="../_images/0604a326205093ad43e31ae2cfb032adce9cb0dd5b1db4e3b00d9e9d6888ed2d.png" src="../_images/0604a326205093ad43e31ae2cfb032adce9cb0dd5b1db4e3b00d9e9d6888ed2d.png" />
+</div>
+</div>
+</section>
+<section id="trends">
+<h3>Trends<a class="headerlink" href="#trends" title="Link to this heading">#</a></h3>
+<p>Trends are long-term information</p>
+<ul class="simple">
+<li><p><strong>Long-term tendency</strong> of values</p></li>
+<li><p>Can show any <strong>non-cyclical</strong> behavior (linear, quadratic)</p></li>
+</ul>
+<p>Difficulty from trends</p>
+<ul class="simple">
+<li><p><strong>Visualizing</strong> short-/mid-term is masked)</p></li>
+<li><p>Modelling the values at different time intervals have different levels</p></li>
+<li><p>Distribution is time-dependent</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/a039915530facc180c1bedfed5f768af736d59709a9494cf53f4a4790262223c.png" src="../_images/a039915530facc180c1bedfed5f768af736d59709a9494cf53f4a4790262223c.png" />
+</div>
+</div>
+<p>Values in <code class="docutils literal notranslate"><span class="pre">x=[20-40]</span></code> have very different values from values in <code class="docutils literal notranslate"><span class="pre">x=[80-100]</span></code></p>
+</section>
+<section id="eliminating-trends">
+<h3>Eliminating trends<a class="headerlink" href="#eliminating-trends" title="Link to this heading">#</a></h3>
+<p>How to eliminate trends?</p>
+<ul class="simple">
+<li><p>Model + subtract trends</p>
+<ul>
+<li><p>linear <span class="math notranslate nohighlight">\( m_t = \alpha_0 + \alpha_1 t \)</span></p></li>
+<li><p>quadratic <span class="math notranslate nohighlight">\( m_t = \alpha_0 + \alpha_1 t + \alpha_2 t^2 \)</span></p></li>
+</ul>
+</li>
+<li><p>Differencing <span class="math notranslate nohighlight">\(\Delta y_t = y_t - y_{t-1}\)</span></p></li>
+<li><p>(High-Pass Filtering: e.g. Hodrick-Prescott)</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/a039915530facc180c1bedfed5f768af736d59709a9494cf53f4a4790262223c.png" src="../_images/a039915530facc180c1bedfed5f768af736d59709a9494cf53f4a4790262223c.png" />
+<img alt="../_images/0604a326205093ad43e31ae2cfb032adce9cb0dd5b1db4e3b00d9e9d6888ed2d.png" src="../_images/0604a326205093ad43e31ae2cfb032adce9cb0dd5b1db4e3b00d9e9d6888ed2d.png" />
+</div>
+</div>
+<p>Time series before and after eliminating the trend: afterwards short-/mid-term patterns are clearer</p>
+</section>
+<section id="cycles-and-on-and-on-it-goes">
+<h3>Cycles - and on and on it goes<a class="headerlink" href="#cycles-and-on-and-on-it-goes" title="Link to this heading">#</a></h3>
+<p>Seasonal patterns (cycles) are <strong>mid-/short-term information</strong></p>
+<ul class="simple">
+<li><p>Recurring value levels</p></li>
+<li><p>Typical example: sales during the year</p></li>
+<li><p>Can show any cyclical behavior(e.g. Trigonometric)</p></li>
+</ul>
+<p>Problematic in time series modeling</p>
+<ul class="simple">
+<li><p>Values in different areas of the cycle are significantly different</p></li>
+<li><p>Different distribution - <strong>non-stationary</strong></p></li>
+</ul>
+<div class="alert alert-block alert-success"> <b>Question:</b> What are some seasonalities you can think of? </b></div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3d5ef4d42d6dcb5902d89a90410d88e9f0ade6428f26219be2e0b0ed7e58dad3.png" src="../_images/3d5ef4d42d6dcb5902d89a90410d88e9f0ade6428f26219be2e0b0ed7e58dad3.png" />
+</div>
+</div>
+<p>Value distributions look different at different time ranges</p>
+</section>
+<section id="eliminating-cycles">
+<h3>Eliminating cycles<a class="headerlink" href="#eliminating-cycles" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p>Cycles often contain process-intrinsic information</p>
+<p>Eliminate cycles with</p>
+<ul>
+<li><p>Model + subtract trends</p></li>
+<li><p>Time differencing: <span class="math notranslate nohighlight">\(\Delta y_t = y_t - y_{t-4}\)</span></p></li>
+<li><p>Low-pass filtering</p></li>
+<li><p>Fourier series: <br />
+<span class="math notranslate nohighlight">\( s_t = \beta_0 + \sum_{j=1}^{k} (\beta_j \sin(\lambda_j t) + \kappa_j \cos(\lambda_j t))\text{, }\lambda_j = \frac{2\pi}{d_j} \)</span></p>
+</div>
+<div class="images_30">
+</li>
+</ul>
+<img src="../images/time_series_analysis_intro/img_p17_4.png">
+  </div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/8818db5d3df5bcae4a88ba85a61777905aa1e1ff6d76a16c3ff51b557e5f233e.png" src="../_images/8818db5d3df5bcae4a88ba85a61777905aa1e1ff6d76a16c3ff51b557e5f233e.png" />
+</div>
+</div>
+<p>Time series before and after removing trend and seasonal patterns… what a beauty</p>
+</section>
+</section>
+<section id="recap">
+<h2>Recap:<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<p>We talked about timeseries data:</p>
+<ul class="simple">
+<li><p>Data were the sequence plays a crucial role</p></li>
+<li><p>Typically: data with a fixed interval without missing values</p></li>
+</ul>
+<p>We talked about visual EDA:</p>
+<ul class="simple">
+<li><p>Trends (Where are they coming from? how to deal with that?)</p></li>
+<li><p>Cycles (Many examples, what to do with that?)</p></li>
+</ul>
+<section id="triggerwarning">
+<h3>Triggerwarning<a class="headerlink" href="#triggerwarning" title="Link to this heading">#</a></h3>
+<section id="timeseries">
+<h4>Timeseries?<a class="headerlink" href="#timeseries" title="Link to this heading">#</a></h4>
+</section>
+</section>
+</section>
+<section id="don-t-panic">
+<h2>DON’T PANIC<a class="headerlink" href="#don-t-panic" title="Link to this heading">#</a></h2>
+</section>
+<section id="common-tools-in-tsa">
+<h2>Common Tools in TSA<a class="headerlink" href="#common-tools-in-tsa" title="Link to this heading">#</a></h2>
+<section id="data">
+<h3>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/6447b736a01bd655c71f49886f669a11967393a4076cb9c42eb6e62333408f43.png" src="../_images/6447b736a01bd655c71f49886f669a11967393a4076cb9c42eb6e62333408f43.png" />
+</div>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+There shouldn't be gaps in Timeseries data. And the
+frequency should be consistent
+</div></section>
+<section id="imputation">
+<h3>Imputation<a class="headerlink" href="#imputation" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/9050c06340bc90ae6de9bb2f1f7fc3bc1f06bb4c78faa354838c66fbf0d28c88.png" src="../_images/9050c06340bc90ae6de9bb2f1f7fc3bc1f06bb4c78faa354838c66fbf0d28c88.png" />
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>filling (backfilll,forwardfill,mean)</p></li>
+<li><p>interpolate / filtering</p></li>
+<li><p>Resampling</p></li>
+<li><p>Predicting</p></li>
+</ol>
+</section>
+<section id="train-test-split">
+<h3>Train - Test - Split<a class="headerlink" href="#train-test-split" title="Link to this heading">#</a></h3>
+<p><strong>Q: How would you split a Timeseries?</strong></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/9050c06340bc90ae6de9bb2f1f7fc3bc1f06bb4c78faa354838c66fbf0d28c88.png" src="../_images/9050c06340bc90ae6de9bb2f1f7fc3bc1f06bb4c78faa354838c66fbf0d28c88.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Train - Test - Split<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p><strong>Q: How would you split a Timeseries?</strong></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/25c85a2c4e410aa6c308f65808cd810fa589b009f990450f9b03b90bb2b27bbc.png" src="../_images/25c85a2c4e410aa6c308f65808cd810fa589b009f990450f9b03b90bb2b27bbc.png" />
+</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="p">,</span><span class="n">test</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="o">-</span><span class="mi">10</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span>
+</pre></div>
+</div>
+</section>
+<section id="crossvalidation">
+<h3>Crossvalidation<a class="headerlink" href="#crossvalidation" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="images">
+<img src="../images/time_series_analysis_intro/img_p25_3.png">
+  </div>
+  <div class="images">
+<img src="../images/time_series_analysis_intro/img_p25_4.png">
+  </div>
+</div>
+<p><a class="reference external" href="https://medium.com/&#64;soumyachess1496/cross-validation-in-time-series-566ae4981ce4">Cross validation in TSA</a></p>
+<p><a class="reference external" href="https://machinelearningmastery.com/backtest-machine-learning-models-time-series-forecasting/">CV in Timeseries 2</a></p>
+</section>
+<section id="stationarity">
+<h3>Stationarity<a class="headerlink" href="#stationarity" title="Link to this heading">#</a></h3>
+<img src="../images/time_series_analysis_intro/ts_stationary_mean_std.png"></section>
+<section id="what-does-it-mean-for-a-ts-to-be-stationary">
+<h3>What does it mean for a TS to be stationary?<a class="headerlink" href="#what-does-it-mean-for-a-ts-to-be-stationary" title="Link to this heading">#</a></h3>
+<p>Having a constant mean and covariance function across the time series - <strong>in short:</strong> constant moments</p>
+<p>A time series needs to be stationary in order to make good predictions</p>
+<p>How do we know?</p>
+<ul class="simple">
+<li><p><strong>ADF</strong> test - Null Hypothesis: Not Stationary</p></li>
+<li><p><strong>KPSS</strong> test - Null Hypothesis: Stationary</p></li>
+</ul>
+<p>We can also look at the <strong>autocorrelation function ACF</strong></p>
+</section>
+<section id="rolling-mean">
+<h3>Rolling Mean<a class="headerlink" href="#rolling-mean" title="Link to this heading">#</a></h3>
+<p><strong>Careful:</strong> This rolling mean is actually an AR(p) process, not a MA(q)</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><video src="../images/time_series_analysis_intro/unif.mp4" controls  >
+      Your browser does not support the <code>video</code> element.
+    </video></div></div>
+</div>
+</section>
+<section id="exponential-smoothing-methods">
+<h3>Exponential Smoothing Methods<a class="headerlink" href="#exponential-smoothing-methods" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><video src="../images/time_series_analysis_intro/exp.mp4" controls  >
+      Your browser does not support the <code>video</code> element.
+    </video></div></div>
+</div>
+</section>
+</section>
+<section id="modelling-time-series">
+<h2>Modelling Time Series<a class="headerlink" href="#modelling-time-series" title="Link to this heading">#</a></h2>
+</section>
+<section id="the-oldschool-stuff-decomposition">
+<h2>The oldschool stuff - Decomposition<a class="headerlink" href="#the-oldschool-stuff-decomposition" title="Link to this heading">#</a></h2>
+<section id="what-makes-a-time-series">
+<h3>What makes a time series?<a class="headerlink" href="#what-makes-a-time-series" title="Link to this heading">#</a></h3>
+<p>A simple additive decomposed model</p>
+<div class="math notranslate nohighlight">
+\[x_t = m_t + s_t + e_t\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m_t\)</span> is the trend</p></li>
+<li><p><span class="math notranslate nohighlight">\(s_t\)</span> is the seasonality</p></li>
+<li><p><span class="math notranslate nohighlight">\(e_t\)</span> is the error or random noise</p></li>
+</ul>
+<p><strong>Trend</strong> -&gt; increase or decrease of the values in the series</p>
+<p><strong>Seasonality</strong> -&gt; the repeating short term cycles in the series</p>
+<p><strong>Random noise</strong> -&gt; random variation in the series though there might also be some autocorrelations that can be discovered?!</p>
+</section>
+<section id="additive-vs-multiplicative">
+<h3>Additive vs Multiplicative<a class="headerlink" href="#additive-vs-multiplicative" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="images">
+<center><img src="../images/time_series_analysis_intro/img_p36_1.png" width="150"></center>
+  </div>
+  <div class="images">
+<center><img src="../images/time_series_analysis_intro/img_p37_2.png" width="150"></center>
+  </div>
+</div>
+<center><img src="../images/time_series_analysis_intro/img_p39_3.png"></center></section>
+</section>
+<section id="components-of-ts">
+<h2>Components of TS<a class="headerlink" href="#components-of-ts" title="Link to this heading">#</a></h2>
+<section id="signal">
+<h3>Signal<a class="headerlink" href="#signal" title="Link to this heading">#</a></h3>
+<p>Temperature measurements in Basel</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/5a594d66b85693f2a12387a5996e1574caaea95c68981b49ddfb41a32226a9eb.png" src="../_images/5a594d66b85693f2a12387a5996e1574caaea95c68981b49ddfb41a32226a9eb.png" />
+</div>
+</div>
+</section>
+<section id="trend">
+<h3>Trend<a class="headerlink" href="#trend" title="Link to this heading">#</a></h3>
+<p>What does the trend look like for the temperatures?</p>
+<ul class="simple">
+<li><p>(strong) upward trend</p></li>
+<li><p>temperature is gradually rising</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+The trend is computed based on the moving average
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/5a594d66b85693f2a12387a5996e1574caaea95c68981b49ddfb41a32226a9eb.png" src="../_images/5a594d66b85693f2a12387a5996e1574caaea95c68981b49ddfb41a32226a9eb.png" />
+<img alt="../_images/49685ca0c9cf42f780ea739a3146e671b75324c31665d6ddf3daa259a2c04cf4.png" src="../_images/49685ca0c9cf42f780ea739a3146e671b75324c31665d6ddf3daa259a2c04cf4.png" />
+</div>
+</div>
+</section>
+<section id="seasonality">
+<h3>Seasonality<a class="headerlink" href="#seasonality" title="Link to this heading">#</a></h3>
+<p>What does the seasonality look like for the temperatures?</p>
+<ul class="simple">
+<li><p>We see a strong seasonality for summer and winter</p></li>
+<li><p>in business cycles we have the problem of very long cycles - so very long persistence</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+The seasonality is the mean of the seasonal periods
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/5a594d66b85693f2a12387a5996e1574caaea95c68981b49ddfb41a32226a9eb.png" src="../_images/5a594d66b85693f2a12387a5996e1574caaea95c68981b49ddfb41a32226a9eb.png" />
+<img alt="../_images/f26bb702d44b9db0918545c26623dec06ae7dbe02781bcea24b1fb5cc492e81a.png" src="../_images/f26bb702d44b9db0918545c26623dec06ae7dbe02781bcea24b1fb5cc492e81a.png" />
+</div>
+</div>
+</section>
+<section id="residuals">
+<h3>Residuals<a class="headerlink" href="#residuals" title="Link to this heading">#</a></h3>
+<p>We want residuals to look random</p>
+<ul class="simple">
+<li><p>it is random looking</p></li>
+<li><p>it shows the variation in the series</p></li>
+<li><p>unexplained variance happening due to chance</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+The Residual is what remains after removing trend and seasonality.
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/a84168c2bb8b337c4ea14e45b9caeef90f896ac59868450b020da7e6dd75ba30.png" src="../_images/a84168c2bb8b337c4ea14e45b9caeef90f896ac59868450b020da7e6dd75ba30.png" />
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>Components of TS<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/7a9c8f411a9be61ec0a056c9dbe62c4a2da8869e79b9b91ea9e2c7f2294ea2d8.png" src="../_images/7a9c8f411a9be61ec0a056c9dbe62c4a2da8869e79b9b91ea9e2c7f2294ea2d8.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="the-oldschool-stuff-arma">
+<h2>The oldschool stuff - ARMA<a class="headerlink" href="#the-oldschool-stuff-arma" title="Link to this heading">#</a></h2>
+<section id="data-generating-arma-process-example">
+<h3>Data Generating ARMA process example<a class="headerlink" href="#data-generating-arma-process-example" title="Link to this heading">#</a></h3>
+<div class="text_30">
+<div class="box1_store">
+<p>  <strong>Store</strong></p>
+<p>  Current stock of cake <span style="font-size:50px"><span class="math notranslate nohighlight">\(\hspace{0.5cm}X_t\)</span></span></p>
+</div>
+<div class="box2_production">
+<p>  <strong>Production</strong></p>
+<p>  About 100 cakes are produced every day <span style="font-size:50px"><span class="math notranslate nohighlight">\(\hspace{2cm}\varepsilon_t\)</span></span> <br />
+  (normally distributed)</p>
+</div>
+<div class="box3_thieves">
+<p>  <strong>Thieves!</strong></p>
+<p>  15% of the cakes from stock <br />
+  are eaten by Larissa</p>
+</div>
+<div class="box4_sales1">
+<p>  <strong>Sales</strong></p>
+<p>  40% of the production are picked up <br />
+  the next day</p>
+</div>
+<div class="box5_sales2">
+<p><br/>   <br/>
+  20% of the production are picked up <br />
+  the day after</p>
+</div>
+<div class="box6_cake_image_equation">
+<img src="../images/time_series_analysis_intro/cake.png">
+</div>
+</div> 
+</section>
+<section id="id5">
+<h3>Data Generating ARMA process example<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="text_30">
+<div class="box1_store">
+<p>  <strong>Store</strong></p>
+<p>  Current stock of cake <span style="font-size:50px"><span class="math notranslate nohighlight">\(\hspace{0.5cm}X_t\)</span></span></p>
+</div>
+<div class="box2_production">
+<p>  <strong>Production</strong></p>
+<p>  About 100 cakes are produced every day <span style="font-size:50px"><span class="math notranslate nohighlight">\(\hspace{2cm}\varepsilon_t\)</span></span> <br />
+  (normally distributed)</p>
+</div>
+<div class="box3_thieves">
+<p>  <strong>Thieves!</strong></p>
+<p>  15% of the cakes from stock <br />
+  are eaten by Larissa</p>
+</div>
+<div class="box4_sales1">
+<p>  <strong>Sales</strong></p>
+<p>  40% of the production are picked up <br />
+  the next day</p>
+</div>
+<div class="box5_sales2">
+<p><br/>   <br/>
+  20% of the production are picked up <br />
+  the day after</p>
+</div>
+<p><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<span style="font-size:50px"><span class="math notranslate nohighlight">\(X_t = \underbrace{0.85 X_{t-1}}_{\text{AR(1)}} \underbrace{- 0.2\varepsilon_{t-2} - 0.4\varepsilon_{t-1}}_{\text{MA(2)}} + \varepsilon_t\)</span></span></p>
+</section>
+<section id="id6">
+<h3>Data Generating ARMA process example<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/743fbdbd25830d948d04ea0ad1fbd53e613340a71a352028618fb3ac3e64d69b.png" src="../_images/743fbdbd25830d948d04ea0ad1fbd53e613340a71a352028618fb3ac3e64d69b.png" />
+</div>
+</div>
+<p><span style="font-size:50px"><span class="math notranslate nohighlight">\(X_t = \underbrace{0.85 X_{t-1}}_{\text{AR(1)}} \underbrace{- 0.2\varepsilon_{t-2} - 0.4\varepsilon_{t-1}}_{\text{MA(2)}} + \varepsilon_t\)</span></span></p>
+</section>
+<section id="id7">
+<h3>Data Generating ARMA process example<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">print_rmse</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train RMSE of predict_mean: 11.32
+Train RMSE of predict_ARMA: 9.88
+Test RMSE of predict_mean: 12.58
+Test RMSE of predict_ARMA: 12.27
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/53576f3aa87a963383db410bcf70496e8668f03ac7066abde9ae73ea6b1e4332.png" src="../_images/53576f3aa87a963383db410bcf70496e8668f03ac7066abde9ae73ea6b1e4332.png" />
+</div>
+</div>
+<p><span style="font-size:50px"><span class="math notranslate nohighlight">\(X_t = \underbrace{0.85 X_{t-1}}_{\text{AR(1)}} \underbrace{- 0.2\varepsilon_{t-2} - 0.4\varepsilon_{t-1}}_{\text{MA(2)}} + \varepsilon_t\)</span></span></p>
+</section>
+<section id="forecasting-with-arma">
+<h3>Forecasting with ARMA<a class="headerlink" href="#forecasting-with-arma" title="Link to this heading">#</a></h3>
+<p>Step 1: Estimate ARMA model</p>
+<ul class="simple">
+<li><p>get parameters</p></li>
+</ul>
+<p>Step 2: Use parameters to forecast</p>
+<ul class="simple">
+<li><p>calculate innovations recursively</p></li>
+<li><p>compute forecasts with observations and innovations</p></li>
+<li><p>software-implemented (statsmodels)</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/6854fe4d95b97b298eded1f715d45fcf6247024ff9eee7dba6baa3f99767d1f0.png" src="../_images/6854fe4d95b97b298eded1f715d45fcf6247024ff9eee7dba6baa3f99767d1f0.png" />
+</div>
+</div>
+</section>
+<section id="other-models-from-arma-class">
+<h3>Other models from ARMA class<a class="headerlink" href="#other-models-from-arma-class" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>ARMAX</p>
+<ul>
+<li><p>Adding exogeneous variables to the model</p></li>
+</ul>
+</li>
+<li><p>ARIMA</p>
+<ul>
+<li><p>Adding an integrated part for non-stationarity (in the mean)</p></li>
+</ul>
+</li>
+<li><p>SARIMA</p>
+<ul>
+<li><p>Adding a further seasonal part to the model</p></li>
+</ul>
+</li>
+<li><p>ARFIMA</p>
+<ul>
+<li><p>Models with long memory</p></li>
+</ul>
+</li>
+<li><p>VAR</p>
+<ul>
+<li><p>Multivariate (vector) autoregressive models</p></li>
+</ul>
+</li>
+<li><p>Time-Varying coefficients</p></li>
+</ul>
+</section>
+</section>
+<section id="the-normal-stuff">
+<h2>The “normal” stuff<a class="headerlink" href="#the-normal-stuff" title="Link to this heading">#</a></h2>
+<p>With a little trick you can also use many of the models we have used so far (often XGboost is working very well)</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.496714</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.060421</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.324157</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.660069</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.209006</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-1.280167</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1.086848</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2.119192</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>-0.510608</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>-1.036433</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>y</th>
+      <th>y_t1</th>
+      <th>y_t2</th>
+      <th>y_t3</th>
+      <th>y_t4</th>
+      <th>y_t5</th>
+      <th>y_t6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.496714</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.060421</td>
+      <td>0.496714</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.324157</td>
+      <td>0.060421</td>
+      <td>0.496714</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.660069</td>
+      <td>0.324157</td>
+      <td>0.060421</td>
+      <td>0.496714</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.209006</td>
+      <td>1.660069</td>
+      <td>0.324157</td>
+      <td>0.060421</td>
+      <td>0.496714</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-1.280167</td>
+      <td>0.209006</td>
+      <td>1.660069</td>
+      <td>0.324157</td>
+      <td>0.060421</td>
+      <td>0.496714</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1.086848</td>
+      <td>-1.280167</td>
+      <td>0.209006</td>
+      <td>1.660069</td>
+      <td>0.324157</td>
+      <td>0.060421</td>
+      <td>0.496714</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2.119192</td>
+      <td>1.086848</td>
+      <td>-1.280167</td>
+      <td>0.209006</td>
+      <td>1.660069</td>
+      <td>0.324157</td>
+      <td>0.060421</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>-0.510608</td>
+      <td>2.119192</td>
+      <td>1.086848</td>
+      <td>-1.280167</td>
+      <td>0.209006</td>
+      <td>1.660069</td>
+      <td>0.324157</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>-1.036433</td>
+      <td>-0.510608</td>
+      <td>2.119192</td>
+      <td>1.086848</td>
+      <td>-1.280167</td>
+      <td>0.209006</td>
+      <td>1.660069</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="the-fancy-stuff">
+<h2>The fancy stuff<a class="headerlink" href="#the-fancy-stuff" title="Link to this heading">#</a></h2>
+<section id="facebooks-prophet">
+<h3>Facebook’s Prophet<a class="headerlink" href="#facebooks-prophet" title="Link to this heading">#</a></h3>
+<p>Harvey, A.C. and Peters, S. (1990), “Estimation Procedures for Structural Time Series Models”
+Taylor, S.J. and Letham, B. (2017), “Forecasting at Scale”</p>
+<div class="group">
+  <div class="text_70">
+<ul>
+<li><p>Library open-sourced for automated forecasting</p>
+<ul class="simple">
+<li><p>Based on decomposable time series model <br />
+<span class="math notranslate nohighlight">\(x_t = g(t) + s(t) + h(t) + \varepsilon_t\)</span> <br />
+<span class="math notranslate nohighlight">\(g(t)\)</span> : trend function <br />
+<span class="math notranslate nohighlight">\(s(t)\)</span> : periodic changes <br />
+<span class="math notranslate nohighlight">\(h(t)\)</span> : holiday effects</p></li>
+</ul>
+</li>
+<li><p>Time is the only feature</p>
+<ul class="simple">
+<li><p>several linear and non-linear functions of time</p></li>
+</ul>
+</li>
+<li><p>Needs not to be regularly spaced</p></li>
+<li><p>Easily interpretable</p>
+</div>
+<div class="images_30">
+</li>
+</ul>
+<img src="../images/time_series_analysis_intro/img_p63_3.png">
+<p><sub><a class="reference external" href="https://peerj.com/preprints/3190/">Image source</a></sub></p>
+  </div>
+</div>
+<p><sub>Harvey, A.C. and Peters, S. (1990), “Estimation Procedures for Structural Time Series Models” <br />
+Taylor, S.J. and Letham, B. (2017), “Forecasting at Scale”</sub></p>
+</section>
+<section id="rocket">
+<h3>Rocket<a class="headerlink" href="#rocket" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Open-source library for time classification</p></li>
+<li><p>Uses CNN with &gt;10.000 random convolutional filters</p>
+<ul>
+<li><p>Then Logistic Regression</p></li>
+</ul>
+</li>
+<li><p>Exceptionally fast</p>
+<ul>
+<li><p>1h 15min vs. 16h of alternative methods</p></li>
+</ul>
+</li>
+</ul>
+<p><sub>Dempster, A. et al. (2019): “ROCKET: Exceptionally fast and accurate time series classification
+using random convolutional kernels”</sub></p>
+</section>
+<section id="convolutional-neural-networks">
+<h3>Convolutional neural networks<a class="headerlink" href="#convolutional-neural-networks" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p>As with images slide the kernel over the sequence data to detect patterns</p>
+<ul class="simple">
+<li><p>If the data pattern matches the filter we see spikes</p></li>
+</ul>
+</li>
+<li><p>Later layers in CNNs respond to more complicated patterns, i.e. higher {specialization}</p>
+<ul class="simple">
+<li><p>In 1D-convolutions we can use longer filters or add layers</p></li>
+</ul>
+</div>
+<div class="images">
+</li>
+</ul>
+<img src="../images/time_series_analysis_intro/ts_cnn.png">
+  </div>
+</div></section>
+<section id="long-short-term-memory-networks">
+<h3>Long-Short-Term-Memory networks<a class="headerlink" href="#long-short-term-memory-networks" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p>LSTMs are special network layers that carry memory for short-term and long-term information</p></li>
+<li><p>Appropriateness ambiguous</p>
+<ul class="simple">
+<li><p>Often do not beat exponential smoothing</p></li>
+<li><p>Sometimes very good results</p></li>
+</ul>
+</li>
+<li><p>Very data hungry</p>
+</div>
+<div class="images">
+</li>
+</ul>
+<img src="../images/time_series_analysis_intro/Unrolled-LSTM-uses-time-series-data-as-input.png">
+<p><sub><a class="reference external" href="https://www.researchgate.net/figure/Unrolled-LSTM-uses-time-series-data-as-input_fig1_333791434">Image source</a></sub></p>
+  </div>
+</div></section>
+<section id="transformer-models">
+<h3>Transformer models<a class="headerlink" href="#transformer-models" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul class="simple">
+<li><p>A very promising model is autoformer</p></li>
+<li><p>Good long-term predictions</p></li>
+<li><p>Very data hungry, not much experience yet</p></li>
+<li><p>Also, hard to predict when they will work well</p></li>
+</ul>
+ </div>
+<div class="images">
+<img src="../images/time_series_analysis_intro/Autoformer_architecture.png" width="500">
+<p><sub><a class="reference external" href="https://huggingface.co/docs/transformers/model_doc/autoformer">source</a></sub></p>
+  </div>
+</div>
+[medium article](https://medium.com/mlearning-ai/transformer-implementation-for-time-series-forecasting-a9db2db5c820)
+[tds article](https://towardsdatascience.com/how-to-use-transformer-networks-to-build-a-forecasting-model-297f9270e630)</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<section id="many-models-where-to-start">
+<h3>Many models - where to start<a class="headerlink" href="#many-models-where-to-start" title="Link to this heading">#</a></h3>
+<p>As usual: with a good <strong>EDA</strong></p>
+<ul class="simple">
+<li><p>Find what is characteristic</p></li>
+</ul>
+<p>Start with <strong>simple models</strong></p>
+<ul class="simple">
+<li><p>Exponential smoother are very good for forecasting</p></li>
+<li><p>ARMA models are well interpretable and allow simulations and control</p></li>
+</ul>
+<p>Only <strong>go to more complex</strong> or specific models, <strong>if you have</strong> to</p>
+<ul class="simple">
+<li><p>and if your data amount allows you to</p></li>
+</ul>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Brockwell, P.J. and Davis, R.A. “Introduction to time series and forecasting”</p></li>
+<li><p>Brockwell, P.J. and Davis, A.R. “Time Series Analysis”</p></li>
+<li><p>Heij, C. et al., “Econometric Methods With Applications in Business and Economics”</p></li>
+<li><p><a class="reference external" href="https://people.duke.edu/~rnau/arimrule.htm">https://people.duke.edu/~rnau/arimrule.htm</a></p></li>
+<li><p><a class="reference external" href="https://github.com/juanitorduz/btsa">Berlin Time Series Meetup Repo .. really good pointers</a></p></li>
+<li><p><a class="reference external" href="https://machinelearningmastery.com/multi-step-time-series-forecasting/">https://machinelearningmastery.com/multi-step-time-series-forecasting/</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/tagged/time-series-from-scratch">Time Series from Scratch</a></p></li>
+</ul>
+<section id="acf-pacf">
+<h3>ACF / PACF<a class="headerlink" href="#acf-pacf" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">acf_pacf</span><span class="p">(</span><span class="n">df_acf_pacf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e112ab1c6f6c124159821e309d93ff4bfc19be2fe7985e788eaf8f49f62e9704.png" src="../_images/e112ab1c6f6c124159821e309d93ff4bfc19be2fe7985e788eaf8f49f62e9704.png" />
+</div>
+</div>
+<p>They all have 0/1 as a first value (auto correlation without lag. “what is the temperature now compared with the temperature now. wow the same, hence 1”)
+they have the same value for the first lag. After that, they differ.</p>
+</section>
+<section id="id8">
+<h3>ACF / PACF<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/6195eba64109dd740578bb72b9a11df3f240257f836fc2e65ca4b7560b3485fe.png" src="../_images/6195eba64109dd740578bb72b9a11df3f240257f836fc2e65ca4b7560b3485fe.png" />
+</div>
+</div>
+<p>Step - by - step visualisation to aid explaining the difference between ACF and PACF.
+For PACF, in each step the stuff that was already explained by the shorter autocorrelations is removed.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="20_Capstone_Phase.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Capstone Phase</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="22_Dimensionality_Reduction.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Unsupervised Learning - Dimensionality Reduction</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agenda">Agenda</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-time-series">What is a Time Series?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">What is a Time Series?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-temperature-data">Some temperature data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-special-in-time-series-data">What is special in time series data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">What is special in time series data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predicting-the-future-mhm">Predicting the future… mhm</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-for-timeseries">EDA for Timeseries</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trends">Trends</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eliminating-trends">Eliminating trends</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cycles-and-on-and-on-it-goes">Cycles - and on and on it goes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eliminating-cycles">Eliminating cycles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triggerwarning">Triggerwarning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#timeseries">Timeseries?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-panic">DON’T PANIC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-tools-in-tsa">Common Tools in TSA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imputation">Imputation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-test-split">Train - Test - Split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Train - Test - Split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crossvalidation">Crossvalidation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stationarity">Stationarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-it-mean-for-a-ts-to-be-stationary">What does it mean for a TS to be stationary?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-mean">Rolling Mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exponential-smoothing-methods">Exponential Smoothing Methods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling-time-series">Modelling Time Series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-oldschool-stuff-decomposition">The oldschool stuff - Decomposition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-makes-a-time-series">What makes a time series?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additive-vs-multiplicative">Additive vs Multiplicative</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components-of-ts">Components of TS</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signal">Signal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trend">Trend</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seasonality">Seasonality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals">Residuals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Components of TS</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-oldschool-stuff-arma">The oldschool stuff - ARMA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generating-arma-process-example">Data Generating ARMA process example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Data Generating ARMA process example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Data Generating ARMA process example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Data Generating ARMA process example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting-with-arma">Forecasting with ARMA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-models-from-arma-class">Other models from ARMA class</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-normal-stuff">The “normal” stuff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fancy-stuff">The fancy stuff</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facebooks-prophet">Facebook’s Prophet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rocket">Rocket</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-neural-networks">Convolutional neural networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#long-short-term-memory-networks">Long-Short-Term-Memory networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer-models">Transformer models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#many-models-where-to-start">Many models - where to start</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acf-pacf">ACF / PACF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">ACF / PACF</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

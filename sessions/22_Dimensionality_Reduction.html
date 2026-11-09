@@ -1,0 +1,951 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Unsupervised Learning - Dimensionality Reduction &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/22_Dimensionality_Reduction';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Clustering" href="23_Clustering.html" />
+    <link rel="prev" title="Time Series Analysis" href="21_Time_Series_Analysis_Intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Unsupervised Learning - Dimensionality Reduction</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">Unsupervised learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-curse-of-dimensionality-intuition">The curse of Dimensionality: Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">The curse of Dimensionality: Intuition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-curse-of-dimensionality">The curse of Dimensionality</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-curse-dimensions">The curse dimensions..</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-manifold-hypothesis">The Manifold Hypothesis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manifold-hypothesis-intuition">Manifold Hypothesis - Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-best-point-of-view-maximizing-the-line-of-sight">Getting the best point of view = maximizing the line of sight</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Getting the best point of view = maximizing the line of sight</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages">Disadvantages</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">PCA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis">Principal Component Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Principal Component Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-projection-to-lower-dimensions">Principal Component Analysis - Projection to lower dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Principal Component Analysis - Projection to lower dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-transformation-of-data">Principal Component Analysis - Transformation of Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Principal Component Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-explained-variance-ratio">Principal Component Analysis - Explained Variance Ratio</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-for-compression">Principal Component Analysis for Compression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-eigen-faces">Principal Component Analysis - Eigen Faces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-pc-visualization">Principal Component Analysis - PC visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-variants">Principal Component Analysis - Variants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-use-cases">PCA - Use Cases</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-techniques-linear">Other Techniques - linear</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-techniques-non-linear">Other Techniques - non linear</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="unsupervised-learning-dimensionality-reduction">
+<h1>Unsupervised Learning - Dimensionality Reduction<a class="headerlink" href="#unsupervised-learning-dimensionality-reduction" title="Link to this heading">#</a></h1>
+<p><img alt="img_p2_1" src="../_images/img_p2_1.png" /></p>
+<section id="unsupervised-learning">
+<h2>Unsupervised learning<a class="headerlink" href="#unsupervised-learning" title="Link to this heading">#</a></h2>
+<p>Statistical methods that extract meaning from data <strong>without</strong>
+training a model on <strong>labeled data</strong></p>
+<p><strong>Unsupervised learning</strong> also constructs a model of the data but
+it doesn’t distinguish between target and predictor variables</p>
+<ul class="simple">
+<li><p>finding groups of data → <strong>Clustering</strong></p></li>
+<li><p>reducing the dimensions of the data to a more manageable set of variables → <strong>Dimensionality Reduction</strong></p></li>
+<li><p>extension to EDA - when you have large number of variables and records</p></li>
+</ul>
+<section id="the-curse-of-dimensionality-intuition">
+<h3>The curse of Dimensionality: Intuition<a class="headerlink" href="#the-curse-of-dimensionality-intuition" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>To which category does x belong to?</p>
+<p>Blue / Red / Green?</p>
+</div>
+    <div class="images">
+        <img src="../images/dimensionality_reduction/img_p5_1.png">
+    </div>
+</div>
+<div class="group">
+    <div class="text">
+<p><strong>Intuition:</strong> The identity of x should be determined more strongly
+by nearby training points and less so by further away training
+points</p>
+</div>
+<div class="group">
+    <div class="text">
+<p>Simple approach: Divide in cells
+x belongs to the majority class in it’s
+cell</p>
+</div>
+    <div class="images">
+        <img src="../images/dimensionality_reduction/img_p7_1.png">
+    </div>
+</div><p><strong>What if we have more dimensions?</strong></p>
+</section>
+<section id="id1">
+<h3>The curse of Dimensionality: Intuition<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Do you think in all plots are the same amount of points?
+<img src="../images/dimensionality_reduction/img_p9_1.png">
+<img src="../images/dimensionality_reduction/img_p9_2.png"></p>
+</div>
+    <div class="images">
+        <img src="../images/dimensionality_reduction/img_p9_3.png">
+    </div>
+</div>
+</section>
+</section>
+<section id="the-curse-of-dimensionality">
+<h2>The curse of Dimensionality<a class="headerlink" href="#the-curse-of-dimensionality" title="Link to this heading">#</a></h2>
+<p>If we divide a region of a space into regular cells, the number of
+<strong>cells grows exponentially</strong> with the dimensionality of the space</p>
+<p>Why is this a problem?</p>
+<p><img alt="img_p10_1" src="../_images/img_p10_1.png" /></p>
+<p>How many data points do we need to cover all the cells?</p>
+<p>We would need exponentially large quantity of training data to ensure all cells are filled</p>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Sparse data: when you do not have data covering all cells!</p>
+</div>
+<div class="group">
+<div class="text">
+<p>I.e. between radius <span class="math notranslate nohighlight">\(r_\text{i} = 1 - \epsilon \)</span> (where <span class="math notranslate nohighlight">\( \epsilon \)</span> is the thickness of the shell) and <span class="math notranslate nohighlight">\(r_\text{total}\)</span> = 1 ?</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+ \frac{V_\text{Shell}}{V_\text{Total}} = \frac{V_\text{Total}-V_\text{Inner}}{V_\text{Total}} = \frac{1^D - (1 -\epsilon)^{D}}{1^{D}}= 1 - (1 -\epsilon)^{D}
+\end{align}\]</div>
+</div>
+<div class="images">
+<img src="../images/dimensionality_reduction/img_p13_3.png" width="800"/>
+</div>
+</div><div class="group">
+<div class="text_70">
+<img src="../images/dimensionality_reduction/despair.png" width="400" align="right"/>
+</div>
+<div class="image_30">
+<h3> WHYYYYYYY!!????</h3>
+</div>
+</div><section id="the-curse-dimensions">
+<h3>The curse dimensions..<a class="headerlink" href="#the-curse-dimensions" title="Link to this heading">#</a></h3>
+<p>we can still apply pattern recognition techniques to
+high-dimensionality data by exploiting these properties of <strong>real data:</strong></p>
+<ul class="simple">
+<li><p>may be <strong>confined to a region</strong> of the space having lower dimensionality, the directions over which important features may vary can be confined</p></li>
+<li><p>will typically exhibit some <strong>smoothness properties</strong> and small changes in the input variables will produce small changes in the  target variable</p>
+<ul>
+<li><p>use local-interpolation techniques to make predictions for new values</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="the-manifold-hypothesis">
+<h2>The Manifold Hypothesis<a class="headerlink" href="#the-manifold-hypothesis" title="Link to this heading">#</a></h2>
+<p>Real-world high-dimensional data lies on low-dimensional
+manifolds</p>
+<ul class="simple">
+<li><p>manifolds are embedded within the high-dimensional space</p></li>
+<li><p>manifolds are topological spaces that behave locally like
+Euclidean spaces</p></li>
+</ul>
+<p><a class="reference external" href="https://deepai.org/machine-learning-glossary-and-terms/manifold-hypothesis"></a><a class="reference external" href="https://deepai.org/machine-learning-glossary-and-terms/manifold-hypothesis">https://deepai.org/machine-learning-glossary-and-terms/manifold-hypothesis</a></p>
+<section id="manifold-hypothesis-intuition">
+<h3>Manifold Hypothesis - Intuition<a class="headerlink" href="#manifold-hypothesis-intuition" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p>“Most real-world high-dimensional datasets lie close to a much
+lower-dimensional manifold”</p>
+<ul class="simple">
+<li><p>typical example: swiss roll</p></li>
+<li><p>2D plane, bent and twisted in 3rd dimension</p></li>
+<li><p>one dimension: line, circle, but not an 8</p></li>
+<li><p>two dimensions: surface, sphere, plane</p>
+<ul>
+<li><p>purpose is to <strong>unroll the swiss roll</strong></p></li>
+<li><p>the <strong>real euclidean distance</strong> between the two points is the solid line, not the dotted one</p></li>
+</ul>
+</li>
+</ul>
+</div>
+    <div class="images_30">
+        <img src="../images/dimensionality_reduction/img_p17_2.png">
+        <img src="../images/dimensionality_reduction/img_p17_1.png">
+    </div>
+</div>
+</section>
+<section id="getting-the-best-point-of-view-maximizing-the-line-of-sight">
+<h3>Getting the best point of view = maximizing the line of sight<a class="headerlink" href="#getting-the-best-point-of-view-maximizing-the-line-of-sight" title="Link to this heading">#</a></h3>
+<p><img alt="img_p18_0" src="../_images/img_p18_0.png" /></p>
+</section>
+<section id="id2">
+<h3>Getting the best point of view = maximizing the line of sight<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p><img alt="img_p18_1" src="../_images/img_p18_1.png" /></p>
+</section>
+<section id="advantages">
+<h3>Advantages<a class="headerlink" href="#advantages" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul class="simple">
+<li><p>Speeds up subsequent algorithm</p></li>
+<li><p>Data compression without substantial loss of information</p></li>
+<li><p>Helps visualizing patterns</p></li>
+<li><p>Can improve results through noise reduction (only sometimes)</p></li>
+</ul>
+</div>
+    <div class="images_30">
+        <img src="../images/dimensionality_reduction/img_p20_1.png", width="500">
+        <img src="../images/dimensionality_reduction/img_p20_2.png", width="500">
+    </div>
+</div>
+</section>
+<section id="disadvantages">
+<h3>Disadvantages<a class="headerlink" href="#disadvantages" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Potential information loss</p></li>
+<li><p>Computational cost</p></li>
+<li><p>Transformed features may be hard to interpret</p></li>
+</ul>
+</section>
+</section>
+<section id="pca">
+<h2>PCA<a class="headerlink" href="#pca" title="Link to this heading">#</a></h2>
+<section id="principal-component-analysis">
+<h3>Principal Component Analysis<a class="headerlink" href="#principal-component-analysis" title="Link to this heading">#</a></h3>
+<p>Goal is to <strong>reduce dimensions of feature space</strong> while preserving as much information as possible by:</p>
+<p>➔ Finding new axis (= principal components) that represents the largest part of variance</p>
+<ul class="simple">
+<li><p>principal components must be <strong>orthogonal</strong> (=independent) to each other</p></li>
+<li><p>you can have just as many principal components as features</p></li>
+</ul>
+<p>➔ keep only the most informative principal components</p>
+</section>
+<section id="id3">
+<h3>Principal Component Analysis<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>PCA: combine the numeric predictors into a smaller set of variables, which are weighted linear combinations of the original set</p>
+<ul class="simple">
+<li><p>the smaller set of variables, the principal components, explains most of the variability of the full set of variables</p></li>
+<li><p>the weights reflect the relative contributions of the original variables</p></li>
+</ul>
+</section>
+<section id="principal-component-analysis-projection-to-lower-dimensions">
+<h3>Principal Component Analysis - Projection to lower dimensions<a class="headerlink" href="#principal-component-analysis-projection-to-lower-dimensions" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul class="simple">
+<li><p>feature space (3D) reduced to lower dimensional subspace (2D)</p></li>
+<li><p>the first 2 principal components can be presented as hyperplane</p></li>
+<li><p>data is projected perpendicularly onto this hyperplane</p></li>
+</ul>
+</div>
+    <div class="images_30">
+        <img src="../images/dimensionality_reduction/img_p25_1.png", width="500">
+        <img src="../images/dimensionality_reduction/img_p25_2.png", width="500">
+    </div>
+</div>
+</section>
+<section id="id4">
+<h3>Principal Component Analysis - Projection to lower dimensions<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>Which line would you choose to preserve as much information as
+possible?</p>
+<div class="image">
+<img src="../images/dimensionality_reduction/img_p26_1.png", width="1000">
+</div>
+<ul class="simple">
+<li><p>C1 preserves most of the variance</p></li>
+<li><p>C2 (dotted line) is orthogonal to C1, preserves little variation</p></li>
+<li><p>The unnamed, dashed line preserves an intermediate amount of variance</p></li>
+</ul>
+</section>
+<section id="principal-component-analysis-transformation-of-data">
+<h3>Principal Component Analysis - Transformation of Data<a class="headerlink" href="#principal-component-analysis-transformation-of-data" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>important to transform data for PCA</p></li>
+<li><p>centered around zero</p></li>
+<li><p>principal components are combinations of features and can be presented in the original feature space</p></li>
+</ul>
+</div>
+    <div class="images">
+        <img src="../images/dimensionality_reduction/img_p28_1.png">
+    </div>
+</div>
+</section>
+<section id="id5">
+<h3>Principal Component Analysis<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="group">
+<div class="text_30">
+Maximizing variance
+<p><a class="reference external" href="https://setosa.io/ev/principal-component-analysis/">https://setosa.io/ev/principal-component-analysis/</a></p>
+</div>
+<div class="images_70">
+<img src="../images/dimensionality_reduction/img_p29_1.png">
+<img src="https://i.stack.imgur.com/lNHqt.gif">
+</div>
+</div></section>
+<section id="principal-component-analysis-explained-variance-ratio">
+<h3>Principal Component Analysis - Explained Variance Ratio<a class="headerlink" href="#principal-component-analysis-explained-variance-ratio" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<ul>
+<li><p>principal components are found by a standard matrix factorization technique (<strong>Singular Value Decomposition (SVD)</strong>)</p></li>
+<li><p>after identifying all PC, <strong>reduce the dimensionality of the dataset by keeping only the first d PC</strong></p>
+<p>→ look at the explained variance ratio of the PCs to decide how many d Dimensions to keep</p>
+<p>→ take as many d PC that a sufficiently large portion of the variance is explained (eg 95%)</p>
+</li>
+</ul>
+</div>
+    <div class="images">
+        <img src="../images/dimensionality_reduction/img_p30_1.png">
+    </div>
+</div>
+</section>
+<section id="principal-component-analysis-for-compression">
+<h3>Principal Component Analysis for Compression<a class="headerlink" href="#principal-component-analysis-for-compression" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p><strong>Original Data (left picture)</strong></p>
+<ul class="simple">
+<li><p>784 features</p></li>
+</ul>
+<p><strong>PCA</strong></p>
+<ul class="simple">
+<li><p>preserving 95% of variance</p></li>
+<li><p>154 PCs</p></li>
+<li><p>only 20 % of original size!</p></li>
+</ul>
+<p><strong>Inverse Transformation (right picture)</strong></p>
+<ul class="simple">
+<li><p>transforms 154 PC back to 784 features</p></li>
+<li><p>only slight quality loss</p></li>
+</ul>
+</div>
+    <div class="images">
+        <img src="../images/dimensionality_reduction/img_p31_1.png">
+    </div>
+</div>
+</section>
+<section id="principal-component-analysis-eigen-faces">
+<h3>Principal Component Analysis - Eigen Faces<a class="headerlink" href="#principal-component-analysis-eigen-faces" title="Link to this heading">#</a></h3>
+<p>Eigen Faces: using PCA as a compression algorithm for images</p>
+<ul class="simple">
+<li><p>Each image is turned into a vector and PCA is used to get their principal components</p></li>
+<li><p>Instead of the training images them selves, we use the linear combination of the PCs (here called Eigenfaces due to their apperance) to represent the images.</p></li>
+<li><p><strong>Before transformation:</strong></p>
+<ul>
+<li><p>47 * 62 pixels (resolution) * 1000 (#Images) = <strong>2.914.000</strong> numbers,</p></li>
+</ul>
+</li>
+<li><p><strong>After transformation</strong> using 12 Eigen-Faces:</p>
+<ul>
+<li><p>47 * 62 pixels (resolution) * 12 (#Used-Eigen-Faces) + 12 (#Used-Eigen-Faces) * 1000 (#Images) = <strong>46.968</strong> numbers</p></li>
+</ul>
+</li>
+<li><p>Each original image can be represented by a linear combination of 12 Eigen Faces. It will appear “blurry” -&gt; but we also only need <strong>~2%</strong> of the data to store them</p></li>
+</ul>
+<p><img alt="img_p32_1" src="../_images/img_p32_1.png" /></p>
+<p>Notes: You can see that each eigen face is focusing on a different aspect of face recognition, e.g. some have black for the eyes, others for the nose bridge, or face shape (identify position). If a few of tehm already focus on the eyes, the other don’t need to because it was already well captured.</p>
+</section>
+<section id="principal-component-analysis-pc-visualization">
+<h3>Principal Component Analysis - PC visualization<a class="headerlink" href="#principal-component-analysis-pc-visualization" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>with inverse transformation we can see what information is preserved after using different numbers of PCs</p></li>
+<li><p>original picture: 2914 pixels</p></li>
+</ul>
+<p><img alt="img_p33_1" src="../_images/img_p33_1.png" /></p>
+</section>
+<section id="principal-component-analysis-variants">
+<h3>Principal Component Analysis - Variants<a class="headerlink" href="#principal-component-analysis-variants" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Randomized PCA</strong>: quick, approximation of first d components</p></li>
+<li><p><strong>Incremental PCA</strong>: for parallelization works with minibatches</p></li>
+<li><p><strong>Kernel PCA</strong>:</p>
+<ul>
+<li><p>Kernel trick</p></li>
+<li><p>complex nonlinear projections are possible</p></li>
+<li><p>Preserves clusters of data after projection</p></li>
+<li><p>can help to unroll data that lies on a manifold</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="pca-use-cases">
+<h3>PCA - Use Cases<a class="headerlink" href="#pca-use-cases" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>reduces the features space dimensionality</strong>.. it gets expensive to compute for more than few thousands of features</p></li>
+<li><p>discards information from the data, downstream model may be <strong>cheaper to train, but less accurate</strong></p></li>
+<li><p>can be used in <strong>anomaly detection</strong> of time series</p></li>
+<li><p>financial modeling - <strong>factor analysis</strong></p></li>
+<li><p><strong>preprocessing step</strong> when learning from images -&gt; may speed up the convergence of the algorithm</p></li>
+</ul>
+</section>
+</section>
+<section id="other-techniques-linear">
+<h2>Other Techniques - linear<a class="headerlink" href="#other-techniques-linear" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Linear Discriminant Analysis</strong> (LDA)</p>
+<p>→ classification algorithm</p>
+<p>→ finds discriminative axes that keep classes as far apart as possible</p>
+</li>
+<li><p><strong>Latent Semantic Analysis</strong> (LSA)</p>
+<p>→ does not center the data before computing the singular value decomposition =&gt; can work with sparse matrices efficiently</p>
+<p>→ also called truncated SVD</p>
+</li>
+</ol>
+</section>
+<section id="other-techniques-non-linear">
+<h2>Other Techniques - non linear<a class="headerlink" href="#other-techniques-non-linear" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>t-Distributed Stochastic Neighbour Embedding (t-SNE)</strong>
+→ based on probability distribution calculated with the distances between all points</p></li>
+<li><p><strong>Uniform manifold approximation and projection (UMAP)</strong>
+→ works with kNN (=&gt; k is a hyperparamter also in UMAP)
+→ faster than t-SNE</p></li>
+</ol>
+<p><a class="reference external" href="https://pair-code.github.io/understanding-umap/">https://pair-code.github.io/understanding-umap/</a></p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://github.com/peteflorence/MachineLearning6.867/blob/master/Bishop/Bishop%20-%20Pattern%20Recognition%20and%20Machine%20Learning.pdf"></a><a class="reference external" href="https://github.com/peteflorence/MachineLearning6.867/blob/master/Bishop/Bishop%20-%20Pattern%20Recognition%20and%20Machine%20Learning.pdf">https://github.com/peteflorence/MachineLearning6.867/blob/master/Bishop/Bishop - Pattern Recognition and Machine Learning.pdf</a></p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Manifold">https://en.wikipedia.org/wiki/Manifold</a>
+<a class="reference external" href="https://www.researchgate.net/publication/2953663_Diagnosing_Network-Wide_Traffic_Anomalies">https://www.researchgate.net/publication/2953663_Diagnosing_Network-Wide_Traffic_Anomalies</a></p>
+<p>Feature Engineering for Machine Learning</p>
+<p>Dogan (2013) Dogan, Tunca. (2013). Automatic
+Identification of Evolutionary and
+Sequence Relationships in Large Scale
+Protein Data Using Computational and
+Graph-theoretical Analyses.</p>
+<p>A. Geron, ”Hands-on ML with scikit-learn
+and tensorFlow”, 2017</p>
+<p>Kholodilin, Konstantin &amp; Michelsen, Claus &amp; Ulbricht, Dirk. (2018). Speculative
+price bubbles in urban housing markets: Empirical evidence from Germany.
+Empirical Economics. 55. 10.1007/s00181-017-1347-x.
+<a class="reference external" href="https://www.diw.de/documents/publikationen/73/diw_01.c.487920.de/dp1417.pdf">https://www.diw.de/documents/publikationen/73/diw_01.c.487920.de/dp1417.pdf</a></p>
+<p>Müller, Andreas C., and Sarah Guido. Introduction to
+machine learning with Python: a guide for data
+scientists. “ O’Reilly Media, Inc.”, 2017.</p>
+<p><a class="reference external" href="https://www.geeksforgeeks.org/ml-face-recognition-usi">https://www.geeksforgeeks.org/ml-face-recognition-usi</a>
+ng-eigenfaces-pca-algorithm/</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="21_Time_Series_Analysis_Intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Time Series Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="23_Clustering.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Clustering</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">Unsupervised learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-curse-of-dimensionality-intuition">The curse of Dimensionality: Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">The curse of Dimensionality: Intuition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-curse-of-dimensionality">The curse of Dimensionality</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-curse-dimensions">The curse dimensions..</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-manifold-hypothesis">The Manifold Hypothesis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manifold-hypothesis-intuition">Manifold Hypothesis - Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-best-point-of-view-maximizing-the-line-of-sight">Getting the best point of view = maximizing the line of sight</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Getting the best point of view = maximizing the line of sight</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages">Disadvantages</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca">PCA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis">Principal Component Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Principal Component Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-projection-to-lower-dimensions">Principal Component Analysis - Projection to lower dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Principal Component Analysis - Projection to lower dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-transformation-of-data">Principal Component Analysis - Transformation of Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Principal Component Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-explained-variance-ratio">Principal Component Analysis - Explained Variance Ratio</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-for-compression">Principal Component Analysis for Compression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-eigen-faces">Principal Component Analysis - Eigen Faces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-pc-visualization">Principal Component Analysis - PC visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principal-component-analysis-variants">Principal Component Analysis - Variants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-use-cases">PCA - Use Cases</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-techniques-linear">Other Techniques - linear</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-techniques-non-linear">Other Techniques - non linear</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

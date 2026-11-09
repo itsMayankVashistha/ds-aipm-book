@@ -1,0 +1,967 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Ethics in Data Science &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/04_Ethics_Data_Science';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Databases" href="05.1_Intro_to_Databases.html" />
+    <link rel="prev" title="Introduction to AIPM" href="aipm_sessions/Intro_to_AIPM.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Ethics in Data Science</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understand-data-ethics">Understand Data Ethics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-ethical-concerns">Examples of ethical concerns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-we-do">What can we do?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">What can we do?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-examples-of-possible-solutions-to-some-ethical-concern">Practical examples of possible solutions to some ethical concern.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Terminology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oppression-vs-privilege">Oppression vs. Privilege</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-of-the-privileges-out-there">Some of the privileges out there</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#axes-of-privilege">Axes of privilege</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-your-privilege">Identify your privilege</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Axes of privilege</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references-follow-up">References &amp; Follow up</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ethics-in-data-science">
+<h1>Ethics in Data Science<a class="headerlink" href="#ethics-in-data-science" title="Link to this heading">#</a></h1>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
+<section id="understand-data-ethics">
+<h3>Understand Data Ethics<a class="headerlink" href="#understand-data-ethics" title="Link to this heading">#</a></h3>
+</section>
+<section id="id1">
+<h3>Exercise<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">  
+<p>Split in <strong>3 groups</strong> and open <strong>chapter 1</strong> from the book.</p>
+<p><strong>Group 1:</strong> Data Science by Whom?</p>
+<p><strong>Group 2:</strong> Data Science for Whom?</p>
+<p><strong>Group 3:</strong> Data Science with Whose Interests and Goals?</p>
+  </div>
+      <div class="images_30">
+        <img src="../images/ethics/data_feminism.jpg"><div id='image_caption'>https://data-feminism.mitpress.mit.edu/pub/vi8obxh7/release/4</div>
+    </div>
+</div><p>Summarise the text as answers to these 3 questions:</p>
+<p><strong>1. The problem     2. One example     3. A possible solution</strong></p>
+<center>
+    <img src="../images/ethics/data_feminism_qr_code.png"> 
+</center>
+<p><a class="reference external" href="https://data-feminism.mitpress.mit.edu/pub/vi8obxh7/release/4">https://data-feminism.mitpress.mit.edu/pub/vi8obxh7/release/4</a></p>
+<div class="group">
+  <div class="text">   
+<p><strong>Definition</strong></p>
+<p>Data ethics refers to the moral and responsible use of data. It involves considering the implications and consequences of collecting, storing, analyzing, and disseminating data, especially in the context of technology, data science, and artificial intelligence. The goal of data ethics is to ensure that data practices are aligned with principles such as fairness, transparency, accountability, and privacy.
+__Form: <a class="reference external" href="https://atlan.com/data-ethics-101/">https://atlan.com/data-ethics-101/</a></p>
+  </div>
+  <div class="text">
+<p><strong>Key aspects</strong></p>
+<ul>
+<li><p>Fairness</p></li>
+<li><p>Transparency</p></li>
+<li><p>Privacy</p></li>
+<li><p>Security</p></li>
+<li><p>Accountability</p></li>
+<li><p>Consent</p></li>
+<li><p>Data Governance</p></li>
+<li><p>Societal Impact</p>
+</div>
+</li>
+</ul>
+</div>
+<center>
+<blockquote>
+<div><p>»Big Data processes codify the past. They do not invent the future. Doing that requires moral imagination, and that’s something only humans can provide. We have to explicitly embed better values into our algorithms, creating Big Data models that follow our ethical lead. Sometimes that will mean putting fairness ahead of profit.«</p>
+</div></blockquote>
+</center>
+<p>Cathy O’Neil, <em>Weapon of Math Destruction</em></p>
+</section>
+<section id="examples-of-ethical-concerns">
+<h3>Examples of ethical concerns<a class="headerlink" href="#examples-of-ethical-concerns" title="Link to this heading">#</a></h3>
+<center> 
+<p><strong>Fairness:</strong></p>
+<p><u>Issue:</u> Ensuring that data and algorithms are not biased and do not discriminate against individuals or groups.</p>
+<p><u>Example:</u> A loan application system uses a black-box machine learning model that denies loans, but customers are not told how decisions were made.</p>
+<p><strong>Transparency:</strong></p>
+<p><u>Issue:</u> Making data processes and decisions understandable and visible to stakeholders, reducing opacity in algorithms and data usage.</p>
+<p><u>Example:</u> A loan application system uses a black-box machine learning model that denies loans, but customers are not told how decisions were made.</p>
+<p><strong>Privacy:</strong></p>
+<p><u>Issue:</u> Respecting individuals’ rights to control their personal information and ensuring that data is handled securely.</p>
+<p><u>Example:</u> A fitness app collects users’ location and health data without clearly informing them of the extent of data collection.</p>
+<p><strong>Security:</strong></p>
+<p><u>Issue:</u> Protecting data from unauthorized access, ensuring data integrity, and implementing measures to prevent breaches.</p>
+<p><u>Example:</u> A healthcare provider experiences a data breach, exposing patients’ personal and medical records.</p>
+<p><strong>Accountability:</strong></p>
+<p><u>Issue:</u> Holding individuals and organizations responsible for the ethical use of data, including being able to explain and justify decisions made using data.</p>
+<p><u>Example:</u> An AI-powered resume screening tool unfairly rejects qualified candidates, and no team or individual takes responsibility for the error.</p>
+<p><strong>Consent:</strong></p>
+<p><u>Issue:</u> Obtaining informed consent from individuals before collecting, processing, or sharing their data.</p>
+<p><u>Example:</u> A smart home device records conversations without users’ explicit permission.</p>
+<p><strong>Data Governance:</strong></p>
+<p><u>Issue:</u> Establishing frameworks and policies for how data is managed, including defining roles, responsibilities, and processes.</p>
+<p><u>Example:</u> A company shares customer data with third-party vendors without proper tracking, leading to unauthorized access.</p>
+<p><strong>Societal impact:</strong></p>
+<p><u>Issue:</u> Considering the broader social implications of data use and ensuring that it contributes positively to society, considering unintended consequences.</p>
+<p><u>Example:</u> A predictive policing algorithm disproportionately targets certain neighborhoods, leading to over-policing and reinforcing negative stereotypes.</p>
+</center></section>
+</section>
+<section id="what-can-we-do">
+<h2>What can we do?<a class="headerlink" href="#what-can-we-do" title="Link to this heading">#</a></h2>
+</section>
+<section id="id2">
+<h2>What can we do?<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<center> 
+<p><strong>Build better model:</strong> Fairness over accuracy.</p>
+<p><strong>Collect better data:</strong> Garbage in, Garbage out.</p>
+<p><strong>Accountability and revision of the algorithm</strong></p>
+<p><strong>Challenge institution that misuse the data</strong></p>
+<p><strong>Demand for more regulation</strong></p>
+<p>… and more</p>
+</center><blockquote>
+<div><p>»How do we start to regulate the mathematical models that run more and more of our lives? I would suggest that the process begin with the modelers themselves. Like doctors, data scientists should pledge a Hippocratic Oath, one that focuses on the possible misuses and misinterpretations of their models. Following the market crash of 2008, two financial engineers, Emanuel Derman and Paul Wilmott, drew up such an oath. It reads:</p>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p>I will remember that I didn’t make the world, and it doesn’t satisfy my equations.</p></li>
+<li><p>Though I will use models boldly to estimate value, I will not be overly impressed by mathematics.</p></li>
+<li><p>I will never sacrifice reality for elegance without explaining why I have done so.</p></li>
+<li><p>Nor will I give the people who use my model false comfort about its accuracy. Instead, I will make explicit its assumptions and oversights.</p></li>
+<li><p>I understand that my work may have enormous effects on society and the economy, many of them beyond my comprehension.</p></li>
+</ul>
+</div></blockquote>
+<p>Cathy O’Neil, <em>Weapon of Math Destruction</em></p>
+<section id="practical-examples-of-possible-solutions-to-some-ethical-concern">
+<h3>Practical examples of possible solutions to some ethical concern.<a class="headerlink" href="#practical-examples-of-possible-solutions-to-some-ethical-concern" title="Link to this heading">#</a></h3>
+<left> 
+<p><strong>Fairness:</strong></p>
+<ul class="simple">
+<li><p>Perform bias audits on the dataset and algorithm to identify biases.</p></li>
+<li><p>Use re-sampling or re-weighting techniques to correct for imbalanced data.</p></li>
+<li><p>Introduce fairness constraints into the algorithm, such as equal opportunity or demographic parity.</p></li>
+<li><p>Use balanced data.</p></li>
+<li><p>Regularly monitor the model’s performance to detect any unfair patterns after deployment.</p></li>
+</ul>
+<p><strong>Transparency:</strong></p>
+<ul class="simple">
+<li><p>Use explainable AI techniques, such as SHAP (SHapley Additive exPlanations) or LIME (Local Interpretable Model-agnostic Explanations), to provide users with insights into why a particular decision was made.</p></li>
+<li><p>Create clear documentation for stakeholders and end-users about how the model works and what data it relies on.</p></li>
+<li><p>Provide appeal mechanisms for customers to challenge decisions.</p></li>
+</ul>
+<p><strong>Privacy:</strong></p>
+<ul class="simple">
+<li><p>Implement data minimization principles—only collect data necessary for the service provided.</p></li>
+<li><p>Use encryption to secure sensitive data in storage and during transmission.</p></li>
+<li><p>Provide privacy policies in plain language and let users easily access, manage, and delete their data.</p></li>
+</ul>
+<p><strong>Security:</strong></p>
+<ul class="simple">
+<li><p>Apply multi-factor authentication and encryption to protect sensitive data.</p></li>
+<li><p>Conduct regular penetration testing and security audits to identify vulnerabilities.</p></li>
+<li><p>Ensure incident response plans are in place to address and mitigate breaches quickly.</p></li>
+</ul>
+<p><strong>Accountability:</strong></p>
+<ul class="simple">
+<li><p>Establish clear accountability frameworks, assigning roles and responsibilities to specific teams or individuals for the design, deployment, and monitoring of models.</p></li>
+<li><p>Require model documentation and audits to track who made what changes and why.</p></li>
+<li><p>Implement audit logs and make performance reports available to both internal and external stakeholders.</p></li>
+</ul>
+<p><strong>Consent:</strong></p>
+<ul class="simple">
+<li><p>Ensure informed and explicit consent by giving users clear information about what data will be collected, how it will be used, and with whom it will be shared.</p></li>
+<li><p>Use opt-in mechanisms rather than opt-out for data collection.</p></li>
+<li><p>Provide easy-to-use dashboards where users can manage their data preferences.</p></li>
+</ul>
+<p><strong>Data Governance:</strong></p>
+<ul class="simple">
+<li><p>Implement a data governance framework that defines how data is collected, stored, accessed, and shared.</p></li>
+<li><p>Use data catalogs and metadata management tools to track data flows and ensure compliance with policies.</p></li>
+<li><p>Assign data stewards or data owners to oversee data usage and enforce governance rules.</p></li>
+</ul>
+<p><strong>Societal impact:</strong></p>
+<ul class="simple">
+<li><p>Assess the societal impact of the model using impact assessments that involve diverse stakeholders, including community representatives.</p></li>
+<li><p>Regularly evaluate the system’s outcomes and unintended consequences and adjust the algorithm as necessary.</p></li>
+</ul>
+</left></section>
+</section>
+<section id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">   
+<p><strong>Cultural Agility</strong></p>
+<p>Cultural agility is the ability to understand multiple local contexts and work within them to obtain consistent organizational results.</p>
+  </div>
+  <div class="text">
+<p><strong>Diversity</strong></p>
+<p>The presence of different and multiple characteristics that make up individual and collective identities, including race, gender, age, religion, sexual orientation, ethnicity, national origin, socioeconomic status, language, and physical ability.</p>
+  </div>
+</div>
+<div class="group">
+  <div class="text">   
+<p><strong>Inclusion</strong></p>
+<p>Is creating environments in which any individual or group can be and feel welcomed, respected, supported and valued to participate fully.</p>
+  </div>
+  <div class="text">
+<p><strong>Equity</strong></p>
+<p>The process of identifying and removing the barriers that create disparities in the access to resources and means, and the achievement of fair treatment and equal opportunities to thrive.</p>
+  </div>
+</div>
+<div class="group">
+  <div class="text">   
+<p><strong>Intersectionality</strong></p>
+<p>The intertwining of social identities such as gender, race, ethnicity, social class, religion, sexual orientation or gender identity, which result in unique experiences, opportunities, barriers or social inequality.</p>
+  </div>
+  <div class="text">
+  </div>
+</div><center>
+    <img src="../images/ethics/circle.png"><div id='image_caption'>Be Inspired, J. K. Nelson: Building a Foundation of Shared Language, Cultural Awareness, & Belonging</div>
+</center><center>
+<blockquote>
+<div><p>»Intersectionality is a lens, a prism, for seeing the way in which various forms of inequality often operate together and exacerbate each other. We tend to talk about race inequality as separate from inequality based on gender, class, sexuality or immigrant status. What’s often missing is how some people are subject to all of these, and the experience is not just the sum of its parts.«</p>
+</div></blockquote>
+</center>
+<p>Kimberlé Williams Crenshaw</p>
+<section id="id3">
+<h3>Terminology<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+<p><strong>Oppression/Subjugation</strong></p>
+<p>A system of supremacy and discrimination for the benefit of a limited dominant group perpetuated through differential or unjust treatment, ideology and institutional control.</p>
+  </div>
+  <div class="text">
+<p><strong>Privilege</strong></p>
+<p>Unearned access to resources (social power) only readily available to some people as a result of their advantaged social group membership.</p>
+  </div>
+</div><div class="group">
+  <div class="text">   
+      <img src="../images/ethics/circle.png"><div id='image_caption'>Be Inspired, J. K. Nelson: Building a Foundation of Shared Language, Cultural Awareness, & Belonging</div>
+  </div>
+  <div class="images">
+<p><strong>Privilege</strong></p>
+<ul class="simple">
+<li><p>Advantage</p></li>
+<li><p>Opportunity</p></li>
+<li><p>Inclusion</p></li>
+</ul>
+<br>
+<br>   
+<br>
+<p><strong>Subjugation</strong></p>
+<ul>
+<li><p>Disadvantage</p></li>
+<li><p>Humiliation</p></li>
+<li><p>Exclusion</p>
+</div>
+</li>
+</ul>
+</div></section>
+<section id="oppression-vs-privilege">
+<h3>Oppression vs. Privilege<a class="headerlink" href="#oppression-vs-privilege" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+<p><strong>Oppression</strong></p>
+<p>→ Identity that has historically experienced more barriers/stigma</p>
+<p>→ Identity is a source of exclusion</p>
+<p>→ Identity is very present</p>
+  </div>
+  <div class="text">
+<p><strong>Privilege</strong></p>
+<p>→ Identity that has historically experienced more power</p>
+<p>→ Identity is a source of strength</p>
+<p>→ Identity seems unimportant</p>
+  </div>
+</div></section>
+<section id="some-of-the-privileges-out-there">
+<h3>Some of the privileges out there<a class="headerlink" href="#some-of-the-privileges-out-there" title="Link to this heading">#</a></h3>
+<div class="column">
+<span style="font-size: 0.7em;">
+<p>→ Identity that has historically experienced more barriers/stigma</p>
+<p>→ Identity is a source of exclusion</p>
+<p>→ Identity is very present</p>
+</span>
+</div>    
+<div class="column">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head text-center"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p></p></td>
+<td class="text-center"><p>← Education →</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td class="text-center"><p>← Gender →</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td class="text-center"><p>← Ethnicity &amp; race →</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td class="text-center"><p>← Socioeconomic status →</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td class="text-center"><p>← Disability status →</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td class="text-center"><p>← Sexual orientation →</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td class="text-center"><p>← Age →</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td class="text-center"><p>← National origin →</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>    
+<div class="column">
+<span style="font-size: 0.7em;">
+<p>→ Identity that has historically experienced more power</p>
+<p>→  Identity is a source of strength</p>
+<p>→ Identity seems unimportant</p>
+</span>     
+</div>  </section>
+<section id="axes-of-privilege">
+<h3>Axes of privilege<a class="headerlink" href="#axes-of-privilege" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p></p></th>
+<th class="head text-center"><p></p></th>
+<th class="head text-right"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>low</p></td>
+<td class="text-center"><p>← Education →</p></td>
+<td class="text-right"><p>high</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Non-binary</p></td>
+<td class="text-center"><p>← Gender →</p></td>
+<td class="text-right"><p>Male</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Non white passing</p></td>
+<td class="text-center"><p>← Ethnicity &amp; race →</p></td>
+<td class="text-right"><p>White or white passing</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Low</p></td>
+<td class="text-center"><p>← Socioeconomic status →</p></td>
+<td class="text-right"><p>High</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Disabled</p></td>
+<td class="text-center"><p>← Disability status →</p></td>
+<td class="text-right"><p>Not disabled</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>LGBTQI</p></td>
+<td class="text-center"><p>← Sexual orientation →</p></td>
+<td class="text-right"><p>Hetero</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Old</p></td>
+<td class="text-center"><p>← Age →</p></td>
+<td class="text-right"><p>Young</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Stigmatised foreign country</p></td>
+<td class="text-center"><p>← National origin →</p></td>
+<td class="text-right"><p>Same as current country</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="id4">
+<h2>Exercise<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<section id="identify-your-privilege">
+<h3>Identify your privilege<a class="headerlink" href="#identify-your-privilege" title="Link to this heading">#</a></h3>
+</section>
+<section id="id5">
+<h3>Axes of privilege<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>-1</p></th>
+<th class="head text-center"><p>0</p></th>
+<th class="head text-right"><p>1</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>low</p></td>
+<td class="text-center"><p>← Education →</p></td>
+<td class="text-right"><p>high</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Non-binary</p></td>
+<td class="text-center"><p>← Gender →</p></td>
+<td class="text-right"><p>Male</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Non white passing</p></td>
+<td class="text-center"><p>← Ethnicity &amp; race →</p></td>
+<td class="text-right"><p>White or white passing</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Low</p></td>
+<td class="text-center"><p>← Socioeconomic status →</p></td>
+<td class="text-right"><p>High</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Disabled</p></td>
+<td class="text-center"><p>← Disability status →</p></td>
+<td class="text-right"><p>Not disabled</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>LGBTQI</p></td>
+<td class="text-center"><p>← Sexual orientation →</p></td>
+<td class="text-right"><p>Hetero</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Old</p></td>
+<td class="text-center"><p>← Age →</p></td>
+<td class="text-right"><p>Young</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Stigmatised foreign country</p></td>
+<td class="text-center"><p>← National origin →</p></td>
+<td class="text-right"><p>Same as current country</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<center>
+<blockquote>
+<div><p>»Data is not going away. Nor are computers - much less mathematics. Predictive models are, increasingly, the tools we will be relying on to run our institutions, deploy our resources, and manage our lives. But as I’ve tried to show throughout this book, these models are constructed not just data but from the choices we make about the type of data to pay attention to - and which to leave out. Those choices are not just about logistics, profits, and efficiency. They are fundamentally moral. «</p>
+</div></blockquote>
+</center>
+<p>Cathy O’Neil, <em>Weapon of Math Destruction</em></p>
+</section>
+</section>
+<section id="references-follow-up">
+<h2>References &amp; Follow up<a class="headerlink" href="#references-follow-up" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://frameshiftconsulting.com/ally-skills-workshop">Ally Skills Workshops</a></p></li>
+<li><p><a class="reference external" href="https://journals.aom.org/doi/abs/10.5465/amj.2014.0538">Does Diversity-Valuing Behavior Result in Diminished Performance Ratings for Non-White and Female Leaders?</a></p></li>
+<li><p><a class="reference external" href="https://data-feminism.mitpress.mit.edu/pub/vi8obxh7/release/4">Data Feminism</a></p></li>
+<li><p><a class="reference external" href="https://www.beinspiredteam.com">Be Inspired, J. K. Nelson</a></p></li>
+<li><p><a class="reference external" href="https://kevinguyan.com/queer-data">Queer Data</a></p></li>
+<li><p><a class="reference external" href="https://carolinecriadoperez.com/book/invisible-women/">Invisible Women</a></p></li>
+<li><p><a class="reference external" href="https://www.sinsinvalid.org/disability-justice-primer">Skin, Tooth, and Bone: The Basis of Movement is Our People</a></p></li>
+<li><p><a class="reference external" href="https://www.penguin.co.uk/authors/141689/shon-faye">The Transgender Issue</a></p></li>
+<li><p><a class="reference external" href="https://www.dair-institute.org">Timnit Gebru’s DAIR Institute</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="aipm_sessions/Intro_to_AIPM.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to AIPM</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="05.1_Intro_to_Databases.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Databases</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understand-data-ethics">Understand Data Ethics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Exercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-ethical-concerns">Examples of ethical concerns</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-we-do">What can we do?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">What can we do?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-examples-of-possible-solutions-to-some-ethical-concern">Practical examples of possible solutions to some ethical concern.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Terminology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#oppression-vs-privilege">Oppression vs. Privilege</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-of-the-privileges-out-there">Some of the privileges out there</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#axes-of-privilege">Axes of privilege</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-your-privilege">Identify your privilege</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Axes of privilege</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references-follow-up">References &amp; Follow up</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

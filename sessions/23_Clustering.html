@@ -1,0 +1,1089 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Clustering &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/23_Clustering';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Natural Language Processing" href="24_NLP_Intro.html" />
+    <link rel="prev" title="Unsupervised Learning - Dimensionality Reduction" href="22_Dimensionality_Reduction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Clustering</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">Unsupervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Clustering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-measures">Similarity Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-examples-for-ds-purposes">Application examples for <em>DS purposes</em></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">K-Means clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea-of-k-means">Idea of K-means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-in-action">K-means in action</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-find-the-best-number-of-clusters">How to find the best number of clusters?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elbow-method">Elbow Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#silhouette-plot-and-silhouette-coefficients">Silhouette plot and silhouette coefficients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-considerations">K-means considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">K-means considerations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-clustering">Hierarchical clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea">Idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#agglomerative-algorithm">Agglomerative algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">How to find the best number of clusters?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dissimilarity-metrics">Dissimilarity Metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bottom-up-vs-top-down">Bottom up vs. top down</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks-of-agglomerative-clustering">Drawbacks of Agglomerative Clustering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dbscan">DBSCAN</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-hyper-parameters">Two hyper-parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-types-of-points">Three types of points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Three types of points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Three types of points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#procedure">Procedure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dbscan-in-action">DBSCAN in action</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="clustering">
+<h1>Clustering<a class="headerlink" href="#clustering" title="Link to this heading">#</a></h1>
+<section id="unsupervised-learning">
+<h2>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">
+<ol class="arabic simple">
+<li><p>Dimensionality Reduction</p>
+<ul class="simple">
+<li><p>reducing dimension of feature space by finding informative feature representations (for ML algorithms or humans)</p></li>
+<li><p>visualization in 2D</p></li>
+</ul>
+</li>
+<li><p><strong>Clustering</strong></p>
+<ul class="simple">
+<li><p>grouping similar samples</p></li>
+</ul>
+</li>
+</ol>
+  </div>
+  <div class="images">
+    <img src="../images/clustering/img_p0_1.png">
+  </div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Warm-up: Try to find pairs (using ipython, e.g.)</span>
+<span class="c1"># CAVEAT:  requires some research!</span>
+
+<span class="n">left</span> <span class="o">=</span> <span class="p">[</span>
+ <span class="s1">&#39;Outlier or anomaly detection can be used&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Principal Component Analysis (PCA) is a method&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Principal Component Analysis (PCA) is frequently used&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;There are many clustering methods&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Most clustering algorithms are based on a distance metric&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Gaussian Mixture Models (GMM) are a generative model&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Unsupervised learning is a family of machine learning methods&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;The &quot;curse of dimensionality&quot; is a problem&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;t-SNE reduces data to two dimensions&#39;</span>
+<span class="p">]</span>
+
+<span class="n">right</span> <span class="o">=</span> <span class="p">[</span>
+ <span class="s1">&#39;to visualize complex datasets.&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;that becomes worse the more features you have.&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;to identify credit card fraud.&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;for dimensionality reduction.&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;e.g. Euclidean or Manhattan distance.&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;that do not require labled data.&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;for detecting outliers.&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;as part of a supervised learning pipeline.&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;like K-means, agglomeration, or DBSCAN.&#39;</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>Clustering<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Idea: Partition the dataset into groups (clusters) so that</p>
+<ul class="simple">
+<li><p>observations in same cluster are as similar as possible</p></li>
+<li><p>observations in different clusters are as different as possible</p></li>
+</ul>
+<ul class="simple">
+<li><p>application examples</p>
+<ul>
+<li><p>anomaly detection (e.g. fraud detection, technical maintenance)</p></li>
+<li><p>recommender systems (e.g. literature/movie/cloth recommendations)</p></li>
+<li><p>no personalized but groupwise patient treatments (e.g. rehabilitation programs)</p></li>
+<li><p>…</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="similarity-measures">
+<h2>Similarity Measures<a class="headerlink" href="#similarity-measures" title="Link to this heading">#</a></h2>
+<p>The distance between two points <span class="math notranslate nohighlight">\(a_1\)</span> and <span class="math notranslate nohighlight">\(a_2\)</span> in n-dimensional space<br />
+can be measured in different ways:</p>
+<div class="group">
+  <div class="text_70">
+<ul>
+<li><p>Euclidean distance (“length” of connecting line)</p></li>
+<li><p>Manhattan distance (<a class="reference external" href="https://en.wikipedia.org/wiki/Taxicab_geometry">taxicab distance</a>)</p></li>
+<li><p>Minkowski distance (generalisation of above distance metrics)<br />
+<br></p></li>
+<li><p>Cosine similarity (cosine of the enclosed angle)<br />
+<br><br></p></li>
+<li><p>The similarity of sets A and B can be measured by the <a class="reference external" href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard index</a></p></li>
+<li><p>…</p>
+</div>
+<div class="image_30">
+</li>
+</ul>
+<p><span class="math notranslate nohighlight">\( d_{Eucl}(a_1,a_2) = \sqrt{(a_2-a_1)^2} \)</span><br />
+<span class="math notranslate nohighlight">\( d_{Manhattan}(a_1,a_2) = \sum_{i=1}^n \left|a_{2,i} - a_{1,i}\right|\)</span><br />
+<span class="math notranslate nohighlight">\( d_{Mink}(a_1,a_2) = \biggl(\sum_{i=1}^n |a_{2,i}-a_{1,i}|^k\biggr)^{\frac{1}{k}}\)</span><br />
+<span class="math notranslate nohighlight">\( d_{cosine}(a_1,a_2) = {a_1 \cdot a_2 \over {\|a_1\| \|a_2\|}}\)</span><br>
+<br><br><br />
+<span class="math notranslate nohighlight">\( J(A,B) = \frac{|A \cap B|}{|A \cup B|} \)</span></p>
+  </div>
+</div><section id="application-examples-for-ds-purposes">
+<h3>Application examples for <em>DS purposes</em><a class="headerlink" href="#application-examples-for-ds-purposes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>convenient inspection of single clusters (instead of the complete dataset, e.g. for visualisations)</p></li>
+<li><p>create groups as features or outcomes for predictive regression or classification model</p></li>
+<li><p>create pseudo-labels for semi-supervised learning</p></li>
+</ul>
+</section>
+</section>
+<section id="k-means-clustering">
+<h2>K-Means clustering<a class="headerlink" href="#k-means-clustering" title="Link to this heading">#</a></h2>
+<section id="idea-of-k-means">
+<h3>Idea of K-means<a class="headerlink" href="#idea-of-k-means" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Define the number of clusters, k (hyperparameter).</p></li>
+<li><p>Assign all observations to a certain cluster so that within-cluster distances (hyperparameter) are minimal.</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Cluster mean does not refer to a single number, but to the n-dimensional means of all features.</p>
+</div></section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e34c4f91f05e567644404ad948654ffdda5d18ac825af740e976aa1e9f9462d3.png" src="../_images/e34c4f91f05e567644404ad948654ffdda5d18ac825af740e976aa1e9f9462d3.png" />
+</div>
+</div>
+<p>Sample with <strong>two features</strong> x and y, <strong>100 observations</strong> and obviously <strong>3 clusters</strong>.</p>
+<p>Notes: Mention that the number of clusters is usually not know in advance.</p>
+</section>
+<section id="id2">
+<h3>Example<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/85be003d0c46a18663041d90876e2b4b5e59dd36ae9904311eb12fc9aac6f45d.png" src="../_images/85be003d0c46a18663041d90876e2b4b5e59dd36ae9904311eb12fc9aac6f45d.png" />
+</div>
+</div>
+<p><strong>Step 0:</strong> Randomly initialize (or user-define) starting cluster <strong>centroids</strong>.</p>
+<p><strong>Step 1:</strong> Assign observations to closest cluster centroid (initial/new clusters).</p>
+</section>
+<section id="id3">
+<h3>Example<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/d8b87e0b4939a945f217d0f4dd4aae4e91cbf7ddbc4cc2cf2adf0d4d3db378c1.png" src="../_images/d8b87e0b4939a945f217d0f4dd4aae4e91cbf7ddbc4cc2cf2adf0d4d3db378c1.png" />
+</div>
+</div>
+<p><strong>Step 2:</strong> For each cluster (<em>here</em>: red, green, blue) calculate the mean values for each of the features (<em>here</em>: y and x). These mean values are the coordinates of the new cluster centroids:</p>
+<div class="math notranslate nohighlight">
+\[{\bar{x}}_{k}={\frac{1}{n_{k}}}\sum_{i\in{C}(k)}x_{i}\;\;\text{and}\;\;{\bar{y}}_{k}={\frac{1}{n_{k}}}\sum_{i\in{C}(k)}y_{i}\]</div>
+</section>
+<section id="id4">
+<h3>Example<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p><strong>Step 3:</strong> Repeat from <strong>Step 1</strong> (reassign points) until the following sum is minimised:</p>
+  </div>
+  <div class="images">
+<div class="math notranslate nohighlight">
+\[D_{k}=\sum_{i\in{C}(k)}(x_{i}-\bar{x}_{k})^2+(y_{i}-\bar{y}_{k})^2\]</div>
+<div class="math notranslate nohighlight">
+\[\text{min}\;DD=\sum_{k=1}^{3}D_{k}\]</div>
+  </div>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/017ec1868cfea32d25215f62be3c137cbd4fa75d34d601f7f7ca9515f29a43a9.png" src="../_images/017ec1868cfea32d25215f62be3c137cbd4fa75d34d601f7f7ca9515f29a43a9.png" />
+</div>
+</div>
+</section>
+<section id="k-means-in-action">
+<h3>K-means in action<a class="headerlink" href="#k-means-in-action" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>To see K-Means in action, check out this amazing <a class="reference external" href="https://www.naftaliharris.com/blog/visualizing-k-means-clustering/">blog</a> by Naftali Harris.</p>
+  </div>
+  <div class="images">
+    <img src="../images/clustering/K-means.png">
+  </div>
+</div><p>Notes:<br />
+Choose e.g.: “I’ll chose” / “Gaussian Mixture” / manually select 3 points / “GO!” / “Update Centroids” / …<br />
+Selecting “Farthest Points” behaves like kmeans++</p>
+</section>
+<section id="how-to-find-the-best-number-of-clusters">
+<h3>How to find the best number of clusters?<a class="headerlink" href="#how-to-find-the-best-number-of-clusters" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3ffb3c440fd2e356e594d2bb21f342c63f205eeb2e5cdb9dcfacdeb4426adc7e.png" src="../_images/3ffb3c440fd2e356e594d2bb21f342c63f205eeb2e5cdb9dcfacdeb4426adc7e.png" />
+</div>
+</div>
+</section>
+<section id="elbow-method">
+<h3>Elbow Method<a class="headerlink" href="#elbow-method" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>test different amount of clusters k<br />
+→ k is a hyperparameter</p></li>
+<li><p>calculate performance metric (eg. within-cluster sum of squares)</p></li>
+<li><p>decide for the amount of clusters where an additional cluster contributes only marginally</p></li>
+</ul>
+</section>
+<section id="silhouette-plot-and-silhouette-coefficients">
+<h3>Silhouette plot and silhouette coefficients<a class="headerlink" href="#silhouette-plot-and-silhouette-coefficients" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p><strong>Silhouette plot</strong>:</p>
+<ul>
+<li><p>based on silhouette coefficients (cluster average score) and score</p></li>
+<li><p>“knives” should extend over dashed line</p></li>
+<li><p>similar sizes are preferable</p>
+</div>
+<div class="text">
+</li>
+</ul>
+<p><strong>Silhouette coefficients</strong>:</p>
+<ul>
+<li><p>close to 1: good clustering</p></li>
+<li><p>close to 0: overlapping clusters</p></li>
+<li><p>close to -1: incorrectly assigned</p>
+</div>
+</li>
+</ul>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/b4ce414683fd071d6f058c0d3ed36c2adac267fdb2e8ce67fa373e0b3656212f.png" src="../_images/b4ce414683fd071d6f058c0d3ed36c2adac267fdb2e8ce67fa373e0b3656212f.png" />
+</div>
+</div>
+</section>
+<section id="k-means-considerations">
+<h3>K-means considerations<a class="headerlink" href="#k-means-considerations" title="Link to this heading">#</a></h3>
+<p>Pros</p>
+<ul class="simple">
+<li><p>fast (computational effort scales with size of dataset, viz. linear)</p></li>
+<li><p>simple and therefore understandable</p></li>
+<li><p>interpretable results (e.g. centroid can be regarded as characteristic for a cluster)</p></li>
+<li><p>Number of clusters can be defined (advantageous if specified by the business case)</p></li>
+</ul>
+<p>Cons</p>
+<ul class="simple">
+<li><p>Cannot easily handle clusters with different diameters,</p></li>
+<li><p>nor non-convex clusters.</p></li>
+<li><p>Number of clusters has to be defined (hyperparameter)</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/295b6ffebb616eaf497790687210cb712fab1b63d7bee0fd2e1e080aca392ec1.png" src="../_images/295b6ffebb616eaf497790687210cb712fab1b63d7bee0fd2e1e080aca392ec1.png" />
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>K-means considerations<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>General</p>
+<ul class="simple">
+<li><p>Scale variables before clustering otherwise variables with large scale will dominate the clustering process.</p></li>
+<li><p>K-means does not care for a balance within a dataset.</p></li>
+<li><p>It’s a greedy algorithm  with outcome depending on initialization.</p></li>
+</ul>
+<p>Improvements</p>
+<ul class="simple">
+<li><p>k-means++ (tends to select centroids that are distant from one another)</p></li>
+<li><p>Balanced K-means (enforces the cluster sizes to be strictly balanced)</p></li>
+<li><p>Regularized K-means (effective clustering of high-dimensional data)</p></li>
+</ul>
+<p>Notes:<br />
+regarding greedy: only optimum for each single step is taken into account. Final outcome depends on number K and initialization. Which other algorithm was greedy? (decision trees).</p>
+</section>
+</section>
+<section id="hierarchical-clustering">
+<h2>Hierarchical clustering<a class="headerlink" href="#hierarchical-clustering" title="Link to this heading">#</a></h2>
+<section id="idea">
+<h3>Idea<a class="headerlink" href="#idea" title="Link to this heading">#</a></h3>
+<p>Finding clusters not depending on random initialization.</p>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>“most similar” includes the need to define similarity (see the beginning of the lecture, e.g. Euclidean, Manhattan, …)</p></li>
+<li><p>“like a single observation” includes the need to define the characteristic of a cluster like the centre, e.g. The following slide shows two possibilities.</p></li>
+</ul>
+<p>Those are two hyperparameters which have to be defined.</p>
+</section>
+<section id="agglomerative-algorithm">
+<h3>Agglomerative algorithm<a class="headerlink" href="#agglomerative-algorithm" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+    <img src="../images/clustering/img_p19_1.png">     
+  </div>
+  <div class="images_30">
+  </div>
+</div></section>
+<section id="visualization">
+<h3>Visualization<a class="headerlink" href="#visualization" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Dendrogram</strong>: <br />
+Visual representation of records and hierarchy of clusters to which they belong <br />
+(“dendro” is greek for tree)</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>Visualization<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p>plotting Dendrogram (visualize hierarchical clustering)</p></li>
+<li><p>samples are numbered</p></li>
+<li><p>shows order in which samples are clustered together (reading from bottom to top)</p></li>
+<li><p>y-axis shows how far apart clusters are</p>
+</div>
+<div class="images">
+  <img src="../images/clustering/img_p21_1.png">
+</div>
+</li>
+</ul>
+</div></section>
+<section id="id7">
+<h3>How to find the best number of clusters?<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p>plotting Dendrogram (visualize hierarchical clustering)</p></li>
+<li><p>samples are numbered</p></li>
+<li><p>shows order in which samples are clustered together (reading from bottom to top)</p></li>
+<li><p>y-axis shows how far apart clusters are</p>
+</div>
+<div class="images">
+  <img src="../images/clustering/hirarchical.png">
+</div>
+</li>
+</ul>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>→ optimal number of clusters: largest vertical distance within same number of clusters</p>
+</div></section>
+<section id="dissimilarity-metrics">
+<h3>Dissimilarity Metrics<a class="headerlink" href="#dissimilarity-metrics" title="Link to this heading">#</a></h3>
+<p>We need to define how far two observations / clusters are away from each other</p>
+<center>
+    <img src="../images/clustering/clustering_linkage_transparent_bg.png" width=600>
+</center></section>
+<section id="bottom-up-vs-top-down">
+<h3>Bottom up vs. top down<a class="headerlink" href="#bottom-up-vs-top-down" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p>So far we investigated agglomeration (bottom up)</p></li>
+<li><p>Alternatively there is also divisive clustering (top down)</p>
+</div>
+<div class="images">
+  <img src="../images/clustering/Agglomeration_vs_Division.png">
+</div>
+</li>
+</ul>
+</div></section>
+<section id="drawbacks-of-agglomerative-clustering">
+<h3>Drawbacks of Agglomerative Clustering<a class="headerlink" href="#drawbacks-of-agglomerative-clustering" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p>not able to capture complex structure</p></li>
+<li><p>does not scale well with large data sets</p></li>
+<li><p>greedy algorithm (might not be globally optimal)</p>
+</div>
+<div class="images">
+  <img src="../images/clustering/img_p23_1.png" width=500>
+</div>
+</li>
+</ul>
+</div></section>
+</section>
+<section id="dbscan">
+<h2>DBSCAN<a class="headerlink" href="#dbscan" title="Link to this heading">#</a></h2>
+<section id="id8">
+<h3>Idea<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>DBSCAN:
+<strong>D</strong>ensity-<strong>b</strong>ased <strong>s</strong>patial <strong>c</strong>lustering of <strong>a</strong>pplications with <strong>n</strong>oise</p>
+<p>Idea:</p>
+<ul class="simple">
+<li><p>clusters dense regions which are separated by areas that are relatively empty</p></li>
+<li><p>it identifies points that don’t belong to any cluster (aka noise)</p></li>
+</ul>
+</section>
+<section id="two-hyper-parameters">
+<h3>Two hyper-parameters<a class="headerlink" href="#two-hyper-parameters" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<br>     
+<ul>
+<li><p>eps (max distance considered between points of a cluster)</p></li>
+<li><p>min_samples (required to form a cluster)</p>
+</div>
+<div class="images_30">
+  <img src="../images/clustering/clustering_dbscan_transparent_bg.png" width=250>
+</div>
+</li>
+</ul>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>The core point itself is also counted when checking the min_samples requirement.</p>
+</div> 
+</section>
+<section id="three-types-of-points">
+<h3>Three types of points<a class="headerlink" href="#three-types-of-points" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p><strong>Core point:</strong></p>
+<ul>
+<li><p>if there are at least <em>min_sample</em> points within distance <em>eps</em></p>
+</div>
+<div class="images_30">
+  <img src="../images/clustering/dbscan_points_transparent_bg.png">
+</div>
+</li>
+</ul>
+</div></section>
+<section id="id9">
+<h3>Three types of points<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p><strong>Core point:</strong></p>
+<ul class="simple">
+<li><p>if there are at least <em>min_sample</em> points within distance <em>eps</em></p></li>
+</ul>
+<p><strong>Boundary point:</strong></p>
+<ul>
+<li><p>if there is at least one core point within distance <em>eps</em></p></li>
+<li><p>but <strong>less</strong> neighbouring points than <em>min_samples</em></p>
+</div>
+<div class="images_30">
+  <img src="../images/clustering/dbscan_points_transparent_bg.png">
+</div>
+</li>
+</ul>
+</div></section>
+<section id="id10">
+<h3>Three types of points<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p><strong>Core point:</strong></p>
+<ul class="simple">
+<li><p>if there are at least <em>min_sample</em> points within distance <em>eps</em></p></li>
+</ul>
+<p><strong>Boundary point:</strong></p>
+<ul class="simple">
+<li><p>if there is at least one core point within distance <em>eps</em></p></li>
+<li><p>but <strong>less</strong> neighbouring points than <em>min_samples</em></p></li>
+</ul>
+<p><strong>Noise (outlier):</strong></p>
+<ul>
+<li><p>if neither core nor boundary point<br />
+→ not reachable from any other cluster</p>
+</div>
+<div class="images_30">
+  <img src="../images/clustering/dbscan_points_transparent_bg.png">
+</div>
+</li>
+</ul>
+</div></section>
+<section id="procedure">
+<h3>Procedure<a class="headerlink" href="#procedure" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/clustering/DBSCAN.gif" width=1000>
+</center>
+<p><a class="reference external" href="https://www.naftaliharris.com/blog/visualizing-dbscan-clustering/">Gif source</a></p>
+</section>
+<section id="advantages">
+<h3>Advantages<a class="headerlink" href="#advantages" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<ul class="simple">
+<li><p>automatically identifies number of clusters</p></li>
+<li><p>able to identify complex formed clusters</p></li>
+<li><p>able to identify clusters with very different sizes</p></li>
+<li><p>distinguish between clusters (dense data) and noise</p></li>
+</ul>
+<p>However, boundary points can belong to different clusters. DBSCAN assigns those arbitrarily to one possible cluster.</p>
+  </div>
+  <div class="images_30">
+    <img src="../images/clustering/img_p43_1.png">
+    <img src="../images/clustering/img_p43_2.png">
+  </div>
+</div></section>
+<section id="dbscan-in-action">
+<h3>DBSCAN in action<a class="headerlink" href="#dbscan-in-action" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>To try out more DBSCAN in action, check out this amazing <a class="reference external" href="https://www.naftaliharris.com/blog/visualizing-dbscan-clustering/">blog</a> by Naftali Harris.</p>
+  </div>
+  <div class="images">
+    <img src="../images/clustering/img_p44_2.png">
+  </div>
+</div></section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>Great <a class="reference external" href="https://scikit-learn.org/stable/modules/clustering.html">documentation page</a> on scikit-learn!</p>
+<center>
+    <img src="../images/clustering/img_p45_2.png" width=900>
+</center></section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.scikit-yb.org/en/latest/api/cluster/elbow.html">Explanation of elbow method</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/DBSCAN">Wikipedia: DBSCAN</a></p></li>
+<li><p><a class="reference external" href="https://www.oreilly.com/library/view/practical-statistics-for/9781491952955/">Book: Practical Statistics for Data Scientists</a></p></li>
+<li><p><a class="reference external" href="https://www.naftaliharris.com/blog/visualizing-k-means-clustering/">Visualizing k-means</a></p></li>
+<li><p><a class="reference external" href="https://www.naftaliharris.com/blog/visualizing-dbscan-clustering/">Visualizing DBSCAN</a></p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html">Explanation of the Shilouette analysis</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="22_Dimensionality_Reduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Unsupervised Learning - Dimensionality Reduction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="24_NLP_Intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Natural Language Processing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">Unsupervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Clustering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#similarity-measures">Similarity Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-examples-for-ds-purposes">Application examples for <em>DS purposes</em></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">K-Means clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea-of-k-means">Idea of K-means</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-in-action">K-means in action</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-find-the-best-number-of-clusters">How to find the best number of clusters?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elbow-method">Elbow Method</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#silhouette-plot-and-silhouette-coefficients">Silhouette plot and silhouette coefficients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-considerations">K-means considerations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">K-means considerations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-clustering">Hierarchical clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#idea">Idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#agglomerative-algorithm">Agglomerative algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization">Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">How to find the best number of clusters?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dissimilarity-metrics">Dissimilarity Metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bottom-up-vs-top-down">Bottom up vs. top down</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks-of-agglomerative-clustering">Drawbacks of Agglomerative Clustering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dbscan">DBSCAN</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-hyper-parameters">Two hyper-parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-types-of-points">Three types of points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Three types of points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Three types of points</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#procedure">Procedure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dbscan-in-action">DBSCAN in action</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

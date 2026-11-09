@@ -1,0 +1,824 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Let’s talk about git.. &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/02_Git_Workflows';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Data Science &amp; ML" href="03_Intro_to_Data_Science_ML.html" />
+    <link rel="prev" title="Welcome to the Data Science &amp; AI Bootcamp!" href="01_Orientation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Let’s talk about git..</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-git">What is git?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-of-you-has-done-that">Who of you has done that?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-of-you-has-used-built-in-version-control-of-a-tool-already">Who of you has used built in version control of a tool already?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-control-with-git">Version Control with git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Version Control with git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-three-stages">The Three Stages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-workflow">The Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-status-of-your-files">The Status of your Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-git-locally">Using Git Locally</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-github">What is GitHub?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-git-with-remote-repository">Using Git with Remote Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Using Git with Remote Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Using Git with Remote Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Using Git with Remote Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-git">Setting up Git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Using Git with Remote Repository</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lets-work-in-pairs">Let’s work in pairs.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lets-talk-about-git">
+<h1>Let’s talk about git..<a class="headerlink" href="#lets-talk-about-git" title="Link to this heading">#</a></h1>
+<section id="what-is-git">
+<h2>What is git?<a class="headerlink" href="#what-is-git" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text"> 
+<ul>
+<li><p>Open-source project</p></li>
+<li><p>Distributed Version Control System</p></li>
+<li><p>can be used completely offline</p>
+  </div>
+  <div class="images">
+      <img src="../images/git/img_p1_1.png">
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="who-of-you-has-done-that">
+<h2>Who of you has done that?<a class="headerlink" href="#who-of-you-has-done-that" title="Link to this heading">#</a></h2>
+<p><img alt="http://thedoghousediaries.com/5964" src="http://thedoghousediaries.com/dhdcomics/2015-02-09B.png" /></p>
+</section>
+<section id="who-of-you-has-used-built-in-version-control-of-a-tool-already">
+<h2>Who of you has used built in version control of a tool already?<a class="headerlink" href="#who-of-you-has-used-built-in-version-control-of-a-tool-already" title="Link to this heading">#</a></h2>
+<p><img alt="" src="../_images/version-control-google-slides.png" /></p>
+</section>
+<section id="version-control-with-git">
+<h2>Version Control with git<a class="headerlink" href="#version-control-with-git" title="Link to this heading">#</a></h2>
+<p><img alt="scikit-learn repo" src="../_images/commit-history.png" /></p>
+</section>
+<section id="id1">
+<h2>Version Control with git<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p><img alt="scikit-learn commit change" src="../_images/commit-changes.png" /></p>
+</section>
+<section id="the-three-stages">
+<h2>The Three Stages<a class="headerlink" href="#the-three-stages" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">  
+<ul>
+<li><p>modified:
+file was changed but not committed yet</p></li>
+<li><p>staged:
+file was marked in its current version to go into the next commit</p></li>
+<li><p>committed:
+file/data is stored in local database (.git directory)</p>
+  </div>
+  <div class="images">
+      <img src="../images/git/img_p2_1.png">
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="the-workflow">
+<h2>The Workflow<a class="headerlink" href="#the-workflow" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">  
+<ol class="arabic">
+<li><p>Modify files in working tree/directory</p></li>
+<li><p>Selectively stage those changes that should be part of the next commit</p></li>
+<li><p>Commit the files as they are in the staging area and store that snapshot to your git repository</p>
+ </div>
+ <div class="images">
+     <img src="../images/git/img_p4_1.png">
+ </div>
+</li>
+</ol>
+</div>
+</section>
+<section id="the-status-of-your-files">
+<h2>The Status of your Files<a class="headerlink" href="#the-status-of-your-files" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">   
+<img src="../images/git/git_stages.png">
+    </div>
+      <div class="images">
+    </div>
+</div>
+<!-- if you want the old picture back, use git_stages_v2.png --> </section>
+<section id="using-git-locally">
+<h2>Using Git Locally<a class="headerlink" href="#using-git-locally" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>In your terminal: create a new folder and navigate into it</p></li>
+<li><p>Turn it into a git repository with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> and create a file (can be any file type)</p></li>
+<li><p>Explore the different stages and commands:</p>
+<ul class="simple">
+<li><p>Track a file</p></li>
+<li><p>Stage and commit a file</p></li>
+<li><p>Modify a committed file and commit it again</p></li>
+<li><p>Stage a file and unstage it again</p></li>
+<li><p>Create a new file, track it and untrack it again</p></li>
+</ul>
+<p>Between every command run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code>. It will not only show you the effects of your command but also suggest all the commands you will need to unstage or untrack a file.</p>
+</li>
+</ol>
+</section>
+<section id="what-is-github">
+<h2>What is GitHub?<a class="headerlink" href="#what-is-github" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text_70"> 
+<ul>
+<li><p>Collaborate effectively online based on git (see below)</p></li>
+<li><p>Open-source community and contribution</p></li>
+<li><p>Follow others, find and star interesting repositories</p></li>
+<li><p>Show others what you did, invite to collaborate and collaborate yourself</p></li>
+<li><p>Demonstrate that you are actively working on projects</p></li>
+<li><p>Learn from code
+If you want to learn more about git &amp; GitHub, you can check <a class="reference external" href="https://docs.github.com/en/get-started/learning-to-code/getting-started-with-git">here</a>.</p>
+  </div>
+  <div class="images_30">
+      <img src="../images/git/img_p7_7.png">
+  </div>
+</li>
+</ul>
+</div>
+</section>
+<section id="using-git-with-remote-repository">
+<h2>Using Git with Remote Repository<a class="headerlink" href="#using-git-with-remote-repository" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">   
+<img src="../images/git/img_p9_1.png">
+    </div>
+      <div class="images">
+    </div>
+</div>
+</section>
+<section id="id2">
+<h2>Using Git with Remote Repository<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">   
+<img src="../images/git/img_p10_1.png">
+    </div>
+      <div class="images">
+    </div>
+</div></section>
+<section id="id3">
+<h2>Using Git with Remote Repository<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">   
+<img src="../images/git/img_p11_1.png">
+    </div>
+      <div class="images">
+    </div>
+</div>
+<p>Notes:</p>
+<p>CONTENT FROM THE PREVIOUS SLIDE:</p>
+<hr class="docutils" />
+<p>BUT Maybe some coworker(s) suggest further modifications (add a fish):</p>
+<ol class="arabic simple">
+<li><p>you could add a fish locally</p></li>
+<li><p>so we create a branch from main to work on a “copy” rather than on the original version (e.g. add a fish to the picture)</p></li>
+<li><p>when satisfied with the changes: git add, git commit, git push to the branch</p></li>
+<li><p>create a PR and ask for approval</p></li>
+<li><p>Maybe they will not approve a PR because they dislike the fish’s color (yellow) and ask for a change (red color)</p></li>
+</ol>
+<p>ASK THE STUDENTS TO THINK ABOUT HOW TO PROCEED IN THIS CASE.
+THEN CLICK and GO TO NEXT SLIDE TO SEE THE STEPS:</p>
+<hr class="docutils" />
+<p>CONTENT FOR THIS SLIDE:</p>
+<ol class="arabic simple">
+<li><p>modify the color (to red) locally; git add/git commit/git push to the branch; ask again for approval.</p></li>
+</ol>
+<p>How to check a PR as a reviewer? clone repo; switch to the branch in question; check the code (or here: picture); agree on github. Afterwards you may want to delete the branch for cleaning up and git pull.</p>
+</section>
+<section id="id4">
+<h2>Using Git with Remote Repository<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">   
+<img src="../images/git/img_p12_1.png">
+    </div>
+      <div class="images">
+    </div>
+</div>
+</section>
+<section id="setting-up-git">
+<h2>Setting up Git<a class="headerlink" href="#setting-up-git" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Setting the user name globally:</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">user.name</span> <span class="pre">“your</span> <span class="pre">name”</span></code></p>
+</li>
+<li><p>Setting the email address globally:</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">user.email</span> <span class="pre">“your</span> <span class="pre">email”</span></code></p>
+</li>
+<li><p>Setting the pull behaviour:</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">pull.ff</span> <span class="pre">only</span></code></p>
+</li>
+<li><p>Change default branch name:</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">init.defaultBranch</span> <span class="pre">main</span></code></p>
+</li>
+<li><p>Show configuration settings:</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--list</span></code></p>
+</li>
+</ul>
+</section>
+<section id="id5">
+<h2>Using Git with Remote Repository<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Create and clone new repo on Github</p></li>
+<li><p>Create new branch</p></li>
+<li><p>Commit and push changes to new branch</p></li>
+<li><p>Open a pull request (pr)</p></li>
+<li><p>Review code and approve pull request</p></li>
+<li><p>Merge branch into main / Deal with merge conflicts (if one occurs)</p></li>
+<li><p>Synchronize branches</p></li>
+<li><p>Open a pull request, approve and merge</p></li>
+</ol>
+<section id="lets-work-in-pairs">
+<h3>Let’s work in pairs.<a class="headerlink" href="#lets-work-in-pairs" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>New Repo</p>
+<ul class="simple">
+<li><p>ONE: creates new public repo on github with <a class="reference external" href="http://README.md">README.md</a>, .gitignore, and Licence (MIT)</p></li>
+<li><p>Invites partner as collaborator</p></li>
+<li><p>BOTH: Clone it to your machine: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">&lt;ssh_url&gt;</span></code></p></li>
+</ul>
+</li>
+<li><p>New Branches</p>
+<ul class="simple">
+<li><p>BOTH: create and switch to a new branch locally: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">-c</span> <span class="pre">&lt;new_branch&gt;</span></code></p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="3">
+<li><p>Commit Changes (BOTH)</p>
+<ul class="simple">
+<li><p>Create a new file and add, commit and push your change</p></li>
+<li><p>To push a local branch to a new remote branch use:
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">--set-upstream</span> <span class="pre">origin</span> <span class="pre">&lt;branch_name&gt;</span></code></p></li>
+</ul>
+</li>
+<li><p>Open Pull Request</p>
+<ul class="simple">
+<li><p>ONE: opens pull request and adds partner as reviewer</p></li>
+</ul>
+</li>
+<li><p>Code Review</p>
+<ul class="simple">
+<li><p>TWO: reviews changes and approves pull request</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="6">
+<li><p>Merge Branch</p>
+<ul class="simple">
+<li><p>ONE: merges approved pull request into main branch and deletes remote branch</p></li>
+</ul>
+</li>
+<li><p>Syncing Branches Locally</p>
+<ul class="simple">
+<li><p>Now branch of TWO will be behind main branch</p>
+<ul>
+<li><p>switch to main branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">main</span></code></p></li>
+<li><p>pull changes: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></p></li>
+<li><p>switch to your branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">&lt;branch_name&gt;</span></code></p></li>
+<li><p>merge new changes from main branch in your branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">main</span></code></p></li>
+<li><p>add commit message (vim will open automatically) if necessary and push again</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="alert alert-block alert-info">
+<b>Note: </b> 
+    Merging should be done by the person who did the pull request!
+</div>     
+<ol class="arabic simple" start="8">
+<li><p>Second pull request</p>
+<ul class="simple">
+<li><p>TWO: opens pull request for his branch</p></li>
+<li><p>ONE: reviews changes and approves pull request</p></li>
+<li><p>TWO: merges approved pull request into main branch and deletes remote branch</p></li>
+</ul>
+</li>
+</ol>
+<p>Last but not least..</p>
+<ul class="simple">
+<li><p>BOTH: switch to main branch locally and pull changes</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note: </b> 
+    Merging should be done by the person who did the pull request!
+</div>  <div class="group">
+  <div class="text">   
+<img src="../images/git/img_p19_1.png">
+    </div>
+      <div class="images">
+    </div>
+</div></section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<p>Git Basics - <a class="reference external" href="https://www.youtube.com/watch?v=_OZVJpLHUaI">https://www.youtube.com/watch?v=_OZVJpLHUaI</a></p>
+<p>Reference Manual - <a class="reference external" href="https://www.git-scm.com/docs">https://www.git-scm.com/docs</a></p>
+<p>Pro Git Book - <a class="reference external" href="https://www.git-scm.com/book/en/v2">https://www.git-scm.com/book/en/v2</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_Orientation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to the <br> Data Science &amp; AI Bootcamp!</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_Intro_to_Data_Science_ML.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Data Science &amp; ML</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-git">What is git?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-of-you-has-done-that">Who of you has done that?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-of-you-has-used-built-in-version-control-of-a-tool-already">Who of you has used built in version control of a tool already?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#version-control-with-git">Version Control with git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Version Control with git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-three-stages">The Three Stages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-workflow">The Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-status-of-your-files">The Status of your Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-git-locally">Using Git Locally</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-github">What is GitHub?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-git-with-remote-repository">Using Git with Remote Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Using Git with Remote Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Using Git with Remote Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Using Git with Remote Repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-git">Setting up Git</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Using Git with Remote Repository</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lets-work-in-pairs">Let’s work in pairs.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

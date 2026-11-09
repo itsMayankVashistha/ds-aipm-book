@@ -1,0 +1,957 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Regularization &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/09.2_Regularization';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gradient Descent" href="10_Gradient_Descent.html" />
+    <link rel="prev" title="Bias Variance Tradeoff" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Regularization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">Part 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-on-bias-variance-trade-off">Recap on Bias-Variance Trade-Off</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance-trade-off">Bias - Variance Trade-Off</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-underfitting-vs-overfitting">Example: Underfitting vs. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example: Underfitting vs. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example: Underfitting vs. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Example: Underfitting vs. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Example: Underfitting vs. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Example: Underfitting vs. Overfitting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2">Part 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-visual-approach">A Visual Approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prevent-overfitting">Prevent Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Prevent Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Prevent Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Prevent Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prevent-overfitting-with-regularization">Prevent Overfitting with Regularization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3">Part 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-constraint">Hard constraint</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Hard constraint</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-constraint-with-more-features">Hard constraint with more features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-constraint">Soft constraint</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Soft constraint</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-code-for-regularization">Sklearn code for regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-different-alpha-values">Some different alpha values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">Ridge Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">Lasso Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-vs-lasso">Ridge vs Lasso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-l1-eliminating-while-l2-only-reducing-weights">Why is L1 eliminating while L2 only reducing weights?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elastic-net-mixing-lasso-and-ridge">Elastic Net - Mixing Lasso and Ridge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-regularization-methods">Comparison of regularization methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="regularization">
+<h1>Regularization<a class="headerlink" href="#regularization" title="Link to this heading">#</a></h1>
+<section id="part-1">
+<h2>Part 1<a class="headerlink" href="#part-1" title="Link to this heading">#</a></h2>
+</section>
+<section id="recap-on-bias-variance-trade-off">
+<h2>Recap on Bias-Variance Trade-Off<a class="headerlink" href="#recap-on-bias-variance-trade-off" title="Link to this heading">#</a></h2>
+<section id="bias-variance-trade-off">
+<h3>Bias - Variance Trade-Off<a class="headerlink" href="#bias-variance-trade-off" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[MSE(\hat{y})=Bias^{2}+Variance+Noise\]</div>
+<p>→ to minimize the cost we need to find a good balance between the Bias and Variance term of a model<br />
+→ we can influence bias and variance by changing the complexity of our model</p>
+<div class="alert alert-block alert-info">
+<b>Note: </b> 
+    Noise is the irreducible error of a model.  
+    We cannot influence it.
+</div>  
+</section>
+<section id="example-underfitting-vs-overfitting">
+<h3>Example: Underfitting vs. Overfitting<a class="headerlink" href="#example-underfitting-vs-overfitting" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>We got data.
+But we don’t know the underlying Data Generating Process.</p></li>
+<li><p>So we want to model it.</p></li>
+<li><p>Do you see a pattern/trend?</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/f4526282e62414b4f02e3b7a5bb3d65e442d5a619ff10bf0ce649a2789dcae61.png" src="../_images/f4526282e62414b4f02e3b7a5bb3d65e442d5a619ff10bf0ce649a2789dcae61.png" />
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>Example: Underfitting vs. Overfitting<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Which model seems best?</p></li>
+<li><p>Which model seems to underfit the data?</p></li>
+<li><p>Which model might overfit the data?</p></li>
+<li><p>How to evaluate if a model is underfitting/overfitting?</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/5a7a7d28875fedfcbab421bac7c4295d43fc8929648624819bd0b714c3c58a18.png" src="../_images/5a7a7d28875fedfcbab421bac7c4295d43fc8929648624819bd0b714c3c58a18.png" />
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>Example: Underfitting vs. Overfitting<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>How to evaluate if a model is underfitting/overfitting?</p>
+<ul class="simple">
+<li><p>we need a cost function</p></li>
+<li><p>we need test data</p></li>
+<li><p>we should do error analysis</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/638c34f5d9b43c77c2d3a8f25ac901faa9357f3b8f45a90d226937d17508c449.png" src="../_images/638c34f5d9b43c77c2d3a8f25ac901faa9357f3b8f45a90d226937d17508c449.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Example: Underfitting vs. Overfitting<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>How to figure out if your model is overfitting?</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/638c34f5d9b43c77c2d3a8f25ac901faa9357f3b8f45a90d226937d17508c449.png" src="../_images/638c34f5d9b43c77c2d3a8f25ac901faa9357f3b8f45a90d226937d17508c449.png" />
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>Example: Underfitting vs. Overfitting<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>How to figure out if your model is overfitting?</p>
+<ul class="simple">
+<li><p>error on training data is low</p></li>
+<li><p>error on test data is high</p></li>
+</ul>
+<p>→ model memorizes the noise in the data</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/638c34f5d9b43c77c2d3a8f25ac901faa9357f3b8f45a90d226937d17508c449.png" src="../_images/638c34f5d9b43c77c2d3a8f25ac901faa9357f3b8f45a90d226937d17508c449.png" />
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>Example: Underfitting vs. Overfitting<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>How to figure out if your model is overfitting?</p>
+<ul class="simple">
+<li><p>error on training data is low</p></li>
+<li><p>error on test data is high</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/638c34f5d9b43c77c2d3a8f25ac901faa9357f3b8f45a90d226937d17508c449.png" src="../_images/638c34f5d9b43c77c2d3a8f25ac901faa9357f3b8f45a90d226937d17508c449.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="part-2">
+<h2>Part 2<a class="headerlink" href="#part-2" title="Link to this heading">#</a></h2>
+</section>
+<section id="a-visual-approach">
+<h2>A Visual Approach<a class="headerlink" href="#a-visual-approach" title="Link to this heading">#</a></h2>
+<section id="prevent-overfitting">
+<h3>Prevent Overfitting<a class="headerlink" href="#prevent-overfitting" title="Link to this heading">#</a></h3>
+<p>If we see overfitting of our model, we could gather more data.</p>
+</section>
+<section id="id6">
+<h3>Prevent Overfitting<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>If we see overfitting of our model, we could reduce its complexity.</p>
+<p>HOW?</p>
+<div class="alert alert-block alert-info">
+<b>Note: </b> 
+   Every model type has a way to reduce model
+complexity.</br>
+   We just learnt Linear Reg. that’s why we will
+concentrate on the Regularization of those models for now.
+</div>  <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/638c34f5d9b43c77c2d3a8f25ac901faa9357f3b8f45a90d226937d17508c449.png" src="../_images/638c34f5d9b43c77c2d3a8f25ac901faa9357f3b8f45a90d226937d17508c449.png" />
+</div>
+</div>
+</section>
+<section id="id7">
+<h3>Prevent Overfitting<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>If we see overfitting of our model, we could reduce its complexity.</p>
+<p>HOW?</p>
+<ul class="simple">
+<li><p>reduce amount of features</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/461af262f29c73c244f4d998adb76492f9c01344832dfcd1e81f729980a48408.png" src="../_images/461af262f29c73c244f4d998adb76492f9c01344832dfcd1e81f729980a48408.png" />
+</div>
+</div>
+</section>
+<section id="id8">
+<h3>Prevent Overfitting<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>If we see overfitting of our model, we could reduce its complexity.</p>
+<p>HOW?</p>
+<ul class="simple">
+<li><p>reduce amount of features</p></li>
+<li><p>make the model less susceptible to data by reducing the influence of features<br />
+→ smaller coefficients</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/a03490862d634ebf63f7614b91ee095d173c5b986272e906043dba99dafc360d.png" src="../_images/a03490862d634ebf63f7614b91ee095d173c5b986272e906043dba99dafc360d.png" />
+</div>
+</div>
+</section>
+<section id="prevent-overfitting-with-regularization">
+<h3>Prevent Overfitting with Regularization<a class="headerlink" href="#prevent-overfitting-with-regularization" title="Link to this heading">#</a></h3>
+<p>BOTH can be achieved with regularizing a model:</p>
+<ul class="simple">
+<li><p>reduce amount of features</p></li>
+<li><p>make the model less susceptive of data by reducing the influence of features (smaller coefficients)</p></li>
+</ul>
+</section>
+</section>
+<section id="part-3">
+<h2>Part 3<a class="headerlink" href="#part-3" title="Link to this heading">#</a></h2>
+</section>
+<section id="id9">
+<h2>Regularization<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<section id="id10">
+<h3>Regularization<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>Regularization conceptually uses a hard constraint to prevent coefficients from getting too large, at a small cost in overall accuracy. With the aim to get models that generalize better on new data.</p>
+<div class="alert alert-block alert-info">
+<b>Note: </b> 
+    Even with linear models, it can be useful to regularise them.
+Because they have a tendency to trace outliers in the
+training data.
+</div>     
+</section>
+<section id="hard-constraint">
+<h3>Hard constraint<a class="headerlink" href="#hard-constraint" title="Link to this heading">#</a></h3>
+<p>We add a hard constraint to our cost function:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{min}\,J(b_{0},b_{1})={\frac{1}{n}}\sum{(y_{i}-b_{0}-b_{1}x_{i})}^{2}\,\text{subject}\,\text{to}\,-1 \leq b_{1} \leq 1\]</div>
+<p>General form of the constraint:</p>
+<div class="math notranslate nohighlight">
+\[-t \leq b_{1} \leq t\]</div>
+<p>What do we have to change to get to a form like this:</p>
+<div class="math notranslate nohighlight">
+\[b_{1} \leq t\]</div>
+<div class="group">
+<div class="text"> 
+    <div class="alert alert-block alert-info">
+<b>Note: </b> 
+    We are not constraining the y-intercept
+</div> 
+</div>
+<div class="images">
+<img src="../images/regularization/img_p18_1.png">
+</div>    
+</div>
+</section>
+<section id="id11">
+<h3>Hard constraint<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<p>We add a hard constraint to our cost function:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{min}\,J(b_{0},b_{1},...,b_{m})={\frac{1}{n}}\sum{(y_{i}-b_{0}-b_{1}x_{i}-...-b_{m}x_{m})}^{2}\,\text{subject}\,\text{to}\,L1/L2\,\text{constraint}\]</div>
+<div class="group">
+  <div class="text"> 
+<p>The most common regularization constraints:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+L_{1}\,&amp;:\,|b_{1}| \leq t \\
+L_{2}\,&amp;:\,b_{1}^2 \leq t
+\end{align}\end{split}\]</div>
+</div>
+    <div class="images">
+        <img src="../images/regularization/img_p18_1.png">
+    </div>
+</div>
+</section>
+<section id="hard-constraint-with-more-features">
+<h3>Hard constraint with more features<a class="headerlink" href="#hard-constraint-with-more-features" title="Link to this heading">#</a></h3>
+<p>We add a hard constraint to our cost function:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{min}\,J(b_{0},b_{1},...,b_{m})=\frac{1}{n}\sum{(y_{i}-b_{0}-b_{1}x_{i}-...-b_{m}x_{m})}^{2}\,\text{subject}\,\text{to}\,L1/L2\,\text{constraint}\]</div>
+<p>The most common regularization constraints:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+L_{1}\,&amp;:\,|b_{1}|+|b_{2}|+... \leq t \\
+L_{2}\,&amp;:\,b_{1}^2+b_{2}^2+... \leq t
+\end{align}\end{split}\]</div>
+<div class="alert alert-block alert-info">
+<b>Note: </b> 
+    If we have more than one feature, we need to bring them all to the same scale. Otherwise they contribute different to the penalty term.
+</div> 
+</section>
+<section id="soft-constraint">
+<h3>Soft constraint<a class="headerlink" href="#soft-constraint" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">  
+<p>We can add this constraint directly to our Loss function (t becomes alpha (or lambda))</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+Ridge (L2): J(b)&amp;=\frac{1}{n}\sum{\big(y-(b_{0}+b_{1}x_{1}+b_{2}x_{2})\big)}^{2} + \alpha\,(b_{1}^2+b_{2}^2) \\
+Lasso (L1): J(b)&amp;=\frac{1}{n}\sum{\big(y-(b_{0}+b_{1}x_{1}+b_{2}x_{2})\big)}^{2} + \alpha\,(|b_{1}|+|b_{2}|)
+\end{align}\end{split}\]</div>
+<p>Alpha is a hyperparameter. Before training the model we need to set it.</p>
+</div>
+    <div class="images">
+        <img src="../images/regularization/img_p21_1.png">
+        <img src="../images/regularization/img_p21_2.png">
+    </div>
+</div></section>
+<section id="id12">
+<h3>Soft constraint<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>We can add this constraint directly to our Loss function (t becomes alpha (or lambda))</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+Ridge (L2): J(b)&amp;=\frac{1}{n}\sum{\big(y-(b_{0}+b_{1}x_{1}+b_{2}x_{2})\big)}^{2} + \alpha\,(b_{1}^2+b_{2}^2) \\
+Lasso (L1): J(b)&amp;=\frac{1}{n}\sum{\big(y-(b_{0}+b_{1}x_{1}+b_{2}x_{2})\big)}^{2} + \alpha\,(|b_{1}|+|b_{2}|)
+\end{align}\end{split}\]</div>
+<p>What happens if we set alpha to 0?<br />
+What happens if we set alpha to a very high value?</p>
+</section>
+<section id="sklearn-code-for-regularization">
+<h3>Sklearn code for regularization<a class="headerlink" href="#sklearn-code-for-regularization" title="Link to this heading">#</a></h3>
+<p>check sklearn documentation <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html">here</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ridge_mod</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1">#adjust the alpha level</span>
+<span class="n">ridge_mod</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">ridge_mod</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</section>
+<section id="some-different-alpha-values">
+<h3>Some different alpha values<a class="headerlink" href="#some-different-alpha-values" title="Link to this heading">#</a></h3>
+<p>We have to test some values for alpha and check which give us best
+results on unseen data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;the MSE for Ridge regularization and alpha = 0.5 is:&#39;</span><span class="p">,</span> <span class="n">get_mse</span><span class="p">(</span><span class="n">Ridge</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">polynomial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;the MSE for Lasso regularization and alpha = 0.5 is: &#39;</span><span class="p">,</span><span class="n">get_mse</span><span class="p">(</span><span class="n">Lasso</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">polynomial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the MSE for Ridge regularization and alpha = 0.5 is: 0.29571689096317
+the MSE for Lasso regularization and alpha = 0.5 is:  0.4647391677603675
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ab126dc2970523338fe98d46a0280d63aac0ef54f2d4175491139f4b7e47f83d.png" src="../_images/ab126dc2970523338fe98d46a0280d63aac0ef54f2d4175491139f4b7e47f83d.png" />
+</div>
+</div>
+</section>
+<section id="ridge-regression">
+<h3>Ridge Regression<a class="headerlink" href="#ridge-regression" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">  
+<ul class="simple">
+<li><p>Also called L2 Regularization / l2 norm</p></li>
+<li><p>the regularization term forces the parameter estimates to be as small as possible
+- <b><span class="color-brand">weight decay</span></b></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[J(b)=\frac{1}{n} \sum{(y-\hat{y}(b))^2}+\alpha\sum{b_{i}^2}\]</div>
+</div>
+    <div class="images">
+        <img src="../images/regularization/img_p24_1.png">
+    </div>
+</div>
+</section>
+<section id="lasso-regression">
+<h3>Lasso Regression<a class="headerlink" href="#lasso-regression" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">  
+<p>Least Absolute Shrinkage and Selection Operator</p>
+<ul class="simple">
+<li><p>Also called L1 Regression / l1 norm</p></li>
+<li><p>Tends to <b><span class="color-brand">eliminate weights</b></span> = it automatically performs <b><span class="color-brand">feature selection</b></span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[J(b)=\frac{1}{n} \sum{(y-\hat{y}(b))^2}+\alpha\sum{|b_{i}|}\]</div>
+</div>
+    <div class="images">
+        <img src="../images/regularization/img_p25_1.png">
+    </div>
+</div>
+</section>
+<section id="ridge-vs-lasso">
+<h3>Ridge vs Lasso<a class="headerlink" href="#ridge-vs-lasso" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/7f0a66096c1106f2d8ef5c814b1ae3163f443b71ed898a3c5a858244ad5ff197.png" src="../_images/7f0a66096c1106f2d8ef5c814b1ae3163f443b71ed898a3c5a858244ad5ff197.png" />
+</div>
+</div>
+</section>
+<section id="why-is-l1-eliminating-while-l2-only-reducing-weights">
+<h3>Why is L1 eliminating while L2 only reducing weights?<a class="headerlink" href="#why-is-l1-eliminating-while-l2-only-reducing-weights" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/regularization/regularization.gif" width=800>
+</center>
+</section>
+<section id="elastic-net-mixing-lasso-and-ridge">
+<h3>Elastic Net - Mixing Lasso and Ridge<a class="headerlink" href="#elastic-net-mixing-lasso-and-ridge" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Regularization term is weighted average of Ridge and Lasso Regularization term</p></li>
+<li><p>When r = 0 it is equivalent to Ridge, if r = 1 it is equivalent to Lasso Regression</p></li>
+<li><p>Preferable to Lasso when features are highly correlated or to Ridge for high-dimensional data (more features than observations)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[J(b)=\frac{1}{n}\sum{(y-\hat{y}(b))}^{2}+\alpha\,r \sum{|b_{i}|+\alpha\,(1-r)} \sum{b_{i}^2}\]</div>
+</section>
+<section id="comparison-of-regularization-methods">
+<h3>Comparison of regularization methods<a class="headerlink" href="#comparison-of-regularization-methods" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text"> 
+<ul>
+<li><p>elastic net is between L1 and L2 (whatever you use as r… it will change its form more to L2 or L1</p>
+  </div>
+  <div class="images">
+      <img src="../images/regularization/img_p29_1.png">
+  </div>
+</li>
+</ul>
+</div>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Hands-on ML with scikit-learn and TensorFlow, Geron</p></li>
+<li><p><a class="reference external" href="http://scott.fortmann-roe.com/docs/BiasVariance.html">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/analytics-vidhya/bias-variance-tradeoff-for-dummies-9f13147ab7d0">https://medium.com/analytics-vidhya/bias-variance-tradeoff-for-dummies-9f13147ab7d0</a></p></li>
+<li><p>Machine Learning - A probabilistic Perspective - Kevin P. Murphy</p></li>
+<li><p><a class="reference external" href="https://explained.ai/regularization/constraints.html">https://explained.ai/regularization/constraints.html</a></p></li>
+<li><p><a class="reference external" href="https://explained.ai/statspeak/index.html">https://explained.ai/statspeak/index.html</a></p></li>
+<li><p><a class="reference external" href="https://people.eecs.berkeley.edu/~jrs/189s21/">https://people.eecs.berkeley.edu/~jrs/189s21/</a></p></li>
+</ul>
+<div class="group">
+  <div class="text">   
+<img src="../images/regularization/img_p30_1.png">
+    </div>
+      <div class="images">
+    </div>
+</div></section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Bias Variance Tradeoff</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="10_Gradient_Descent.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Gradient Descent</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">Part 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-on-bias-variance-trade-off">Recap on Bias-Variance Trade-Off</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance-trade-off">Bias - Variance Trade-Off</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-underfitting-vs-overfitting">Example: Underfitting vs. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example: Underfitting vs. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example: Underfitting vs. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Example: Underfitting vs. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Example: Underfitting vs. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Example: Underfitting vs. Overfitting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2">Part 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-visual-approach">A Visual Approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prevent-overfitting">Prevent Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Prevent Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Prevent Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Prevent Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prevent-overfitting-with-regularization">Prevent Overfitting with Regularization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3">Part 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-constraint">Hard constraint</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Hard constraint</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-constraint-with-more-features">Hard constraint with more features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-constraint">Soft constraint</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Soft constraint</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sklearn-code-for-regularization">Sklearn code for regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-different-alpha-values">Some different alpha values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">Ridge Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lasso-regression">Lasso Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-vs-lasso">Ridge vs Lasso</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-l1-eliminating-while-l2-only-reducing-weights">Why is L1 eliminating while L2 only reducing weights?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elastic-net-mixing-lasso-and-ridge">Elastic Net - Mixing Lasso and Ridge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-regularization-methods">Comparison of regularization methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

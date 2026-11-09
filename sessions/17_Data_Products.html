@@ -1,0 +1,843 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Designing Data Products &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/17_Data_Products';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Artificial Neural Networks" href="18_Neural_Networks.html" />
+    <link rel="prev" title="Ensemble Methods - Practical Overview" href="aipm_sessions/Ensemble_Methods_AIPM.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Designing Data Products</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-would-we-build-a-model">Why would we build a model?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#product-customer-x-business-x-technology">Product = Customer x Business x Technology</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-success">Measuring success</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#business-performance-vs-model-performance">Business performance vs. model performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Business performance vs. model performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Business performance vs. model performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Business performance vs. model performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-measuring-business-performance">Examples of measuring business performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-measuring-model-performance">Examples of measuring model performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-between-business-performance-model-performance">Relationship between business performance &amp; model performance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-analysis">Error Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remember-the-summary-vs-details">Remember the Summary vs details?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-beyond-aggregated-metrics">Going beyond aggregated metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-supervised-learning">Types of supervised learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-your-model-inspect-how-it-is-performing">Validate your model - inspect how it is performing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix-for-classification">Confusion Matrix for classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-analysis-for-regression">Residual analysis for regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Residual analysis for regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ml-project-topics">ML Project Topics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kickstarter-project-success">Kickstarter Project Success</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tanzania-tourism-prediction">Tanzania Tourism Prediction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fraud-detection-challenge-in-electricity-and-gas-consumption">Fraud Detection Challenge in Electricity and Gas Consumption</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urban-air-pollution-challenge">Urban Air Pollution Challenge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flight-delay-prediction-challenge">Flight Delay Prediction Challenge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#financial-inclusion-in-east-africa">Financial Inclusion in East Africa</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="designing-data-products">
+<h1>Designing Data Products<a class="headerlink" href="#designing-data-products" title="Link to this heading">#</a></h1>
+<section id="why-would-we-build-a-model">
+<h2>Why would we build a model?<a class="headerlink" href="#why-would-we-build-a-model" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Exploratory analysis - understand what happened in the past</p></li>
+<li><p>Predictive analysis - predict what will happen</p></li>
+<li><p><strong>Predict what, for whom and for what purpose?</strong></p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note: </b> 
+    You do not always need a ML model.
+</div> <section id="product-customer-x-business-x-technology">
+<h3>Product = Customer x Business x Technology<a class="headerlink" href="#product-customer-x-business-x-technology" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Usability</p></li>
+<li><p>Business viability</p></li>
+<li><p>Feasibility</p></li>
+</ul>
+<p>Value = product of the three (If one is zero then the value is zero too.)</p>
+</section>
+</section>
+<section id="measuring-success">
+<h2>Measuring success<a class="headerlink" href="#measuring-success" title="Link to this heading">#</a></h2>
+<p>The first model you build should be the simplest model that could address the product needs.</p>
+<p><strong>Business performance:</strong> measured usually by one KPI (key performance indicator)
+<br><br></p>
+<p><strong>Model performance:</strong> an offline metric that captures how well the model will fit the business need
+<br><br></p>
+<div class="alert alert-block alert-info">
+<b>Note: </b> 
+    The business metric is independent from the model metric... It is a measure of the product success.
+</div> 
+<section id="business-performance-vs-model-performance">
+<h3>Business performance vs. model performance<a class="headerlink" href="#business-performance-vs-model-performance" title="Link to this heading">#</a></h3>
+<center>  
+<img src="../images/ml_project_data_products/Business_vs_Model_Performance_1.png" >
+</center> 
+</section>
+<section id="id1">
+<h3>Business performance vs. model performance<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<center>  
+<img src="../images/ml_project_data_products/Business_vs_Model_Performance_2.png">
+</center> </section>
+<section id="id2">
+<h3>Business performance vs. model performance<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<center>  
+<img src="../images/ml_project_data_products/Business_vs_Model_Performance_3.png">
+</center> </section>
+<section id="id3">
+<h3>Business performance vs. model performance<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<center>  
+<img src="../images/ml_project_data_products/Business_vs_Model_Performance_4.png">
+</center> </section>
+<section id="examples-of-measuring-business-performance">
+<h3>Examples of measuring business performance<a class="headerlink" href="#examples-of-measuring-business-performance" title="Link to this heading">#</a></h3>
+<p>Business metrics:</p>
+<ul class="simple">
+<li><p>Click through rate (CTR) - for recommenders</p></li>
+<li><p>Usage - model that generates html from hand drawn diagrams</p></li>
+<li><p>Adoption by finance team - internal revenue forecasting</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note: </b> 
+    The business metrics for your model might be impossible to measure before the model goes live!
+</div> 
+</section>
+<section id="examples-of-measuring-model-performance">
+<h3>Examples of measuring model performance<a class="headerlink" href="#examples-of-measuring-model-performance" title="Link to this heading">#</a></h3>
+<p><b>Regression: </b></p>
+<ul class="simple">
+<li><p>RMSE, RMSLE</p></li>
+<li><p>MAPE ( mean absolute percentage error) - accuracy as a ratio</p></li>
+</ul>
+<p><b>Classification: </b></p>
+<ul class="simple">
+<li><p>Accuracy</p></li>
+<li><p>Precision</p></li>
+<li><p>Recall</p></li>
+</ul>
+<p><b>Custom metric: </b> based on the worst case scenarios of your product.</p>
+<div class="alert alert-block alert-info">
+<b>Note: </b> 
+    If you need to present to stakeholders you need a simple metric!
+</div> 
+<!--
+<div class="alert alert-block alert-info">
+<b>Note: </b> 
+    If you need to present to stakeholders you need a simple metric... RMSE , precision, recall etc. are too complex to explain!
+</div> 
+--></section>
+<section id="relationship-between-business-performance-model-performance">
+<h3>Relationship between business performance &amp; model performance<a class="headerlink" href="#relationship-between-business-performance-model-performance" title="Link to this heading">#</a></h3>
+<p>Thinking of the business value of your model and the cost of being
+wrong can help you choose the right model metric.</p>
+<p><strong>Always start from the value!</strong></p>
+</section>
+</section>
+<section id="error-analysis">
+<h2>Error Analysis<a class="headerlink" href="#error-analysis" title="Link to this heading">#</a></h2>
+<section id="remember-the-summary-vs-details">
+<h3>Remember the Summary vs details?<a class="headerlink" href="#remember-the-summary-vs-details" title="Link to this heading">#</a></h3>
+<center>  
+    <img src="../images/ml_project_data_products/img_p13.gif" width=800>
+</center> </section>
+<section id="going-beyond-aggregated-metrics">
+<h3>Going beyond aggregated metrics<a class="headerlink" href="#going-beyond-aggregated-metrics" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Most model performance metrics we’ve seen are aggregated metrics</p></li>
+<li><p>They help determine whether a model has learned well from a dataset or needs improvement</p></li>
+<li><p>Next step: examine results and errors to understand why and how is the model failing or succeeding</p></li>
+</ul>
+<p><strong>Why: validation and iteration</strong></p>
+<div class="alert alert-block alert-info">
+<b>Note: </b> 
+    Performance metrics can be deceptive, on highly imbalanced datasets a classifier can reach very high accuracy without any predictive power
+</div> 
+</section>
+<section id="types-of-supervised-learning">
+<h3>Types of supervised learning<a class="headerlink" href="#types-of-supervised-learning" title="Link to this heading">#</a></h3>
+<center>  
+<img src="../images/ml_project_data_products/img_p15.png" width=800>
+</center>
+<p><a class="reference external" href="https://towardsdatascience.com/regression-or-classification-linear-or-logistic-f093e8757b9c">source</a></p>
+</section>
+<section id="validate-your-model-inspect-how-it-is-performing">
+<h3>Validate your model - inspect how it is performing<a class="headerlink" href="#validate-your-model-inspect-how-it-is-performing" title="Link to this heading">#</a></h3>
+<p>There are lot of ways to do this. You want to contrast data (target and/or features) and predictions.</p>
+<p><strong>Regression:</strong> looking at residuals, for example doing EDA on residuals and inspecting the outliers</p>
+<p><strong>Classification:</strong> one can start with a confusion matrix, breaking results in true class and predictions</p>
+</section>
+<section id="confusion-matrix-for-classification">
+<h3>Confusion Matrix for classification<a class="headerlink" href="#confusion-matrix-for-classification" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Counts how often the model predicted correctly and how often it got confused.</p>
+<ul>
+<li><p>False Positive: false alarm / type I error</p></li>
+<li><p>False Negative: missed detection / type II error</p>
+  </div>
+  <div class="text">
+</li>
+</ul>
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">TN</span></td>
+            <td><span style="color:#E1BE6A">FP</span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A">FN</span></td>
+            <td><span style="color:#40B0A6">TP</span></td>
+        </tr> 
+    </tbody>   
+</table>
+   </div>
+</div>  
+<p><strong>What do the misclassified examples have in common?</strong></p>
+</section>
+<section id="residual-analysis-for-regression">
+<h3>Residual analysis for regression<a class="headerlink" href="#residual-analysis-for-regression" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text"> 
+<ul>
+<li><p>This is like EDA again but on residuals (predicted - observed)</p></li>
+<li><p>Plot residuals /and standardized residuals vs predicted</p></li>
+<li><p>We want our residuals to have no patterns, to be symmetrically distributed, centered in the middle of the plot</p></li>
+<li><p><strong>IF NOT…</strong></p>
+  </div>
+  <div class="images">
+      <img src="../images/ml_project_data_products/img_p18_1.png" width=600>
+  </div>
+</li>
+</ul>
+</div>
+</section>
+<section id="id4">
+<h3>Residual analysis for regression<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text"> 
+<ul class="simple">
+<li><p><strong>IF NOT..</strong> then there is room for improvement in the model.</p></li>
+</ul>
+<p>What if my residuals look like this? Check out <a class="reference external" href="https://www.qualtrics.com/support/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/">this walkthrough</a><br />
+</div>
+<div class="images">
+<img src="../images/ml_project_data_products/img_p18_2.png" width=600><br />
+</div></p>
+</div>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://svpg.com/what-is-a-product/">https://svpg.com/what-is-a-product/</a><br />
+<a class="reference external" href="https://medium.com/analytics-vidhya/root-mean-square-log-error">https://medium.com/analytics-vidhya/root-mean-square-log-error</a></p>
+<p>Building Machine Learning Powered Applications(<a class="reference external" href="https://medium.com/analytics-vidhya/root-mean-square-log-error-rmse-vs-rmlse-935c6cc1802a">https://medium.com/analytics-vidhya/root-mean-square-log-error-rmse-vs-rmlse-935c6cc1802a</a>) - EmmanuelAmeisen<br />
+<a class="reference external" href="https://www.qualtrics.com/support/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/">https://www.qualtrics.com/support/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/</a><br />
+<a class="reference external" href="https://www.scikit-yb.org/en/latest/api/regressor/residuals.html">https://www.scikit-yb.org/en/latest/api/regressor/residuals.html</a></p>
+<p>Example of EDA with error analysis<br />
+<a class="reference external" href="https://www.kaggle.com/elitcohen/forest-cover-type-eda-modeling-error-analysis#Error-Analysis">https://www.kaggle.com/elitcohen/forest-cover-type-eda-modeling-error-analysis#Error-Analysis</a><br />
+<a class="reference external" href="https://www.kaggle.com/pestipeti/error-analysis">https://www.kaggle.com/pestipeti/error-analysis</a><br />
+<a class="reference external" href="https://www.kaggle.com/pmarcelino/comprehensive-data-exploration-with-python">https://www.kaggle.com/pmarcelino/comprehensive-data-exploration-with-python</a></p>
+</section>
+<section id="ml-project-topics">
+<h2>ML Project Topics<a class="headerlink" href="#ml-project-topics" title="Link to this heading">#</a></h2>
+<section id="kickstarter-project-success">
+<h3>Kickstarter Project Success<a class="headerlink" href="#kickstarter-project-success" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text"> 
+<p>Analyse and model success factors of kickstarter campaigns. Give
+new projects an idea what is needed for a successful funding and
+potentially even predict campaign success upfront.</p>
+<ul>
+<li><p>221811 rows of data on campaigns</p></li>
+<li><p>(medium)</p>
+  </div>
+  <div class="images: position: absolute; top: 0; right: 0;">
+      <center><img src="../images/ml_project_data_products/img_p22.png" alt="Example Image" style="width: 200px; height: 200px;"></center>
+  </div>
+</li>
+</ul>
+</div>
+</section>
+<section id="tanzania-tourism-prediction">
+<h3>Tanzania Tourism Prediction<a class="headerlink" href="#tanzania-tourism-prediction" title="Link to this heading">#</a></h3>
+<p>Can you use tourism survey data and ML to predict how much money a tourist will spend when visiting Tanzania?</p>
+<ul class="simple">
+<li><p>Survey Data from 6476 participants</p></li>
+<li><p>(easy/medium)</p></li>
+</ul>
+<p><a href="https://zindi.africa/competitions/tanzania-tourism-prediction/data">Zindi-Tansania-Tourism</a></p>
+</section>
+<section id="fraud-detection-challenge-in-electricity-and-gas-consumption">
+<h3>Fraud Detection Challenge in Electricity and Gas Consumption<a class="headerlink" href="#fraud-detection-challenge-in-electricity-and-gas-consumption" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Based on client’s billing history detect clients involved in fraudulent activities</p></li>
+<li><p>(medium/advanced)</p></li>
+</ul>
+<p><a href="https://zindi.africa/competitions/fraud-detection-in-electricity-and-gas-consumption-challenge">Fraud Detection Challenge</a></p>
+</section>
+<section id="urban-air-pollution-challenge">
+<h3>Urban Air Pollution Challenge<a class="headerlink" href="#urban-air-pollution-challenge" title="Link to this heading">#</a></h3>
+<p>Predict air quality levels and empower communities to plan and protect their health</p>
+<ul class="simple">
+<li><p>weather data and daily observations collected from Sentinel 5P satellite tracking various pollutants in the atmosphere</p></li>
+<li><p>(medium/advanced -&gt; domain knowledge helpful)</p></li>
+</ul>
+<p><a href="https://zindi.africa/competitions/zindiweekendz-learning-urban-air-pollution-challenge">Air Pollution Challenge</a></p>
+</section>
+<section id="flight-delay-prediction-challenge">
+<h3>Flight Delay Prediction Challenge<a class="headerlink" href="#flight-delay-prediction-challenge" title="Link to this heading">#</a></h3>
+<p>Predict airline delays for Tunisian aviation company, Tunisair</p>
+<ul class="simple">
+<li><p>Data on flight delays. Can be combined with airport locations</p></li>
+<li><p>(medium)</p></li>
+</ul>
+<p><a href="https://zindi.africa/competitions/flight-delay-prediction-challenge">Flight Delay Prediction Challenge</a></p>
+</section>
+<section id="financial-inclusion-in-east-africa">
+<h3>Financial Inclusion in East Africa<a class="headerlink" href="#financial-inclusion-in-east-africa" title="Link to this heading">#</a></h3>
+<p>Can you predict who in East Africa is most likely to have a bank account?</p>
+<ul class="simple">
+<li><p>Survey data on financial inclusion of ~33,600 participants</p></li>
+<li><p>(easy/medium)</p></li>
+</ul>
+<p><a href="https://zindi.africa/competitions/financial-inclusion-in-africa/data">Financial Inclusion in East Africa</a></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="aipm_sessions/Ensemble_Methods_AIPM.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Ensemble Methods - Practical Overview</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="18_Neural_Networks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Artificial Neural Networks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-would-we-build-a-model">Why would we build a model?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#product-customer-x-business-x-technology">Product = Customer x Business x Technology</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-success">Measuring success</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#business-performance-vs-model-performance">Business performance vs. model performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Business performance vs. model performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Business performance vs. model performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Business performance vs. model performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-measuring-business-performance">Examples of measuring business performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-measuring-model-performance">Examples of measuring model performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-between-business-performance-model-performance">Relationship between business performance &amp; model performance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-analysis">Error Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remember-the-summary-vs-details">Remember the Summary vs details?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-beyond-aggregated-metrics">Going beyond aggregated metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-supervised-learning">Types of supervised learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-your-model-inspect-how-it-is-performing">Validate your model - inspect how it is performing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix-for-classification">Confusion Matrix for classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-analysis-for-regression">Residual analysis for regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Residual analysis for regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ml-project-topics">ML Project Topics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kickstarter-project-success">Kickstarter Project Success</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tanzania-tourism-prediction">Tanzania Tourism Prediction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fraud-detection-challenge-in-electricity-and-gas-consumption">Fraud Detection Challenge in Electricity and Gas Consumption</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#urban-air-pollution-challenge">Urban Air Pollution Challenge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flight-delay-prediction-challenge">Flight Delay Prediction Challenge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#financial-inclusion-in-east-africa">Financial Inclusion in East Africa</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

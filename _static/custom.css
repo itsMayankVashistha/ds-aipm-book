@@ -1,0 +1,122 @@
+@font-face {
+  font-family: "Inter";
+  src: url("/.marp/assets/fonts/Inter/Inter-VariableFont_slnt,wght.ttf")
+    format("f");
+}
+
+/* neuefische */
+:root {
+    --color-brand: #FF4A11 ; 
+    --color-brand-dark: #252629 ; 
+    --color-brand-light: #EFECE7 ; 
+    --color-brand-light-2: #F3F5F9 ; 
+    --color-brand-light-3: #FFFFFF ; 
+    --color-h1: var(--color-brand-light) ; 
+    --color-titles: var(--color-brand) ;
+    --color-subtitles: var(--color-brand-dark)  ;
+    --color-plot-blue: #33A5FF ; 
+    --color-plot-green: #03AC13 ; 
+}
+
+/* spiced 
+#2E016D - R46 G01 B109 (Dark Purple)
+#3F0097 - R63 G0 B151 (Purple)
+#FFADB9 - R255 G173 B185 (Pink)
+#7FD9E2 - R127 G217 B226 (Turquoise)
+#3BCCDA - R56 G284 B218 (Dark Turquoise)
+*/
+/*
+:root {
+  --color-brand: #FFADB9 ;
+  --color-brand-dark: #2E016D  ; 
+  --color-brand-light: #7FD9E2 ; 
+  --color-brand-light-2: #3BCCDA ; 
+  --color-brand-light-3: #FFFFFF ; 
+  --color-h1:  var(--color-brand-dark); 
+  --color-titles:var(--color-brand-dark)  ;
+  --color-subtitles: #3F0097  ;
+  --color-plot-blue: #3BCCDA ; 
+  --color-plot-green: #03AC13 ; 
+} 
+*/
+
+html {
+  --pst-font-family-base: "Inter", sans-serif;
+}
+
+html[data-theme="light"] {
+  --pst-color-primary: var(--color-brand);
+  --pst-color-muted: var(--color-brand-dark);
+}
+
+html[data-theme="dark"] {
+  --pst-color-primary: var(--color-brand-light);
+}
+
+/**********************************
+ * Define special colors for text *
+ **********************************/
+
+ .color-brand {
+  color: var(--color-titles);
+}
+
+.color-plot_light {
+  color: var(--color-brand);
+}
+
+.color-plot_dark {
+  color: var(--color-subtitles);
+}
+
+.color-plot_blue {
+  color: var(--color-plot-blue);
+}
+
+.color-plot_green {
+  color: var(--color-plot-green);
+}
+
+/*************************************
+ * Define table for confusion matrix *
+ *************************************/
+
+ table.confusion_matrix {
+  border-collapse: collapse;
+	text-align: center;
+	vertical-align: middle;
+  border: 2px solid black;
+}
+
+table.confusion_matrix th {
+  text-align: center;
+  padding: 30px;
+  border: 1px solid var(--color-brand-dark);
+}
+
+table.confusion_matrix td {
+  border: 2px solid black;
+  text-align: center;
+  padding: 30px;
+  background-color: white;
+  font-size: 150%;
+}
+
+table.confusion_matrix thead {
+  background-color: var(--color-brand-dark);
+  color: var(--color-brand-light-3);
+}
+
+table.confusion_matrix tbody th {
+  background-color: var(--color-brand-dark);
+  color: var(--color-brand-light-3);
+  text-align: center;
+}
+
+.cell-class {
+  background-color: var(--color-brand) !important;
+  font-weight: bold;
+  color: var(--color-brand-light-3);
+  border: 2px solid var(--color-brand) !important;
+  font-size: 100% !important;
+}

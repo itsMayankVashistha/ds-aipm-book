@@ -1,0 +1,1073 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Decision Trees &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/15_Decision_Tree';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Decision Trees" href="aipm_sessions/Decision_Tree_AIPM.html" />
+    <link rel="prev" title="Testing" href="14_Testing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Decision Trees</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-would-you-differentiate-these-animals-from-one-another">How would you differentiate these animals from one another?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-binary-tree">A Binary Tree</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">A Binary Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-tree-is-built">A Tree is built!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-feature-is-continuous-decision-work-just-as-fine">If the feature is continuous, decision work just as fine</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-differentiate-if-a-house-is-located-in-new-york-or-san-francisco">How to differentiate if a house is located in New York or San Francisco?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-decision-tree">Interpreting Decision Tree</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Interpreting Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Interpreting Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Interpreting Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Interpreting Decision Tree</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-it-dangerous-to-grow-a-large-tree">Why is it dangerous to grow a large tree?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Why is it dangerous to grow a large tree?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees-in-a-nutshell">Decision Trees in a Nutshell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-decision">Splitting Decision</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-is-the-best-split">Which is the best split?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gini-impurity">Gini Impurity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Gini Impurity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-of-gini-impurity">Intuition of Gini Impurity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Intuition of Gini Impurity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gini-impurity-for-each-node">1. Gini impurity for each node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-well-does-the-split-perform-overall">2. How well does the split perform overall?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Which is the best split?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-build-with-two-continuous-features">Tree build with two continuous features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Tree build with two continuous features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-second-split">The second split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#growing-a-full-tree">Growing a full tree</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-trees">Regression Trees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularisation-is-needed">Regularisation is needed!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularisation">Regularisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruning-trees-max-leaf-nodes">Pruning Trees - <code class="docutils literal notranslate"><span class="pre">max_leaf_nodes</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruning-trees-max-depth">Pruning Trees - <code class="docutils literal notranslate"><span class="pre">max_depth</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruning-trees-min-samples-split">Pruning Trees - <code class="docutils literal notranslate"><span class="pre">min_samples_split</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruning-trees-max-features">Pruning Trees - <code class="docutils literal notranslate"><span class="pre">max_features</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="decision-trees">
+<h1>Decision Trees<a class="headerlink" href="#decision-trees" title="Link to this heading">#</a></h1>
+<section id="how-would-you-differentiate-these-animals-from-one-another">
+<h2>How would you differentiate these animals from one another?<a class="headerlink" href="#how-would-you-differentiate-these-animals-from-one-another" title="Link to this heading">#</a></h2>
+<p>(through their various features)</p>
+<img src="../images/decision_tree/img_p1_1.png" style="display:block; margin:auto"><p>Notes:<br />
+Mention the purpose of DT first: Aim is to classify further animals of which you don’t know the label.<br />
+These animals (training dataset) have already been labeled/classified (penguin, hawk, …). Select whatever features enable you to classify new unknown animals.<br />
+Is this supervised/regression problem or what?</p>
+</section>
+<section id="a-binary-tree">
+<h2>A Binary Tree<a class="headerlink" href="#a-binary-tree" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">
+Decision trees are based on binary trees:
+<p>1 Question has 2 answers</p>
+<p>= 1 Parent node has 2 children nodes</p>
+  </div>
+  <div class="images">
+    <img src="../images/decision_tree/img_p2_1.png">
+  </div>
+</div><p>Notes:<br />
+A pigeon would be classified as a hawk. Why? Model is too simple.</p>
+<section id="id1">
+<h3>A Binary Tree<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>First decision split is called <strong>root</strong> or <strong>root node</strong></p>
+<p>Each decision node compares a feature:</p>
+<ul class="simple">
+<li><p>True/False question (for categorical
+features)</p></li>
+<li><p>Larger than split (for numerical features)</p></li>
+</ul>
+<p>Each <strong>leaf node</strong> (end node) represents a class
+label</p>
+<p>To predict an unknown/new instance, we go through all the
+decisions in the tree until we end up at a leaf.</p>
+  </div>
+  <div class="images">
+    <img src="../images/decision_tree/img_p3_1.png">
+  </div>
+</div></section>
+<section id="a-tree-is-built">
+<h3>A Tree is built!<a class="headerlink" href="#a-tree-is-built" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>Node’s question - which feature and which threshold is appropriate - is chosen during training</p>
+<p>This is done recursively until a stop condition is reached (e.g. less than 5 observations in
+a node, or node is pure).</p>
+<p>This is a tree with depth=2.</p>
+  </div>
+  <div class="images">
+    <img src="../images/decision_tree/img_p3_1.png">
+  </div>
+</div>
+</section>
+<section id="if-the-feature-is-continuous-decision-work-just-as-fine">
+<h3>If the feature is continuous, decision work just as fine<a class="headerlink" href="#if-the-feature-is-continuous-decision-work-just-as-fine" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ol class="arabic simple">
+<li><p>The data are ordered in ascending order</p></li>
+<li><p>Each mean between two adjacent data points is considered a splitting point</p></li>
+</ol>
+  </div>
+  <div class="images">
+    <img src="../images/decision_tree/img_p3_1.png">
+  </div>
+</div><p>Notes:<br />
+This is funny: If 2 kg is the mean between the lightest bear and the heaviest goldfish …</p>
+</section>
+</section>
+<section id="how-to-differentiate-if-a-house-is-located-in-new-york-or-san-francisco">
+<h2>How to differentiate if a house is located in New York or San Francisco?<a class="headerlink" href="#how-to-differentiate-if-a-house-is-located-in-new-york-or-san-francisco" title="Link to this heading">#</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>bath</th>
+      <th>beds</th>
+      <th>elevation</th>
+      <th>price</th>
+      <th>price_per_sqft</th>
+      <th>sqft</th>
+      <th>target</th>
+      <th>year_built</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>10</td>
+      <td>999000</td>
+      <td>999</td>
+      <td>1000</td>
+      <td>0</td>
+      <td>1960</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_elevation</span><span class="p">(</span><span class="n">housing_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/eb7c077813a034ee97c31be75fc3ea335ca1605e143667d2ce9db98ba53ec19b.png" src="../_images/eb7c077813a034ee97c31be75fc3ea335ca1605e143667d2ce9db98ba53ec19b.png" />
+</div>
+</div>
+</section>
+<section id="interpreting-decision-tree">
+<h2>Interpreting Decision Tree<a class="headerlink" href="#interpreting-decision-tree" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>First line of decision node: Feature name and split value</p></li>
+</ul>
+<p><a class="reference external" href="http://www.r2d3.us/visual-intro-to-machine-learning-part-1/">visual example</a></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">clf_housing_max_depth_3</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">RSEED</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">clf_housing_max_depth_3</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_housing</span><span class="p">,</span> <span class="n">y_housing</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">plot_decision_tree</span><span class="p">(</span><span class="n">clf_housing_max_depth_3</span><span class="p">,</span> <span class="n">X_housing</span><span class="p">,</span> <span class="n">housing_colors</span><span class="p">,</span> <span class="n">fig_size</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">impurity</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nn">Cell In[7], line 8,</span> in <span class="ni">plot_decision_tree</span><span class="nt">(decision_tree, X, colors, fig_size, fontsize, impurity)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">to_rgb</span><span class="p">(</span><span class="n">colors</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">value</span><span class="p">)])</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">f</span> <span class="o">=</span> <span class="n">impurity</span> <span class="o">*</span> <span class="mi">2</span> <span class="c1"># for N colors: f = impurity * N/(N-1) if N&gt;1 else 0</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_bbox_patch</span><span class="p">()</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">((</span><span class="n">f</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">f</span><span class="p">)</span><span class="o">*</span><span class="n">r</span><span class="p">,</span> <span class="n">f</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">f</span><span class="p">)</span><span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="n">f</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">f</span><span class="p">)</span><span class="o">*</span><span class="n">b</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_bbox_patch</span><span class="p">()</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="ne">AttributeError</span>: &#39;NoneType&#39; object has no attribute &#39;set_facecolor&#39;
+</pre></div>
+</div>
+<img alt="../_images/8f7e00d748be382381805230ec1d2cd827f2eae381809d3c8859c99f5fb56601.png" src="../_images/8f7e00d748be382381805230ec1d2cd827f2eae381809d3c8859c99f5fb56601.png" />
+</div>
+</div>
+<section id="id2">
+<h3>Interpreting Decision Tree<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p><strong>samples</strong>: How many observations are in the node <br>
+<strong>value</strong>: Target value distribution - Real number of observations per class</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/80c5dbe1b4262c582238aa6155f6d0e67752bbe50797464b80cacb455d110707.png" src="../_images/80c5dbe1b4262c582238aa6155f6d0e67752bbe50797464b80cacb455d110707.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Interpreting Decision Tree<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Is a house located in New York or San Francisco?</p>
+<ul class="simple">
+<li><p>Leaf node → prediction value</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/80c5dbe1b4262c582238aa6155f6d0e67752bbe50797464b80cacb455d110707.png" src="../_images/80c5dbe1b4262c582238aa6155f6d0e67752bbe50797464b80cacb455d110707.png" />
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>Interpreting Decision Tree<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>→ Confusion matrix based on one split
+</div>
+<div class="text"></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>true \ pred</p></th>
+<th class="head"><p>New York</p></th>
+<th class="head"><p>San Francisco</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>New York</p></td>
+<td><p>105</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>San Francisco</p></td>
+<td><p>40</p></td>
+<td><p>99</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/80c5dbe1b4262c582238aa6155f6d0e67752bbe50797464b80cacb455d110707.png" src="../_images/80c5dbe1b4262c582238aa6155f6d0e67752bbe50797464b80cacb455d110707.png" />
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>Interpreting Decision Tree<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Leaf node purity - leaf nodes where one class has an overwhelming majority are more reliable predictors</p></li>
+<li><p>Number of samples in leaf node: large leaf nodes are preferable, too few samples in leaves might be a sign of overfitting</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/7928e0b9b16f0697a6ccd45cca0f37c6d23ebbeb018993092534e7a016229241.png" src="../_images/7928e0b9b16f0697a6ccd45cca0f37c6d23ebbeb018993092534e7a016229241.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="why-is-it-dangerous-to-grow-a-large-tree">
+<h2>Why is it dangerous to grow a large tree?<a class="headerlink" href="#why-is-it-dangerous-to-grow-a-large-tree" title="Link to this heading">#</a></h2>
+<center>
+    <img src="../images/decision_tree/img_p13_1.png" width=800>
+</center><section id="id6">
+<h3>Why is it dangerous to grow a large tree?<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul class="simple">
+<li><p>Nodes will be splitted until leaves are pure</p></li>
+<li><p>Decision Trees can be extremely perceptive of the training data</p></li>
+<li><p>Tend to overfit the data</p></li>
+</ul>
+<p><a class="reference external" href="http://www.r2d3.us/visual-intro-to-machine-learning-part-1/">visual example</a></p>
+  </div>
+  <div class="images">
+    <img src="../images/decision_tree/img_p13_1.png" width=600>
+  </div>
+</div></section>
+</section>
+<section id="decision-trees-in-a-nutshell">
+<h2>Decision Trees in a Nutshell<a class="headerlink" href="#decision-trees-in-a-nutshell" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Easy to interpret (white box)</p></li>
+<li><p>Can be used for regression and classification problems</p></li>
+<li><p>No feature scaling or centering needed</p></li>
+<li><p>No assumptions needed (e.g. linearity)</p></li>
+<li><p>Building block of Random Forests, Ada boost, Gradient boost</p></li>
+<li><p>Training is costly, prediction is cheap</p></li>
+<li><p>Tend to overfit the data</p></li>
+</ul>
+</section>
+<section id="splitting-decision">
+<h2>Splitting Decision<a class="headerlink" href="#splitting-decision" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="text_70">
+<p>Which feature to take first?</p>
+<p>Which splitting point to choose?</p>
+<p>Decision Trees can be based on different algorithms.</p>
+<p>→ We will discuss <strong>Classification and Regression Trees</strong> (CART) by Breiman et al. (1984)<br />
+</div>
+<div class="images_30">
+<img src="../images/decision_tree/img_p17_1.png">
+</div></p>
+</div><section id="which-is-the-best-split">
+<h3>Which is the best split?<a class="headerlink" href="#which-is-the-best-split" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>All leaves are <strong>impure</strong>, i.e. they do not divide the instances into a pure group.</p>
+  </div>
+  <div class="images">
+    <img src="../images/decision_tree/dec_tree_gini.png" width=600>
+  </div>
+</div>
+</section>
+</section>
+<section id="gini-impurity">
+<h2>Gini Impurity<a class="headerlink" href="#gini-impurity" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">
+In order to build a tree, we measure how pure the data split is.
+<p>On of the most common measures is the <strong><a class="reference external" href="https://en.wikipedia.org/wiki/Corrado_Gini">Gini</a> impurity</strong>.</p>
+<p>Alternatives are misclassification error or entropy.</p>
+  </div>
+  <div class="images">
+    <img src="../images/decision_tree/dec_tree_gini.png" width=600>
+  </div>
+</div><section id="id7">
+<h3>Gini Impurity<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>is a measurement of the likelihood of an <strong>incorrect classification</strong> of a new instance of a random variable, if that new instance were <strong>randomly classified according to the distribution of class labels</strong> from the data set</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ I_{G}(p)\ =\ \sum_{i=1}^{J}\,p_{i}(1\ -\ p_{i})\ =\ 1-\sum_{i=1}^{J}\,p_{i}^{2}\]</div>
+</section>
+<section id="intuition-of-gini-impurity">
+<h3>Intuition of Gini Impurity<a class="headerlink" href="#intuition-of-gini-impurity" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[I_{G}(p)\ =\ \sum_{i=1}^{J}\,p_{i}(1\ -\ p_{i})\ =\ 1-\sum_{i=1}^{J}\,p_{i}^{2}\]</div>
+<img src="../images/decision_tree/gini_impurity_1.png" style="display:block; margin:auto">
+<div class="math notranslate nohighlight">
+\[I_{G}(p)=1-\color{#41992c}{\left(\frac{3}{10}\right)^2}-\color{#104683}{\left(\frac{7}{10}\right)^2}=0.42\]</div>
+</section>
+<section id="id8">
+<h3>Intuition of Gini Impurity<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<center>
+<img src="../images/decision_tree/gini_impurity_5.png">
+</center>
+<div class="group">
+  <div class="text">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+I_{G}(p)&amp;=1-\color{#41992c}{\left(\frac{0}{10}\right)^2}-\color{#104683}{\left(\frac{10}{10}\right)^2}=0.0 \\
+I_{G}(p)&amp;=1-\color{#41992c}{\left(\frac{3}{10}\right)^2}-\color{#104683}{\left(\frac{7}{10}\right)^2}=0.42
+\end{align}\end{split}\]</div>
+  </div>
+  <div class="text">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+I_{G}(p)&amp;=1-\color{#41992c}{\left(\frac{10}{10}\right)^2}-\color{#104683}{\left(\frac{0}{10}\right)^2}=0.0 \\
+I_{G}(p)&amp;=1-\color{#41992c}{\left(\frac{7}{10}\right)^2}-\color{#104683}{\left(\frac{3}{10}\right)^2}=0.42
+\end{align}\end{split}\]</div>
+  </div>
+</div>
+<div class="math notranslate nohighlight">
+\[I_{G}(p)=1-\color{#41992c}{\left(\frac{5}{10}\right)^2}-\color{#104683}{\left(\frac{5}{10}\right)^2}=0.5\]</div>
+</section>
+<section id="gini-impurity-for-each-node">
+<h3>1. Gini impurity for each node<a class="headerlink" href="#gini-impurity-for-each-node" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<div class="math notranslate nohighlight">
+\[ 1\,-\,\left(\frac{111}{250}\right)^{2}-\left(\frac{139}{250}\right)^{2}=\,0.494\]</div>
+  </div>
+  <div class="text">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+1-\left(\frac{105}{145}\right)^{2}-\left(\frac{40}{145}\right)^{2}\,&amp;=\,0.4  \\
+1-\left(\frac{6}{105}\right)^{2}-\left(\frac{99}{105}\right)^{2}\,&amp;=\,0.108
+\end{align}\end{split}\]</div>
+  </div>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ec27531d854c2cc32853efdc37e3574053a5b1abcd7da92147aacc7f433b3686.png" src="../_images/ec27531d854c2cc32853efdc37e3574053a5b1abcd7da92147aacc7f433b3686.png" />
+</div>
+</div>
+</section>
+<section id="how-well-does-the-split-perform-overall">
+<h3>2. How well does the split perform overall?<a class="headerlink" href="#how-well-does-the-split-perform-overall" title="Link to this heading">#</a></h3>
+<p>Just calculate the <strong>average of the impurities</strong> of the leaves, of course weighted by their impact (= rel. number of obs.):</p>
+<div class="math notranslate nohighlight">
+\[ 0.4\ \cdot{\frac{145}{250}}+\ 0.108\ \cdot{\frac{105}{250}}=\;0.277\]</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ec27531d854c2cc32853efdc37e3574053a5b1abcd7da92147aacc7f433b3686.png" src="../_images/ec27531d854c2cc32853efdc37e3574053a5b1abcd7da92147aacc7f433b3686.png" />
+</div>
+</div>
+</section>
+<section id="id9">
+<h3>Which is the best split?<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+Let's calculate the Gini impurity for each possible split.
+<p><span class="math notranslate nohighlight">\( I_{G}(p)\ =\ \sum_{i=1}^{J}\,p_{i}(1\ -\ p_{i})\ =\ 1-\sum_{i=1}^{J}\,p_{i}^{2}\)</span></p>
+<p>Gini impurity of the split is the <strong>weighted average of the impurities</strong> of the leaves.</p>
+<p>Finally, the best splitting point is the one, which <strong>minimizes the Gini Impurity of the split</strong>.</p>
+  </div>
+  <div class="images">
+    <img src="../images/decision_tree/dec_tree_gini_values.png">
+  </div>
+</div></section>
+</section>
+<section id="tree-build-with-two-continuous-features">
+<h2>Tree build with two continuous features<a class="headerlink" href="#tree-build-with-two-continuous-features" title="Link to this heading">#</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/a653c9dd3f4234134c0d7e9d55af41f3ac3c29c2c08f59a4289a1ed2a268b0e1.png" src="../_images/a653c9dd3f4234134c0d7e9d55af41f3ac3c29c2c08f59a4289a1ed2a268b0e1.png" />
+</div>
+</div>
+</section>
+<section id="id10">
+<h2>Tree build with two continuous features<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/f293663d51be834234457f3eb98aae09384c3c1a96d14d5ce08129e3facd7680.png" src="../_images/f293663d51be834234457f3eb98aae09384c3c1a96d14d5ce08129e3facd7680.png" />
+</div>
+</div>
+<section id="the-second-split">
+<h3>The second split<a class="headerlink" href="#the-second-split" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e76bcba657c2220e148be4799438de4622ed3f1b0ee4ea31fac5b728fa1ce3b1.png" src="../_images/e76bcba657c2220e148be4799438de4622ed3f1b0ee4ea31fac5b728fa1ce3b1.png" />
+</div>
+</div>
+</section>
+<section id="growing-a-full-tree">
+<h3>Growing a full tree<a class="headerlink" href="#growing-a-full-tree" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3ea985d009c002449ba8042791d726b6af939e5009598b37c95173cbb7981ece.png" src="../_images/3ea985d009c002449ba8042791d726b6af939e5009598b37c95173cbb7981ece.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="regression-trees">
+<h2>Regression Trees<a class="headerlink" href="#regression-trees" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Similar approach as with classification trees, but split data based on <strong>MSE</strong> not impurity</p></li>
+<li><p>Traverse tree to get predictions for new instance, which is <strong>mean</strong> of target values of all observations in one leaf</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/f7bdbfd013e39d2ffbfd876835b363be81547475c655584a419af6ec0ce97cfe.png" src="../_images/f7bdbfd013e39d2ffbfd876835b363be81547475c655584a419af6ec0ce97cfe.png" />
+</div>
+</div>
+</section>
+<section id="regularisation-is-needed">
+<h2>Regularisation is needed!<a class="headerlink" href="#regularisation-is-needed" title="Link to this heading">#</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/8f0b532cbad195ea55a35b2ea7e527c644986d394ccabf013f25f71364c1d3cd.png" src="../_images/8f0b532cbad195ea55a35b2ea7e527c644986d394ccabf013f25f71364c1d3cd.png" />
+</div>
+</div>
+<section id="regularisation">
+<h3>Regularisation<a class="headerlink" href="#regularisation" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>Decision Trees will recursively split the data until nodes are pure no matter how small the sample size will be.</p>
+<p>→ High chance of <strong>overfitting.</strong></p>
+<p><strong>Solution:</strong></p>
+<p>Pruning Trees → limiting the number of branches/leaves</p>
+  </div>
+  <div class="images">
+    <img src="../images/decision_tree/img_p13_1.png" width=600>
+  </div>
+</div></section>
+<section id="pruning-trees-max-leaf-nodes">
+<h3>Pruning Trees - <code class="docutils literal notranslate"><span class="pre">max_leaf_nodes</span></code><a class="headerlink" href="#pruning-trees-max-leaf-nodes" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/6d33c645aa1e35e2df0f73b989e5dad2517d645dc041b2eae1ba345844602a78.png" src="../_images/6d33c645aa1e35e2df0f73b989e5dad2517d645dc041b2eae1ba345844602a78.png" />
+</div>
+</div>
+</section>
+<section id="pruning-trees-max-depth">
+<h3>Pruning Trees - <code class="docutils literal notranslate"><span class="pre">max_depth</span></code><a class="headerlink" href="#pruning-trees-max-depth" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/af6755ac2c4e5dd57635dcc3786f30a50837d5732e1865471199a42ee0730024.png" src="../_images/af6755ac2c4e5dd57635dcc3786f30a50837d5732e1865471199a42ee0730024.png" />
+</div>
+</div>
+</section>
+<section id="pruning-trees-min-samples-split">
+<h3>Pruning Trees - <code class="docutils literal notranslate"><span class="pre">min_samples_split</span></code><a class="headerlink" href="#pruning-trees-min-samples-split" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e3d7812e3cd8a32219d78d954752ad6f7613cca8e3014da5c1640fcda0471b05.png" src="../_images/e3d7812e3cd8a32219d78d954752ad6f7613cca8e3014da5c1640fcda0471b05.png" />
+</div>
+</div>
+</section>
+<section id="pruning-trees-max-features">
+<h3>Pruning Trees - <code class="docutils literal notranslate"><span class="pre">max_features</span></code><a class="headerlink" href="#pruning-trees-max-features" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e709d71c9e65a2c4907c20a6970a4444af9bf31ddd0b475605f0cb6806efeb65.png" src="../_images/e709d71c9e65a2c4907c20a6970a4444af9bf31ddd0b475605f0cb6806efeb65.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Code for plots:</p>
+<p><a class="reference external" href="https://github.com/ageron/handson-ml2/blob/master/06_decision_trees.ipynb">Hands on ML repo</a>, A. Geron</p>
+<p><a class="reference external" href="https://github.com/amueller/introduction_to_ml_with_python/blob/master/02-supervised-learning.ipynb">Introduction to Machine Learning with Python repo</a>, A. Müller and S. Guido</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="14_Testing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Testing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="aipm_sessions/Decision_Tree_AIPM.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Decision Trees</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-would-you-differentiate-these-animals-from-one-another">How would you differentiate these animals from one another?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-binary-tree">A Binary Tree</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">A Binary Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-tree-is-built">A Tree is built!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-feature-is-continuous-decision-work-just-as-fine">If the feature is continuous, decision work just as fine</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-differentiate-if-a-house-is-located-in-new-york-or-san-francisco">How to differentiate if a house is located in New York or San Francisco?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-decision-tree">Interpreting Decision Tree</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Interpreting Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Interpreting Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Interpreting Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Interpreting Decision Tree</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-it-dangerous-to-grow-a-large-tree">Why is it dangerous to grow a large tree?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Why is it dangerous to grow a large tree?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees-in-a-nutshell">Decision Trees in a Nutshell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#splitting-decision">Splitting Decision</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-is-the-best-split">Which is the best split?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gini-impurity">Gini Impurity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Gini Impurity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-of-gini-impurity">Intuition of Gini Impurity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Intuition of Gini Impurity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gini-impurity-for-each-node">1. Gini impurity for each node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-well-does-the-split-perform-overall">2. How well does the split perform overall?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Which is the best split?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-build-with-two-continuous-features">Tree build with two continuous features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Tree build with two continuous features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-second-split">The second split</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#growing-a-full-tree">Growing a full tree</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-trees">Regression Trees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularisation-is-needed">Regularisation is needed!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularisation">Regularisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruning-trees-max-leaf-nodes">Pruning Trees - <code class="docutils literal notranslate"><span class="pre">max_leaf_nodes</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruning-trees-max-depth">Pruning Trees - <code class="docutils literal notranslate"><span class="pre">max_depth</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruning-trees-min-samples-split">Pruning Trees - <code class="docutils literal notranslate"><span class="pre">min_samples_split</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruning-trees-max-features">Pruning Trees - <code class="docutils literal notranslate"><span class="pre">max_features</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

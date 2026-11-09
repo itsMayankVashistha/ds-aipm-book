@@ -1,0 +1,1198 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Linear Regression &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/08_Linear_Regression';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Linear Regression AIPM" href="aipm_sessions/Linear_Regression_AIPM.html" />
+    <link rel="prev" title="EDA &amp; Presenting your Results" href="07.2_EDA_process.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-linear-regression-visualizations">Additional linear-regression visualizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-origin-regression-to-the-mean">Historical Origin: Regression to the Mean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-of-regression">Goal of Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-could-i-estimate-the-value">How could I estimate the value?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-should-train-a-regression-model">I should train a regression model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-model">Building a model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-equation">Linear Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Linear Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-what-is-the-equation-of-a-line">Question: What is the equation of a line?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Linear Equation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Linear Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-more-than-2-points">What about more than 2 points?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lets-look-at-an-example">Let’s look at an example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-two-fitted-lines-which-one-is-better">Try two fitted lines. Which one is better?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-know-which-line-is-better">How do we know which line is better?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals">Residuals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-example-one-data-point">Residual Example (One Data Point)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-criterion">Least Squares Criterion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-several-fitted-lines">Trying several fitted lines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#there-are-infinitely-many-possible-lines">There are infinitely many possible lines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-how-do-we-solve-this">So how do we solve this?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-least-squares-regression">Ordinary Least Squares Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-facts-about-residuals">Useful facts about residuals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-performance">Model performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-of-target-variable-bar-y-frac-1-n-sum-limits-i-1-n-y-i">Mean of target variable: <span class="math notranslate nohighlight">\(\bar{y}=\frac{1}{n} \sum\limits_{i=1}^{n}y_{i}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-target-variable-sigma-2-frac-1-n-1-sum-i-y-i-bar-y-2">Variance of target variable: <span class="math notranslate nohighlight">\(\sigma^2 = \frac{1}{n-1}\sum_i{(y_i-\bar{y})^2}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-mean-vs-fitted-regression">Baseline Mean vs Fitted Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-squares-decomposition-variance-analysis">Sum of Squares Decomposition (Variance Analysis)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#root-mean-squared-error">Root Mean Squared Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-metric-answers-which-question">Which Metric Answers Which Question?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metric-comparison-for-two-candidate-lines">Metric Comparison for Two Candidate Lines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-terms">Key Terms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-terms-machine-learning">Key terms: Machine learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#but-i-want-to-use-more-than-one-feature">But I want to use more than one feature</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression">Multiple regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-equation">Normal Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions">Predictions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression-evaluation-metrics">Multiple Regression — Evaluation Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#root-mean-squared-error-rmse">Root Mean Squared Error (<b>RMSE</b>)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusted-r-squared-adj-r-2">Adjusted R-squared (<span class="math notranslate nohighlight">\(adj.\ R^2\)</span>):</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-linear-regression-terms">Overview of Linear Regression Terms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-more-math-for-those-who-want-to-know-how-to-calculate-b-1">Some more math for those who want to know how to calculate <span class="math notranslate nohighlight">\(b_1\)</span></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-regression">
+<h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h1>
+<section id="additional-linear-regression-visualizations">
+<h2>Additional linear-regression visualizations<a class="headerlink" href="#additional-linear-regression-visualizations" title="Link to this heading">#</a></h2>
+</section>
+<section id="historical-origin-regression-to-the-mean">
+<h2>Historical Origin: Regression to the Mean<a class="headerlink" href="#historical-origin-regression-to-the-mean" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">
+<ul class="simple">
+<li><p>In the 19th century, Francis Galton studied parent and child heights.</p></li>
+<li><p>He observed that extreme values tend to be followed by values closer to the average.</p></li>
+<li><p>He called this pattern <i>regression toward mediocrity</i> (now: regression to the mean).</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Why this matters:</b><br>
+The term <b>regression</b> originally came from this statistical phenomenon, before modern ML usage.
+</div>
+  </div>
+  <div class="images">
+    <img src="../images/linear_regression/francis_galton_1850s.jpg" width="320"><br>
+    <small>Francis Galton (via Wikipedia/Wikimedia Commons)</small>
+  </div>
+</div>
+</section>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h2>
+<p>Why linear regression matters in practice.</p>
+<section id="goal-of-regression">
+<h3>Goal of Regression<a class="headerlink" href="#goal-of-regression" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p>I own a house in King County.</p></li>
+<li><p>It has 3 bedrooms, 2 bathrooms, a 10,000 sqft lot, and is 10 km away from Bill Gates’ mansion.</p></li>
+<li><p>I need a reliable estimate of what it is worth.</p>
+</div>
+<div class="images">
+  <img src="../images/linear_regression/img_p3_1.png">
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="how-could-i-estimate-the-value">
+<h3>How could I estimate the value?<a class="headerlink" href="#how-could-i-estimate-the-value" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p>Use training data to …</p></li>
+<li><p>… find one similar house …</p></li>
+<li><p>… and use its value as an estimate.</p>
+</div>
+<div class="text">
+</li>
+<li><p>Use training data to …</p></li>
+<li><p>… learn a general rule …</p></li>
+<li><p>… and apply it to estimate value.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="i-should-train-a-regression-model">
+<h3>I should train a regression model<a class="headerlink" href="#i-should-train-a-regression-model" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    216 645  $ base price
+
++    20 033  $ for each bedroom
+
++   234 314 $ for each bathroom
+
++         1 $ for each sqft of lot size
+
+-    14 745 $ for each km distance from Bill Gates&#39; mansion
+
+=        xyz $ estimated house price
+</pre></div>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b><br>
+    The term regression (e.g. regression analysis) usually
+    refers to <i>linear</i> regression.<br>
+    (Don't confuse it with <i>logistic</i> regression.)
+</div>
+</section>
+<section id="building-a-model">
+<h3>Building a model<a class="headerlink" href="#building-a-model" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+  <h4> Descriptive statistics </h4>
+  Using linear regression for explanation (profiling)
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> Why is my house worth xyz?</p>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> How can I increase the price?</p>
+  <h4> Inferential statistics </h4>
+  Using linear regression for prediction
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> How much is my house worth?</p>
+  </div>
+  <div class="images">
+    <img src="../images/linear_regression/img_p6_1.png">
+  </div>
+</div>
+</section>
+</section>
+<section id="linear-equation">
+<h2>Linear Equation<a class="headerlink" href="#linear-equation" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Linear Equation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<section id="question-what-is-the-equation-of-a-line">
+<h4>Question: What is the equation of a line?<a class="headerlink" href="#question-what-is-the-equation-of-a-line" title="Link to this heading">#</a></h4>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e130a8110f82de8ff6e27e7abab648e6ad09b3be7ec5c9284111dac22f42aefe.png" src="../_images/e130a8110f82de8ff6e27e7abab648e6ad09b3be7ec5c9284111dac22f42aefe.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="id2">
+<h3>Linear Equation<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/0523dad36b8ad3f6f9d5a5ffa004ae8756b5e79986ad5cffb85861d4a541ee1e.png" src="../_images/0523dad36b8ad3f6f9d5a5ffa004ae8756b5e79986ad5cffb85861d4a541ee1e.png" />
+</div>
+</div>
+<div class="alert alert-block alert-info">
+<b>Key terms:</b>
+<ul>
+  <li>Intercept (<i>b</i><sub>0</sub>): predicted value of <i>y</i> when <i>x</i> = 0.</li>
+  <li>Slope (<i>b</i><sub>1</sub>): expected change in <i>y</i> when <i>x</i> increases by 1 unit.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="id3">
+<h2>Linear Regression<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<section id="id4">
+<h3>Linear Regression<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Is variable <span class="math notranslate nohighlight">\(X\)</span> associated with variable <span class="math notranslate nohighlight">\(y\)</span>?</p></li>
+<li><p>If yes, what is the relationship, and can we use it to predict <span class="math notranslate nohighlight">\(y\)</span>?</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b><br>
+<ul>
+  <li>Correlation &mdash; measures the strength of a relationship &rarr; a number.</li>
+  <li>Regression &mdash; quantifies the relationship itself &rarr; an equation.</li>
+</ul>
+</div>
+</section>
+<section id="what-about-more-than-2-points">
+<h3>What about more than 2 points?<a class="headerlink" href="#what-about-more-than-2-points" title="Link to this heading">#</a></h3>
+<center>
+<img src="../images/linear_regression/img_p14_1.png" width=600>  
+</center></section>
+<section id="lets-look-at-an-example">
+<h3>Let’s look at an example<a class="headerlink" href="#lets-look-at-an-example" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p><b>Two correlated variables:</b></p>
+<ul>
+<li><p>week of bootcamp, <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p>coffee consumption, <span class="math notranslate nohighlight">\(y\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(r \approx 0.9\)</span></p>
+</div>
+<div class="images">
+</li>
+</ul>
+<p><span class="math notranslate nohighlight">\(y = b_{0}+b_{1}\cdot x+e\)</span></p>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> Find <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span></p>
+  </div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/1ab93dd3bea75dacfb3bcc93132627985fb2391ebb2422bb2ed37ad4bcec3f0d.png" src="../_images/1ab93dd3bea75dacfb3bcc93132627985fb2391ebb2422bb2ed37ad4bcec3f0d.png" />
+</div>
+</div>
+</section>
+<section id="try-two-fitted-lines-which-one-is-better">
+<h3>Try two fitted lines. Which one is better?<a class="headerlink" href="#try-two-fitted-lines-which-one-is-better" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Grey: <span class="math notranslate nohighlight">\(\hat{y} = 0.35 + 0.5 \cdot x\)</span></p></li>
+<li><p>Blue: <span class="math notranslate nohighlight">\(\hat{y} = 1.65 + 0.3 \cdot x\)</span></p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b> <br>
+    <i>y&#770;</i> ("y-hat") denotes an estimated value (line) rather than an observed value (data point).
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/fb5e12a053390e2e7b1d935d2b8d6945a4df4a819d4d38eb3aca477f27fe09fd.png" src="../_images/fb5e12a053390e2e7b1d935d2b8d6945a4df4a819d4d38eb3aca477f27fe09fd.png" />
+</div>
+</div>
+</section>
+<section id="how-do-we-know-which-line-is-better">
+<h3>How do we know which line is better?<a class="headerlink" href="#how-do-we-know-which-line-is-better" title="Link to this heading">#</a></h3>
+</section>
+<section id="residuals">
+<h3>Residuals<a class="headerlink" href="#residuals" title="Link to this heading">#</a></h3>
+<p>For each observation <span class="math notranslate nohighlight">\(i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[e_i = y_i - \hat{y}_i\]</div>
+<p>which means:</p>
+<div class="math notranslate nohighlight">
+\[y_i = b_0 + b_1 \cdot x_i + e_i\]</div>
+<p>How to read this:</p>
+<ul class="simple">
+<li><p>Real value (what we observed): <span class="math notranslate nohighlight">\(y_i\)</span></p></li>
+<li><p>Predicted value from the line: <span class="math notranslate nohighlight">\(\hat{y}_i\)</span></p></li>
+<li><p>Prediction error (residual): <span class="math notranslate nohighlight">\(e_i\)</span></p></li>
+<li><p>If the residual is positive (<span class="math notranslate nohighlight">\(e_i\)</span> &gt; 0), we predicted too low; if negative (<span class="math notranslate nohighlight">\(e_i\)</span> &lt; 0), we predicted too high.</p></li>
+</ul>
+</section>
+<section id="residual-example-one-data-point">
+<h3>Residual Example (One Data Point)<a class="headerlink" href="#residual-example-one-data-point" title="Link to this heading">#</a></h3>
+<p>Suppose for one observation:</p>
+<ul class="simple">
+<li><p>Observed value: <span class="math notranslate nohighlight">\(y = 4.8\)</span></p></li>
+<li><p>Model prediction: <span class="math notranslate nohighlight">\(\hat{y} = 0.3 + 0.5 \cdot 6 = 3.3\)</span></p></li>
+</ul>
+<p>Residual:
+$<span class="math notranslate nohighlight">\(e = y - \hat{y} = 4.8 - 3.3 = 1.5\)</span>$</p>
+<p>Interpretation:</p>
+<ul class="simple">
+<li><p>Positive residual (<span class="math notranslate nohighlight">\(e &gt; 0\)</span>): model underestimates</p></li>
+<li><p>Negative residual (<span class="math notranslate nohighlight">\(e &lt; 0\)</span>): model overestimates</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/053debd311cbc8e433376c2b845719ade81467c8b08aee321dc9f151cb200620.png" src="../_images/053debd311cbc8e433376c2b845719ade81467c8b08aee321dc9f151cb200620.png" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/a8d4349d722f58c52382b9585d02ec884fb713eb8c046349372bfefc4f3a4c4a.png" src="../_images/a8d4349d722f58c52382b9585d02ec884fb713eb8c046349372bfefc4f3a4c4a.png" />
+</div>
+</div>
+</section>
+<section id="least-squares-criterion">
+<h3>Least Squares Criterion<a class="headerlink" href="#least-squares-criterion" title="Link to this heading">#</a></h3>
+<p>To compare fitted lines, we use the sum of squared residuals:</p>
+<div class="math notranslate nohighlight">
+\[ J(b_{0}, b_{1}) = \sum_{i=1}^{n} e_{i}^{2} = \sum_{i=1}^{n}(y_{i} - \hat{y}_{i})^{2} = \sum_{i=1}^{n}(y_{i} - (b_{0} + b_{1}x_{i}))^{2} \]</div>
+<div class="math notranslate nohighlight">
+\[ n \text{ is the number of observations} \]</div>
+<p>How to read this equation:</p>
+<ul class="simple">
+<li><p>Compute error for each point: <span class="math notranslate nohighlight">\(y_i-\hat{y}_i\)</span></p></li>
+<li><p>Square each error (no cancellation, large errors count more)</p></li>
+<li><p>Add all squared errors <span class="math notranslate nohighlight">\(\rightarrow\)</span> this total is <span class="math notranslate nohighlight">\(J\)</span></p></li>
+<li><p>Smaller <span class="math notranslate nohighlight">\(J\)</span> means a better-fitting line.</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/4ee21d41e0fc8035d63ea37ffc00b49e56a6140d52ad10dd2b4c40375e5f739d.png" src="../_images/4ee21d41e0fc8035d63ea37ffc00b49e56a6140d52ad10dd2b4c40375e5f739d.png" />
+</div>
+</div>
+</section>
+<section id="trying-several-fitted-lines">
+<h3>Trying several fitted lines<a class="headerlink" href="#trying-several-fitted-lines" title="Link to this heading">#</a></h3>
+<p>By comparing the sum of squared residuals, we can decide which line fits better:</p>
+<div class="math notranslate nohighlight">
+\[ J(b_{0}, b_{1}) = \sum_{i=1}^{n} e_{i}^{2} = \sum_{i=1}^{n}(y_{i} - \hat{y}_{i})^{2} = \sum_{i=1}^{n}(y_{i} - (b_{0} + b_{1}x_{i}))^{2} \]</div>
+<p>Beginner view:</p>
+<ul class="simple">
+<li><p>Each candidate line gets one score: <span class="math notranslate nohighlight">\(J\)</span></p></li>
+<li><p>Lower score = line stays closer to points overall.</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/11a7429bd3252f4945572319208933c736c41db97d94e3ba6976deee62d090e6.png" src="../_images/11a7429bd3252f4945572319208933c736c41db97d94e3ba6976deee62d090e6.png" />
+</div>
+</div>
+</section>
+<section id="there-are-infinitely-many-possible-lines">
+<h3>There are infinitely many possible lines<a class="headerlink" href="#there-are-infinitely-many-possible-lines" title="Link to this heading">#</a></h3>
+</section>
+<section id="so-how-do-we-solve-this">
+<h3>So how do we solve this?<a class="headerlink" href="#so-how-do-we-solve-this" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Doing this manually is not scalable</p></li>
+<li><p>We minimize the <b>OLS</b> objective <span class="math notranslate nohighlight">\(J(b_0, b_1)\)</span> with respect to <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span></p></li>
+<li><p><b>OLS</b> = Ordinary Least Squares</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ J(b_{0}, b_{1}) = \sum (y_{i} - b_{0} - b_{1}x_{i})^{2} \]</div>
+<p>Plain language:</p>
+<ul class="simple">
+<li><p>Try values for <span class="math notranslate nohighlight">\(b_0\)</span> (intercept) and <span class="math notranslate nohighlight">\(b_1\)</span> (slope)</p></li>
+<li><p>Keep the pair that makes <span class="math notranslate nohighlight">\(J\)</span> as small as possible.</p></li>
+</ul>
+</section>
+<section id="ordinary-least-squares-regression">
+<h3>Ordinary Least Squares Regression<a class="headerlink" href="#ordinary-least-squares-regression" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[ \mathrm{min}\ J(b_{0},b_{1})\ =\ \sum(y_{i}\ -\ b_{0}\ -\ b_{1}x_{i})^{2}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\frac{\partial J}{\partial b_{0}}&amp;=\mathrm{-2\,}\Sigma(y_{i}-b_{0}-b_{1}x_{i})\nonumber\,=\,0 \\
+\frac{\partial J}{\partial b_{1}}&amp;=\mathrm{-2\,}\Sigma x_i(y_{i}-b_{0}-b_{1}x_{i})\nonumber\,=\,0
+\end{align}\end{split}\]</div>
+<p>Divide the first equation by <span class="math notranslate nohighlight">\(2n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{array}{c}{{-(\bar{y}\ -\ b_{0}\ -\ b_{1}\bar{x})\ =\ 0}} \\ {{b_{0}\ =\ \bar{y}\ -\ b_{1}\bar{x}}}\end{array}\end{split}\]</div>
+<p>… more algebra gives:</p>
+<div class="math notranslate nohighlight">
+\[ b_1 = \frac{\Sigma(y_i - \bar{y})(x_i - \bar{x})}{\sum(x_{i} - \bar{x})^{2}} \]</div>
+<div class="alert alert-block alert-info">
+<b>How to interpret:</b>
+<ul>
+  <li><i>&part;J/&part;b</i><sub>j</sub> means how much <i>J</i> changes when one parameter changes.</li>
+  <li>Setting derivatives to 0 gives the minimum for this problem.</li>
+  <li>Result: formulas for the best <i>b</i><sub>0</sub> and <i>b</i><sub>1</sub>.</li>
+</ul>
+</div>
+</section>
+<section id="useful-facts-about-residuals">
+<h3>Useful facts about residuals<a class="headerlink" href="#useful-facts-about-residuals" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+y_i &amp;= b_0 + b_1 \cdot x_i + e_i \\
+e_i &amp;= y_i -b_0 -b_1 \cdot x_i \\
+b_0 &amp;= \bar{y} - b_1 \cdot \bar{x}
+\end{align}\end{split}\]</div>
+  </div>
+  <div class="images">
+Which leads to the following conclusions:
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\Sigma e_i &amp;= 0 \\
+\Sigma(x_i - \bar{x}) \cdot e_i &amp;= 0
+\end{align}\end{split}\]</div>
+  </div>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b>
+<ul>
+  <li>The second equation means residuals are uncorrelated with the explanatory variable.</li>
+  <li>Feel free to verify this on your own fitted models.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="model-performance">
+<h2>Model performance<a class="headerlink" href="#model-performance" title="Link to this heading">#</a></h2>
+<section id="mean-of-target-variable-bar-y-frac-1-n-sum-limits-i-1-n-y-i">
+<h3>Mean of target variable: <span class="math notranslate nohighlight">\(\bar{y}=\frac{1}{n} \sum\limits_{i=1}^{n}y_{i}\)</span><a class="headerlink" href="#mean-of-target-variable-bar-y-frac-1-n-sum-limits-i-1-n-y-i" title="Link to this heading">#</a></h3>
+</section>
+<section id="variance-of-target-variable-sigma-2-frac-1-n-1-sum-i-y-i-bar-y-2">
+<h3>Variance of target variable: <span class="math notranslate nohighlight">\(\sigma^2 = \frac{1}{n-1}\sum_i{(y_i-\bar{y})^2}\)</span><a class="headerlink" href="#variance-of-target-variable-sigma-2-frac-1-n-1-sum-i-y-i-bar-y-2" title="Link to this heading">#</a></h3>
+<p>How to read:</p>
+<ul class="simple">
+<li><p><b>Mean</b>: add all target values and divide by how many values there are.</p></li>
+<li><p><b>Variance</b>: average squared distance from the mean (how spread out values are).</p></li>
+</ul>
+</section>
+<section id="baseline-mean-vs-fitted-regression">
+<h3>Baseline Mean vs Fitted Regression<a class="headerlink" href="#baseline-mean-vs-fitted-regression" title="Link to this heading">#</a></h3>
+<p>A constant mean line is a simple baseline model.
+A fitted regression line should reduce error compared with this baseline.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/5c658ce36b6eb89196c2220e0e4b6403b1b658e6f3e38f94e2a80e5a2e6b6c2d.png" src="../_images/5c658ce36b6eb89196c2220e0e4b6403b1b658e6f3e38f94e2a80e5a2e6b6c2d.png" />
+</div>
+</div>
+<div class="group">
+  <div class="images">
+    <img src="../images/linear_regression/mean_variance.png" width="1000">
+  </div>
+</div></section>
+<section id="sum-of-squares-decomposition-variance-analysis">
+<h3>Sum of Squares Decomposition (Variance Analysis)<a class="headerlink" href="#sum-of-squares-decomposition-variance-analysis" title="Link to this heading">#</a></h3>
+<div class="images">
+  <img src="../images/linear_regression/variance_analysis.png" width="1000"><br>
+</div>
+<p><strong>SST</strong> = total sum of squares<br />
+<strong>SSE</strong> = explained sum of squares<br />
+<strong>SSR</strong> = residual (unexplained) sum of squares</p>
+<div class="math notranslate nohighlight">
+\[SST = SSE + SSR\]</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b>
+These quantities are scale-dependent, so their absolute values depend on the scale of <i>y</i>.<br>
+0 &le; R<sup>2</sup> &le; 1<br>
+R<sup>2</sup> = SSE / SST = 1 - SSR / SST<br>
+Interpretation: higher R<sup>2</sup> means the model explains more of the target variability.
+</div></section>
+<section id="root-mean-squared-error">
+<h3>Root Mean Squared Error<a class="headerlink" href="#root-mean-squared-error" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[ RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-{\hat{y}}_{i}\right)^{2}} \]</div>
+<p>How to compute <b>RMSE</b>:</p>
+<ol class="arabic simple">
+<li><p>Compute each residual <span class="math notranslate nohighlight">\((y_i-\hat{y}_i)\)</span></p></li>
+<li><p>Square residuals</p></li>
+<li><p>Average them <span class="math notranslate nohighlight">\(\rightarrow\)</span> <b>MSE</b></p></li>
+<li><p>Take square root <span class="math notranslate nohighlight">\(\rightarrow\)</span> <b>RMSE</b></p></li>
+</ol>
+<div class="alert alert-block alert-info">
+<b>Note:</b> <br>
+<b>RMSE</b> is in the same unit as <i>y</i> (easy to interpret).<br>
+Lower <b>RMSE</b> means better predictions on average.
+</div>
+</section>
+<section id="which-metric-answers-which-question">
+<h3>Which Metric Answers Which Question?<a class="headerlink" href="#which-metric-answers-which-question" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><b>RMSE</b>: “How large is the typical prediction error?”
+Units: same as target variable <span class="math notranslate nohighlight">\(y\)</span></p></li>
+<li><p><b><span class="math notranslate nohighlight">\(R^2\)</span></b>: “How much variance does the model explain?”
+Range: 0 to 1 (higher is better)</p></li>
+<li><p><b>Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></b>: “Did extra features truly help?”
+Penalizes adding weak or unnecessary features</p></li>
+</ul>
+</section>
+<section id="metric-comparison-for-two-candidate-lines">
+<h3>Metric Comparison for Two Candidate Lines<a class="headerlink" href="#metric-comparison-for-two-candidate-lines" title="Link to this heading">#</a></h3>
+<p>Same dataset, two fitted lines.
+Use <b>RMSE</b> and <span class="math notranslate nohighlight">\(R^2\)</span> to compare their quality directly.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/7b69641eaf4649f16d70b92d2cf7b836d958d12f0a47903ef19486c28570b6a1.png" src="../_images/7b69641eaf4649f16d70b92d2cf7b836d958d12f0a47903ef19486c28570b6a1.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="key-terms">
+<h2>Key Terms<a class="headerlink" href="#key-terms" title="Link to this heading">#</a></h2>
+<section id="key-terms-machine-learning">
+<h3>Key terms: Machine learning<a class="headerlink" href="#key-terms-machine-learning" title="Link to this heading">#</a></h3>
+<section id="variables">
+<h4>Variables:<a class="headerlink" href="#variables" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Target (dependent variable, prediction, response, y)</p></li>
+<li><p>Feature (independent variable, explanatory/predictive variable, attribute, X)</p></li>
+<li><p>Observation (row, instance, example, data point)</p></li>
+</ul>
+</section>
+<section id="model">
+<h4>Model:<a class="headerlink" href="#model" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Fitted values (predicted values) - denoted with the hat notation <span class="math notranslate nohighlight">\(\hat{y}\)</span></p></li>
+<li><p>Residuals (errors, e) - difference between reality and model</p></li>
+<li><p>Least squares (method for fitting a regression)</p></li>
+<li><p>Coefficients, weights (here: slope, intercept)</p></li>
+</ul>
+</section>
+</section>
+<section id="but-i-want-to-use-more-than-one-feature">
+<h3>But I want to use more than one feature<a class="headerlink" href="#but-i-want-to-use-more-than-one-feature" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="multiple-linear-regression">
+<h2>Multiple Linear Regression<a class="headerlink" href="#multiple-linear-regression" title="Link to this heading">#</a></h2>
+<section id="multiple-regression">
+<h3>Multiple regression<a class="headerlink" href="#multiple-regression" title="Link to this heading">#</a></h3>
+<p>For one feature: <span class="math notranslate nohighlight">\(y=b_0+b_1x+e\)</span>. For many features: <span class="math notranslate nohighlight">\(y=Xb+e\)</span>.</p>
+<p>Where <b>y</b>, <b>b</b>, <b>e</b> are vectors, and <b>X</b> is a matrix.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+y = \begin{bmatrix} y_1 \\ \vdots \\ y_n \end{bmatrix},
+\quad
+X = \begin{bmatrix}
+1 &amp; x_{11} &amp; \cdots &amp; x_{1m} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; x_{n1} &amp; \cdots &amp; x_{nm}
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+b = \begin{bmatrix} b_0 \\ b_1 \\ \vdots \\ b_m \end{bmatrix},
+\quad
+e = \begin{bmatrix} e_1 \\ \vdots \\ e_n \end{bmatrix}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(n\)</span> = number of observations, <span class="math notranslate nohighlight">\(m\)</span> = number of features.</p>
+<p><span class="math notranslate nohighlight">\(x_{obs,feature} = x_{row,col} = x_{n,m}\)</span></p>
+<p><span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(X\)</span> are known (observed data). <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(e\)</span> are unknown.</p>
+<p>Think of <span class="math notranslate nohighlight">\(Xb\)</span> as: for each row, multiply features by weights and add them up.</p>
+<div class="alert alert-block alert-info">
+<b>Note:</b><br>
+<i>Multiple</i> regression means multiple independent variables.
+<i>Multivariate</i> regression means multiple dependent variables.
+</div>
+</section>
+<section id="normal-equation">
+<h3>Normal Equation<a class="headerlink" href="#normal-equation" title="Link to this heading">#</a></h3>
+<p>The optimal values for <span class="math notranslate nohighlight">\(b\)</span> (<span class="math notranslate nohighlight">\(b_0\)</span>, <span class="math notranslate nohighlight">\(b_1\)</span>, <span class="math notranslate nohighlight">\(...\)</span>, <span class="math notranslate nohighlight">\(b_m\)</span>) are often found numerically (e.g., gradient descent).
+For linear regression, they can also be computed analytically with the normal equation:</p>
+<div class="math notranslate nohighlight" id="equation-moore-penrose-pseudoinverse">
+<span class="eqno">(1)<a class="headerlink" href="#equation-moore-penrose-pseudoinverse" title="Link to this equation">#</a></span>\[b = (X^TX)^{-1}X^Ty\]</div>
+<section id="predictions">
+<h4>Predictions<a class="headerlink" href="#predictions" title="Link to this heading">#</a></h4>
+<p>Once <span class="math notranslate nohighlight">\(b\)</span> is known, we can make predictions:
+$<span class="math notranslate nohighlight">\( \hat{y} = b_0 + b_1x_1  + ... + b_mx_m \)</span>$</p>
+<p>Or in matrix notation:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y} = Xb\]</div>
+<p><span class="math notranslate nohighlight">\(X\)</span> needs the same feature format as above, but can have a different number of rows (e.g., 1).
+The error term <span class="math notranslate nohighlight">\(e\)</span> remains unknown, but is minimized during fitting.</p>
+</section>
+</section>
+<section id="multiple-regression-evaluation-metrics">
+<h3>Multiple Regression — Evaluation Metrics<a class="headerlink" href="#multiple-regression-evaluation-metrics" title="Link to this heading">#</a></h3>
+<section id="root-mean-squared-error-rmse">
+<h4>Root Mean Squared Error (<b>RMSE</b>)<a class="headerlink" href="#root-mean-squared-error-rmse" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[ RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-{\hat{y}}_{i}\right)^{2}} \]</div>
+<p>  Typical prediction error size in the original unit of <span class="math notranslate nohighlight">\(y\)</span>.<br />
+  Lower <b>RMSE</b> is better.</p>
+</section>
+<section id="adjusted-r-squared-adj-r-2">
+<h4>Adjusted R-squared (<span class="math notranslate nohighlight">\(adj.\ R^2\)</span>):<a class="headerlink" href="#adjusted-r-squared-adj-r-2" title="Link to this heading">#</a></h4>
+<div class="math notranslate nohighlight">
+\[ adj.\;R^{2}=1-\left(1-R^{2}\right)\frac{n-1}{n-p-1}\]</div>
+<p>  <span class="math notranslate nohighlight">\(n\)</span>: sample size, <span class="math notranslate nohighlight">\(p\)</span>: number of features.<br />
+  Starts from <span class="math notranslate nohighlight">\(R^2\)</span>, then penalizes unnecessary features.</p>
+<div class="alert alert-block alert-info">
+<b>Note:</b>
+Use <b>RMSE</b> for error magnitude and adjusted R<sup>2</sup> to check if extra features are truly useful.
+</div>
+</section>
+</section>
+<section id="overview-of-linear-regression-terms">
+<h3>Overview of Linear Regression Terms<a class="headerlink" href="#overview-of-linear-regression-terms" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(R\)</span>: Pearson correlation coefficient — in the interval [-1, 1]</p></li>
+<li><p><span class="math notranslate nohighlight">\(R^2\)</span>: Coefficient of determination — fraction of variance in <span class="math notranslate nohighlight">\(y\)</span> explained by the model</p></li>
+<li><p><span class="math notranslate nohighlight">\(MSE\)</span>: mean squared error — average squared prediction error</p></li>
+<li><p><span class="math notranslate nohighlight">\(RMSE\)</span>: root mean squared error — square root of MSE in the original unit of <span class="math notranslate nohighlight">\(y\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(SST\)</span>, <span class="math notranslate nohighlight">\(SSE\)</span>, <span class="math notranslate nohighlight">\(SSR\)</span>: sum of squares — total, explained, residual</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma^2\)</span>: variance of a variable — dispersion around the mean</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Beginner shortcut</b>:
+<ul>
+  <li>Residuals tell you point-by-point errors.</li>
+  <li>RMSE tells you average error size.</li>
+  <li>R<sup>2</sup> tells you how much variance your model explains.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>There are also many detailed explanations in the exercise repositories.</p>
+<p><a class="reference external" href="https://www.oreilly.com/library/view/practical-statistics-for/9781491952955/">Practical Statistics for Data Science</a> - Peter Bruce &amp; Andrew
+Bruce</p>
+<p><a class="reference external" href="https://dl.rasabourse.com/Econometrics_Erasmus/Christiaan_Heij_Paul_de_Boer.pdf">Econometric Methods with Applications in Business and
+Economics</a> - Christiaan Heij, Paul de Boer, Philip Hans
+Franses, Teun Kloek, Herman K. van Dijk</p>
+<p><a class="reference external" href="https://learningstatisticswithr.com/book/regression.html">Written explanation of LR</a></p>
+<p><a class="reference external" href="https://www.investopedia.com/ask/answers/012615/whats-difference-between-rsquared-and-adjusted-rsquared.asp">Difference between <span class="math notranslate nohighlight">\(R^2\)</span> and adjusted <span class="math notranslate nohighlight">\(R^2\)</span></a></p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=7ArmBVF2dCs">StatQuest: Linear Regression</a></p>
+<section id="some-more-math-for-those-who-want-to-know-how-to-calculate-b-1">
+<h3>Some more math for those who want to know how to calculate <span class="math notranslate nohighlight">\(b_1\)</span><a class="headerlink" href="#some-more-math-for-those-who-want-to-know-how-to-calculate-b-1" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(-2 \Sigma x_i(y_i - b_0 - b_1x_i) = 0 \)</span></p>
+<p>we know that <span class="math notranslate nohighlight">\(b_0 = \bar{y} - b_1 \bar{x}\)</span></p>
+<p><span class="math notranslate nohighlight">\(-2 \Sigma x_i(y_i - \bar{y} + b_1 \bar{x} - b_1x_i) = 0 \)</span></p>
+<p><span class="math notranslate nohighlight">\(\Sigma(x_iy_i - x_i \bar{y} + b_1(x_i \bar{x} - x_ix_i)) = 0\)</span></p>
+<p><span class="math notranslate nohighlight">\(\Sigma(x_iy_i - 2x_i \bar{y} + \bar{x}\bar{y} + b_1(-\bar{x}\bar{x} + 2x_i \bar{x} - x_ix_i)) = 0 \hspace{1cm}|\hspace{1cm} \Sigma x_i = \Sigma \bar{x} \)</span></p>
+<p><span class="math notranslate nohighlight">\(\Sigma(x_iy_i - x_i \bar{y} - \bar{x}y_i + \bar{x}\bar{y} + b_1(-\bar{x}\bar{x} + 2x_i \bar{x} - x_ix_i)) = 0 \hspace{1cm}|\hspace{1cm} \Sigma x_i \bar{y}= \Sigma \bar{x}y_i = n \bar{x}\bar{y} \)</span></p>
+<p><span class="math notranslate nohighlight">\(\Sigma(y_i - \bar{y})(x_i - \bar{x}) - b_1 \Sigma(x_i - \bar{x})^2 = 0 \)</span></p>
+<p><span class="math notranslate nohighlight">\(b_1 = \frac{\Sigma(y_i - \bar{y})(x_i - \bar{x})}{\Sigma(x_i - \bar{x})^2} \)</span></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07.2_EDA_process.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">EDA &amp; Presenting your Results</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="aipm_sessions/Linear_Regression_AIPM.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Linear Regression AIPM</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-linear-regression-visualizations">Additional linear-regression visualizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-origin-regression-to-the-mean">Historical Origin: Regression to the Mean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-of-regression">Goal of Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-could-i-estimate-the-value">How could I estimate the value?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#i-should-train-a-regression-model">I should train a regression model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-model">Building a model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-equation">Linear Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Linear Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#question-what-is-the-equation-of-a-line">Question: What is the equation of a line?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Linear Equation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Linear Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-more-than-2-points">What about more than 2 points?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lets-look-at-an-example">Let’s look at an example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-two-fitted-lines-which-one-is-better">Try two fitted lines. Which one is better?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-know-which-line-is-better">How do we know which line is better?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals">Residuals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-example-one-data-point">Residual Example (One Data Point)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-criterion">Least Squares Criterion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-several-fitted-lines">Trying several fitted lines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#there-are-infinitely-many-possible-lines">There are infinitely many possible lines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-how-do-we-solve-this">So how do we solve this?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-least-squares-regression">Ordinary Least Squares Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-facts-about-residuals">Useful facts about residuals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-performance">Model performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-of-target-variable-bar-y-frac-1-n-sum-limits-i-1-n-y-i">Mean of target variable: <span class="math notranslate nohighlight">\(\bar{y}=\frac{1}{n} \sum\limits_{i=1}^{n}y_{i}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-target-variable-sigma-2-frac-1-n-1-sum-i-y-i-bar-y-2">Variance of target variable: <span class="math notranslate nohighlight">\(\sigma^2 = \frac{1}{n-1}\sum_i{(y_i-\bar{y})^2}\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-mean-vs-fitted-regression">Baseline Mean vs Fitted Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-squares-decomposition-variance-analysis">Sum of Squares Decomposition (Variance Analysis)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#root-mean-squared-error">Root Mean Squared Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-metric-answers-which-question">Which Metric Answers Which Question?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metric-comparison-for-two-candidate-lines">Metric Comparison for Two Candidate Lines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-terms">Key Terms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-terms-machine-learning">Key terms: Machine learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#but-i-want-to-use-more-than-one-feature">But I want to use more than one feature</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression">Multiple regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-equation">Normal Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predictions">Predictions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-regression-evaluation-metrics">Multiple Regression — Evaluation Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#root-mean-squared-error-rmse">Root Mean Squared Error (<b>RMSE</b>)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusted-r-squared-adj-r-2">Adjusted R-squared (<span class="math notranslate nohighlight">\(adj.\ R^2\)</span>):</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-linear-regression-terms">Overview of Linear Regression Terms</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-more-math-for-those-who-want-to-know-how-to-calculate-b-1">Some more math for those who want to know how to calculate <span class="math notranslate nohighlight">\(b_1\)</span></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1162 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Hypothesis Testing And A/B Testing &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/28_Hypothesis_Testing';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Recommender Systems, an Introduction" href="29_Recommender_Systems.html" />
+    <link rel="prev" title="Distributions" href="27_Distributions_CI.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Hypothesis Testing And A/B Testing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro">Intro</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-a-waterfall-view-really-worth-more">Is a Waterfall View Really Worth More?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem">The Problem</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis">Hypothesis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-hypothesis">What is a Hypothesis?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-formulate-a-hypothesis">How Do We Formulate a Hypothesis?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-null-and-alternative-hypothesis">What is the Null and Alternative Hypothesis?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-hypotheses">Types of Hypotheses</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">Hypothesis Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose-and-limitations-of-hypothesis-testing">Purpose and Limitations of Hypothesis Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-tailed-directional-hypothesis-test">One-Tailed (Directional) Hypothesis Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-tailed-non-directional-hypothesis-test">Two-Tailed (Non-Directional) Hypothesis Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-p-value">Understanding the p-value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-hypothesis-tests">Common Hypothesis Tests</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-b-testing">A/B Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-a-b-testing">🆎 Introduction to A/B Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-a-b-testing-works">How A/B Testing Works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-random-assignment">Why Random Assignment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-a-b-test-results">Interpreting A/B Test Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-hypothesis-testing-a-b-testing">Conclusion - Hypothesis Testing &amp; A/B Testing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing-and-a-b-testing">
+<h1>Hypothesis Testing And A/B Testing<a class="headerlink" href="#hypothesis-testing-and-a-b-testing" title="Link to this heading">#</a></h1>
+<section id="intro">
+<h2>Intro<a class="headerlink" href="#intro" title="Link to this heading">#</a></h2>
+<section id="is-a-waterfall-view-really-worth-more">
+<h3>Is a Waterfall View Really Worth More?<a class="headerlink" href="#is-a-waterfall-view-really-worth-more" title="Link to this heading">#</a></h3>
+<div style="margin: 40px auto; text-align: center; max-width: 500px; font-size: 1.2em; background: #eef7eeff; padding: 20px; border-radius: 10px;">
+<span style="font-weight:bold">Common Belief</span>: <br>
+<i>"Houses with a waterfall view are more expensive than houses without one"</i>.
+</div>
+<div style="display: flex; justify-content: center; gap: 20px; margin: 20px auto; max-width: 800px;">
+        <img src="../images/hypothesis_testing/no_water_fall__house.png" alt="House with waterfall view" style="width: 100%; max-width: 350px; border-radius: 10px; object-fit: cover;">
+        <img src="../images/hypothesis_testing/water_fall_house.png" alt="House without waterfall view" style="width: 100%; max-width: 350px; border-radius: 10px; object-fit: cover;">
+    </div>
+<div style="margin: 20px auto; text-align: center; max-width: 500px; font-size: 1.em; font-weight: bold;">
+        Which one <span style="font-style: italic;">feels</span> more expensive?
+    </div>
+</section>
+<section id="the-problem">
+<h3>The Problem<a class="headerlink" href="#the-problem" title="Link to this heading">#</a></h3>
+<p>Just seeing a difference in price isn’t enough.</p>
+<p>We need to ask:</p>
+<ul class="simple">
+<li><p>Is the difference <strong>real</strong>?</p></li>
+<li><p>Or could it just be due to random <strong>chance</strong>?</p></li>
+</ul>
+</section>
+</section>
+<section id="hypothesis">
+<h2>Hypothesis<a class="headerlink" href="#hypothesis" title="Link to this heading">#</a></h2>
+<section id="what-is-a-hypothesis">
+<h3>What is a Hypothesis?<a class="headerlink" href="#what-is-a-hypothesis" title="Link to this heading">#</a></h3>
+<div style="display: flex; font-family: Arial, sans-serif; margin: 20px; gap: 40px;">
+<!-- Left container -->
+<div style="flex: 1; background-color: #f4f3c5ff; padding: 20px; border-radius: 10px;">
+  <div style="margin-bottom: 20px;">
+      <span style="font-weight: bold;">A hypothesis</span> is an assumption about an expected association.
+  </div>
+  <div style="margin-bottom: 20px;">
+      Our goal is to either <span style="font-weight: bold;">reject or retain</span> this hypothesis.
+  </div>
+  <div style="margin-bottom: 20px;">
+      You can test our hypothesis based on data.
+  </div>
+  <div>
+      The analysis of the data is done with a <span style="font-weight: bold;">hypothesis test</span>.
+  </div>
+</div>
+<!-- Right container -->
+<div style="flex: 1; color: teal; background-color: #f0f8f8; padding: 20px; border-radius: 10px;">
+  <div style="margin-bottom: 20px;">
+      Houses with a waterfall view are more expensive than houses without.
+  </div>
+  <div style="margin-bottom: 20px; font-size: 20px;">
+      👍 👎
+  </div>
+  <div style="margin-bottom: 20px;">
+      We collect a sample among a 1000 houses in King County.
+  </div>
+  <div>
+      We pick up the proper hypothesis test.
+  </div>
+</div>
+</div>
+<!-- Stepwise Vertical Flow with Arrows -->
+<div style="font-family:Arial, sans-serif; font-size:18px; padding:20px; line-height:1.6;">
+<h3>Research process</h3>
+<ol class="arabic simple">
+<li><p>Topic <br></p></li>
+<li><p>Research Question <br></p></li>
+<li><p>Hypotheses <br></p></li>
+<li><p>Collect Data <br></p></li>
+<li><p>Hypothesis Test <br></p></li>
+<li><p>Conclusion</p></li>
+</ol>
+</div>
+</section>
+<section id="how-do-we-formulate-a-hypothesis">
+<h3>How Do We Formulate a Hypothesis?<a class="headerlink" href="#how-do-we-formulate-a-hypothesis" title="Link to this heading">#</a></h3>
+<div style="display: flex; justify-content: space-between; gap: 20px; max-width: 100%; margin: 40px auto; flex-wrap: wrap;">
+<div style="flex: 1; min-width: 300px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #eef7eeff; font-size: 0.9em;">
+      <h3 style="margin-top: 0;"> 🔍 Research Question</h3>
+      <ul>
+          <li> Asks whether there's an effect. <br>
+          <i>e.g.,<b>"Are homes near waterfall more expensive?".</b></i></li>
+          <li>Broader and more exploratory in scope.</li>
+          <li>May not be directly testable as-is; might need to be broken into hypotheses.</li>
+      </ul>
+</div>
+<div style="flex: 1; min-width: 300px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f4f3c5ff; font-size: 0.9em;">
+     <h3 style="margin-top: 0;">💡Hypothesis</h3>
+     <ul>
+        <li> Provides a specific, testable prediction. <br>
+        <i>e.g., <b>Homes near waterfall have a higher average price per square meter.</b></i>
+        </li>
+        <li> Narrow and focused on what you expect to find.</li>
+        <li>Designed to be testable through statistical methods.</li>
+     </ul>
+</div>
+</div></section>
+<section id="what-is-the-null-and-alternative-hypothesis">
+<h3>What is the Null and Alternative Hypothesis?<a class="headerlink" href="#what-is-the-null-and-alternative-hypothesis" title="Link to this heading">#</a></h3>
+<!-- Wrapper for the first two containers side-by-side -->
+<div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; margin: 20px auto;">
+<!-- Hypothesis container -->
+<div style="flex: 0 0 600px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f4f3c5; font-size: 0.9em;">
+<h4 style="margin-top: 0;">💡 Hypothesis</h4>
+<p>Ask yourself:</p>
+<ul style="margin: 0; padding-left: 20px;">
+<li>What will change?</li><br>
+<li>How will it change?</li><br>
+<li>What will cause the change?</li>
+</ul>
+</div>
+<!-- Null & Alternative container -->
+<div style="flex: 1; min-width: 400px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #e2c3f6; font-size: 0.9em;">
+<h4 style="margin-top: 0; margin-bottom: 0;">🔀 Two possible Hypotheses</h4>
+<div style="display: flex; gap: 20px; flex-wrap: nowrap; justify-content: space-between; margin-top: 10px;">
+<!-- Null Hypothesis -->
+<div style="flex: 1; background: #f7e6ff; padding: 15px; border-radius: 6px;">
+<h5 style="margin-top: 0;">Null Hypothesis (H₀):</h5>
+<p>There is no difference or effect between two or more groups with respect to a characteristic.</p>
+<p>Any observed difference is due to chance.</p>
+<span style="font-weight: bold;">Example:</span><br>
+The price of homes with and without a waterfall view does not differ.
+</div>
+<!-- Alternative Hypothesis -->
+<div style="flex: 1; background: #fff0f7; padding: 15px; border-radius: 6px;">
+<h5 style="margin-top: 0;">Alternative Hypothesis (H₁):</h5>
+<p>There is a difference or effect between two or more groups.</p>
+<br><br>
+<span style="font-weight: bold;">Example:</span><br>
+The price of homes with and without a waterfall view does differ.
+</div>
+</div>
+</div>
+</div>
+<!-- Statement underneath -->
+<div style="margin: 20px auto; text-align: center; max-width: 900px; font-size: 1em; font-weight: bold;">
+In a hypothesis test, only H₀ can be tested and the goal is to find out if the null hypothesis is <span style="font-style: italic">rejected</span> or not.
+</div>
+</section>
+<section id="types-of-hypotheses">
+<h3>Types of Hypotheses<a class="headerlink" href="#types-of-hypotheses" title="Link to this heading">#</a></h3>
+<div style="max-width: 900px; margin: 20px auto; padding: 12px;">
+<div style="display: flex; gap: 30px; flex-wrap: wrap;">
+<!-- Non-Directional Hypothesis -->
+<div style="flex: 1; min-width: 300px; background: #e2f0f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
+    <h4 style="margin-top: 0;">🔄 Non-Directional (Two-Tailed) Hypothesis</h4>
+    <p>States that there is a difference, but does not specify the direction of the difference.</p>
+    <p><em>Example (Difference):</em> "There is a difference in average prices between homes with and without waterfall views."</p>
+    <p><em>Example (Correlation):</em> "There is a relationship between house size and sale price."</p>
+    <p>This type of hypothesis is often used when the researcher does not have a specific expectation about the direction of the difference.</p>
+</div>
+<!-- Directional Hypothesis -->
+<div style="flex: 1; min-width: 300px; background: #fce4ec; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
+    <h4 style="margin-top: 0;">➡️ Directional (One-Tailed) Hypothesis</h4>
+    <p>States that there is a difference and specifies the direction of the difference.</p>
+    <p><em>Example (Difference):</em> "Homes with waterfall views have higher average prices than those without."</p>
+    <p><em>Example (Correlation):</em> "Larger houses are positively correlated with higher sale prices."</p>
+    <p>This type of hypothesis is used when the researcher has a specific expectation about the direction of the difference.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="hypothesis-testing">
+<h2>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Link to this heading">#</a></h2>
+<section id="purpose-and-limitations-of-hypothesis-testing">
+<h3>Purpose and Limitations of Hypothesis Testing<a class="headerlink" href="#purpose-and-limitations-of-hypothesis-testing" title="Link to this heading">#</a></h3>
+<div style="max-width: 5000px; margin: 0; padding: 20px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9;">
+<!-- Left side (Text) -->
+<div style="flex: 1; min-width: 280px; max-width: 900px; font-size: 0.9em;">
+<ul style="margin: 0; padding-left: 20px; list-style: none;">
+<li>✅ A hypothesis test is used to test an assumption about a population using information from a sample.</li>
+<li>🎯 The goal is to determine whether there is enough evidence to reject the <strong>null hypothesis</strong> or retain it.</li>
+<li>⚠️ It <strong>never rejects</strong> the null hypothesis with <strong>absolute certainty</strong>.</li>
+<li>🔄 There is always a probability of rejecting the null hypothesis even if it is actually true.</li>
+<li>📏 This probability threshold is called the <strong>level of significance α</strong> (commonly 5%).</li>
+<li>📊 If the <strong>p-value</strong> is less than α, we reject the null hypothesis in favor of the alternative hypothesis.</li>
+</ul>
+</div>
+<!-- Right side (Image) -->
+<div style="flex: 1; min-width: 280px; text-align: center;">
+<img src="../images/hypothesis_testing/inference_statistic.png" 
+ alt="When to use hypothesis testing" 
+ style="width: 100%; max-width: 900px; border-radius: 10px; display: block; margin: 0 auto;">
+</div>
+</div>
+</section>
+<section id="one-tailed-directional-hypothesis-test">
+<h3>One-Tailed (Directional) Hypothesis Test<a class="headerlink" href="#one-tailed-directional-hypothesis-test" title="Link to this heading">#</a></h3>
+<div style="max-width: 5000px; margin: 0; display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start;">
+<!-- Left: Text -->
+<div style="flex: 0 0 auto; max-width: 800px; min-width: 750px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; padding: 20px; font-size: 0.95em; line-height: 1.5;">
+<p><strong>Purpose</strong>:<br>
+Test for a difference in <strong>one direction</strong> only.
+</p>
+<p><strong>How it works</strong>:</p>
+<ul style="margin: 0 0 1em 20px; padding: 0;">
+<li>If your sample result falls in the critical region, you reject the null hypothesis and accept the alternative hypothesis.</li>
+<li>If it does not, you don't reject the null hypothesis (no evidence to support the alternative hypothesis).</li>
+</ul>
+<p><strong>Example</strong>:<br>
+A real estate company claims homes near a waterfall are more expensive.
+</p>
+<p><strong>Hypotheses</strong>:</p>
+<ul style="margin: 0 0 1em 20px; padding: 0;">
+<li>Null Hypothesis (<strong>H₀</strong>): μ₁ ≤ μ₂ (True mean price near waterfall is less than or equal to that of homes not near)</li>
+<li>Alternative Hypothesis (<strong>H₁</strong>): μ₁ > μ₂ (True mean price near waterfall is greater than that of homes not near)</li>
+</ul>
+</div>
+<!-- Right: Image + Table -->
+<div style="flex: 1; min-width: 300px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; padding: 20px; text-align: center;">
+<!-- Image -->
+<p><img src="../images/hypothesis_testing/one_tailed.png" 
+alt="One-tailed test" 
+style="width: 100%; max-width: 900px; border-radius: 6px; margin-bottom: 20px;"></p>
+<!-- Table -->
+<div style="overflow-x: auto;">
+<table style="border-collapse: collapse; width: 100%; font-size: 0.9em;">
+<thead>
+<tr style="background-color: #e6e6e6;">
+<th style="border: 1px solid #ccc; padding: 8px;">Sample</th>
+<th style="border: 1px solid #ccc; padding: 8px;">Sample Mean (Near Water)</th>
+<th style="border: 1px solid #ccc; padding: 8px;">Sample Mean (Not Near Water)</th>
+<th style="border: 1px solid #ccc; padding: 8px;">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">1</td>
+<td style="border: 1px solid #ccc; padding: 8px;">98</td>
+<td style="border: 1px solid #ccc; padding: 8px;">106</td>
+<td style="border: 1px solid #ccc; padding: 8px;">-8</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">2</td>
+<td style="border: 1px solid #ccc; padding: 8px;">101</td>
+<td style="border: 1px solid #ccc; padding: 8px;">104</td>
+<td style="border: 1px solid #ccc; padding: 8px;">-3</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">3</td>
+<td style="border: 1px solid #ccc; padding: 8px;">100</td>
+<td style="border: 1px solid #ccc; padding: 8px;">100</td>
+<td style="border: 1px solid #ccc; padding: 8px;">0</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">4</td>
+<td style="border: 1px solid #ccc; padding: 8px;">103</td>
+<td style="border: 1px solid #ccc; padding: 8px;">101</td>
+<td style="border: 1px solid #ccc; padding: 8px; font-weight: bold; color: green;">+2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="two-tailed-non-directional-hypothesis-test">
+<h3>Two-Tailed (Non-Directional) Hypothesis Test<a class="headerlink" href="#two-tailed-non-directional-hypothesis-test" title="Link to this heading">#</a></h3>
+<div style="max-width: 5000px; margin: 0; display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start;">
+<!-- Left: Text -->
+<div style="flex: 0 0 auto; max-width: 800px; min-width: 750px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; padding: 20px; font-size: 0.95em; line-height: 1.5;">
+<p><strong>Purpose</strong>:<br>
+Test for a difference in <strong>both directions</strong>.
+</p>
+<p><strong>How it works</strong>:</p>
+<ul style="margin: 0 0 1em 20px; padding: 0;">
+<li>If your sample result falls in either critical region, you reject the null hypothesis and accept the alternative hypothesis.</li>
+<li>If it does not, you don't reject the null hypothesis (no evidence to support the alternative hypothesis).</li>
+</ul>
+<p><strong>Example</strong>:<br>
+A real estate company claims homes near a waterfall are either more or less expensive.
+</p>
+<p><strong>Hypotheses</strong>:</p>
+<ul style="margin: 0 0 1em 20px; padding: 0;">
+<li>Null Hypothesis (<strong>H₀</strong>): μ₁ = μ₂ (True mean price near waterfall is equal to that of homes not near)</li>
+<li>Alternative Hypothesis (<strong>H₁</strong>): μ₁ ≠ μ₂ (True mean price near waterfall is different from that of homes not near)</li>
+</ul>
+</div>
+<!-- Right: Image + Table -->
+<div style="flex: 1; min-width: 300px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; padding: 20px; text-align: center;">
+<!-- Image -->
+<p><img src="../images/hypothesis_testing/two_tailed.png" 
+alt="Two-tailed test"
+style="width: 100%; max-width: 900px; border-radius: 6px; margin-bottom: 20px;"></p>
+<!-- Table -->
+<div style="overflow-x: auto;">
+<table style="border-collapse: collapse; width: 100%; font-size: 0.9em;">
+<thead>
+<tr style="background-color: #e6e6e6;">
+<th style="border: 1px solid #ccc; padding: 8px;">Sample</th>
+<th style="border: 1px solid #ccc; padding: 8px;">Sample Mean (Near Water)</th>
+<th style="border: 1px solid #ccc; padding: 8px;">Sample Mean (Not Near Water)</th>
+<th style="border: 1px solid #ccc; padding: 8px;">Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">1</td>
+<td style="border: 1px solid #ccc; padding: 8px;">98</td>
+<td style="border: 1px solid #ccc; padding: 8px;">102</td>
+<td style="border: 1px solid #ccc; padding: 8px; font-weight: bold; color: #b00020;">-4</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">2</td>
+<td style="border: 1px solid #ccc; padding: 8px;">101</td>
+<td style="border: 1px solid #ccc; padding: 8px;">99</td>
+<td style="border: 1px solid #ccc; padding: 8px; font-weight: bold; color: green;">+2</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">3</td>
+<td style="border: 1px solid #ccc; padding: 8px;">100</td>
+<td style="border: 1px solid #ccc; padding: 8px;">100</td>
+<td style="border: 1px solid #ccc; padding: 8px;">0</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">4</td>
+<td style="border: 1px solid #ccc; padding: 8px;">103</td>
+<td style="border: 1px solid #ccc; padding: 8px;">97</td>
+<td style="border: 1px solid #ccc; padding: 8px; font-weight: bold; color: green;">+6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="understanding-the-p-value">
+<h3>Understanding the p-value<a class="headerlink" href="#understanding-the-p-value" title="Link to this heading">#</a></h3>
+<div style="max-width: 5000px; margin: 0; display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start;">
+<!-- Left: Text -->
+<div style="flex: 0 0 auto; max-width: 800px; min-width: 750px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; padding: 20px; font-size: 0.95em; line-height: 1.6;">
+<p><strong>Purpose</strong>:<br>
+Used to decide whether to <strong>reject</strong> or <strong>retain</strong> the null hypothesis.
+</p>
+<p><strong>Definition</strong>:<br>
+The p-value is the probability (assuming the null hypothesis is true) of obtaining a sample result
+at least as extreme as the one observed.
+</p>
+<p><strong>Decision rule</strong>:</p>
+<ul style="margin: 0 0 1em 20px; padding: 0;">
+<li>If <strong>p-value ≤ α</strong> (e.g., 0.05), reject H₀.</li>
+<li>If <strong>p-value > α</strong>, do not reject H₀.</li>
+</ul>
+<p><strong>Notes</strong>:</p>
+<ul style="margin: 0 0 0.5em 20px; padding: 0;">
+<li>Smaller p-values give stronger evidence against H₀.</li>
+<li>The p-value is <em>not</em> the probability that H₀ is true.</li>
+</ul>
+</div>
+<!-- Right: Diagram (PNG) + Table -->
+<div style="flex: 1; min-width: 300px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; padding: 20px; text-align: center;">
+<!-- Image (PNG) -->
+<p><img src="../images/hypothesis_testing/p_values.png"
+alt="Sampling distribution with critical region and test statistic"
+style="width: 100%; max-width: 900px; border-radius: 6px; margin-bottom: 18px;"></p>
+<!-- Results Table -->
+<div style="overflow-x: auto;">
+<table style="border-collapse: collapse; width: 100%; font-size: 0.9em;">
+<thead>
+<tr style="background-color: #e6e6e6;">
+<th style="border: 1px solid #ccc; padding: 8px;">Sample</th>
+<th style="border: 1px solid #ccc; padding: 8px;">Test Statistic</th>
+<th style="border: 1px solid #ccc; padding: 8px;">p-value</th>
+<th style="border: 1px solid #ccc; padding: 8px;">Decision (α = 0.05)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">1</td>
+<td style="border: 1px solid #ccc; padding: 8px;">2.10</td>
+<td style="border: 1px solid #ccc; padding: 8px;">0.041</td>
+<td style="border: 1px solid #ccc; padding: 8px; color: green; font-weight: bold;">Reject H₀</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">2</td>
+<td style="border: 1px solid #ccc; padding: 8px;">1.50</td>
+<td style="border: 1px solid #ccc; padding: 8px;">0.141</td>
+<td style="border: 1px solid #ccc; padding: 8px; color: red; font-weight: bold;">Do not reject H₀</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">3</td>
+<td style="border: 1px solid #ccc; padding: 8px;">2.85</td>
+<td style="border: 1px solid #ccc; padding: 8px;">0.006</td>
+<td style="border: 1px solid #ccc; padding: 8px; color: green; font-weight: bold;">Reject H₀</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="common-hypothesis-tests">
+<h3>Common Hypothesis Tests<a class="headerlink" href="#common-hypothesis-tests" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://www.statology.org/choosing-the-right-statistical-test-a-decision-tree-approach/">source</a></p>
+<div style="max-width: 1000px; margin: 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background: #f9f9f9; font-size: 0.95em; line-height: 1.5;">
+  <table style="border-collapse: collapse; width: 100%; font-size: 0.85em;">
+    <thead>
+      <tr style="background-color: #e6e6e6;">
+        <th style="border: 1px solid #ccc; padding: 8px;">Test</th>
+        <th style="border: 1px solid #ccc; padding: 8px;">Purpose</th>
+        <th style="border: 1px solid #ccc; padding: 8px;">When to Use</th>
+        <th style="border: 1px solid #ccc; padding: 8px;">Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #ccc; padding: 8px;">One-Sample t-Test</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Tests if the sample mean differs from a known value.</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Compare average house price in one neighborhood to a known county average.</td>
+        <td style="border: 1px solid #ccc; padding: 8px; background-color: #d4edda; color: #155724; font-weight: bold;">Parametric</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ccc; padding: 8px;">Two-Sample t-Test (Independent)</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Tests if the means of two independent groups differ.</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Compare average prices of houses with waterfall views vs. without.</td>
+        <td style="border: 1px solid #ccc; padding: 8px; background-color: #d4edda; color: #155724; font-weight: bold;">Parametric</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ccc; padding: 8px;">Paired t-Test</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Tests if the means of two related measurements differ.</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Compare house prices before and after renovations on the same properties.</td>
+        <td style="border: 1px solid #ccc; padding: 8px; background-color: #d4edda; color: #155724; font-weight: bold;">Parametric</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ccc; padding: 8px;">Wilcoxon Signed-Rank Test</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Non-parametric alternative to the paired t-test.</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Compare house prices before and after renovation when data are not normally distributed.</td>
+        <td style="border: 1px solid #ccc; padding: 8px; background-color: #f8d7da; color: #721c24; font-weight: bold;">Non-Parametric</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ccc; padding: 8px;">Chi-Square Test</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Tests for association between categorical variables.</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Check if having a pool is associated with being in a specific neighborhood.</td>
+        <td style="border: 1px solid #ccc; padding: 8px; background-color: #f8d7da; color: #721c24; font-weight: bold;">Non-Parametric</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ccc; padding: 8px;">ANOVA (Analysis of Variance)</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Tests if means differ across three or more groups.</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Compare average prices across urban, suburban, and rural areas.</td>
+        <td style="border: 1px solid #ccc; padding: 8px; background-color: #d4edda; color: #155724; font-weight: bold;">Parametric</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ccc; padding: 8px;">Kruskal-Wallis Test</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Non-parametric alternative to ANOVA.</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Compare average prices across urban, suburban, and rural areas when data are not normally distributed.</td>
+        <td style="border: 1px solid #ccc; padding: 8px; background-color: #f8d7da; color: #721c24; font-weight: bold;">Non-Parametric</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ccc; padding: 8px;">Correlation Test (Pearson)</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Tests linear relationship between two continuous variables.</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Check if house size is related to house price.</td>
+        <td style="border: 1px solid #ccc; padding: 8px; background-color: #d4edda; color: #155724; font-weight: bold;">Parametric</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #ccc; padding: 8px;">Correlation Test (Spearman)</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Tests monotonic relationship between two variables.</td>
+        <td style="border: 1px solid #ccc; padding: 8px;">Check if house rank in size is related to rank in price.</td>
+        <td style="border: 1px solid #ccc; padding: 8px; background-color: #f8d7da; color: #721c24; font-weight: bold;">Non-Parametric</td>
+      </tr>
+    </tbody>
+  </table>
+</div></section>
+</section>
+<section id="a-b-testing">
+<h2>A/B Testing<a class="headerlink" href="#a-b-testing" title="Link to this heading">#</a></h2>
+<section id="introduction-to-a-b-testing">
+<h3>🆎 Introduction to A/B Testing<a class="headerlink" href="#introduction-to-a-b-testing" title="Link to this heading">#</a></h3>
+<div style="max-width: 900px; margin: 0; padding: 30px; border-radius: 8px; background: #f9f9f9; font-family: Arial, sans-serif; line-height: 1.5;">
+<h4 style="margin-top: 0; color: #333;">What is A/B Testing?</h4>
+<p style="margin-bottom: 1em;">
+A/B Testing is an <strong>experiment</strong> where you compare two versions (A and B) of something to see which performs better. 
+<h4 style="margin-top: 20px; color: #333;">Why We Use It</h4>
+<ul style="margin-bottom: 1em; padding-left: 20px;">
+<li>To make <strong>data-driven decisions</strong> instead of relying on guesswork.</li>
+<li>To improve performance and user experience.</li>
+<li>To validate design, content, or product changes before full rollout.</li>
+</ul>
+</div>
+</section>
+<section id="how-a-b-testing-works">
+<h3>How A/B Testing Works<a class="headerlink" href="#how-a-b-testing-works" title="Link to this heading">#</a></h3>
+<div style="max-width: 900px; margin: 0; padding: 30px; border-radius: 8px; background: #f9f9f9; font-family: Arial, sans-serif; line-height: 1.5;">
+<h4 style="margin-top: 20px; color: #333;">How it Works</h4>
+<ul style="margin-bottom: 1em; padding-left: 20px;">
+<li>Randomly split your audience into two groups.</li>
+<li>Show group A one version and group B another version.</li>
+<li>Measure the outcome (click rate, purchase rate, etc.).</li>
+<li>Use a statistical test (often a <em>two-sample proportion test</em> or <em>t-test</em>) to see if the difference is significant.</li>
+</ul>
+<div style="display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
+<!-- Example -->
+<div style="flex: 1; min-width: 250px; background: #e8f4fd; padding: 15px; border-radius: 6px;">
+<h5 style="margin-top: 0;">Example</h5>
+<p>💻 A company tests two landing page designs:</p>
+<ul style="padding-left: 20px; margin: 0;">
+<li><strong>Version A</strong>: Without Chatbot</li>
+<li><strong>Version B</strong>: With Chatbot</li>
+</ul>
+<p style="margin-top: 0.5em;">Measure which version leads to more sign-ups.</p>
+</div>
+<!-- Diagram -->
+<div style="flex: 1; min-width: 250px; background: #fff; padding: 15px; border-radius: 6px; text-align: center; border: 1px solid #ddd;">
+    <img src="../images/hypothesis_testing/random_split_experiment.png" alt="A/B Testing Diagram" style="max-width: 100%; height: auto; border-radius: 4px;">
+</div>
+</div>
+<h4 style="margin-top: 20px; color: #333;">Key Points</h4>
+<ul style="padding-left: 20px; margin: 0;">
+<li><strong>H₀</strong>: No difference between A and B.</li>
+<li><strong>H₁</strong>: One version performs better.</li>
+<li>Significance level (α).</li>
+</ul>
+</div>
+</section>
+<section id="why-random-assignment">
+<h3>Why Random Assignment<a class="headerlink" href="#why-random-assignment" title="Link to this heading">#</a></h3>
+<div style="max-width: 900px; margin: 0; padding: 30px; border-radius: 8px; background: #f9f9f9; font-family: Arial, sans-serif; line-height: 1.5;">
+<p>It ensures that the groups are <strong>comparable</strong> and any differences in outcomes are likely due to the change you made — not to pre-existing differences.</p>
+<h5 style="margin-top: 0;">Why It Matters</h5>
+<ul style="padding-left: 20px; margin: 0;">
+<li><strong>Removes Selection Bias</strong> – Ensures both groups start out similar.</li>
+<li><strong>Balances Confounding Variables</strong> – Distributes known and unknown factors evenly.</li>
+</ul>
+<p style="margin-top: 1em; font-style: italic;">
+Without random assignment, differences may be due to who’s in the groups — not the change you made.
+</p>
+</div>
+</section>
+<section id="interpreting-a-b-test-results">
+<h3>Interpreting A/B Test Results<a class="headerlink" href="#interpreting-a-b-test-results" title="Link to this heading">#</a></h3>
+<div style="max-width: 1100px; margin: 0 auto; padding: 30px; border-radius: 8px; background: #f9f9f9; font-family: Arial, sans-serif; line-height: 1.5;">
+<h4 style="margin-top: 0; color: #333;">Key Outputs from an A/B Test</h4>
+<ul style="margin-bottom: 1em; padding-left: 20px;">
+<li><strong>p-value</strong> – Probability the observed difference happened by chance.</li>
+<li><strong>Confidence Interval (CI)</strong> – Range of likely true differences.</li>
+<li><strong>Effect Size</strong> – Magnitude of the difference (practical significance).</li>
+</ul>
+<div style="display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap; align-items: flex-start;">
+<!-- Example Results Table -->
+<div style="flex: 1 1 48%; max-width: 500px; background: #fff; padding: 15px; border-radius: 6px; border: 1px solid #ddd;">
+<h5 style="margin-top: 0;">Example Results</h5>
+<table style="border-collapse: collapse; width: 100%; font-size: 0.95em;">
+<thead>
+<tr style="background-color: #e6e6e6;">
+<th style="border: 1px solid #ccc; padding: 8px;">Metric</th>
+<th style="border: 1px solid #ccc; padding: 8px;">Version A</th>
+<th style="border: 1px solid #ccc; padding: 8px;">Version B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">Conversion Rate</td>
+<td style="border: 1px solid #ccc; padding: 8px;">8.0%</td>
+<td style="border: 1px solid #ccc; padding: 8px;">9.5%</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">p-value</td>
+<td colspan="2" style="border: 1px solid #ccc; padding: 8px;">0.032</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">95% CI</td>
+<td colspan="2" style="border: 1px solid #ccc; padding: 8px;">[0.2%, 2.8%]</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 8px;">Effect Size</td>
+<td colspan="2" style="border: 1px solid #ccc; padding: 8px;">+1.5 percentage points</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- How to Interpret -->
+<div style="flex: 1 1 48%; max-width: 500px; background: #e8f4fd; padding: 15px; border-radius: 6px;">
+<h5 style="margin-top: 0;">How to Interpret</h5>
+<ul style="padding-left: 20px; margin: 0;">
+<li><strong>p-value &lt; 0.05</strong> → Reject H₀.</li>
+<li><strong>CI entirely positive</strong> → B likely better than A.</li>
+<li><strong>Effect Size</strong> → Shows practical relevance.</li>
+</ul>
+<p style="margin-top: 0.5em;">Here, Version B is statistically and practically better than Version A.</p>
+</div>
+</div>
+<h4 style="margin-top: 20px; color: #333;">Key Takeaway</h4>
+<p style="margin: 0;">
+Statistical significance (<strong>p-value</strong>) is not enough — always check the <strong>effect size</strong> and the <strong>confidence interval</strong>.
+</p>
+</div></section>
+<section id="conclusion-hypothesis-testing-a-b-testing">
+<h3>Conclusion - Hypothesis Testing &amp; A/B Testing<a class="headerlink" href="#conclusion-hypothesis-testing-a-b-testing" title="Link to this heading">#</a></h3>
+<div style="max-width: 900px; margin: 0; padding: 30px; border-radius: 8px; background: #f4f9ff; font-family: Arial, sans-serif; line-height: 1.5;">
+  <h4 style="margin-top: 0; color: #004c99;">Key Takeaways</h4>
+  <ul style="padding-left: 20px; margin-bottom: 1em;">
+    <li>Both <strong>Hypothesis Testing</strong> and <strong>A/B Testing</strong> help make data-driven decisions rather than relying on guesswork.</li>
+    <li>Every test starts with a clear <strong>null hypothesis (H₀)</strong> and <strong>alternative hypothesis (H₁)</strong>.</li>
+    <li>The <strong>p-value</strong> tells us how likely it is to observe the data (or more extreme) if H₀ were true — but it’s not absolute proof.</li>
+    <li>Statistical significance doesn’t always mean <em>practical significance</em> — always check effect sizes and context.</li>
+  </ul>
+</div>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=0oc49DyA3hU">Hypothesis Testing and The Null Hypothesis, Clearly Explained!!!</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=5koKb5B_YWo">Alternative Hypotheses: Main Ideas!!!</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=vemZtEM63GY">p-values: What they are and how to interpret them</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=JQc3yx0-Q9E">How to calculate p-values</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=HDCOUXE3HMM">P hacking</a></p></li>
+<li><p><a class="reference external" href="https://blog.hubspot.com/marketing/how-to-do-a-b-testing">How to do A/B testing</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="27_Distributions_CI.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Distributions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="29_Recommender_Systems.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Recommender Systems, an Introduction</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro">Intro</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-a-waterfall-view-really-worth-more">Is a Waterfall View Really Worth More?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem">The Problem</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis">Hypothesis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-hypothesis">What is a Hypothesis?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-formulate-a-hypothesis">How Do We Formulate a Hypothesis?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-null-and-alternative-hypothesis">What is the Null and Alternative Hypothesis?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-hypotheses">Types of Hypotheses</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">Hypothesis Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose-and-limitations-of-hypothesis-testing">Purpose and Limitations of Hypothesis Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-tailed-directional-hypothesis-test">One-Tailed (Directional) Hypothesis Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-tailed-non-directional-hypothesis-test">Two-Tailed (Non-Directional) Hypothesis Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-p-value">Understanding the p-value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-hypothesis-tests">Common Hypothesis Tests</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-b-testing">A/B Testing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-a-b-testing">🆎 Introduction to A/B Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-a-b-testing-works">How A/B Testing Works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-random-assignment">Why Random Assignment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-a-b-test-results">Interpreting A/B Test Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-hypothesis-testing-a-b-testing">Conclusion - Hypothesis Testing &amp; A/B Testing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

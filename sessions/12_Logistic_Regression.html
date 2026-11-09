@@ -1,0 +1,1626 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Logistic Regression &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/12_Logistic_Regression';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Logistic Regression" href="aipm_sessions/Logistic_Regression_AIPM.html" />
+    <link rel="prev" title="Evaluation Metrics" href="aipm_sessions/Evaluation_Metrics_AIPM.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Logistic Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-metrics">Classification metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Classification metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Classification metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-curve">ROC Curve</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Logistic Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification">Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-classification">Why classification?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Why classification?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Why classification?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Why classification?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Why Classification?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-problem-with-classification-with-linear-regression">Another problem with classification with linear regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression-model">Logistic Regression Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">The Logistic function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-logistic-function-to-logistic-regression">From logistic function to logistic regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-sigmoid-function">Explore the sigmoid function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Explore the sigmoid function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-hypothesis">Interpretation of the Hypothesis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Interpretation of the Hypothesis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-decision-boundary">The Decision Boundary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">The Decision Boundary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">The Logistic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-example-time">Hands on. Example time!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-boundary-example-lets-use-logistic-regression">Decision Boundary Example - Let’s use Logistic regression!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-boundary-example">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-boundary">Decision Boundary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cost-function">The Cost Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">The Cost Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">The Cost Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">The Cost Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">The Cost Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-based-on-logs-of-probabilities">Loss based on logs of probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">Loss based on logs of probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-just-add-it-all-up">Now, just add it all up</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">Now, just add it all up</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-loss-to-cost">From loss to cost</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-j-find-b">Minimizing J - find <span class="math notranslate nohighlight">\(b\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-class-problems">Multi class problems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="logistic-regression">
+<h1>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h1>
+<section id="recap">
+<h2>Recap!<a class="headerlink" href="#recap" title="Link to this heading">#</a></h2>
+<section id="confusion-matrix">
+<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h3>
+<p><b>Q1:</b> Which cells show the correct predictions</p>
+<p><b>Q2:</b> Now where do we put… TN TP FN FP?</p>
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:green"> </span></td>
+            <td><span style="color:red"> </span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:red"> </span></td>
+            <td><span style="color:green"> </span></td>
+        </tr> 
+    </tbody>   
+</table> 
+</section>
+<section id="id1">
+<h3>Confusion Matrix<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p><b>Q1:</b> Which cells show the correct predictions</p>
+<p><b>Q2:</b> Now where do we put… TN TP FN FP?</p>
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">TN</span></td>
+            <td><span style="color:#E1BE6A">FP</span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A">FN</span></td>
+            <td><span style="color:#40B0A6">TP</span></td>
+        </tr> 
+    </tbody>   
+</table> </section>
+<section id="classification-metrics">
+<h3>Classification metrics<a class="headerlink" href="#classification-metrics" title="Link to this heading">#</a></h3>
+<p><b>Q3</b>: Which classification metrics do you remember?</p>
+<div style="font-size:140%">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metric</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><div style="color: rgba(0, 0, 0, 0)">Accuracy </div></p></td>
+<td><p><div style="color: rgba(0, 0, 0, 0)"><span class="math notranslate nohighlight">\({\frac{130}{200}}=0.65\)</span> </div></p></td>
+</tr>
+<tr class="row-odd"><td><p><div style="color: rgba(0, 0, 0, 0)">Precision </div></p></td>
+<td><p><div style="color: rgba(0, 0, 0, 0)"><span class="math notranslate nohighlight">\({\frac{70}{110}}=0.64\)</span> </div></p></td>
+</tr>
+<tr class="row-even"><td><p><div style="color: rgba(0, 0, 0, 0)">Recall </div></p></td>
+<td><p><div style="color: rgba(0, 0, 0, 0)"><span class="math notranslate nohighlight">\({\frac{70}{100}}=0.7\)</span> </div></p></td>
+</tr>
+<tr class="row-odd"><td><p><div style="color: rgba(0, 0, 0, 0)">F1-Score </div></p></td>
+<td><p><div style="color: rgba(0, 0, 0, 0)"><span class="math notranslate nohighlight">\(2\cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}=\frac{2}{3}\)</span> </div></p></td>
+</tr>
+<tr class="row-even"><td><p><div style="color: rgba(0, 0, 0, 0)"> ROC AUC </div></p></td>
+<td><p>                                                                </p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>  
+</section>
+<section id="id2">
+<h3>Classification metrics<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p><b>Q3</b>: Which classification metrics do you remember?</p>
+<div style="font-size:140%">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metric</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Accuracy</p></td>
+<td><p><div style="color: rgba(0, 0, 0, 0)"><span class="math notranslate nohighlight">\({\frac{130}{200}}=0.65\)</span> </div></p></td>
+</tr>
+<tr class="row-odd"><td><p>Precision</p></td>
+<td><p><div style="color: rgba(0, 0, 0, 0)"><span class="math notranslate nohighlight">\({\frac{70}{110}}=0.64\)</span> </div></p></td>
+</tr>
+<tr class="row-even"><td><p>Recall</p></td>
+<td><p><div style="color: rgba(0, 0, 0, 0)"><span class="math notranslate nohighlight">\({\frac{70}{100}}=0.7\)</span> </div></p></td>
+</tr>
+<tr class="row-odd"><td><p>F1-Score</p></td>
+<td><p><div style="color: rgba(0, 0, 0, 0)"><span class="math notranslate nohighlight">\(2\cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}=\frac{2}{3}\)</span> </div></p></td>
+</tr>
+<tr class="row-even"><td><p>ROC AUC</p></td>
+<td><p>                                                                </p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>  
+<p><b>Q4</b>: What are the values?</p>
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">60</span></td>
+            <td><span style="color:#E1BE6A">40</span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A">30</span></td>
+            <td><span style="color:#40B0A6">70</span></td>
+        </tr> 
+    </tbody>   
+</table> <p>Accuracy - Rate of correct predictions - (TP+TN) /(TP+TN+FP+FN) = # correct predictions / # all predictions<br />
+Precision - How precise does a model predict positives - TP / (TP+FP) = # correct positives / # all positives<br />
+Recall/Sensitivity/TPRate - How many % of the patients will be recalled / How sensitive is the model - TP / (TP+FN) = # correct positives / # actual positive<br />
+F1-Score - Harmonic mean between Precision and Recall - 2x (P*R) / (P+R)<br />
+ROC AUC - area under ROC curve; parameter: threshold</p>
+</section>
+<section id="id3">
+<h3>Classification metrics<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p><b>Q3</b>: Which classification metrics do you remember?</p>
+<div style="font-size:140%">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metric</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Accuracy</p></td>
+<td><p><span class="math notranslate nohighlight">\({\frac{130}{200}}=0.65\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Precision</p></td>
+<td><p><span class="math notranslate nohighlight">\({\frac{70}{110}}=0.64\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Recall</p></td>
+<td><p><span class="math notranslate nohighlight">\({\frac{70}{100}}=0.7\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>F1-Score</p></td>
+<td><p><span class="math notranslate nohighlight">\(2\cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}=\frac{2}{3}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>ROC AUC</p></td>
+<td><p>                                                                </p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>  
+<p><b>Q4</b>: What are the values?</p>
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">60</span></td>
+            <td><span style="color:#E1BE6A">40</span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A">30</span></td>
+            <td><span style="color:#40B0A6">70</span></td>
+        </tr> 
+    </tbody>   
+</table>  </section>
+<section id="roc-curve">
+<h3>ROC Curve<a class="headerlink" href="#roc-curve" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p><b>Q5</b>: What is the threshold?</p>
+<p><b>Q6</b>: When would you change it?</p>
+  </div>
+  <div class="images">
+    <img src="../images/logistic_regression/ROC_curve_transparent_bg.png" width=600>
+  </div>
+</div><p>Improving the recall, TP / (TP+FN) = missing no patient, by altering the threshold goes along with:<br />
+a worsening (increase) in false alarms, called false positive rate, because there will be more FP.</p>
+</section>
+</section>
+<section id="id4">
+<h2>Logistic Regression<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+</section>
+<section id="classification">
+<h2>Classification<a class="headerlink" href="#classification" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text_70">
+<p>Some examples for classification</p>
+<ul>
+<li><p>Email: <i>spam vs not spam</i></p></li>
+<li><p>Tumor classification: <i> malignant vs benign </i></p></li>
+<li><p>Bee image: <i> healthy vs not healthy </i></p></li>
+<li><p>Sentiment analysis: <i> happy vs sad </i></p></li>
+<li><p>Text analysis: <i> toxic vs not toxic </i></p></li>
+<li><p>Face recognition: <i>iphone owner or not </i></p></li>
+<li><p>Animal detection: <i> cat vs dog vs monkey vs…</i> (multi class classification)</p>
+</div>
+<div class="images_30">
+  <img src="../images/logistic_regression/img_p9_2.png">
+</div>
+</li>
+</ul>
+</div><p>In (binary)-classification we have two possible classes:</p>
+<div class="math notranslate nohighlight">
+\[y\in\{0,1\}\]</div>
+<ul class="simple">
+<li><p>Class 0: the <i>negative</i> class (not spam, malignant, not cat)</p></li>
+<li><p>Class 1: the <i>positive</i> class (spam, benign, cat)</p></li>
+</ul>
+<section id="why-classification">
+<h3>Why classification?<a class="headerlink" href="#why-classification" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/8f83432365b088dddb64539ae08f937df23ec966215e7e9200568e8f6f78b3a9.png" src="../_images/8f83432365b088dddb64539ae08f937df23ec966215e7e9200568e8f6f78b3a9.png" />
+</div>
+</div>
+<p>Why do we need another (classification) algorithm if we have linear regression?</p>
+</section>
+<section id="id5">
+<h3>Why classification?<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[h_{b}(x)=b^{T}x\]</div>
+<div class="math notranslate nohighlight">
+\[\text{(or in 1d without matrix notation: }h_b(x) = b_0  + b_1\cdot x)\]</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/b6fb37bf804a234637c1ad23f444bfaf78ee8d4e7a2623420255702e4772f2b2.png" src="../_images/b6fb37bf804a234637c1ad23f444bfaf78ee8d4e7a2623420255702e4772f2b2.png" />
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>Why classification?<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>if <span class="math notranslate nohighlight">\(h_{b}(x)\geq0.5\)</span> then predict “y = 1” (→ sad)</p>
+<p>if <span class="math notranslate nohighlight">\(h_{b}(x)&lt;0.5\)</span> then predict “y = 0” (→ not sad)</p>
+  </div>
+  <div class="text">
+<div class="math notranslate nohighlight">
+\[h_{b}(x)=b^{T}x\]</div>
+</div>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/65ce160076f9dc85f67903e08d28ac93900eae810111531b8a4b5bb91e698304.png" src="../_images/65ce160076f9dc85f67903e08d28ac93900eae810111531b8a4b5bb91e698304.png" />
+</div>
+</div>
+</section>
+<section id="id7">
+<h3>Why classification?<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3f9fd1bca748b562896de38517a965d4f2243aa9eb3b40ae58b9fe0032c1b312.png" src="../_images/3f9fd1bca748b562896de38517a965d4f2243aa9eb3b40ae58b9fe0032c1b312.png" />
+</div>
+</div>
+</section>
+<section id="id8">
+<h3>Why Classification?<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>applying linear regression to a classification problem is usually not a great idea</p></li>
+<li><p>first time we got lucky and we got a hypothesis that worked well for the particular example</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/4e9201c4b0c15dc9acf55a2d8e15b512087cc7d6ef8e00dc875d73122831d319.png" src="../_images/4e9201c4b0c15dc9acf55a2d8e15b512087cc7d6ef8e00dc875d73122831d319.png" />
+</div>
+</div>
+</section>
+<section id="another-problem-with-classification-with-linear-regression">
+<h3>Another problem with classification with linear regression<a class="headerlink" href="#another-problem-with-classification-with-linear-regression" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>y can be 1 or 0 (or any other labels)  <span class="math notranslate nohighlight">\(y\in\{0,1\}\)</span></p></li>
+<li><p>but the hypothesis <span class="math notranslate nohighlight">\(h_{b}(x)\)</span> can be larger than 1 or smaller than 0 even when all the training data was with 0 and 1</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+h_{b}(x)&amp;=b^{T}x\\[8pt]
+h_{b}(x)&amp;\in\mathbb{R}
+\end{align}\end{split}\]</div>
+</section>
+</section>
+<section id="logistic-regression-model">
+<h2>Logistic Regression Model<a class="headerlink" href="#logistic-regression-model" title="Link to this heading">#</a></h2>
+<p>Classification hypothesis:</p>
+<div class="math notranslate nohighlight">
+\[0\leq h_{b}(x) \leq 1\]</div>
+<p>Linear regression hypothesis:</p>
+<div class="math notranslate nohighlight">
+\[h_{b}(x)=b^{T}x\]</div>
+<p>Logistic regression hypothesis:</p>
+<div class="math notranslate nohighlight">
+\[h_{b}(x)=\sigma(b^{T}x)\]</div>
+<p>Sigmoid function aka. logistic function:</p>
+<div class="math notranslate nohighlight">
+\[\sigma(t)=\frac{1}{1+e^{-t}}\]</div>
+<section id="the-logistic-function">
+<h3>The Logistic function<a class="headerlink" href="#the-logistic-function" title="Link to this heading">#</a></h3>
+<div class="group">
+<p>Lets discuss some properties of the sigmoid function:</p>
+<div class="text">
+<ul>
+<li><p>Sigmoid function makes values fit into (0,1)
+<br>
+<br></p></li>
+<li><p>The sigmoid asymptotes to 0 when t goes to minus infinity
+<br>
+<br></p></li>
+<li><p>The sigmoid asymptotes to 1 when t goes to infinity
+<br>
+<br></p></li>
+<li><p>All its values lie within (0,1)</p>
+</div>
+<div class="text" style="font-size: 115%">
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\sigma(t)&amp;=\frac{1}{1+e^{-t}}\\[4pt]
+\operatorname*{lim}_{t\rightarrow-\infty}\sigma(t)&amp;=0\\[4pt]
+\operatorname*{lim}_{t\rightarrow\infty}\sigma(t)&amp;=1 \\[4pt]
+\sigma(t)&amp;\in\{0,1\}\\
+\end{align}\end{split}\]</div>
+  </div>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/71204cf53591e76492455c89e023f71d7d615c864ea01c7c2a560030ffd838ec.png" src="../_images/71204cf53591e76492455c89e023f71d7d615c864ea01c7c2a560030ffd838ec.png" />
+</div>
+</div>
+</section>
+<section id="from-logistic-function-to-logistic-regression">
+<h3>From logistic function to logistic regression<a class="headerlink" href="#from-logistic-function-to-logistic-regression" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<ul>
+<li><p>Sigmoid function makes values fit into (0,1)</p></li>
+<li><p>we then need to pick the parameters b</p>
+<ul class="simple">
+<li><p>t is equivalent to <span class="math notranslate nohighlight">\(b^Tx\)</span></p></li>
+</ul>
+</div>
+<div class="text_30" style="font-size: 115%">
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\sigma(t)&amp;=\frac{1}{1+e^{-t}}\\[8pt]
+h_{b}(x)&amp;=\frac{1}{1+e^{-b^Tx}}
+\end{align}\end{split}\]</div>
+  </div>
+</div>    <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/71204cf53591e76492455c89e023f71d7d615c864ea01c7c2a560030ffd838ec.png" src="../_images/71204cf53591e76492455c89e023f71d7d615c864ea01c7c2a560030ffd838ec.png" />
+</div>
+</div>
+</section>
+<section id="explore-the-sigmoid-function">
+<h3>Explore the sigmoid function<a class="headerlink" href="#explore-the-sigmoid-function" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\sigma(x)=\frac{1}{1+e^{-(b_0 + b_1 \cdot x)}}\]</div>
+<p>Please take this code and evaluate the influence of <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span>.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># create the sigmoid function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sigmoid_function</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Calculates p for given t&#39;&#39;&#39;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">p</span>
+
+<span class="c1"># create the logit function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">logit_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">b1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Caluculates the border&#39;&#39;&#39;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">b0</span> <span class="o">+</span> <span class="n">b1</span><span class="o">*</span><span class="n">x</span>
+    <span class="k">return</span> <span class="n">t</span>
+
+<span class="n">b0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">logit_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">sigmoid_function</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">p</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c_dark</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="n">b0</span><span class="o">/</span><span class="n">b1</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">c_blue</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">xmin</span><span class="o">=-</span><span class="mi">50</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=-</span><span class="n">b0</span><span class="o">/</span><span class="n">b1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">c_light</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h3>Explore the sigmoid function<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>Result</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p(t(x))\)</span> (the result of the sigmoid function) or in short <span class="math notranslate nohighlight">\(p(x)\)</span> is mainly only 0 or 1 (about)</p></li>
+<li><p><span class="math notranslate nohighlight">\(b_0\)</span> shifts the sigmoid function to the left and right</p></li>
+<li><p>Larger <span class="math notranslate nohighlight">\(b_1\)</span> sharpens the sigmoid function.</p></li>
+<li><p>Proper fractions of <span class="math notranslate nohighlight">\(b_1\)</span> smoothens the sigmoid function.</p></li>
+<li><p>Negative <span class="math notranslate nohighlight">\(b_1\)</span> flips the sigmoid function.</p></li>
+</ul>
+<p>Assuming that <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> are known, we can input any <span class="math notranslate nohighlight">\(x\)</span> (a feature of our machine learning problem), and our sigmoid function tells us whether the observation belongs to category 0 or 1.</p>
+<p>The only requirement is to customize the model parameters <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> to our needs / input data so that it can be used to discrimitate/binarize/classify any numerical feature <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/96f37d11c492fad900c6015dc9aaf1b37f6860f1afabbb40ae1d578f33cf1cd3.png" src="../_images/96f37d11c492fad900c6015dc9aaf1b37f6860f1afabbb40ae1d578f33cf1cd3.png" />
+</div>
+</div>
+</section>
+<section id="interpretation-of-the-hypothesis">
+<h3>Interpretation of the Hypothesis<a class="headerlink" href="#interpretation-of-the-hypothesis" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(h_b(x)\)</span> is the probability that y = 1 on input x</p>
+<p>Example:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x = \begin{bmatrix} x_0 \\ x_1\end{bmatrix} = \begin{bmatrix} 1 \\ \text{#negWords}\end{bmatrix}
+\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(h_{b}(x)=0.8\)</span></p>
+<p>The sentence has a 80% probability of being sad.
+<i>The probability of y=1 given the feature vector x is 80%</i></p>
+<p>Notation:</p>
+<p><span class="math notranslate nohighlight">\(h_{b}(x)=p(y=1\mid x;b)\)</span></p>
+</section>
+<section id="conditional-probability">
+<h3>Conditional probability<a class="headerlink" href="#conditional-probability" title="Link to this heading">#</a></h3>
+<p>The syntax <span class="math notranslate nohighlight">\(p(y=1\mid x;b)\)</span> denotes a so called <em>conditional probability</em>.</p>
+<ul class="simple">
+<li><p>The <span class="math notranslate nohighlight">\(p\)</span> is called probability function or just <em>probability</em>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y = 1\)</span> is the event that we are interested in.</p></li>
+<li><p>The  <span class="math notranslate nohighlight">\( | \)</span>  is pronounced “given”, which refers to the following parameters …</p></li>
+<li><p>… <span class="math notranslate nohighlight">\(x; b\)</span> which describe the conditions under which we are considering the probability.</p></li>
+</ul>
+<p>In this example we want to know the probability that y is 1 (that y belongs to class 1) assuming a certain number of negative words <span class="math notranslate nohighlight">\((x)\)</span> and underlying the given weights for <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<p>What is:</p>
+<p><span class="math notranslate nohighlight">\(p(y=0\mid x;b)\)</span></p>
+</section>
+<section id="id10">
+<h3>Interpretation of the Hypothesis<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>This is a classification problem, so <b>y has to be 0 or 1</b>
+<br>
+<br>
+<br></p>
+<div class="group" style="font-size: 130%">
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+&amp;\underbrace{p(y=1\mid x;b)}_{\color{red}{\text{sad}}}+ \underbrace{p(y=0\mid x;b)}_{\color{green}{\text{not sad (happy)}}} = 1\\[12pt]
+h_{b}(x)=&amp;\underbrace{p(y=1\mid x;b)}_{\color{red}{\text{sad}}} =  1-\underbrace{p(y=0\mid x;b)}_{\color{green}{\text{not sad (happy)}}}
+\end{align}\end{split}\]</div>
+</div></section>
+</section>
+<section id="the-decision-boundary">
+<h2>The Decision Boundary<a class="headerlink" href="#the-decision-boundary" title="Link to this heading">#</a></h2>
+<p>Defining the decision boundary / threshold</p>
+<div group="group">
+    <div class="text_70">
+<ul>
+<li><p>we could do 0.5 as the threshold (default in sklearn implementation)</p></li>
+<li><p>If the probability is bigger than or equal to 0.5 it is classified as 1, else as 0.</p>
+  </div>
+  <div class="images_30">
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split} \hat{y}= \begin{cases} 1 &amp; \text{if } \hat{p} \ge 0.5 \\ 0 &amp; \text{if } \hat{p} &lt; 0.5 \ \end{cases} \end{split}\]</div>
+<p><strong>For what t is the sigmoid greater than 0.5?</strong></p>
+   </div>
+</div>    <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/71204cf53591e76492455c89e023f71d7d615c864ea01c7c2a560030ffd838ec.png" src="../_images/71204cf53591e76492455c89e023f71d7d615c864ea01c7c2a560030ffd838ec.png" />
+</div>
+</div>
+<section id="id11">
+<h3>The Decision Boundary<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<p>Defining the decision boundary / threshold</p>
+<div group="group">
+    <div class="text_70">
+<ul>
+<li><p>we could do 0.5 as the threshold (default in sklearn implementation)</p></li>
+<li><p>If the probability is bigger than or equal to 0.5 it is classified as 1, else as 0.</p>
+  </div>
+  <div class="text_30">
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{array}{c}{{\hat{p}\:=\:\sigma\bigl(b^{T}\,x\bigr)\:\ge\:0.5}}\\ {{b^{T}\:x\geq0}}\end{array}\end{split}\]</div>
+<p><strong>When do we predict y = 0?</strong></p>
+   </div>
+</div>  <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/71204cf53591e76492455c89e023f71d7d615c864ea01c7c2a560030ffd838ec.png" src="../_images/71204cf53591e76492455c89e023f71d7d615c864ea01c7c2a560030ffd838ec.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="id12">
+<h2>Classification<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<p>Now classification will be based on probabilities:</p>
+<div group="text">
+    <div class="text_70">
+<ul>
+<li><p>0.5 is the threshold</p></li>
+<li><p>If the probability is bigger than or equal to 0.5 it is classified as 1, else as 0.</p>
+  </div>
+  <div class="images_30">
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split} \hat{y}= \begin{cases} 1 &amp; \text{if } \hat{p} \ge 0.5 \\ 0 &amp; \text{if } \hat{p} &lt; 0.5 \ \end{cases} \end{split}\]</div>
+<p><strong>Why 0.5? Good question!</strong></p>
+   </div>
+</div>  <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/71204cf53591e76492455c89e023f71d7d615c864ea01c7c2a560030ffd838ec.png" src="../_images/71204cf53591e76492455c89e023f71d7d615c864ea01c7c2a560030ffd838ec.png" />
+</div>
+</div>
+</section>
+<section id="id13">
+<h2>The Logistic Function<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">
+<p>Remember: The threshold corresponds to your
+business problem!</p>
+  </div>
+  <div class="images">
+    <img src="../images/logistic_regression/ROC_curve_transparent_bg.png" width=600>
+  </div>
+</div><p>e.g. decrease # missed (potential) patients by decreasing the threshold (drawback: many healthy get panicked)</p>
+</section>
+<section id="hands-on-example-time">
+<h2>Hands on. Example time!<a class="headerlink" href="#hands-on-example-time" title="Link to this heading">#</a></h2>
+<section id="decision-boundary-example-lets-use-logistic-regression">
+<h3>Decision Boundary Example - Let’s use Logistic regression!<a class="headerlink" href="#decision-boundary-example-lets-use-logistic-regression" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>We have some texts to classify as <strong>sad</strong> (class 1) or <strong>happy</strong> (class 0)</p></li>
+<li><p>Our features are:</p>
+<ul>
+<li><p>x1: number of negative words (e.g. “Today was a dull, exhausting and tiring one. 😞”, x1 = 3)</p></li>
+<li><p>x2: number of sad smileys (e.g. “Today was a dull, exhausting and tiring one. 😞”, x2 = 1)</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e1a2ce64a4085969fbee3ed0fd007fb7d4ec0b382beb80027688b67c964c8684.png" src="../_images/e1a2ce64a4085969fbee3ed0fd007fb7d4ec0b382beb80027688b67c964c8684.png" />
+</div>
+</div>
+<p>This figure does <strong>not</strong> show the response this time but two features!</p>
+</section>
+<section id="decision-boundary-example">
+<h3>Decision Boundary Example<a class="headerlink" href="#decision-boundary-example" title="Link to this heading">#</a></h3>
+<div group="text">
+    <div class="text">
+<p><span class="math notranslate nohighlight">\(\hat{p} = \sigma(b_0+ b_1 x_1 +b_2 x_2) = \sigma(b^T x)\)</span>
+</div>
+<div class="text"></p>
+<p><span class="math notranslate nohighlight">\(x_0=1\)</span></p>
+   </div>
+</div>
+<p><span class="math notranslate nohighlight">\(b^{T} x=\begin{bmatrix}b_0 &amp; b_1 &amp; b_2 \end{bmatrix}\cdot\begin{bmatrix}x_0\\x_1\\x_2 \end{bmatrix}=\,b_{0}\cdot x_{0}\,+\,b_{1}\cdot x_{1}\,+\,b_{2}\cdot\,x_{2}\)</span></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e1a2ce64a4085969fbee3ed0fd007fb7d4ec0b382beb80027688b67c964c8684.png" src="../_images/e1a2ce64a4085969fbee3ed0fd007fb7d4ec0b382beb80027688b67c964c8684.png" />
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(x\)</span> is one observation. The index refers to different features:<br />
+<span class="math notranslate nohighlight">\(x_0\)</span> belongs to the bias and is 1 (so that <span class="math notranslate nohighlight">\(b_0\)</span> is the intercept).<br />
+<span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> are the # of neg. words and smileys, resp.</p>
+</section>
+<section id="id14">
+<h3>Decision Boundary Example<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<div group="text">
+    <div class="text">
+<p><span class="math notranslate nohighlight">\(\hat{p} = \sigma(b_0+ b_1 x_1 +b_2 x_2) = \sigma(b^T x)\)</span>
+</div>
+<div class="text"></p>
+<p><span class="math notranslate nohighlight">\(b=\left[\begin{array}{c}{{-3\ }}\\ {{1}}\\ {{1}}\end{array}\right]\)</span></p>
+   </div>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e1a2ce64a4085969fbee3ed0fd007fb7d4ec0b382beb80027688b67c964c8684.png" src="../_images/e1a2ce64a4085969fbee3ed0fd007fb7d4ec0b382beb80027688b67c964c8684.png" />
+</div>
+</div>
+</section>
+<section id="id15">
+<h3>Decision Boundary Example<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<div group="text">
+    <div class="text">
+<p><span class="math notranslate nohighlight">\(\hat{p}= \sigma(b_0+ b_1 x_1 +b_2 x_2) = \sigma(b^T x)\)</span></p>
+<p><span class="math notranslate nohighlight">\(\hat{p}= \sigma(-3+ x_1 +x_2) = \sigma(b^T x)\)</span>
+</div>
+<div class="text"></p>
+<p><span class="math notranslate nohighlight">\(b=\left[\begin{array}{c}{{-3\ }}\\ {{1}}\\ {{1}}\end{array}\right]\)</span></p>
+   </div>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e1a2ce64a4085969fbee3ed0fd007fb7d4ec0b382beb80027688b67c964c8684.png" src="../_images/e1a2ce64a4085969fbee3ed0fd007fb7d4ec0b382beb80027688b67c964c8684.png" />
+</div>
+</div>
+</section>
+<section id="id16">
+<h3>Decision Boundary Example<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(\hat{p} = \sigma(-3+ x_1 +x_2) = \sigma(b^T x) = \frac{1}{1+e^{-(b_0+b_1\cdot x_1 + b_2 \cdot x_2)}}\)</span></p>
+<p>We predict class 1 if</p>
+<p><span class="math notranslate nohighlight">\(\hat{p}\geq0.5 \text{ that means } b^T x\geq0\)</span> (the exponent of <span class="math notranslate nohighlight">\(e\)</span>)</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e1a2ce64a4085969fbee3ed0fd007fb7d4ec0b382beb80027688b67c964c8684.png" src="../_images/e1a2ce64a4085969fbee3ed0fd007fb7d4ec0b382beb80027688b67c964c8684.png" />
+</div>
+</div>
+</section>
+<section id="id17">
+<h3>Decision Boundary Example<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<div group="text">
+    <div class="text">
+<p><span class="math notranslate nohighlight">\(\hat{p} = \sigma(-3+ x_1 +x_2) = \sigma(b^T x)\)</span></p>
+<p>We predict “y = 1” when:</p>
+<p><span class="math notranslate nohighlight">\(\hat{p}\geq0.5 \text{ when } b^T x\geq0\)</span>
+</div>
+<div class="text"></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+-3+x_1+x_2&amp;\geq0 \\
+x_1+x_2&amp;\geq3\end{align}\end{split}\]</div>
+   </div>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/e1a2ce64a4085969fbee3ed0fd007fb7d4ec0b382beb80027688b67c964c8684.png" src="../_images/e1a2ce64a4085969fbee3ed0fd007fb7d4ec0b382beb80027688b67c964c8684.png" />
+</div>
+</div>
+</section>
+<section id="id18">
+<h3>Decision Boundary Example<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(\hat{p} = \sigma(-3+ x_1 +x_2) = \sigma(b^T x)\)</span></p>
+<p>We predict “y = 1” when:</p>
+<p><span class="color-plot_blue"><span class="math notranslate nohighlight">\({x_1+x_2\geq3}\)</span></span></p>
+</section>
+<section id="id19">
+<h3>Decision Boundary Example<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(\hat{p} = \sigma(-3+ x_1 +x_2) = \sigma(b^T x)\)</span></p>
+<div group="text">
+    <div class="text">
+<p>We predict “y = 1” when:</p>
+<p><span class="color-plot_blue"><span class="math notranslate nohighlight">\({x_1+x_2\geq3}\)</span></span>
+</div>
+<div class="text"></p>
+<p>We predict “y = 0” when:</p>
+<p><span class="color-plot_light"><span class="math notranslate nohighlight">\({x_1+x_2&lt;3}\)</span></span></p>
+   </div>
+</div></section>
+<section id="id20">
+<h3>Decision Boundary Example<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<div group="text">
+    <div class="text">
+<p>We predict “y = 1” when:</p>
+<p><span class="color-plot_blue"><span class="math notranslate nohighlight">\({x_1+x_2\geq3}\)</span></span></p>
+<p>We predict “y = 0” when:</p>
+<p><span class="color-plot_light"><span class="math notranslate nohighlight">\({x_1+x_2&lt;3}\)</span></span></p>
+ </div>
+    <div class="text">
+<p><strong>Decision Boundary:</strong></p>
+<div class="math notranslate nohighlight">
+\[x_1+x_2=3\]</div>
+<div class="math notranslate nohighlight">
+\[x_2=3-x_1\]</div>
+   </div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/f1a962cd0c798c039d1375e4cec7de886dfc8e03b0242fbf0c3671f29e732e27.png" src="../_images/f1a962cd0c798c039d1375e4cec7de886dfc8e03b0242fbf0c3671f29e732e27.png" />
+</div>
+</div>
+</section>
+<section id="decision-boundary">
+<h3>Decision Boundary<a class="headerlink" href="#decision-boundary" title="Link to this heading">#</a></h3>
+<p>The decision boundary is a property of the hypothesis and not of the data.</p>
+<p>We fit the model to find the parameters <em>b</em> and then we can get the decision boundary based on <em>b</em>.</p>
+<p>Spoiler alert: if you use higher order polynomial features you get a non-linear decision boundary.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/2ffd93b69b9aa1d7eb7f85b466333608a87f3dd6ff2244897458b6be901d8084.png" src="../_images/2ffd93b69b9aa1d7eb7f85b466333608a87f3dd6ff2244897458b6be901d8084.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="the-cost-function">
+<h2>The Cost Function<a class="headerlink" href="#the-cost-function" title="Link to this heading">#</a></h2>
+<p>Training set: <span class="math notranslate nohighlight">\(\{(x^1, y^1), (x^2, y^2), ... (x^n, y^n)\}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split} x\,=\,\left[{\begin{array}{c}{x_{0}}\\ {x_{1}}\\ {\vdots}\\ {x_{m}}\end{array}}\right],x_{0}\,=\,1,\,y\,\in\,\{0,1\}\end{split}\]</div>
+<p>How do we chose the right parameters <em>b</em>?</p>
+<p>Fitting the parameter <em>b</em> to the data.</p>
+<div class="math notranslate nohighlight">
+\[ \hat{p}=\frac{1}{1+e^{-b^{T}x}}\]</div>
+<p>The top numbers are no exponents but refer to the observation number here.</p>
+<section id="id21">
+<h3>The Cost Function<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
+<p>For logistic regression the <strong>log loss function</strong> LLF (also referred to as <strong>binary cross entropy</strong>) is used:<br />
+$<span class="math notranslate nohighlight">\(LLF = -\frac{1}{n}\sum_{i=0}^n\Bigg[ \Bigg(y_i \ln(\hat{p}(x_i))\Bigg) + \Bigg((1-y_i) \ln(1-\hat{p}(x_i))\Bigg)\Bigg]\quad\)</span>$</p>
+<p>with <span class="math notranslate nohighlight">\(n\)</span> being the number of observations,<br />
+<span class="math notranslate nohighlight">\(y_i\)</span> being the real observations (0 or 1)<br />
+and <span class="math notranslate nohighlight">\(\hat{p}(x_i)\)</span> being the predictions, between 0 and 1</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p><span class="math notranslate nohighlight">\(y_i\)</span> (real value)</p></th>
+<th class="head text-left"><p><span class="math notranslate nohighlight">\(\hat{p}(x_i)\)</span> (prediction)</p></th>
+<th class="head text-left"><p>val in []</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>0</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\( \sim 0\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\( \sim 0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>0</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\neq 0\)</span></p></td>
+<td class="text-left"><p>large</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>1</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\( \sim 1\)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\( \sim 0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>1</p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\(\neq 1\)</span></p></td>
+<td class="text-left"><p>large</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>→ The further the prediction is from the real value, the larger the LLF<br />
+<em>vice versa</em>: <strong>The smaller the loss, the better the prediction.</strong></p>
+</section>
+<section id="id22">
+<h3>The Cost Function<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p>Why don’t we use the cost function we know from linear regression?</p>
+<div class="math notranslate nohighlight">
+\[ \mathrm{min}\ J(b)\ =\ \sum(y_{i}\ - \hat{y})^{2}\]</div>
+<div class="math notranslate nohighlight">
+\[ \text{or the estimated probabilities:}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathrm{min}\ J(b)={\textstyle{\frac{1}{2n}}}\sum(y-\hat{p})^{2}\]</div>
+<p>This would lead to a non-convex function which is hard to optimize. (Remember: Gradient Descent)</p>
+  </div>
+  <div class="images_30">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Convex_vs._Not-convex.jpg" width =400>
+  </div>
+</div></section>
+<section id="id23">
+<h3>The Cost Function<a class="headerlink" href="#id23" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p>The linear regression cost function (remember OLS).</p>
+<div class="math notranslate nohighlight">
+\[ J(b)={\textstyle{\frac{1}{2n}}}\sum(y\,-\,\hat{p})^{2}\]</div>
+<p>Logistic regression hypothesis:</p>
+<div class="math notranslate nohighlight">
+\[ \hat{p}=\frac{1}{1+e^{-b^{T}x}}\]</div>
+<p>This would though lead to a non-convex function which is hard to optimize. The usual way to optimize is to find the global minimum.</p>
+  </div>
+  <div class="images_30">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Convex_vs._Not-convex.jpg" width =400>
+  </div>
+</div></section>
+<section id="id24">
+<h3>The Cost Function<a class="headerlink" href="#id24" title="Link to this heading">#</a></h3>
+<p>Logistic regression hypothesis:</p>
+<div class="math notranslate nohighlight">
+\[ \hat{p}=\frac{1}{1+e^{-b^{T}x}}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Loss(\hat{p},y)=\begin{cases}
+-\ln{(\hat{p})} &amp;\text{if } y=1 \\
+-\ln{(1-\hat{p})} &amp;\text{if } y=0
+\end{cases}
+\end{split}\]</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/328624ea380bec5f189e1e79025444b8373257754b9180ab19a309966083f5e2.png" src="../_images/328624ea380bec5f189e1e79025444b8373257754b9180ab19a309966083f5e2.png" />
+</div>
+</div>
+</section>
+<section id="loss-based-on-logs-of-probabilities">
+<h3>Loss based on logs of probabilities<a class="headerlink" href="#loss-based-on-logs-of-probabilities" title="Link to this heading">#</a></h3>
+<p>For instances belonging to class 1 → Loss is the negative log of <span class="math notranslate nohighlight">\(\hat{p}(y=1)\)</span></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>→ Probability is close to zero? Loss is high!
+
+→ Probability is close to one? Loss is low!
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Loss(\hat{p},y)=\begin{cases}
+-\ln{(\hat{p})} &amp;\text{if } y=1 \\
+-\ln{(1-\hat{p})} &amp;\text{if } y=0
+\end{cases}
+\end{split}\]</div>
+<p>For (correct) probabilities of 0 / 1, the loss would be zero.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/eef6fcb2ae1b9a3ad1427ebbfb29479be2e5beee261c716eddc78c1385010e8b.png" src="../_images/eef6fcb2ae1b9a3ad1427ebbfb29479be2e5beee261c716eddc78c1385010e8b.png" />
+</div>
+</div>
+</section>
+<section id="id25">
+<h3>Loss based on logs of probabilities<a class="headerlink" href="#id25" title="Link to this heading">#</a></h3>
+<p>For instances belonging to class 0
+→  Loss is the negative log of <span class="math notranslate nohighlight">\(1-\hat{p}(y=1)\)</span></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>→ Probability is close to zero? Loss is low!
+
+→ Probability is close to one? Loss is high!
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Loss(\hat{p},y)=\begin{cases}
+-\ln{(\hat{p})} &amp;\text{if } y=1 \\
+-\ln{(1-\hat{p})} &amp;\text{if } y=0
+\end{cases}
+\end{split}\]</div>
+<p>For (correct) probabilities of 0 / 1, the loss would be zero.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/8ebba663d0e33437f7489202945b37dca7c4cbfd622219b94d720a54eb8449bb.png" src="../_images/8ebba663d0e33437f7489202945b37dca7c4cbfd622219b94d720a54eb8449bb.png" />
+</div>
+</div>
+</section>
+<section id="now-just-add-it-all-up">
+<h3>Now, just add it all up<a class="headerlink" href="#now-just-add-it-all-up" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Loss(\hat{p},y)=\begin{cases}
+-\ln{(\hat{p})} &amp;\text{if } y=1 \\
+-\ln{(1-\hat{p})} &amp;\text{if } y=0
+\end{cases}
+\end{split}\]</div>
+<br>
+<br>
+Because y is always 0 or 1 we can write this:
+<div class="math notranslate nohighlight">
+\[
+Loss(\hat{p},y)=y\cdot\big(-\ln{(\hat{p})}\big)+(1-y)\cdot\big(-\ln{(1-\hat{p})}\big)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+Loss(\hat{p},y)= \underbrace{y\cdot\big(-\ln{(\hat{p})}\big)}_{\color{grey}{\text{“disabled” for }}y=0}+\underbrace{(1-y)\cdot\big(-\ln{(1-\hat{p})}\big)}_{\color{grey}{\text{“disabled” for }}y=1}
+\]</div>
+</section>
+<section id="id26">
+<h3>Now, just add it all up<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Loss(\hat{p},y)=\begin{cases}
+-\ln{(\hat{p})} &amp;\text{if } y=1 \\
+-\ln{(1-\hat{p})} &amp;\text{if } y=0
+\end{cases}
+\end{split}\]</div>
+<br>
+<br>
+Because y is always 0 or 1 we can write this:
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+Loss(\hat{p},y) &amp;= y\cdot\big(-\ln{(\hat{p})}\big)+(1-y)\cdot\big(-\ln{(1-\hat{p})}\big) \\[18pt]
+Loss(\hat{p},y) &amp;= -\big[y\ln{(\hat{p})} + (1-y)\ln{(1-\hat{p})}\big]
+\end{align}\end{split}\]</div>
+<br>
+<br>
+This loss function (binary cross-entropy) can be directly obtained from MLE (maximum likelihood estimation)
+</section>
+<section id="from-loss-to-cost">
+<h3>From loss to cost<a class="headerlink" href="#from-loss-to-cost" title="Link to this heading">#</a></h3>
+<p>Now, let’s average the Loss function over all observations:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+Loss(\hat{p},y) &amp;= -\big[y\ln{(\hat{p})} + (1-y)\ln{(1-\hat{p})}\big] \\[16pt]
+J(b) &amp;= -\frac{1}{n}\sum_{i=1}^n[y_i\ln\left(\hat{p}_i\right)\ +\ (1-y_i)\ln\left(1-\hat{p}_i\right)\big]
+\end{align}\end{split}\]</div>
+<p>Now we can fit our parameters <em>b</em> to our data:</p>
+<ul class="simple">
+<li><p>Find <em>b</em> that <strong>minimizes the cost function J(b)</strong>.</p></li>
+<li><p>To minimize the cost function we use <strong>gradient descent</strong>!</p></li>
+</ul>
+</section>
+<section id="minimizing-j-find-b">
+<h3>Minimizing J - find <span class="math notranslate nohighlight">\(b\)</span><a class="headerlink" href="#minimizing-j-find-b" title="Link to this heading">#</a></h3>
+<br>
+<div class="group">
+    <div class="text_70">
+<ul class="simple">
+<li><p>There is no closed form solution as the Normal Equation (<span class="math notranslate nohighlight">\(b = (X^TX)^{-1}X^Ty\)</span>)  for linear regression.</p></li>
+<li><p>So instead we get the partial derivatives and start the <strong>gradient descent</strong>!</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{\partial}{\partial b_{j}}J(b)=\frac{1}{n}\sum_{i=1}^{n}\Bigl(\sigma\Bigl(b^{T}x_{i}\Bigr)-y_{i}\Bigr)x_{i,j}\]</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;/div&gt;
+&lt;div class=&quot;images_30&quot;&gt;               
+</pre></div>
+</div>
+<center>
+    <img src="../images/logistic_regression/img_p49_1.png" width=500>
+</center>
+    </div>
+</div></section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text_70">
+<p>Training the model ~ finding <em>b</em> that minimizes <em>J</em> ~ finding the shape of the decision boundary.</p>
+<p>Changing the classification <strong>threshold</strong> from 0.5 (default) ~ changing the position of the decision boundary (but
+not the shape).</p>
+  </div>
+  <div class="images_30">
+    <img src="../images/logistic_regression/decision_boundary_circles_transparent_bg.png" width=300>
+  </div>
+</div><section id="multi-class-problems">
+<h3>Multi class problems<a class="headerlink" href="#multi-class-problems" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p>How can more than two different classes be predicted?</p>
+<p>This is often done using OvR (one versus rest).</p>
+<p>If there are 3 classes, 3 classification runs were performed:</p>
+<ul class="simple">
+<li><p>class 0 vs. classes 1 <span class="math notranslate nohighlight">\(\cup\)</span> 2</p></li>
+<li><p>class 1 vs. classes 0 <span class="math notranslate nohighlight">\(\cup\)</span> 2</p></li>
+<li><p>class 2 vs. classes 0 <span class="math notranslate nohighlight">\(\cup\)</span> 1</p></li>
+</ul>
+<p>The class with the highest probability is used for final prediction.</p>
+  </div>
+  <div class="images_30">
+    <img src="../images/logistic_regression/multiclass_classification.png" width =600>
+  </div>
+</div></section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.amazon.com/Hands-Machine-Learning-Scikit-Learn-TensorFlow/dp/1492032646">Hands on Machine Learning</a></p></li>
+<li><p><a class="reference external" href="https://www.coursera.org/learn/machine-learning">Machine Learning course with Andrew Ng Complex decision boundary</a></p></li>
+<li><p><a class="reference external" href="https://www.researchgate.net/figure/Classification-results-of-SVC-with-the-nonlinear-decision-boundary_fig1_255572951">https://www.researchgate.net/figure/Classification-results-of-SVC-with-the-nonlinear-decision-boundary_fig1_25557</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="aipm_sessions/Evaluation_Metrics_AIPM.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Evaluation Metrics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="aipm_sessions/Logistic_Regression_AIPM.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Logistic Regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap">Recap!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-metrics">Classification metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Classification metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Classification metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-curve">ROC Curve</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Logistic Regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification">Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-classification">Why classification?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Why classification?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Why classification?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Why classification?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Why Classification?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#another-problem-with-classification-with-linear-regression">Another problem with classification with linear regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression-model">Logistic Regression Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">The Logistic function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-logistic-function-to-logistic-regression">From logistic function to logistic regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-sigmoid-function">Explore the sigmoid function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Explore the sigmoid function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-hypothesis">Interpretation of the Hypothesis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Interpretation of the Hypothesis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-decision-boundary">The Decision Boundary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">The Decision Boundary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">The Logistic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-example-time">Hands on. Example time!</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-boundary-example-lets-use-logistic-regression">Decision Boundary Example - Let’s use Logistic regression!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-boundary-example">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">Decision Boundary Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-boundary">Decision Boundary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cost-function">The Cost Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">The Cost Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">The Cost Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">The Cost Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">The Cost Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-based-on-logs-of-probabilities">Loss based on logs of probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">Loss based on logs of probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-just-add-it-all-up">Now, just add it all up</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">Now, just add it all up</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-loss-to-cost">From loss to cost</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-j-find-b">Minimizing J - find <span class="math notranslate nohighlight">\(b\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-class-problems">Multi class problems</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

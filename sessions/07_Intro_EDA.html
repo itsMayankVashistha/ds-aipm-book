@@ -1,0 +1,1464 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Exploratory Data Analysis &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/07_Intro_EDA';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="EDA &amp; Presenting your Results" href="07.2_EDA_process.html" />
+    <link rel="prev" title="Introduction to Visualisation Charts" href="06.2_Fantastic_Charts.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exploratory Data Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-content">Table of Content</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-eda-process">The EDA Process</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#research-business-questions">Research / Business Questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-generation">Hypothesis Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-generation-hypothesis-testing">Hypothesis Generation != Hypothesis testing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-eda-belong-in-the-bigger-picture">Where does EDA belong in the bigger picture?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#black-cats-and-domain-experts">Black cats and domain experts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-eda-and-why-do-we-do-it">What is EDA and why do we do it?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-eda">What is EDA?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#goals-and-benefits">Goals and Benefits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-eda">Types of EDA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimates">Estimates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-vs-multivariate-analysis">Univariate vs. Multivariate Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types">Data Types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-eda">Univariate EDA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-central-tendency">Describing Central Tendency</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mean">Mean</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#median">Median</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mode">Mode</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-the-spread">Describing the Spread</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#range">Range</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantiles">Quantiles</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interquartile-range-iqr">Interquartile Range (IQR)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#outliers">Outliers</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#box-plots">Box Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-standard-deviation">Variance &amp; Standard Deviation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-the-distribution">Describing the Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#skewness-kurtosis">Skewness &amp; Kurtosis</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-distributions">Data Distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-data-distributions-with-histograms">Visualising Data Distributions with Histograms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Box Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#binwidth">Binwidth</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-choose-number-of-bins">How to choose number of bins</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-data-distributions-with-histograms">Comparing Data Distributions with Histograms</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modality">Modality</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-summaries">Data Summaries</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-eda">Multivariate EDA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-data">Numerical Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">Scatter Plot</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-correlation-coefficient-pearsons-r">Pearson correlation coefficient / Pearson’s r</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ice-cream-example">The ice cream example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">The ice cream example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spearman-rank-correlation-coefficient-spearmans">Spearman rank correlation coefficient - Spearman’s ρ</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#consideration-about-correlation">Consideration about correlation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bivariate-and-multivariate-analysis">Bivariate and Multivariate Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-consideration-of-discrete-categorical-data">Special consideration of discrete / categorical data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-tables">Frequency tables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-values">Expected values</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-tabulation">Cross-tabulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-outlook">Summary / Outlook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summaries-vs-details">Summaries vs. Details…</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#techniques-map">Techniques Map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-vocabulary">Visual Vocabulary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="exploratory-data-analysis">
+<h1>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Link to this heading">#</a></h1>
+<section id="table-of-content">
+<h2>Table of Content<a class="headerlink" href="#table-of-content" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The EDA Process put into context</p></li>
+<li><p>Types of EDA</p>
+<ul>
+<li><p>uni-/bi-/multi-variate</p></li>
+<li><p>numerical vs. graphical</p></li>
+<li><p>continuous vs. categorical data</p></li>
+</ul>
+</li>
+<li><p>Measures of central tendency / dispersion</p></li>
+<li><p>Distribution functions / histograms / modality</p></li>
+<li><p>Correlations</p></li>
+<li><p>Special considerations for categorical / discrete variables</p></li>
+<li><p>Summary / References</p></li>
+</ul>
+</section>
+<section id="the-eda-process">
+<h2>The EDA Process<a class="headerlink" href="#the-eda-process" title="Link to this heading">#</a></h2>
+<section id="research-business-questions">
+<h3>Research / Business Questions<a class="headerlink" href="#research-business-questions" title="Link to this heading">#</a></h3>
+<p>Those questions that arise from a researcher guessing about reality (data). They are written in the form of a question.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>Which factors can increase ice cream sales?</p></li>
+<li><p>Can we predict skin cancer using photographs of the melanome?</p></li>
+<li><p>How does the material composition of a bridge affect its durability?</p></li>
+</ul>
+</section>
+<section id="hypothesis-generation">
+<h3>Hypothesis Generation<a class="headerlink" href="#hypothesis-generation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Hypotheses are assumptions or educated guesses we make about the data, using our domain knowledge.</p></li>
+<li><p>You can form a hypothesis in the form of “if/then” or “the more the”.</p></li>
+<li><p>A Hypothesis is formed as a measurable (operationisable) statement you can validate by looking at data.</p></li>
+<li><p>A research question can have multiple hypotheses attached to it.</p></li>
+</ul>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>If the sun is shining then ice cream sales increase.</p></li>
+<li><p>The larger the melanoma, the greater the risk that it is malignant.</p></li>
+<li><p>The cheaper the material composition the shorter its durability.</p></li>
+</ul>
+</section>
+<section id="hypothesis-generation-hypothesis-testing">
+<h3>Hypothesis Generation != Hypothesis testing<a class="headerlink" href="#hypothesis-generation-hypothesis-testing" title="Link to this heading">#</a></h3>
+<p>The process is an educated guess, the hypothesis could still come out to be true or false after EDA and hypothesis testing (is the conclusion random or not?)</p>
+<p><a class="reference external" href="https://www.analyticsvidhya.com/blog/2015/09/hypothesis-testing-explained/">Hypothesis testing</a></p>
+</section>
+</section>
+<section id="where-does-eda-belong-in-the-bigger-picture">
+<h2>Where does EDA belong in the bigger picture?<a class="headerlink" href="#where-does-eda-belong-in-the-bigger-picture" title="Link to this heading">#</a></h2>
+<center>
+    <img src="../images/eda_intro/img_p2_6.png" width=700>
+</center>   
+</section>
+<section id="black-cats-and-domain-experts">
+<h2>Black cats and domain experts<a class="headerlink" href="#black-cats-and-domain-experts" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="text">
+The hardest thing of all is to find a black cat in a dark room, especially if there is no cat.
+<br>
+<br> 
+<br> 
+→ Talk to domain experts or become one.
+    </div>
+    <div class="images">
+        <img src="../images/eda_intro/img_p1_2.png">
+    </div>
+</div></section>
+<section id="what-is-eda-and-why-do-we-do-it">
+<h2>What is EDA and why do we do it?<a class="headerlink" href="#what-is-eda-and-why-do-we-do-it" title="Link to this heading">#</a></h2>
+<section id="what-is-eda">
+<h3>What is EDA?<a class="headerlink" href="#what-is-eda" title="Link to this heading">#</a></h3>
+<p>→ <strong>Detective work</strong></p>
+<p>EDA is the process of summarizing and visualising important characteristics of the data in order to gain insights.</p>
+<p>It’s an <strong>approach/process</strong> not a set of techniques.</p>
+<p><strong>Tools:</strong></p>
+<ul class="simple">
+<li><p>Any method of looking at data that does not include formal statistical modelling and inference</p></li>
+<li><p>Visualisation</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Confirm the expected or show the unexpected!</p>
+</div></section>
+<section id="goals-and-benefits">
+<h3>Goals and Benefits<a class="headerlink" href="#goals-and-benefits" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Understand each variable</p></li>
+<li><p>Get insight into relationships between the variables</p></li>
+<li><p>Draw valid conclusions</p></li>
+<li><p>Checking assumptions</p></li>
+<li><p>Aid in decision making and planning</p></li>
+<li><p>Help in causal analysis</p></li>
+</ul>
+<p>→ To build intuition about the data and gain insights</p>
+<p>→ To generate and corroborate or reject hypotheses</p>
+</section>
+<section id="types-of-eda">
+<h3>Types of EDA<a class="headerlink" href="#types-of-eda" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Univariate or multivariate</p></li>
+<li><p>Graphical or non-graphical</p></li>
+<li><p>Dealing with both categorical and numerical data</p></li>
+</ul>
+</section>
+<section id="estimates">
+<h3>Estimates<a class="headerlink" href="#estimates" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>We can rarely have money/resources to measure everything</p></li>
+<li><p>So we will have <strong>samples</strong> of the <strong>population</strong> which we hope to be representative of the whole population</p></li>
+<li><p>The more data we have the more confident we are in the estimates</p></li>
+<li><p>Ideally: the results drawn from our experiments are reproducible</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>In Data Science most metrics omit the “estimate” word…
+nevertheless mostly all metrics we use are estimates.</p>
+</div>   
+    </div>
+    <div class="images">
+        <img src="../images/eda_intro/img_p7_2.png">
+    </div>
+</div></section>
+<section id="univariate-vs-multivariate-analysis">
+<h3>Univariate vs. Multivariate Analysis<a class="headerlink" href="#univariate-vs-multivariate-analysis" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p><strong>Univariate Analysis:</strong></p>
+<ul>
+<li><p>Analysis of a single variable (often called feature)</p></li>
+<li><p>Characterises data by focusing on distribution, central tendency, dispersion, etc</p></li>
+<li><p>Represents information numerically and visually</br></br></p>
+  </div>
+  <div class="text">
+</li>
+</ul>
+<p><strong>Multivariate Analysis:</strong></p>
+<ul>
+<li><p>Simultaneous analysis of multiple variables</p></li>
+<li><p>Examines how changes in one variable are associated with changes in others</p></li>
+<li><p>Characterises dependence by a numerical coefficient</br></br></p>
+  </div>
+</li>
+</ul>
+</div>
+<div class="group">
+    <div class="text">
+→ Description and understanding of individual variables 
+    </div>
+    <div class="text">       
+→ Understanding of the relationship and interaction among multiple variables 
+    </div>
+</div>
+</section>
+<section id="data-types">
+<h3>Data Types<a class="headerlink" href="#data-types" title="Link to this heading">#</a></h3>
+<img src="../images/eda_intro/data_types.png"></section>
+</section>
+<section id="univariate-eda">
+<h2>Univariate EDA<a class="headerlink" href="#univariate-eda" title="Link to this heading">#</a></h2>
+<section id="describing-central-tendency">
+<h3>Describing Central Tendency<a class="headerlink" href="#describing-central-tendency" title="Link to this heading">#</a></h3>
+<section id="mean">
+<h4>Mean<a class="headerlink" href="#mean" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>sum of data points divided by number of data points</p></li>
+<li><p>often used as default</p></li>
+<li><p>sensitive to extreme values</p></li>
+</ul>
+<p>What is the mean in this example?</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>y</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+    <div class="images">
+<div class="math notranslate nohighlight">
+\[\bar{y}=\frac{1}{n} \sum\limits_{i=1}^{n}y_{i}\]</div>
+<img src="../images/eda_intro/img_p14_2.png">
+    </div>
+</div>
+</section>
+<section id="median">
+<h4>Median<a class="headerlink" href="#median" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>value in the middle of a data series ordered by size</p></li>
+<li><p>more robust against extreme values but computationally more expensive since values need to be sorted</p></li>
+</ul>
+<p>What is the median in this example?</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>y</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+    <div class="images">
+<div class="math notranslate nohighlight">
+\[\begin{split}       
+y_{i} \leq y_{i+1}\;\text{for}\;i=1,...,n-1 \\
+y_{\frac{n+1}{2}}\;\text{if}\;n\;\text{is odd} \\
+\frac{1}{2}\big(y_{\frac{n}{2}}+y_{\frac{n+1}{2}}\big)\;\text{if}\;n\;\text{is even}
+\end{split}\]</div>
+<img src="../images/eda_intro/img_p15_2.png">
+    </div>
+</div></section>
+<section id="mode">
+<h4>Mode<a class="headerlink" href="#mode" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>most frequent values</p></li>
+<li><p>not necessarily unique</p></li>
+<li><p>mostly used for categorical data</p></li>
+</ul>
+<p>What is the mode in this example?</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>y</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+    <div class="images">
+        <img src="../images/eda_intro/img_p16_2.png">
+    </div>
+</div></section>
+</section>
+<section id="describing-the-spread">
+<h3>Describing the Spread<a class="headerlink" href="#describing-the-spread" title="Link to this heading">#</a></h3>
+<section id="range">
+<h4>Range<a class="headerlink" href="#range" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>difference between largest and smallest value</p></li>
+<li><p>measures the spread of the data</p></li>
+<li><p>sensitive to outliers</p></li>
+</ul>
+</div>
+    <div class="images">
+Which dataset has the larger range?       
+        <img src="../images/eda_intro/img_p18_2.png" width=250>
+    </div>
+</div></section>
+<section id="quantiles">
+<h4>Quantiles<a class="headerlink" href="#quantiles" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>quantiles split sorted data into parts with <strong>equal amount of observations</strong></p>
+<ul>
+<li><p>quartiles: splits data into 4 parts</p></li>
+<li><p>deciles: splits data into 10 parts</p></li>
+<li><p>percentiles: splits data into 100 parts</p></li>
+</ul>
+</li>
+</ul>
+</div>
+    <div class="images">       
+        <img src="../images/eda_intro/img_p17_2.png">
+    </div>
+</div><p>Notes: The position of the percentiles are not equidistant (and depend on the distribution)</p>
+</section>
+<section id="interquartile-range-iqr">
+<h4>Interquartile Range (IQR)<a class="headerlink" href="#interquartile-range-iqr" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>width of interval that contains the middle 50% of the data</p></li>
+<li><p>interval between the 25th and 75th percentile</p></li>
+<li><p>interval between 1st and 3rd quartile</p></li>
+<li><p>robust to outliers</p></li>
+</ul>
+</div>
+    <div class="images">       
+        <img src="../images/eda_intro/img_p19_2.png">
+    </div>
+</div></section>
+<section id="outliers">
+<h4>Outliers<a class="headerlink" href="#outliers" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>No generally recognized formal definition for outlier</p></li>
+<li><p>Values outside of the areas of a distribution that would commonly occur</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>If an outlier is good or bad depends on the data problem. For example for anomaly detection you want to keep outliers.</p>
+</div>
+</div>
+    <div class="text"> 
+        <img src="../images/eda_intro/img_p25_2.png">
+    </div>
+</div></section>
+</section>
+<section id="box-plots">
+<h3>Box Plots<a class="headerlink" href="#box-plots" title="Link to this heading">#</a></h3>
+<center>
+<img src="../images/eda_intro/img_p51_2.png">
+</center><section id="variance-standard-deviation">
+<h4>Variance &amp; Standard Deviation<a class="headerlink" href="#variance-standard-deviation" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<p><strong>Variance</strong></p>
+<ul class="simple">
+<li><p>average squared difference of the values from the mean:  <span class="math notranslate nohighlight">\( \sigma_{sample} = \frac{1}{n-1}\sum_i{(x_i-\bar{x})^2}\)</span></p></li>
+</ul>
+<p><strong>Standard deviation</strong></p>
+<ul class="simple">
+<li><p>square root of variance: <span class="math notranslate nohighlight">\(SD = \sqrt{\sigma}\)</span></p></li>
+<li><p>standard difference between each data point and the mean</p></li>
+<li><p>has the same unit as the original data</p></li>
+</ul>
+<p>Both are not robust to outliers.</p>
+<p><a class="reference external" href="https://web.ma.utexas.edu/users/mks/M358KInstr/SampleSDPf.pdf">degrees of freedom</a></p>
+</div>
+    <div class="images">
+<img src="../images/eda_intro/img_p20_3.png" width=500>
+    </div>
+</div></section>
+</section>
+<section id="describing-the-distribution">
+<h3>Describing the Distribution<a class="headerlink" href="#describing-the-distribution" title="Link to this heading">#</a></h3>
+<section id="skewness-kurtosis">
+<h4>Skewness &amp; Kurtosis<a class="headerlink" href="#skewness-kurtosis" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<p><strong>Skewness</strong></p>
+<ul>
+<li><p>degree of asymmetry of the distribution of the data</p>
+  <img src="../images/eda_intro/img_p21_2.png">
+</li>
+</ul>
+</div>
+    <div class="text">
+<p><strong>Kurtosis</strong></p>
+<ul class="simple">
+<li><p>degree of pointyness relative to a normal distribution (flat vs. pointy)<br />
+<img src="../images/eda_intro/img_p21_3.png"></p></li>
+</ul>
+<p><a class="reference external" href="https://www.spektrum.de/lexikon/geographie/kurtosis/4488">Kurtosis</a>
+</div></p>
+</div></section>
+</section>
+<section id="data-distributions">
+<h3><a class="reference external" href="https://en.wikipedia.org/wiki/List_of_probability_distributions">Data Distributions</a><a class="headerlink" href="#data-distributions" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p><font size="4"><em><strong>Uniform</strong></em><br />
+all events have same frequency, e.g. outcome of a dice roll</font></p></li>
+<li><p><font size="4"><em><strong>Bernoulli</strong></em><br />
+two possible outcomes, e.g. a coin toss</font></p></li>
+<li><p><font size="4"><em><strong>Binomial</strong></em><br />
+“discrete version” of normal distribution, e.g. 100 x two coins: likelihood of a certain number of only heads</font></p></li>
+<li><p><font size="4"><em><strong>Normal</strong></em><br />
+most continuous real-valued variables in nature follow this distribution</font></p></li>
+<li><p><font size="4"><em><strong>Poisson</strong></em><br />
+events occurring at random points of time and space - the number of events <a class="reference external" href="https://www.youtube.com/watch?v=jmqZG6roVqU">Video</a></font></p></li>
+<li><p><font size="4"><em><strong>Exponential</strong></em><br />
+the interval between events</font></p></li>
+</ul>
+</div>
+    <div class="images"> 
+        <img src="../images/eda_intro/img_p47_2.png">
+    </div>
+</div></section>
+<section id="visualising-data-distributions-with-histograms">
+<h3>Visualising Data Distributions with Histograms<a class="headerlink" href="#visualising-data-distributions-with-histograms" title="Link to this heading">#</a></h3>
+</section>
+<section id="id1">
+<h3>Box Plots<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>What do we see here?</p>
+<center>
+<img src="../images/eda_intro/img_p52_2.png">
+</center>
+<section id="binwidth">
+<h4>Binwidth<a class="headerlink" href="#binwidth" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p><strong>Binwidth matters!</strong></p></li>
+<li><p>Same data with bin width = 5, 2, 1</p></li>
+</ul>
+</div>
+    <div class="text"> 
+        <img src="../images/eda_intro/img_p23_2.png">
+    </div>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Rule of thumb: Take the square root of the sample size as the number of bins for a first guess (trial and error).</p>
+</div></section>
+<section id="how-to-choose-number-of-bins">
+<h4>How to choose number of bins<a class="headerlink" href="#how-to-choose-number-of-bins" title="Link to this heading">#</a></h4>
+<p>Rule of thumb: Take the square root of the sample size as the number of bins for a first guess (trial and error).</p>
+<p>Consider:</p>
+<ul class="simple">
+<li><p>too large bins → we lose details or end up having only one bin</p></li>
+<li><p>too small → we have too much detail or end up with one bin per observation</p></li>
+</ul>
+</section>
+</section>
+<section id="comparing-data-distributions-with-histograms">
+<h3>Comparing Data Distributions with Histograms<a class="headerlink" href="#comparing-data-distributions-with-histograms" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+Histograms:<br>
+<ul>
+<li><p>Good for looking at residuals (variance)</p></li>
+<li><p>Works best for comparing max 3-4 groups</p></li>
+<li><p>You can use so-called kernel density estimates (KDE) to plot it continuously</p>
+  </div>
+  <div class="text">
+      <img src="../images/eda_intro/img_p50_2.png">
+  </div>
+</li>
+</ul>
+</div>
+<section id="modality">
+<h4>Modality<a class="headerlink" href="#modality" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Plot a histogram and look at the number of peaks in the distribution</p></li>
+</ul>
+<center>
+    <img src="../images/eda_intro/img_p22_2.png">
+</center></section>
+<section id="data-summaries">
+<h4>Data Summaries<a class="headerlink" href="#data-summaries" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>Central tendency</p></th>
+<th class="head text-center"><p>Spread</p></th>
+<th class="head text-center"><p>Modality</p></th>
+<th class="head text-center"><p>Shape</p></th>
+<th class="head text-center"><p>Outliers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>mean</p></td>
+<td class="text-center"><p>range</p></td>
+<td class="text-center"><p>unimodal</p></td>
+<td class="text-center"><p>skewness</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>median</p></td>
+<td class="text-center"><p>interquartile range</p></td>
+<td class="text-center"><p>bimodal</p></td>
+<td class="text-center"><p>kurtosis</p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>mode</p></td>
+<td class="text-center"><p>variance</p></td>
+<td class="text-center"><p>multimodal</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>quantiles</p></td>
+<td class="text-center"><p>standard deviation</p></td>
+<td class="text-center"><p>uniform</p></td>
+<td class="text-center"><p></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+<section id="multivariate-eda">
+<h2>Multivariate EDA<a class="headerlink" href="#multivariate-eda" title="Link to this heading">#</a></h2>
+<section id="numerical-data">
+<h3>Numerical Data<a class="headerlink" href="#numerical-data" title="Link to this heading">#</a></h3>
+<section id="scatter-plot">
+<h4>Scatter Plot<a class="headerlink" href="#scatter-plot" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>Used to visualise relationship between two numeric variables</p></li>
+<li><p>Also called correlation plots</p></li>
+<li><p>Can encode multiple dimensions by color and size</p></li>
+</ul>
+<p>It visually answers the question:</p>
+<p>→ “How are these variables related?”</p>
+<p>→ “When variable X grows, what happens to variable Y? With which intensity?”</p>
+</div>
+    <div class="text"> 
+        <img src="../images/eda_intro/img_p35_2.png">
+    </div>
+</div></section>
+<section id="pearson-correlation-coefficient-pearsons-r">
+<h4>Pearson correlation coefficient / Pearson’s r<a class="headerlink" href="#pearson-correlation-coefficient-pearsons-r" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>Measures the <strong>linear relationship</strong> between two variables</p></li>
+<li><p>Ranges between -1 and 1</p></li>
+</ul>
+<p>→ close to 1: strong positive linear relationship</p>
+<p>→ around 0: no linear relationship</p>
+<p>→ close to -1: strong negative linear relationship</p>
+<p><a class="reference external" href="https://guessthecorrelation.com/">guess the correlation</a></p>
+</div>
+    <div class="text"> 
+        <img src="../images/eda_intro/img_p36_3.png">
+    </div>
+</div></section>
+<section id="the-ice-cream-example">
+<h4>The ice cream example<a class="headerlink" href="#the-ice-cream-example" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Month</p></th>
+<th class="head"><p>Average Temp</p></th>
+<th class="head"><p>Sales</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>January</p></td>
+<td><p>4</p></td>
+<td><p>73</p></td>
+</tr>
+<tr class="row-odd"><td><p>February</p></td>
+<td><p>4</p></td>
+<td><p>57</p></td>
+</tr>
+<tr class="row-even"><td><p>March</p></td>
+<td><p>7</p></td>
+<td><p>81</p></td>
+</tr>
+<tr class="row-odd"><td><p>April</p></td>
+<td><p>8</p></td>
+<td><p>94</p></td>
+</tr>
+<tr class="row-even"><td><p>May</p></td>
+<td><p>12</p></td>
+<td><p>110</p></td>
+</tr>
+<tr class="row-odd"><td><p>June</p></td>
+<td><p>15</p></td>
+<td><p>124</p></td>
+</tr>
+<tr class="row-even"><td><p>July</p></td>
+<td><p>16</p></td>
+<td><p>134</p></td>
+</tr>
+<tr class="row-odd"><td><p>August</p></td>
+<td><p>17</p></td>
+<td><p>139</p></td>
+</tr>
+<tr class="row-even"><td><p>September</p></td>
+<td><p>14</p></td>
+<td><p>124</p></td>
+</tr>
+<tr class="row-odd"><td><p>October</p></td>
+<td><p>11</p></td>
+<td><p>103</p></td>
+</tr>
+<tr class="row-even"><td><p>November</p></td>
+<td><p>7</p></td>
+<td><p>81</p></td>
+</tr>
+<tr class="row-odd"><td><p>December</p></td>
+<td><p>5</p></td>
+<td><p>80</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+    <div class="text"> 
+        <img src="../images/eda_intro/img_p35_2.png">
+    </div>
+</div></section>
+<section id="id2">
+<h4>The ice cream example<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<p><strong>r = 0.983</strong></p>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>A correlation analysis may establish a linear
+relationship but does not allow us to use it to
+predict the value of a variable given another.
+Regression analysis allows us to this and
+more.</p>
+</div>
+</div>
+    <div class="text"> 
+        <img src="../images/eda_intro/img_p35_2.png">
+    </div>
+</div></section>
+<section id="spearman-rank-correlation-coefficient-spearmans">
+<h4>Spearman rank correlation coefficient - Spearman’s ρ<a class="headerlink" href="#spearman-rank-correlation-coefficient-spearmans" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text_70">
+<ul class="simple">
+<li><p>Measure of rank correlation, it is based on the rank of the values vs. the raw data</p></li>
+<li><p>Represents the strength of a monotonic relationship</p></li>
+</ul>
+<p><strong>Monotonic function:</strong></p>
+<p>→ increasing: as X increases Y never decreases</p>
+<p>→ decreasing: as X increases Y never increases</p>
+</div>
+    <div class="text_30"> 
+        <img src="../images/eda_intro/spearman.png" width=200>
+    </div>
+</div>
+</section>
+<section id="consideration-about-correlation">
+<h4>Consideration about correlation<a class="headerlink" href="#consideration-about-correlation" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul>
+<li><p>If two variables are independent, their correlation is 0, but a correlation of 0 does not imply that two variables are independent!</p></li>
+<li><p>The correlation coefficients cannot replace visual examination of data.</p></li>
+<li><p>The presence of correlation is not enough to infer causation!</p>
+ </div>
+ <div class="images"> 
+      <img src="../images/eda_intro/img_p40_2.png">
+ </div>
+</li>
+</ul>
+</div></section>
+</section>
+<section id="bivariate-and-multivariate-analysis">
+<h3>Bivariate and Multivariate Analysis<a class="headerlink" href="#bivariate-and-multivariate-analysis" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Looking at all possible combinations of features:</p>
+<ul class="simple">
+<li><p>for 9 features bivariate would mean 36 combinations: <span class="math notranslate nohighlight">\(\sum_{i=1}^{8} i\)</span></p></li>
+<li><p>How do we reduce the exploration space or focus on interesting combinations?</p></li>
+</ul>
+<p><a class="reference external" href="https://www.displayr.com/what-is-a-correlation-matrix/">Correlation Matrix</a></p>
+</div>
+    <div class="images"> 
+        <img src="../images/eda_intro/img_p43_1.png">
+    </div>
+</div></section>
+<section id="special-consideration-of-discrete-categorical-data">
+<h3>Special consideration of discrete / categorical data<a class="headerlink" href="#special-consideration-of-discrete-categorical-data" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>mode</p></li>
+<li><p>frequency tables: number of times a value occurs</p></li>
+<li><p>expected values: weighted mean when categories can be associated with numerical value</p></li>
+</ul>
+<section id="frequency-tables">
+<h4>Frequency tables<a class="headerlink" href="#frequency-tables" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>Tabulation of the frequencies</p></li>
+<li><p>Show the range of values and frequency of occurrence</p></li>
+</ul>
+</div>
+    <div class="text"> 
+        <img src="../images/eda_intro/img_p30_2.png">
+    </div>
+</div></section>
+<section id="expected-values">
+<h4>Expected values<a class="headerlink" href="#expected-values" title="Link to this heading">#</a></h4>
+<div class="group">
+    <div class="text">
+<ul class="simple">
+<li><p>weighted mean</p></li>
+</ul>
+<p><em>Example:
+Offers for different course plans
+for financial purposes we can sum this up in a single
+“expected value,” which is a form of weighted mean,
+in which the weights are probabilities.</em></p>
+<p><span class="math notranslate nohighlight">\(EV = 0.05*300 + 0.15*50 + 0.80*0 = 22.5\)</span></p>
+</div>
+    <div class="text"> 
+        <img src="../images/eda_intro/img_p31_2.png">
+    </div>
+</div></section>
+<section id="cross-tabulation">
+<h4>Cross-tabulation<a class="headerlink" href="#cross-tabulation" title="Link to this heading">#</a></h4>
+<center>
+<img src="../images/eda_intro/img_p45_2.png" width=700>
+</center></section>
+</section>
+</section>
+<section id="summary-outlook">
+<h2>Summary / Outlook<a class="headerlink" href="#summary-outlook" title="Link to this heading">#</a></h2>
+<p>EDA is like a detective’s investigation to</p>
+<ul class="simple">
+<li><p>understand the data</p></li>
+<li><p>identify patterns</p></li>
+</ul>
+<p>Why do we want to know our data? Because we want to find out</p>
+<ul class="simple">
+<li><p>how to answer our research / business question</p></li>
+<li><p>whether the data is suitable / sufficient</p></li>
+<li><p>how to answer the research questions with the existing data</p></li>
+<li><p>how to phrase/refine our hypotheses</p></li>
+</ul>
+<section id="summaries-vs-details">
+<h3>Summaries vs. Details…<a class="headerlink" href="#summaries-vs-details" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/eda_intro/img_p26_2.gif" width=800>
+</center></section>
+<section id="techniques-map">
+<h3>Techniques Map<a class="headerlink" href="#techniques-map" title="Link to this heading">#</a></h3>
+<center>
+<img src="../images/eda_intro/img_p59_6.png" width=900>
+</center>
+<p><a class="reference external" href="https://extremepresentation.typepad.com/files/choosing-a-good-chart-09.pdf">Techniques Map</a></p>
+</section>
+<section id="visual-vocabulary">
+<h3>Visual Vocabulary<a class="headerlink" href="#visual-vocabulary" title="Link to this heading">#</a></h3>
+<center>
+<img src="../images/eda_intro/img_p60_3.png" width=800>
+</center>
+<p><a class="reference external" href="https://github.com/Financial-Times/chart-doctor/tree/main/visual-vocabulary">Visual Vocabulary</a></p>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://bcourses.berkeley.edu/courses/1267848/files/51138259/download?verifier=SiKALrm4j6S8wszD3ZCnn7a39CcRwtCQnN1U8Eqp&amp;amp;wrap=1">Introduction to Data Science Lecture 6 Exploratory Data Analysis</a></p></li>
+<li><p><a class="reference external" href="https://archive.org/details/exploratorydataa0000tuke_7616">Exploratory Data Analysis</a> - John W. Tukey</p></li>
+<li><p><a class="reference external" href="https://books.google.de/books/about/Practical_Statistics_for_Data_Scientists.html?id=k2XcDwAAQBAJ&amp;amp;redir_esc=y">Practical Statistics for Data Science</a> - Peter Bruce &amp; Andrew Bruce</p></li>
+<li><p><a class="reference external" href="https://dl.rasabourse.com/Econometrics_Erasmus/Christiaan_Heij_Paul_de_Boer.pdf">Econometric Methods with Applications in Business and Economics</a> - Christiaan Heij, Paul de Boer, Philip Hans Franses, Teun Kloek, Herman K. van Dijk</p></li>
+<li><p><a class="reference external" href="http://www.sumsar.net/blog/2014/03/oldies-but-goldies-statistical-graphics-books">http://www.sumsar.net/blog/2014/03/oldies-but-goldies-statistical-graphics-books</a></p></li>
+<li><p><a class="reference external" href="http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html">The Dino dataset</a></p></li>
+<li><p><a class="reference external" href="https://github.com/terezaif/workshops_data_exploration">AMLD EDA workshop</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/clearly-explained-pearson-v-s-spearman-correlation-coefficient-ada2f473b8">Clearly explained pearson vs. spearman correlation coefficient</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ft-interactive/chart-doctor/tree/master/visual-vocabulary">Visual Vocabulary</a></p></li>
+<li><p><a class="reference external" href="https://github.com/neuefische/datascience-infographics/blob/main/EDA_Checklist.md">EDA Checklist</a></p></li>
+<li><p><a class="reference external" href="https://extremepresentation.typepad.com/files/choosing-a-good-chart-09.pdf">https://extremepresentation.typepad.com/files/choosing-a-good-chart-09.pdf</a></p></li>
+<li><p><a class="reference external" href="https://www.stat.cmu.edu/~hseltman/309/Book/Book.pdf">https://www.stat.cmu.edu/~hseltman/309/Book/Book.pdf</a></p></li>
+<li><p><a class="reference external" href="https://www.kdnuggets.com/2020/02/probability-distributions-data-science.html">A bit on distributions</a></p></li>
+<li><p><a class="reference external" href="http://www.math.wm.edu/~leemis/chart/UDR/UDR.html">Even more distributions</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="06.2_Fantastic_Charts.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Visualisation Charts</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07.2_EDA_process.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">EDA &amp; Presenting your Results</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-content">Table of Content</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-eda-process">The EDA Process</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#research-business-questions">Research / Business Questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-generation">Hypothesis Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-generation-hypothesis-testing">Hypothesis Generation != Hypothesis testing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-eda-belong-in-the-bigger-picture">Where does EDA belong in the bigger picture?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#black-cats-and-domain-experts">Black cats and domain experts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-eda-and-why-do-we-do-it">What is EDA and why do we do it?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-eda">What is EDA?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#goals-and-benefits">Goals and Benefits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-eda">Types of EDA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimates">Estimates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-vs-multivariate-analysis">Univariate vs. Multivariate Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types">Data Types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-eda">Univariate EDA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-central-tendency">Describing Central Tendency</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mean">Mean</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#median">Median</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mode">Mode</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-the-spread">Describing the Spread</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#range">Range</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantiles">Quantiles</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#interquartile-range-iqr">Interquartile Range (IQR)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#outliers">Outliers</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#box-plots">Box Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-standard-deviation">Variance &amp; Standard Deviation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#describing-the-distribution">Describing the Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#skewness-kurtosis">Skewness &amp; Kurtosis</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-distributions">Data Distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-data-distributions-with-histograms">Visualising Data Distributions with Histograms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Box Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#binwidth">Binwidth</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-choose-number-of-bins">How to choose number of bins</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-data-distributions-with-histograms">Comparing Data Distributions with Histograms</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modality">Modality</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-summaries">Data Summaries</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-eda">Multivariate EDA</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-data">Numerical Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot">Scatter Plot</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pearson-correlation-coefficient-pearsons-r">Pearson correlation coefficient / Pearson’s r</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ice-cream-example">The ice cream example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">The ice cream example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spearman-rank-correlation-coefficient-spearmans">Spearman rank correlation coefficient - Spearman’s ρ</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#consideration-about-correlation">Consideration about correlation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bivariate-and-multivariate-analysis">Bivariate and Multivariate Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-consideration-of-discrete-categorical-data">Special consideration of discrete / categorical data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-tables">Frequency tables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-values">Expected values</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-tabulation">Cross-tabulation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-outlook">Summary / Outlook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summaries-vs-details">Summaries vs. Details…</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#techniques-map">Techniques Map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-vocabulary">Visual Vocabulary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

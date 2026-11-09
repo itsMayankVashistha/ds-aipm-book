@@ -1,0 +1,1104 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to Visualisation Charts &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/06.2_Fantastic_Charts';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exploratory Data Analysis" href="07_Intro_EDA.html" />
+    <link rel="prev" title="Gestalt Laws Principles" href="06.1_Gestalt_Principles.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Visualisation Charts</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today-s-topics">Today’s Topics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#viz-fundamentals">Viz Fundamentals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-make-data-visualisation">Why do we make data visualisation?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration">Exploration:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation">Explanation:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-makes-a-good-data-visualisation">What makes a good data visualisation?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#message">Message</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-golden-age-of-statistical-graphics">The Golden Age of Statistical Graphics</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lengths-vs-areas">Lengths vs. Areas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Lengths vs. Areas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lengths-vs-volumes">Lengths vs. Volumes</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficiency">Efficiency</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-ink-ratio">“Data-ink ratio”</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessibility">Accessibility</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#colors">Colors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Colors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#patterns">Patterns</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Patterns</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hsv-color-space">HSV Color Space</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#color-schemes">Color Schemes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#color-palettes">Color Palettes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accessibility-guidelines">Accessibility Guidelines</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">What makes a good data visualisation?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fantastic-charts-and-how-to-make-them">Fantastic Charts and How to Make Them</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-text">Simple Text</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tables">Tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-map">Heat map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatterplot">Scatterplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-chart">Line Chart</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-more-type">One more type…</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slopegraph">Slopegraph</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-chart">Bar Chart</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-charts-must-have-a-zero-baseline">Bar charts must have a zero baseline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#but-all-my-values-are-really-close-together">But all my values are really close together!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertical-vs-horizontal-bar-chart">Vertical vs Horizontal Bar Chart</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grouped-bar-charts">Grouped Bar Charts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacked-bars">Stacked Bars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-vertical-bars-always-go-up">Do vertical bars always go up?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-geographical-data">What about geographical data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waterfall">Waterfall</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#square-area-charts-waffle-or-unit-charts">Square Area Charts (Waffle or Unit Charts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thats-all-the-charts">That’s all the charts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-exercises">Optional Exercises</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-exercises-data-viz-review">Optional Exercises: Data Viz Review</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-visualisation-charts">
+<h1>Introduction to Visualisation Charts<a class="headerlink" href="#introduction-to-visualisation-charts" title="Link to this heading">#</a></h1>
+<section id="today-s-topics">
+<h2>Today’s Topics<a class="headerlink" href="#today-s-topics" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Viz Fundamentals</p></li>
+<li><p>How to</p>
+<ul>
+<li><p>make fantastic charts</p></li>
+<li><p>produce better graphs</p></li>
+<li><p>give better visual explanations</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="viz-fundamentals">
+<h2>Viz Fundamentals<a class="headerlink" href="#viz-fundamentals" title="Link to this heading">#</a></h2>
+</section>
+<section id="why-do-we-make-data-visualisation">
+<h2>Why do we make data visualisation?<a class="headerlink" href="#why-do-we-make-data-visualisation" title="Link to this heading">#</a></h2>
+<section id="exploration">
+<h3>Exploration:<a class="headerlink" href="#exploration" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>to learn something</p></li>
+</ul>
+</section>
+<section id="explanation">
+<h3>Explanation:<a class="headerlink" href="#explanation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>to show something</p></li>
+</ul>
+</section>
+</section>
+<section id="what-makes-a-good-data-visualisation">
+<h2>What makes a good data visualisation?<a class="headerlink" href="#what-makes-a-good-data-visualisation" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Message</p></li>
+<li><p>Accuracy</p></li>
+<li><p>Efficiency</p></li>
+<li><p>Accessibility</p></li>
+</ul>
+<section id="message">
+<h3>Message<a class="headerlink" href="#message" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p8_1.png" width=800>
+</center>    <center>
+    Extraneous factors in judicial decisions
+    <img src="../images/Intro_to_Viz_Charts_2/img_p8_1.png" width=800>
+</center>    <center>
+    Extraneous factors in judicial decisions
+    <img src="../images/Intro_to_Viz_Charts_2/img_p8_1.png" width=800>
+<p>Proportion of rulings in favor of the prisoners by ordinal position. Circled points indicate the first decision in each of the three decision
+sessions; tick marks on x axis denote every third case; dotted line denotes food break. Because unequal session lengths resulted in a
+low number of cases for some of the later ordinal positions, the graph is based on the first 95% of the data from each session.</p>
+</center>  <center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p11_1.png" width=800>
+</center>    <center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p12_1.png" width=800>
+</center></section>
+<section id="accuracy">
+<h3>Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p14_1.png" width=550>
+</center><section id="the-golden-age-of-statistical-graphics">
+<h4>The Golden Age of Statistical Graphics<a class="headerlink" href="#the-golden-age-of-statistical-graphics" title="Link to this heading">#</a></h4>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p15_1.png">
+</center></section>
+<section id="lengths-vs-areas">
+<h4>Lengths vs. Areas<a class="headerlink" href="#lengths-vs-areas" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">length_vs_area</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/00a363b0bc9f2dbb5ed5919315636f0730b7146b127fe13b3d1f3a4c550d4fad.png" src="../_images/00a363b0bc9f2dbb5ed5919315636f0730b7146b127fe13b3d1f3a4c550d4fad.png" />
+</div>
+</div>
+</section>
+<section id="id1">
+<h4>Lengths vs. Areas<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p>Let’s check in with our 1915 standards</p>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p17_1.png">
+</center>
+</section>
+<section id="lengths-vs-volumes">
+<h4>Lengths vs. Volumes<a class="headerlink" href="#lengths-vs-volumes" title="Link to this heading">#</a></h4>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p18_1.png">
+</center><center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p19_1.png">
+</center><center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p20_1.png" width=800>
+</center>
+<p>Let’s check in with our 1915 standards</p>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p21_2.png">
+</center>
+</section>
+</section>
+<section id="efficiency">
+<h3>Efficiency<a class="headerlink" href="#efficiency" title="Link to this heading">#</a></h3>
+<section id="data-ink-ratio">
+<h4>“Data-ink ratio”<a class="headerlink" href="#data-ink-ratio" title="Link to this heading">#</a></h4>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p23_1.png">
+</center>
+</section>
+</section>
+<section id="accessibility">
+<h3>Accessibility<a class="headerlink" href="#accessibility" title="Link to this heading">#</a></h3>
+<section id="colors">
+<h4>Colors<a class="headerlink" href="#colors" title="Link to this heading">#</a></h4>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p25_1.png" width=1000>
+</center></section>
+<section id="id2">
+<h4>Colors<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p26_1.png" width=1000>
+</center>
+<p><a class="reference external" href="https://venngage.com/tools/accessible-color-palette-generator">WCAG palettes</a></p>
+</section>
+<section id="patterns">
+<h4>Patterns<a class="headerlink" href="#patterns" title="Link to this heading">#</a></h4>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p27_1.png" width=1000>
+</center></section>
+<section id="id3">
+<h4>Patterns<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p28_1.png" width=1000>
+</center></section>
+<section id="hsv-color-space">
+<h4>HSV Color Space<a class="headerlink" href="#hsv-color-space" title="Link to this heading">#</a></h4>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p29_1.png" width=1000>
+</center>
+</section>
+<section id="color-schemes">
+<h4>Color Schemes<a class="headerlink" href="#color-schemes" title="Link to this heading">#</a></h4>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p30_1.png">
+</center></section>
+<section id="color-palettes">
+<h4>Color Palettes<a class="headerlink" href="#color-palettes" title="Link to this heading">#</a></h4>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p31_1.png" width=1000>
+</center></section>
+<section id="accessibility-guidelines">
+<h4>Accessibility Guidelines<a class="headerlink" href="#accessibility-guidelines" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Ensure sufficient <strong>contrast and separation</strong> between elements in the visualization.</p></li>
+<li><p>Do not rely on <strong>color</strong> alone to convey information, and ensure colors used can be distinguished between by people with various forms of color blindness.</p></li>
+<li><p>Provide a text <strong>summary</strong> of the visualization, making sure to <strong>describe</strong> trends or patterns in the visualization.</p></li>
+<li><p>Ensure text is <strong>readable</strong>.</p></li>
+<li><p>Prefer simple and <strong>understandable</strong> language.</p></li>
+<li><p>Prefer simple, <strong>familiar</strong> visualizations over complex novelties.</p></li>
+<li><p>If using animations or movement in the visualization that can be distracting, allow the user to turn this <strong>off</strong>, and respect the “prefers-reduced-motion” CSS media feature when relevant.</p></li>
+<li><p>Make the data <strong>available</strong> in an accessible table format.</p></li>
+<li><p>Make interactive visualizations <strong>keyboard-accessible</strong>.</p></li>
+<li><p>Ensure the visualization is <strong>responsive</strong> to different <strong>screen</strong> sizes and <strong>zoom</strong> levels.</p></li>
+</ol>
+</section>
+</section>
+<section id="id4">
+<h3>What makes a good data visualisation?<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Message</p></li>
+<li><p>Accuracy</p></li>
+<li><p>Efficiency</p></li>
+<li><p>Accessibility</p></li>
+</ul>
+</section>
+</section>
+<section id="fantastic-charts-and-how-to-make-them">
+<h2>Fantastic Charts and How to Make Them<a class="headerlink" href="#fantastic-charts-and-how-to-make-them" title="Link to this heading">#</a></h2>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p36_1.png">
+</center>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p37_1.png">
+</center>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p38_1.png" width=1000>
+</center><section id="simple-text">
+<h3>Simple Text<a class="headerlink" href="#simple-text" title="Link to this heading">#</a></h3>
+<p>e.g. 91%</p>
+<p>If you’ve only got one or two numbers a chart might be a waste of time.</p>
+</section>
+<section id="tables">
+<h3>Tables<a class="headerlink" href="#tables" title="Link to this heading">#</a></h3>
+<p>For visual presentation of numbers… just <strong>don’t</strong>!</p>
+<p>But people like tables.</p>
+<p>A table works best…</p>
+<ul class="simple">
+<li><p>when it is used to look up <strong>individual values</strong></p></li>
+<li><p>the values must be expressed <strong>precisely</strong></p></li>
+</ul>
+<p>A graph works best when…</p>
+<ul class="simple">
+<li><p>the message is contained in the <strong>shape of the data</strong> (patterns, trends, exceptions to the norm)</p></li>
+<li><p><strong>entire sets</strong> of values must be compared</p></li>
+</ul>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p45_2.png">
+</center></section>
+<section id="heat-map">
+<h3>Heat map<a class="headerlink" href="#heat-map" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p48_1.png" width=1000>
+</center>   <center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p49_1.png">
+</center>   
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p49_2.png">
+</center> </section>
+<section id="scatterplot">
+<h3>Scatterplot<a class="headerlink" href="#scatterplot" title="Link to this heading">#</a></h3>
+<p>Maps data to 2D position.</p>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p53_1.png">
+</center> <center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p54_1.png" width=1000>
+</center> 
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p55_1.png" width=1000>
+</center> 
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p56_1.png">
+</center> <center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p57_1.png">
+</center> <center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p58_1.png">
+</center> </section>
+<section id="line-chart">
+<h3>Line Chart<a class="headerlink" href="#line-chart" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p60_1.png" width=1000>
+</center> <center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p61_1.png" width=1000>
+</center> 
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p62_1.png">
+</center> <center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p63_1.png" width=500>
+</center> 
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p64_1.png">
+</center> <center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p65_1.png">
+</center> <center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p66_1.png">
+</center> <center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p67_1.png">
+</center> <div class="group">
+  <div class="images">
+    <img src="../images/Intro_to_Viz_Charts_2/img_p68_1.png" >
+  </div>
+  <div class="images">
+    <img src="../images/Intro_to_Viz_Charts_2/img_p68_2.png" >
+  </div>
+</div><center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p69_1.png" width=500>
+</center> </section>
+<section id="one-more-type">
+<h3>One more type…<a class="headerlink" href="#one-more-type" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="images">   
+<img src="../images/Intro_to_Viz_Charts_2/img_p71_1.png">
+    </div>
+    <div class="images">
+    </div>
+</div>
+<div class="group">
+  <div class="images">   
+      <img src="../images/Intro_to_Viz_Charts_2/img_p71_1.png">
+  </div>
+  <div class="images">
+      <img src="../images/Intro_to_Viz_Charts_2/img_p72_1.png">
+  </div>
+</div>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p73_1.png">
+</center><center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p74_1.png" width=1000>
+</center>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p75_1.png" width=1000>
+</center>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p76_1.png" width=1000>
+</center>
+</section>
+<section id="slopegraph">
+<h3>Slopegraph<a class="headerlink" href="#slopegraph" title="Link to this heading">#</a></h3>
+<p>Two points of comparison</p>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p80_1.png">
+</center>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p81_1.png" width=600>
+</center>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p82_1.png">
+</center></section>
+<section id="bar-chart">
+<h3>Bar Chart<a class="headerlink" href="#bar-chart" title="Link to this heading">#</a></h3>
+<p>Your go-to chart for → <strong>categorical data</strong></p>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p85_1.png" width=1000>
+</center>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p86_1.png" width=1000>
+</center>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p87_1.png" width=1000>
+</center>
+<div class="grouped">
+  <div class="images">
+    <img src="../images/Intro_to_Viz_Charts_2/img_p88_1.png" width=400>
+  </div>
+  <div class="images">
+    <img src="../images/Intro_to_Viz_Charts_2/img_p88_2.png">
+  </div>
+</div>
+</section>
+<section id="bar-charts-must-have-a-zero-baseline">
+<h3>Bar charts must have a zero baseline<a class="headerlink" href="#bar-charts-must-have-a-zero-baseline" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">YouTubeVideo</span>
+<span class="n">YouTubeVideo</span><span class="p">(</span><span class="s2">&quot;14VYnFhBKcY&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/14VYnFhBKcY"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="but-all-my-values-are-really-close-together">
+<h3>But all my values are really close together!<a class="headerlink" href="#but-all-my-values-are-really-close-together" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p92_1.png">
+</center>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p93_1.png" width=1000>
+</center>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p94_1.png" width=1000>
+</center><center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p92_1.png">
+</center><center>
+    <img src="../images/Intro_to_Viz_Charts_2/negative_graffiti.png">
+</center></section>
+<section id="vertical-vs-horizontal-bar-chart">
+<h3>Vertical vs Horizontal Bar Chart<a class="headerlink" href="#vertical-vs-horizontal-bar-chart" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p98_1.png" width=800>
+</center>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p99_1.png">
+</center><center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p100_1.png" width=500>
+</center></section>
+<section id="grouped-bar-charts">
+<h3>Grouped Bar Charts<a class="headerlink" href="#grouped-bar-charts" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p102_1.png">
+</center>    
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p103_1.png" width=600>
+</center>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p104_1.png" width=1000>
+</center>    
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p105_1.png" width=1000>
+</center><center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p106_1.png" width=1000>
+</center>    
+</section>
+<section id="stacked-bars">
+<h3>Stacked Bars<a class="headerlink" href="#stacked-bars" title="Link to this heading">#</a></h3>
+<p>Rarely a good idea.</p>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p109_1.png">
+</center>  <center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p110_1.png">
+</center>      
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p111_1.png">
+</center>      
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p112_1.png">
+</center>      
+</section>
+<section id="do-vertical-bars-always-go-up">
+<h3>Do vertical bars always go up?<a class="headerlink" href="#do-vertical-bars-always-go-up" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p114_1.png">
+</center>      
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p115_1.png">
+</center>      
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p116_1.png">
+</center>      
+</section>
+<section id="what-about-geographical-data">
+<h3>What about geographical data?<a class="headerlink" href="#what-about-geographical-data" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p119_1.png">
+</center>      
+<p><a class="reference external" href="https://infoactive.co/data-design/ch18.html">infoactive.co</a></p>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p120_1.png">
+</center>      
+</section>
+<section id="waterfall">
+<h3>Waterfall<a class="headerlink" href="#waterfall" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p122_1.png" width=1000>
+</center>      
+</section>
+<section id="square-area-charts-waffle-or-unit-charts">
+<h3>Square Area Charts (Waffle or Unit Charts)<a class="headerlink" href="#square-area-charts-waffle-or-unit-charts" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p124_1.png">
+</center>      
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p125_1.png" width=600>
+</center>      
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p126_1.png" width=400>
+</center>      
+<p><a href="https://www.youtube.com/watch?v=kImBBI6L8MI&t=7s"> Great when presenting live! </a></p>
+</section>
+<section id="thats-all-the-charts">
+<h3>That’s all the charts<a class="headerlink" href="#thats-all-the-charts" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Why we make data visualisation.</p></li>
+<li><p>What makes a good Data visualisation.</p></li>
+<li><p>How to make all your charts fantastic.</p></li>
+</ul>
+<center>
+    <img src="../images/Intro_to_Viz_Charts_2/img_p130_1.png">
+</center>      
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<section id="optional-exercises">
+<h3>Optional Exercises<a class="headerlink" href="#optional-exercises" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Read <a class="reference external" href="https://www.learnui.design/blog/the-hsb-color-system-practicioners-primer.html">this blog post</a> and use tools like <a class="reference external" href="https://www.learnui.design/tools/data-color-picker.html#palette">Data Color Picker</a> and <a class="reference external" href="https://coolors.co/palettes/trending">Coolors</a> to build and store color palettes for different use cases (a lot of categories, gradients, divergence)</p></li>
+<li><p>Build a 10 colour colour palette that fits your brand, and follows good colour differentiation principles from the Fundamentals chapter.</p></li>
+<li><p>Take a look at a slide you made with several charts. List all the Gestalt principles you can spot. Make note of which one is stronger. Consider giving it a makeover based on your findings.</p></li>
+</ul>
+</section>
+<section id="optional-exercises-data-viz-review">
+<h3>Optional Exercises: Data Viz Review<a class="headerlink" href="#optional-exercises-data-viz-review" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Form a pair or a small group</p></li>
+<li><p>Once a month, send your most important plot (.e.g the one regarding the most important business finding/decision, the one shown to most stakeholders) to your reviewer for feedback. If you form a group, it can be nice to meet and listen to the everyone’s reviews</p></li>
+<li><p>Each time, give feedback around a different theme:</p>
+<ul>
+<li><p>Fundamentals: message, accuracy, efficiency</p></li>
+<li><p>Gestalt Principles: proximity, similarity, enclosure, closure, continuity, connection</p></li>
+<li><p>Chart Types: offer improvements, or alternatives</p></li>
+<li><p>Storytelling Process: context, choosing a visual, remove clutter, focus audience attention, tell stories</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="06.1_Gestalt_Principles.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Gestalt <del>Laws</del> Principles</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07_Intro_EDA.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exploratory Data Analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#today-s-topics">Today’s Topics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#viz-fundamentals">Viz Fundamentals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-make-data-visualisation">Why do we make data visualisation?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration">Exploration:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation">Explanation:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-makes-a-good-data-visualisation">What makes a good data visualisation?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#message">Message</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-golden-age-of-statistical-graphics">The Golden Age of Statistical Graphics</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lengths-vs-areas">Lengths vs. Areas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Lengths vs. Areas</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lengths-vs-volumes">Lengths vs. Volumes</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#efficiency">Efficiency</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-ink-ratio">“Data-ink ratio”</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessibility">Accessibility</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#colors">Colors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Colors</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#patterns">Patterns</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Patterns</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hsv-color-space">HSV Color Space</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#color-schemes">Color Schemes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#color-palettes">Color Palettes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#accessibility-guidelines">Accessibility Guidelines</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">What makes a good data visualisation?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fantastic-charts-and-how-to-make-them">Fantastic Charts and How to Make Them</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-text">Simple Text</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tables">Tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-map">Heat map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatterplot">Scatterplot</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-chart">Line Chart</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-more-type">One more type…</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slopegraph">Slopegraph</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-chart">Bar Chart</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-charts-must-have-a-zero-baseline">Bar charts must have a zero baseline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#but-all-my-values-are-really-close-together">But all my values are really close together!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vertical-vs-horizontal-bar-chart">Vertical vs Horizontal Bar Chart</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grouped-bar-charts">Grouped Bar Charts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacked-bars">Stacked Bars</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-vertical-bars-always-go-up">Do vertical bars always go up?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-geographical-data">What about geographical data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#waterfall">Waterfall</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#square-area-charts-waffle-or-unit-charts">Square Area Charts (Waffle or Unit Charts)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thats-all-the-charts">That’s all the charts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-exercises">Optional Exercises</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-exercises-data-viz-review">Optional Exercises: Data Viz Review</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

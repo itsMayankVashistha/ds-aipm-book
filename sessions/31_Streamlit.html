@@ -1,0 +1,1109 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Streamlit — From Analysis to Application &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/31_Streamlit';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Streamlit — From AI Prototype to Product" href="aipm_sessions/Streamlit_AIPM.html" />
+    <link rel="prev" title="Model Context Protocol (MCP)" href="30_MCP.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Streamlit — From Analysis to Application</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up">Warm-up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-last-mile-problem">The last mile problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-streamlit-is-and-is-not">What Streamlit is — and is not</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-design-principles">Three design principles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traditional-web-apps-vs-streamlit-execution">Traditional Web Apps vs. Streamlit: Execution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts-not-applications">Scripts, not applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactivity-through-re-execution">Reactivity through re-execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-profound-consequence">A profound consequence</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traditional-web-apps-vs-streamlit-interface">Traditional Web Apps vs. Streamlit: Interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imperative-vs-declarative">Imperative vs. declarative</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#widgets-as-expressions">Widgets as expressions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-driven-rendering">Type-driven rendering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traditional-web-apps-vs-streamlit-data-flow">Traditional Web Apps vs. Streamlit: Data Flow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#top-to-bottom-data-flow">Top-to-bottom data flow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traditional-web-apps-vs-streamlit-layout">Traditional Web Apps vs. Streamlit: Layout</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-organization">Spatial organization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sidebar-pattern">The sidebar pattern</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traditional-web-apps-vs-streamlit-states">Traditional Web Apps vs. Streamlit: States</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stateless-paradox">The stateless paradox</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caching-remembering-computations">Caching: remembering computations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-state-remembering-interactions">Session State: remembering interactions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-notebook-to-app">From Notebook to App</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-conceptual-distance">The conceptual distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-the-distance-grows">When the distance grows</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-the-communication-gap">Closing the communication gap</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">Key Concepts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="slide-title">
+<section class="tex2jax_ignore mathjax_ignore" id="streamlit-from-analysis-to-application">
+<h1>Streamlit — From Analysis to Application<a class="headerlink" href="#streamlit-from-analysis-to-application" title="Link to this heading">#</a></h1>
+</div><section id="warm-up">
+<h2>Warm-up<a class="headerlink" href="#warm-up" title="Link to this heading">#</a></h2>
+<p>Go to <a class="reference external" href="https://streamlit.io/gallery">streamlit.io/gallery</a> and explore a few example apps for 3 minutes. Discuss:</p>
+<ul class="simple">
+<li><p>How do these apps differ from a static Jupyter notebook?</p></li>
+<li><p>What makes them feel <em>interactive</em>?</p></li>
+<li><p>Could a non-technical person use these without help?</p></li>
+<li><p>What kinds of decisions could a stakeholder make with an app like this that they could not make with a PDF report?</p></li>
+</ul>
+</section>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h2>
+<section id="the-last-mile-problem">
+<h3>The last mile problem<a class="headerlink" href="#the-last-mile-problem" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>Data Science has a <em>last mile problem</em></p>
+<ul class="simple">
+<li><p>Analytical work usually in Python, notebooks technical environments</p></li>
+<li><p>Disconnect with people acting on the insights of the analysis</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p>Traditionally, two unsatisfying options:</p>
+<ul>
+<li><p><strong>Static reports</strong> (PDFs, slide decks) — capture a snapshot but lose interactivity</p></li>
+<li><p><strong>Hand off to web development</strong> — preserves interactivity but takes weeks of translation time</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>The fundamental tension:</p>
+<ul>
+<li><p>Data Scientists think in <strong>Python</strong></p></li>
+<li><p>Stakeholders think in <strong>interfaces</strong></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="what-streamlit-is-and-is-not">
+<h3>What Streamlit is — and is not<a class="headerlink" href="#what-streamlit-is-and-is-not" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Is</strong>: The shortest path from a working Python analysis to a shareable, interactive tool</p></li>
+<li><p><strong>Is not</strong>: A general-purpose web framework (no routing, no authentication, no templating)</p></li>
+</ul>
+<ul class="simple">
+<li><p>It is a niche tool for clear purposes:</p>
+<ul>
+<li><p>Interactive dashboards for EDA</p></li>
+<li><p>Proof-of-concept demos for ML models</p></li>
+<li><p>Internal tools for data teams</p></li>
+<li><p>Rapid prototyping before a full web app</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="three-design-principles">
+<h3>Three design principles<a class="headerlink" href="#three-design-principles" title="Link to this heading">#</a></h3>
+<p>Streamlit rests on three principles that shape everything about the framework:</p>
+<ol class="arabic simple">
+<li><p><strong>An app is a script, not an architecture</strong></p>
+<ul class="simple">
+<li><p>No classes to inherit, no routes to define, no templates to write</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p><strong>Interaction = re-execution</strong></p>
+<ul class="simple">
+<li><p>When a user changes an input, the script reruns from the top</p></li>
+<li><p>No callbacks, no event listeners, no wiring</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="3">
+<li><p><strong>The API should disappear</strong></p>
+<ul class="simple">
+<li><p>So small and intuitive that it never becomes the focus</p></li>
+<li><p>Your analysis stays front and center</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="traditional-web-apps-vs-streamlit-execution">
+<h2>Traditional Web Apps vs. Streamlit: Execution<a class="headerlink" href="#traditional-web-apps-vs-streamlit-execution" title="Link to this heading">#</a></h2>
+<section id="scripts-not-applications">
+<h3>Scripts, not applications<a class="headerlink" href="#scripts-not-applications" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>In traditional web frameworks (Flask, Django), you define <strong>endpoints and handlers</strong></p>
+<ul class="simple">
+<li><p>The framework waits for requests and dispatches them</p></li>
+<li><p>The developer has to think about routing, request/response cycles, state</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p>Streamlit <strong>inverts</strong> this entirely</p>
+<ul>
+<li><p>No endpoints, no router</p></li>
+<li><p>Only a script that runs from first line to last</p></li>
+<li><p>The output of each function call appears in the browser in order</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="reactivity-through-re-execution">
+<h3>Reactivity through re-execution<a class="headerlink" href="#reactivity-through-re-execution" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>When the user interacts with a widget, Streamlit does something radical:</p>
+<ul class="simple">
+<li><p>It <strong>reruns the entire script</strong> from the beginning</p></li>
+<li><p>The widget remembers its new value</p></li>
+<li><p>Everything downstream recomputes with the updated value</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p>This is <em>reactive programming</em> achieved through the simplest possible mechanism</p>
+<ul>
+<li><p>No dependency graph, no observable pattern, no virtual DOM</p></li>
+<li><p>Mental model: “my script produces a page; when something changes, it produces the page again”</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="a-profound-consequence">
+<h3>A profound consequence<a class="headerlink" href="#a-profound-consequence" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The developer <strong>never has to think about synchronization</strong></p>
+<ul>
+<li><p>There is no question of “which part of the UI needs to update?”</p></li>
+<li><p>All of it does, because the whole script runs</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>This makes reasoning about Streamlit apps remarkably easy</p>
+<ul>
+<li><p>Reading an app is like reading a recipe: load, ask, transform, display</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>But there is an obvious cost: <strong>performance</strong></p>
+<ul>
+<li><p>If loading data takes 5 seconds, every slider movement takes 5 seconds</p></li>
+<li><p>Streamlit solves this with <em>caching</em> — which we will discuss shortly</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="traditional-web-apps-vs-streamlit-interface">
+<h2>Traditional Web Apps vs. Streamlit: Interface<a class="headerlink" href="#traditional-web-apps-vs-streamlit-interface" title="Link to this heading">#</a></h2>
+<section id="imperative-vs-declarative">
+<h3>Imperative vs. declarative<a class="headerlink" href="#imperative-vs-declarative" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>Most web frameworks are <strong>imperative</strong></p>
+<ul class="simple">
+<li><p>Create a DOM element, attach a listener, update on event</p></li>
+</ul>
+</li>
+<li><p>Streamlit is <strong>declarative</strong></p>
+<ul class="simple">
+<li><p>Specify <em>what</em> should appear, not <em>how</em> to construct it</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><p>Same distinction as SQL vs. procedural database access
+SQL: “give me rows where age &gt; 30” — the database figures out how
+Streamlit: “display this DataFrame” — the framework renders an interactive table</p>
+</section>
+<section id="widgets-as-expressions">
+<h3>Widgets as expressions<a class="headerlink" href="#widgets-as-expressions" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Traditional UI frameworks: slider is a <strong>component</strong></p>
+<ul>
+<li><p>Instantiate it, place it in a layout, register a callback</p></li>
+</ul>
+</li>
+<li><p>Streamlit: slider is an <strong>expression</strong> (returns a value)</p></li>
+</ul>
+<ul class="simple">
+<li><p>A single line does three things simultaneously:</p>
+<ol class="arabic simple">
+<li><p><strong>Renders</strong> a slider in the browser</p></li>
+<li><p><strong>Returns</strong> the current value to Python</p></li>
+<li><p><strong>Triggers</strong> a re-execution when changed</p></li>
+</ol>
+</li>
+</ul>
+<ul class="simple">
+<li><p>There is no separation between “the UI part” and “the logic part”</p>
+<ul>
+<li><p>They are unified into one <em>data flow</em></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="type-driven-rendering">
+<h3>Type-driven rendering<a class="headerlink" href="#type-driven-rendering" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">st.write()</span></code> inspects the <strong>type</strong> of the object it receives:</p>
+<ul>
+<li><p>String → Markdown</p></li>
+<li><p>DataFrame → interactive table</p></li>
+<li><p>Matplotlib figure → chart</p></li>
+<li><p>Dictionary → JSON</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>This is <em>polymorphism</em> applied to UI rendering</p>
+<ul>
+<li><p>The developer does not need to know the rendering details</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">st.write()</span></code> is the <code class="docutils literal notranslate"><span class="pre">print()</span></code> of interactive applications</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="traditional-web-apps-vs-streamlit-data-flow">
+<h2>Traditional Web Apps vs. Streamlit: Data Flow<a class="headerlink" href="#traditional-web-apps-vs-streamlit-data-flow" title="Link to this heading">#</a></h2>
+<section id="top-to-bottom-data-flow">
+<h3>Top-to-bottom data flow<a class="headerlink" href="#top-to-bottom-data-flow" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Because the script runs top-to-bottom, the data flow has a natural structure:</p>
+<ul>
+<li><p>Inputs (widgets) before the logic that depends on them</p></li>
+<li><p>Outputs (charts, tables) after the transformations</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Reading a Streamlit app is like reading a <strong>recipe</strong></p>
+<ul>
+<li><p>Load the data → ask the user for parameters → transform → display</p></li>
+<li><p>No indirection, no callback chains, no hidden state mutations</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="traditional-web-apps-vs-streamlit-layout">
+<h2>Traditional Web Apps vs. Streamlit: Layout<a class="headerlink" href="#traditional-web-apps-vs-streamlit-layout" title="Link to this heading">#</a></h2>
+<section id="spatial-organization">
+<h3>Spatial organization<a class="headerlink" href="#spatial-organization" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Default layout is <strong>vertical</strong>: each <code class="docutils literal notranslate"><span class="pre">st.</span></code> call adds an element below the previous one</p></li>
+<li><p>Several mechanisms to break out of linearity:</p>
+<ul>
+<li><p><strong>Columns</strong> — elements side by side</p></li>
+<li><p><strong>Sidebar</strong> — persistent control panel on the left</p></li>
+<li><p><strong>Tabs</strong> — switchable views without scrolling</p></li>
+<li><p><strong>Expanders</strong> — optional detail behind a collapsible header</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>The model is a <strong>document with sections</strong>, not a pixel-perfect canvas</p>
+<ul>
+<li><p>Apps look consistent and clean by default</p></li>
+<li><p>Trade-off: no fine-grained CSS control, but no need to think about CSS at all</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="the-sidebar-pattern">
+<h3>The sidebar pattern<a class="headerlink" href="#the-sidebar-pattern" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>The most common layout in Streamlit mirrors professional dashboard tools:</p>
+<ul class="simple">
+<li><p><strong>Controls</strong> on the left (sidebar)</p></li>
+<li><p><strong>Results</strong> in the center (main area)</p></li>
+</ul>
+</li>
+<li><p>This separates <strong>questions</strong> from <strong>answers</strong></p>
+<ul class="simple">
+<li><p>Questions: “What parameters should we use?”</p></li>
+<li><p>Answers: “Here is the resulting visualization”</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div></section>
+</section>
+<section id="traditional-web-apps-vs-streamlit-states">
+<h2>Traditional Web Apps vs. Streamlit: States<a class="headerlink" href="#traditional-web-apps-vs-streamlit-states" title="Link to this heading">#</a></h2>
+<section id="the-stateless-paradox">
+<h3>The stateless paradox<a class="headerlink" href="#the-stateless-paradox" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Streamlit’s re-execution model is <strong>stateless by design</strong></p>
+<ul>
+<li><p>Every run starts fresh</p></li>
+</ul>
+</li>
+<li><p>But real applications need <strong>memory</strong>:</p>
+<ul>
+<li><p>A counter that increments</p></li>
+<li><p>A multi-step form that accumulates answers</p></li>
+<li><p>A chat history that grows</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>How can a stateless execution model support stateful behavior?</p>
+<ul>
+<li><p>Streamlit provides two mechanisms: <em>caching</em> and <em>session state</em></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="caching-remembering-computations">
+<h3>Caching: remembering computations<a class="headerlink" href="#caching-remembering-computations" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;st.cache_data</span></code> — for computations that produce {data}</p>
+<ul class="simple">
+<li><p>Loading a CSV, running a query, computing features</p></li>
+<li><p>Stores the return value keyed by function name, source code, and input arguments</p></li>
+<li><p>Conceptually: {memoization} from functional programming</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;st.cache_resource</span></code> — for objects that are expensive to {initialize}</p>
+<ul>
+<li><p>Database connections, ML models, API clients</p></li>
+<li><p>Stores the actual Python object (shared by reference)</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>The mental model:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cache_data</span></code> for things you <strong>compute</strong> → each caller gets a copy (safe)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cache_resource</span></code> for things you <strong>initialize</strong> → all callers share one instance (efficient)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="session-state-remembering-interactions">
+<h3>Session State: remembering interactions<a class="headerlink" href="#session-state-remembering-interactions" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">st.session_state</span></code> is a dictionary that persists across reruns</p>
+<ul>
+<li><p>Per-user and per-browser-tab</p></li>
+<li><p>Solves problems caching cannot:</p>
+<ul>
+<li><p>How many times was a button pressed?</p></li>
+<li><p>What did the user select in step 1 of a multi-step form?</p></li>
+<li><p>What is the chat history so far?</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Together, <strong>caching</strong> and <strong>session state</strong> create the illusion of continuity</p>
+<ul>
+<li><p>Even though the underlying mechanism is repeated full re-execution</p></li>
+<li><p>The user never notices the script is rerunning from scratch</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="from-notebook-to-app">
+<h2>From Notebook to App<a class="headerlink" href="#from-notebook-to-app" title="Link to this heading">#</a></h2>
+<section id="the-conceptual-distance">
+<h3>The conceptual distance<a class="headerlink" href="#the-conceptual-distance" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>A typical notebook workflow:</p>
+<ul class="simple">
+<li><p>Load data → clean → explore → model → evaluate</p></li>
+<li><p>Each step is a cell, the notebook is sequential</p></li>
+</ul>
+</li>
+<li><p>A Streamlit app has the <strong>same structure</strong></p>
+<ul class="simple">
+<li><p>Replace hardcoded parameters with widgets</p></li>
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">display()</span></code> with <code class="docutils literal notranslate"><span class="pre">st.write()</span></code></p></li>
+<li><p>Add caching for expensive steps</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p>No restructuring, no new architecture</p>
+<ul>
+<li><p>Just a change in how <strong>inputs and outputs</strong> are handled</p></li>
+<li><p>The analysis stays the same</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="when-the-distance-grows">
+<h3>When the distance grows<a class="headerlink" href="#when-the-distance-grows" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Streamlit’s simplicity has limits:</p>
+<ul>
+<li><p>User authentication</p></li>
+<li><p>Persistent data storage</p></li>
+<li><p>Complex navigation with many pages</p></li>
+<li><p>Fine-grained visual design</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>For these cases, Streamlit is best understood as a <strong>prototyping tool</strong>:</p>
+<ul>
+<li><p>Build the proof of concept in Streamlit</p></li>
+<li><p>Validate the idea with stakeholders</p></li>
+<li><p>Invest in a full web app (Flask, Django) if the idea proves its value</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="deployment">
+<h2>Deployment<a class="headerlink" href="#deployment" title="Link to this heading">#</a></h2>
+<section id="closing-the-communication-gap">
+<h3>Closing the communication gap<a class="headerlink" href="#closing-the-communication-gap" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>An app on <code class="docutils literal notranslate"><span class="pre">localhost</span></code> is not much better than a notebook</p>
+<ul>
+<li><p>{Deployment} is what actually closes the communication gap</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p><strong>Streamlit Community Cloud</strong>: the simplest path</p>
+<ul>
+<li><p>Connect a GitHub repo with a <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code></p></li>
+<li><p>App is live at a public URL within minutes</p></li>
+<li><p>Free for public repositories</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p><strong>Any Python host</strong> works for production:</p>
+<ul>
+<li><p>Docker containers, cloud VMs, platform-as-a-service, Kubernetes</p></li>
+<li><p>No build step, no compiled frontend, no separate API server</p></li>
+<li><p>Just a Python process serving a web page</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<section id="key-concepts">
+<h3>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Streamlit addresses the <strong>last mile problem</strong>: getting insights from notebooks to stakeholders</p></li>
+</ul>
+<ul class="simple">
+<li><p>The <strong>execution model</strong> is a script that reruns top-to-bottom on every interaction: radical simplicity</p></li>
+</ul>
+<ul class="simple">
+<li><p>The interface is <strong>declarative</strong>: specify <em>what</em> to display, not <em>how</em> to render it</p></li>
+</ul>
+<ul class="simple">
+<li><p>Widgets are <strong>expressions</strong> that return values: unifying UI and logic</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Caching</strong> compensates for re-execution cost; <strong>session state</strong> provides memory across reruns</p></li>
+</ul>
+<ul class="simple">
+<li><p>The gap between notebook and app is a change in <strong>inputs and outputs</strong>, not a change in paradigm</p></li>
+</ul>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.streamlit.io/">Streamlit Documentation</a></p></li>
+<li><p><a class="reference external" href="https://docs.streamlit.io/library/api-reference">Streamlit API Reference</a></p></li>
+<li><p><a class="reference external" href="https://streamlit.io/gallery">Streamlit Gallery</a> — See what others have built</p></li>
+<li><p><a class="reference external" href="https://streamlit.io/cloud">Streamlit Community Cloud</a></p></li>
+<li><p><a class="reference external" href="https://30days.streamlit.app/">30 Days of Streamlit</a> — A self-paced learning challenge</p></li>
+<li><p><a class="reference external" href="https://docs.streamlit.io/library/cheatsheet">Streamlit Cheat Sheet</a></p></li>
+<li><p>Murray, D. (2023), <em>Creating Interactive Dashboards with Streamlit and Python</em>, Packt</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="30_MCP.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Model Context Protocol (MCP)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="aipm_sessions/Streamlit_AIPM.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Streamlit — From AI Prototype to Product</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up">Warm-up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-last-mile-problem">The last mile problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-streamlit-is-and-is-not">What Streamlit is — and is not</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-design-principles">Three design principles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traditional-web-apps-vs-streamlit-execution">Traditional Web Apps vs. Streamlit: Execution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts-not-applications">Scripts, not applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactivity-through-re-execution">Reactivity through re-execution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-profound-consequence">A profound consequence</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traditional-web-apps-vs-streamlit-interface">Traditional Web Apps vs. Streamlit: Interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imperative-vs-declarative">Imperative vs. declarative</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#widgets-as-expressions">Widgets as expressions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-driven-rendering">Type-driven rendering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traditional-web-apps-vs-streamlit-data-flow">Traditional Web Apps vs. Streamlit: Data Flow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#top-to-bottom-data-flow">Top-to-bottom data flow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traditional-web-apps-vs-streamlit-layout">Traditional Web Apps vs. Streamlit: Layout</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spatial-organization">Spatial organization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sidebar-pattern">The sidebar pattern</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traditional-web-apps-vs-streamlit-states">Traditional Web Apps vs. Streamlit: States</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stateless-paradox">The stateless paradox</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caching-remembering-computations">Caching: remembering computations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-state-remembering-interactions">Session State: remembering interactions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-notebook-to-app">From Notebook to App</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-conceptual-distance">The conceptual distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-the-distance-grows">When the distance grows</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-the-communication-gap">Closing the communication gap</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">Key Concepts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

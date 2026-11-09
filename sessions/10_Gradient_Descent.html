@@ -1,0 +1,948 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Gradient Descent &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/10_Gradient_Descent';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Evaluation Metrics" href="11_Evaluation_Metrics.html" />
+    <link rel="prev" title="Regularization" href="09.2_Regularization.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Gradient Descent</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orientation">Orientation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-of-optimization-of-linear-regression-with-ols">Recap of Optimization of Linear Regression with OLS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-parameters-of-a-model-by-gradually-minimizing-your-cost">Find the parameters of a model by gradually minimizing your cost</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-in-a-nutshell">Gradient Descent in a nutshell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-gradient-descent">When to use Gradient Descent?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-step-define-model">First Step: Define Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-step-define-cost-function">Second Step: Define Cost Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#third-step-initialize-gradient-descent">Third Step: Initialize Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forth-step-derivatives-with-respect-to-the-parameters">Forth Step: Derivatives with respect to the parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forth-step-gradient-descent">Forth Step: Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Forth Step: Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Forth Step: Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Forth Step: Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-summed-up">Gradient Descent summed up</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate">Learning Rate</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Learning Rate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-main-challenges-of-gradient-descent">Two main challenges of Gradient Descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unscaled-data">Unscaled Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-gradient-descent">Variants of Gradient Descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-gradient-descent">Batch gradient descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-gradient-descent">Stochastic gradient descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-gradient-descent">Mini-Batch gradient descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-comparison">Gradient Descent Comparison</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="gradient-descent">
+<h1>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Link to this heading">#</a></h1>
+<section id="orientation">
+<h2>Orientation<a class="headerlink" href="#orientation" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="text">
+<p>Where is Gradient Descent used in the Data Science Lifecycle?
+<br><br></p>
+<p><strong>06 PREDICTIVE MODELING:</strong></p>
+<ul>
+<li><p>select a ML algorithm</p></li>
+<li><p><strong>train the ML model</strong></p></li>
+<li><p>evaluate the performance</p></li>
+<li><p>make predictions</p>
+  </div>
+  <div class="images">
+      <img src="../images/gradient_descent/img_p1_1.png" width=750>
+  </div>
+</li>
+</ul>
+</div>
+</section>
+<section id="recap-of-optimization-of-linear-regression-with-ols">
+<h2>Recap of Optimization of Linear Regression with OLS<a class="headerlink" href="#recap-of-optimization-of-linear-regression-with-ols" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="images_70">
+        <img src="../images/gradient_descent/plots/linear_regression.png" width="5000">       
+    </div>
+    <div class="text_30">
+<p><br><br><br />
+Model: <span class="math notranslate nohighlight">\(y=b_{0}+b_{1}\cdot x+e\)</span>
+<br></p>
+<p>Residuals: <span class="math notranslate nohighlight">\(e_{i}=y_{i}-\hat{y}_{i}\)</span>
+<br></p>
+<p>OLS: <br>
+Minimize the sum of squared residuals <br><br>
+<span class="math notranslate nohighlight">\(\sum_{i=1}^{n}e_{i}^{2}\)</span>
+<br><br></p>
+<p>results in Normal Equation: <br><br>
+<span class="math notranslate nohighlight">\(b=\left(X^{T}X\right)^{-1}X^{T}y\)</span></p>
+<p>→ closed form solution<br />
+</div></p>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using OLS (normal equation), the best parameters were found at: 
+            b₀ = 0.237 
+            b₁ = 0.049
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="definition">
+<h2>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h2>
+<p>Gradient Descent is an <strong>iterative optimization algorithm</strong> to find the minimum of a function.</p>
+<p>→ e.g. of a cost function</p>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+Unlike the normal equation, Gradient Descent has no closed solution.
+</div><img src="../images/gradient_descent/foggy_mountain.png"><section id="find-the-parameters-of-a-model-by-gradually-minimizing-your-cost">
+<h3>Find the parameters of a model by gradually minimizing your cost<a class="headerlink" href="#find-the-parameters-of-a-model-by-gradually-minimizing-your-cost" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Go downhill in the direction of the steepest slope.</p>
+<p>→ endpoint is dependent on the initial starting point
+</div>
+<div class="images">
+<img src="../images/gradient_descent/plots/gd_3D.png" width="900">
+</div></p>
+</div></section>
+</section>
+<section id="gradient-descent-in-a-nutshell">
+<h2>Gradient Descent in a nutshell<a class="headerlink" href="#gradient-descent-in-a-nutshell" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="text">
+<ul>
+<li><p>Have some function <span class="math notranslate nohighlight">\(J(b)\)</span></p></li>
+<li><p>Want min <span class="math notranslate nohighlight">\(J(b)\)</span>:</p>
+<ul class="simple">
+<li><p>start with some random parameter <span class="math notranslate nohighlight">\(b\)</span></p></li>
+<li><p>keep changing <span class="math notranslate nohighlight">\(b\)</span> to reduce <span class="math notranslate nohighlight">\(J(b)\)</span> until we hopefully get to a minimum</p></li>
+</ul>
+  </div>
+  <div class="images">
+      <img src="../images/gradient_descent/gradient_descent_sketch_transparent_bg.png" width=800>
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="when-to-use-gradient-descent">
+<h2>When to use Gradient Descent?<a class="headerlink" href="#when-to-use-gradient-descent" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>GD is a simple <strong>optimization procedure</strong> that can be used for many machine learning algorithms (eg. linear regression, logistic regression, SVM)
+<br><br></p></li>
+<li><p>used for <strong>“Backpropagation”</strong> in Neural Nets (variations of GD)
+<br><br></p></li>
+<li><p>can be used for <strong>online learning</strong> (update as soon as new data comes in)
+<br><br></p></li>
+<li><p>gives <strong>faster results</strong> for problems with many features (computationally simpler)</p></li>
+</ul>
+<section id="first-step-define-model">
+<h3>First Step: Define Model<a class="headerlink" href="#first-step-define-model" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class=text>
+<br>
+Example:<br>
+least squares with one feature
+<br><br><br>
+<span style="font-size:50px">
+<div class="math notranslate nohighlight">
+\[\hat{y}=b_0+b_1\cdot x\]</div>
+</span>     
+    </div>
+    <div class=images>
+        <img src="../images/gradient_descent/plots/linear_regression_two_lines.png">
+    </div>
+</div>
+</section>
+<section id="second-step-define-cost-function">
+<h3>Second Step: Define Cost Function<a class="headerlink" href="#second-step-define-cost-function" title="Link to this heading">#</a></h3>
+<p><strong>Mean Squared Error</strong> with a little bit of cosmetics (2 in denominator)
+<br><br></p>
+<div class="math notranslate nohighlight">
+\[ J(b_{0},b_{1})\;=\;\frac{1}{2n}\sum_{i=1}^{n}{(\hat{y}_{i}-y_{i})}^{2}\,\]</div>
+<p><span class="math notranslate nohighlight">\(\hspace{0.5cm}\)</span></p>
+<div class="math notranslate nohighlight">
+\[min(J(b_{0},b_{1}))\]</div>
+</section>
+<section id="third-step-initialize-gradient-descent">
+<h3>Third Step: Initialize Gradient Descent<a class="headerlink" href="#third-step-initialize-gradient-descent" title="Link to this heading">#</a></h3>
+<p>Deliberately set random starting values for <span class="math notranslate nohighlight">\(b\)</span></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/069e2fb3da09713a4a29b4c88ad0b46a8396649f551f5abf973310db21249a28.png" src="../_images/069e2fb3da09713a4a29b4c88ad0b46a8396649f551f5abf973310db21249a28.png" />
+</div>
+</div>
+</section>
+<section id="forth-step-derivatives-with-respect-to-the-parameters">
+<h3>Forth Step: Derivatives with respect to the parameters<a class="headerlink" href="#forth-step-derivatives-with-respect-to-the-parameters" title="Link to this heading">#</a></h3>
+<p><br><br></p>
+<div class="math notranslate nohighlight">
+\[ J(b_{0},b_{1})\,=\,\frac{1}{2n}\sum_{i=1}^{n}\left(\hat{y}_{i}-y_{i}\right)^{2}\,=\,\frac{1}{2n}\sum_{i=1}^{n}\left(b_{0}+b_{1}x_{i}-y_{i}\right)^{2}\]</div>
+<br>
+<p>The <span class="color-brand"><strong>chain rule</strong></span> gives us:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\frac{\partial J}{\partial b_{0}}&amp;=\frac{1}{n}\sum_{i=1}^{n}(b_{0}+b_{1}x_{i}-y_{i})\cdot 1 \\\\
+\frac{\partial J}{\partial b_{1}}&amp;=\frac{1}{n}\sum_{i=1}^{n}(b_{0}+b_{1}x_{i}-y_{i})\cdot x_{i}
+\end{align}\end{split}\]</div>
+</section>
+<section id="forth-step-gradient-descent">
+<h3>Forth Step: Gradient Descent<a class="headerlink" href="#forth-step-gradient-descent" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Start descent:</p>
+<ul>
+<li><p>Take <strong>derivatives</strong> with respect to your parameters <span class="math notranslate nohighlight">\(b\)</span></p></li>
+<li><p>Set your learning rate (step-size)</p></li>
+<li><p>Adjust your parameters (step)</p>
+  </div>
+  <div class="images">
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{slope of }b_1\text{ at start point }=-6.8\]</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ec1b8d670ebf61ab0dba78e44d2ca4c6952e7a6522a00748f8d0eb7a77a578e6.png" src="../_images/ec1b8d670ebf61ab0dba78e44d2ca4c6952e7a6522a00748f8d0eb7a77a578e6.png" />
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>Forth Step: Gradient Descent<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Start descent:</p>
+<ul>
+<li><p>Take derivatives with respect to your parameters <span class="math notranslate nohighlight">\(b\)</span></p></li>
+<li><p>Set your <strong>learning rate</strong> (step-size)</p></li>
+<li><p>Adjust your parameters (step)</p>
+  </div>
+  <div class="images">
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\alpha&amp;=0.15 \\
+slope&amp;=-6.8
+\end{align}\end{split}\]</div>
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/ec1b8d670ebf61ab0dba78e44d2ca4c6952e7a6522a00748f8d0eb7a77a578e6.png" src="../_images/ec1b8d670ebf61ab0dba78e44d2ca4c6952e7a6522a00748f8d0eb7a77a578e6.png" />
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>Forth Step: Gradient Descent<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Start descent:</p>
+<ul>
+<li><p>Take derivatives with respect to parameters <span class="math notranslate nohighlight">\(b\)</span></p></li>
+<li><p>Set your learning rate (step-size)</p></li>
+<li><p><strong>Adjust your parameters</strong> (step)</p>
+  </div>
+  <div class="images">
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+step&amp;=\alpha \cdot slope \\
+b_{1}^{new}&amp;=b_{1}^{old} - step \\
+b_{1}^{new}&amp;=0.6-(0.15*(-6.8)) \\
+b_{1}^{new}&amp;=1.62 \\
+\end{align}\end{split}\]</div>
+</div>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/36da86b3a7a7c97295b5a741621b9bc438b4f075837579d56e30ef435dbcd979.png" src="../_images/36da86b3a7a7c97295b5a741621b9bc438b4f075837579d56e30ef435dbcd979.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Forth Step: Gradient Descent<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Start descent:</p>
+<ul class="simple">
+<li><p>Take derivatives with respect to your parameters <span class="math notranslate nohighlight">\(b\)</span></p></li>
+<li><p>Set your learning rate (step-size)</p></li>
+<li><p>Adjust your parameters (step)</p></li>
+</ul>
+<p><strong>Repeat till there is no further improvement</strong><br />
+</div>
+<div class="images"></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+step&amp;=\alpha \cdot slope \\
+b_{1}^{new}&amp;=b_{1}^{old} - step
+\end{align}\end{split}\]</div>
+</div>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/82e51581992b58a008d0d1c714b267c46b6946c4892fff378da60b2d424e6c20.png" src="../_images/82e51581992b58a008d0d1c714b267c46b6946c4892fff378da60b2d424e6c20.png" />
+</div>
+</div>
+</section>
+<section id="gradient-descent-summed-up">
+<h3>Gradient Descent summed up<a class="headerlink" href="#gradient-descent-summed-up" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p><span class="math notranslate nohighlight">\(\hspace{0.5cm}\)</span></p>
+<ol class="arabic">
+<li><p>Define model</p></li>
+<li><p>Define the cost function</p></li>
+<li><p>Deliberately set some starting values</p></li>
+<li><p>Start descent:</p>
+<ul class="simple">
+<li><p>Take derivatives with respect to parameters</p></li>
+<li><p>Set your learning rate (step-size)</p></li>
+<li><p>Adjust your parameters (step)</p></li>
+</ul>
+</li>
+<li><p>Repeat 4. till there is no further improvement</p>
+ </div>
+ <div class="images">
+     <img src="https://suniljangirblog.files.wordpress.com/2018/12/1-1.gif?w=600&zoom=2" width=1000>
+ </div>
+</li>
+</ol>
+</div>
+</section>
+</section>
+<section id="learning-rate">
+<h2>Learning Rate<a class="headerlink" href="#learning-rate" title="Link to this heading">#</a></h2>
+<p>It is important to find a good value for the learning rate!
+<br><br><br><br></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/fd6711d6ae292309d1482ba5bf11baddb18be1085a543fba1348a0d48357a6f2.png" src="../_images/fd6711d6ae292309d1482ba5bf11baddb18be1085a543fba1348a0d48357a6f2.png" />
+</div>
+</div>
+<section id="id4">
+<h3>Learning Rate<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>It is important to find a good value for the learning rate!</p>
+<p>Learning Rate <strong>too small</strong>
+→ will take long to find optimum</p>
+<p>Learning Rate <strong>too large</strong>
+→ not able to find optimum</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/3df6cfd1c5e8ca3c52bbf50ef40653b42eac78cec77a264998ed8730f6c0a436.png" src="../_images/3df6cfd1c5e8ca3c52bbf50ef40653b42eac78cec77a264998ed8730f6c0a436.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="two-main-challenges-of-gradient-descent">
+<h2>Two main challenges of Gradient Descent<a class="headerlink" href="#two-main-challenges-of-gradient-descent" title="Link to this heading">#</a></h2>
+<p>The MSE cost function for linear regression is a convex function, it just has one global minimum.
+This is not always the case. Problems are:</p>
+<ul class="simple">
+<li><p>local minima</p></li>
+<li><p>plateaus</p></li>
+</ul>
+<p>Convex: If you pick two random points the line that is connecting them will
+not cross the curve.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/0deabff9ed9bff283e4b1b36d463c6b212c7acdf7396e8026eae1c5c355db4de.png" src="../_images/0deabff9ed9bff283e4b1b36d463c6b212c7acdf7396e8026eae1c5c355db4de.png" />
+</div>
+</div>
+<section id="unscaled-data">
+<h3>Unscaled Data<a class="headerlink" href="#unscaled-data" title="Link to this heading">#</a></h3>
+<p>Without scaling the algorithm Gradient Descent needs more time to find the minimum</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/0ff7df06cf9e6f571b9333eff9816357f8a8a87aa143d4cfdd39be83e08fc7e8.png" src="../_images/0ff7df06cf9e6f571b9333eff9816357f8a8a87aa143d4cfdd39be83e08fc7e8.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="variants-of-gradient-descent">
+<h2>Variants of Gradient Descent<a class="headerlink" href="#variants-of-gradient-descent" title="Link to this heading">#</a></h2>
+<p><strong>Which route to take downhill?</strong></p>
+<img src="../images/gradient_descent/hill.png" width="1500"><section id="batch-gradient-descent">
+<h3>Batch gradient descent<a class="headerlink" href="#batch-gradient-descent" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p><strong>All instances</strong> are used to calculate the gradient (step). <br><br>
+The algorithm is faster than the Normal Equation but still <strong>slow</strong>.<br />
+</div>
+<div class="images">
+<img src="../images/gradient_descent/plots/batch_gd.png">
+</div></p>
+</div></section>
+<section id="stochastic-gradient-descent">
+<h3>Stochastic gradient descent<a class="headerlink" href="#stochastic-gradient-descent" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p><strong>Only 1 random instances</strong> is used to calculate the gradient (step).</p>
+<p><strong>Much faster</strong> as there is little data to process at each update.</p>
+<p>Can be used for <strong>very large data sets
+→ online training possible</strong></p>
+<p>Cost decreases only on average and <strong>bounces back and forth</strong>.
+→ can help not getting stuck in local minima</p>
+<p><strong>Optimum will be close but never reached.</strong><br />
+</div>
+<div class="images">
+<img src="../images/gradient_descent/plots/stochastic_gd.png">
+</div></p>
+</div></section>
+<section id="mini-batch-gradient-descent">
+<h3>Mini-Batch gradient descent<a class="headerlink" href="#mini-batch-gradient-descent" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Trains on <strong>small random subset</strong> instead of all data or individual ones.</p>
+<p><strong>Performs better than SGD</strong> as it exploits hardware optimization of matrix operations</p>
+<p><strong>Drawback</strong>: It is harder not to end up in <strong>local minima</strong><br />
+</div>
+<div class="images">
+<img src="../images/gradient_descent/plots/minibatch_gd.png">
+</div></p>
+</div></section>
+<section id="gradient-descent-comparison">
+<h3>Gradient Descent Comparison<a class="headerlink" href="#gradient-descent-comparison" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/1b48f9a6f47862963c5cef3625324bb0d609908138b087164ac670dace187b4d.png" src="../_images/1b48f9a6f47862963c5cef3625324bb0d609908138b087164ac670dace187b4d.png" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/838d4582a7d4502d6057046c0c82cbbaac3e5d6c0180038c2a83fdcb10f9caa7.png" src="../_images/838d4582a7d4502d6057046c0c82cbbaac3e5d6c0180038c2a83fdcb10f9caa7.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=sDv4f4s2SB8">Gradient Descent Step by Step</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="09.2_Regularization.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Regularization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="11_Evaluation_Metrics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Evaluation Metrics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orientation">Orientation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-of-optimization-of-linear-regression-with-ols">Recap of Optimization of Linear Regression with OLS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-parameters-of-a-model-by-gradually-minimizing-your-cost">Find the parameters of a model by gradually minimizing your cost</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-in-a-nutshell">Gradient Descent in a nutshell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-gradient-descent">When to use Gradient Descent?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-step-define-model">First Step: Define Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#second-step-define-cost-function">Second Step: Define Cost Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#third-step-initialize-gradient-descent">Third Step: Initialize Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forth-step-derivatives-with-respect-to-the-parameters">Forth Step: Derivatives with respect to the parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forth-step-gradient-descent">Forth Step: Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Forth Step: Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Forth Step: Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Forth Step: Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-summed-up">Gradient Descent summed up</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate">Learning Rate</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Learning Rate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-main-challenges-of-gradient-descent">Two main challenges of Gradient Descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unscaled-data">Unscaled Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-gradient-descent">Variants of Gradient Descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-gradient-descent">Batch gradient descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-gradient-descent">Stochastic gradient descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-gradient-descent">Mini-Batch gradient descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-comparison">Gradient Descent Comparison</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

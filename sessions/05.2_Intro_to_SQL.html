@@ -1,0 +1,1057 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to SQL &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/05.2_Intro_to_SQL';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gestalt Laws Principles" href="06.1_Gestalt_Principles.html" />
+    <link rel="prev" title="Introduction to Databases" href="05.1_Intro_to_Databases.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to SQL</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddl-dml-dcl">DDL, DML &amp; DCL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-sql-do">What can SQL do?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">What can SQL do?</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-control-language-dcl">Data Control Language (DCL)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sql-syntax-overview">SQL Syntax Overview</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-data">Selecting Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#select-from">SELECT FROM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-first-sql-query">Your first SQL query</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#select-distinct">SELECT DISTINCT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limit">LIMIT</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-data">Filtering Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where">WHERE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-operators">WHERE Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-with-and-or-not">WHERE with AND, OR, NOT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-with-null-values">WHERE with NULL values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-data">Sorting Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order-by">ORDER BY</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aliasing">Aliasing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aliases-for-columns-and-tables">Aliases for columns and tables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-from-multiple-tables">Selecting from multiple tables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joining-tables">Joining tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#join">JOIN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregating-data">Aggregating Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#min-and-max">MIN() and MAX()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avg-count-and-sum">AVG(), COUNT() and SUM()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operators">Arithmetic Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-by">GROUP BY</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#having">HAVING</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documenting-code">Documenting Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sql-comments">SQL Comments</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-sql">
+<h1>Introduction to SQL<a class="headerlink" href="#introduction-to-sql" title="Link to this heading">#</a></h1>
+<section id="ddl-dml-dcl">
+<h2>DDL, DML &amp; DCL<a class="headerlink" href="#ddl-dml-dcl" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Data Definition Language (DDL)</strong> consists of the
+commands used to define the database schema by creating,
+altering or deleting objects</p></li>
+<li><p><strong>Data Manipulation Language (DML)</strong> consists of the
+commands used to manipulate the data present in the
+database such as selecting, inserting, updating or deleting
+records in a database</p></li>
+<li><p><strong>Data Control Language (DCL)</strong> deals with the rights,
+permissions and other controls of the database system</p></li>
+</ul>
+</section>
+<section id="what-can-sql-do">
+<h2>What can SQL do?<a class="headerlink" href="#what-can-sql-do" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>SQL can execute queries against a database</p></li>
+<li><p>SQL can retrieve data from a database</p></li>
+<li><p>SQL can insert records in a database</p></li>
+<li><p>SQL can update records in a database</p></li>
+<li><p>SQL can delete records from a database</p></li>
+<li><p>SQL can create new databases</p></li>
+<li><p>SQL can create new tables in a database</p></li>
+<li><p>SQL can create stored procedures in a database</p></li>
+<li><p>SQL can create views in a database</p></li>
+<li><p>SQL can set permissions on tables, procedures, and views</p></li>
+</ul>
+<p><a class="reference external" href="https://www.w3schools.com/sql/sql_intro.asp">source</a></p>
+<section id="id1">
+<h3>What can SQL do?<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<h4>Data Definition Language (DDL)</h4>
+<ul>
+<li><p>create new databases</p></li>
+<li><p>create new tables in a database</p></li>
+<li><p>create stored procedures in a database</p></li>
+<li><p>create views in a database</p>
+</div>
+<div class="text">
+</li>
+</ul>
+<h4>Data Manipulation Language (DML)</h4>
+<ul>
+<li><p>execute queries against a database</p></li>
+<li><p>retrieve data from a database</p></li>
+<li><p>insert records in a database</p></li>
+<li><p>update records in a database</p></li>
+<li><p>delete records from a database</p>
+</div>
+</li>
+</ul>
+</div>
+<section id="data-control-language-dcl">
+<h4>Data Control Language (DCL)<a class="headerlink" href="#data-control-language-dcl" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>set permissions on tables, procedures, and views</p></li>
+</ul>
+<p><a class="reference external" href="https://www.w3schools.com/sql/sql_intro.asp">source</a></p>
+</section>
+</section>
+</section>
+<section id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>SQL is structured similar to the English language</p></li>
+</ul>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">range</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">age_bucket</span><span class="p">;</span>
+<span class="w">     </span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Each table is identified by name</p></li>
+<li><p>SQL keywords are NOT case sensitive: select = SELECT</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+Important: Some databases allow more than one SQL
+statement to be executed, therefore it’s the standard way to
+separate each SQL statement with a semicolon
+</div>
+<p><a class="reference external" href="https://www.w3schools.com/sql/sql_syntax.asp">source</a></p>
+<section id="sql-syntax-overview">
+<h3>SQL Syntax Overview<a class="headerlink" href="#sql-syntax-overview" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>KEYWORD</p></th>
+<th class="head text-left"><p>FUNCTION</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>SELECT</p></td>
+<td class="text-left"><p>Returns the final data</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>FROM</p></td>
+<td class="text-left"><p>Choose tables to get base data</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>WHERE</p></td>
+<td class="text-left"><p>Filters the base data</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>GROUP BY</p></td>
+<td class="text-left"><p>Aggregates the base data</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>HAVING</p></td>
+<td class="text-left"><p>Filters the aggregated data</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>ORDER BY</p></td>
+<td class="text-left"><p>Sorts the final data</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>LIMIT</p></td>
+<td class="text-left"><p>Limits the returned data to a row count</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="selecting-data">
+<h2>Selecting Data<a class="headerlink" href="#selecting-data" title="Link to this heading">#</a></h2>
+<section id="select-from">
+<h3>SELECT FROM<a class="headerlink" href="#select-from" title="Link to this heading">#</a></h3>
+<p>Select multiple columns</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Select all columns</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="your-first-sql-query">
+<h3>Your first SQL query<a class="headerlink" href="#your-first-sql-query" title="Link to this heading">#</a></h3>
+<p>Look in the introduction schema</p>
+<p>In the new window on the right click on the query under ‘Your first<br />
+SQL query’:</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">range</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">age_bucket</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Now press ^ CTRL ⮐ RETURN and check out the output that was<br />
+generated below.</p>
+<p>Congratulations you just ran your first SQL query!</p>
+</section>
+<section id="select-distinct">
+<h3>SELECT DISTINCT<a class="headerlink" href="#select-distinct" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">column_names</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Columns often contain duplicate values</p></li>
+<li><p>DISTINCT returns only distinct (=different) values</p></li>
+</ul>
+</section>
+<section id="limit">
+<h3>LIMIT<a class="headerlink" href="#limit" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">column_names</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="nb">number</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Databases often contain tables with huge amounts of<br />
+columns and rows</p></li>
+<li><p>By default SQL tries to retrieve all the rows it can find in a table</p></li>
+<li><p>The bigger the table, the longer it takes to retrieve its data,<br />
+therefore always LIMIT your data to only a few rows</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+DBeaver limits the result to 200 rows by default
+</div>
+</section>
+</section>
+<section id="filtering-data">
+<h2>Filtering Data<a class="headerlink" href="#filtering-data" title="Link to this heading">#</a></h2>
+<section id="where">
+<h3>WHERE<a class="headerlink" href="#where" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The where clause is used to filter records</p></li>
+<li><p>‘condition’ represents how we want the data to be filtered</p></li>
+<li><p>Use quotation marks when filtering string values<br />
+eg. name =’female’ for gender table</p></li>
+<li><p>Example: Retrieve all days with more than 100 cases</p></li>
+</ul>
+</section>
+<section id="where-operators">
+<h3>WHERE Operators<a class="headerlink" href="#where-operators" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Operator</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>=</p></td>
+<td class="text-left"><p>Equal</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>&gt;</p></td>
+<td class="text-left"><p>Greater than</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>&lt;</p></td>
+<td class="text-left"><p>Less than</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>&gt;=</p></td>
+<td class="text-left"><p>Greater than or equal</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>&lt;=</p></td>
+<td class="text-left"><p>Less than or equal</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>&lt;&gt; or !=</p></td>
+<td class="text-left"><p>Not equal</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>BETWEEN</p></td>
+<td class="text-left"><p>Between a certain range</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>LIKE</p></td>
+<td class="text-left"><p>Search for a pattern</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>IN</p></td>
+<td class="text-left"><p>To specify multiple possible values for a column</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="where-with-and-or-not">
+<h3>WHERE with AND, OR, NOT<a class="headerlink" href="#where-with-and-or-not" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span>
+<span class="mi">1</span><span class="p">.</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition1</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">condition2</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">condition3</span><span class="w"> </span><span class="p">...;</span>
+<span class="mi">2</span><span class="p">.</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition1</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">condition2</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">condition3</span><span class="w"> </span><span class="p">...;</span>
+<span class="mi">3</span><span class="p">.</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="n">condition1</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>AND</strong> displays data if all the conditions separated by <strong>AND</strong> are <strong>TRUE</strong></p></li>
+<li><p><strong>OR</strong> displays data if any of the conditions separated by <strong>OR</strong> are <strong>TRUE</strong></p></li>
+<li><p><strong>NOT</strong> displays data if the condition(s) is <strong>NOT TRUE</strong></p></li>
+</ul>
+</section>
+<section id="where-with-null-values">
+<h3>WHERE with NULL values<a class="headerlink" href="#where-with-null-values" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>A field that contains a NULL value is a field with no value<br />
+-&gt; it was left blank during record creation</p></li>
+<li><p>Therefore, it’s different from a zero value or a value that contains spaces</p></li>
+<li><p>It is not possible to check for NULL values using the WHERE<br />
+operators (=, &lt;&gt;, &gt;, &lt;) → <strong>Always</strong> use IS NULL to filter for<br />
+NULL values</p></li>
+</ul>
+</section>
+</section>
+<section id="sorting-data">
+<h2>Sorting Data<a class="headerlink" href="#sorting-data" title="Link to this heading">#</a></h2>
+<section id="order-by">
+<h3>ORDER BY<a class="headerlink" href="#order-by" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">column1</span><span class="w"> </span><span class="k">ASC</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="w"> </span><span class="k">ASC</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span><span class="w"> </span><span class="p">...;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>ORDER BY</strong> sorts the results either in ascending or descending order</p></li>
+<li><p>By default, results are sorted in ascending order</p></li>
+<li><p>When sorting by multiple columns, you can set the sorting<br />
+order for each column separately</p></li>
+<li><p>Columns in the <strong>ORDER BY</strong> can not only be referenced name but also<br />
+by their index in the <strong>SELECT</strong> statement</p></li>
+</ul>
+</section>
+</section>
+<section id="aliasing">
+<h2>Aliasing<a class="headerlink" href="#aliasing" title="Link to this heading">#</a></h2>
+<section id="aliases-for-columns-and-tables">
+<h3>Aliases for columns and tables<a class="headerlink" href="#aliases-for-columns-and-tables" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">alias_name</span><span class="p">,</span><span class="w"> </span><span class="p">...</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">alias_name</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>An alias is created with the AS keyword</p></li>
+<li><p>It allows you to give a column or a table a new temporary name within the query</p></li>
+<li><p>Use snake case = writing spaces as underscores when creating aliases<br />
+(arrivaltime -&gt; arrival_time)</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+When? Whenever possible! Use cases:
+<br>
+<ul class="simple">
+<li><p>Column names are long or not very readable</p></li>
+<li><p>Aggregate functions are used</p></li>
+<li><p>More than one table is involved</p></li>
+<li><p>Multiple columns are combined</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="selecting-from-multiple-tables">
+<h2>Selecting from multiple tables<a class="headerlink" href="#selecting-from-multiple-tables" title="Link to this heading">#</a></h2>
+<section id="joining-tables">
+<h3>Joining tables<a class="headerlink" href="#joining-tables" title="Link to this heading">#</a></h3>
+<p><img alt="img_p28_1" src="../_images/img_p28_1.png" /></p>
+</section>
+<section id="join">
+<h3>JOIN<a class="headerlink" href="#join" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="n">something</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">table1</span><span class="w"> </span><span class="n">t1</span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">table2</span><span class="w"> </span><span class="n">t2</span>
+<span class="k">ON</span><span class="w"> </span><span class="n">t1</span><span class="p">.</span><span class="n">key1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t2</span><span class="p">.</span><span class="n">key2</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>inner join is default</p>
+<p>now with nice names:</p>
+<p>get all cases for women<br />
+get all cases for men between 20 and 50</p>
+<img src="../images/intro_to_sql/img_p30_1.png" width="950"></section>
+</section>
+<section id="aggregating-data">
+<h2>Aggregating Data<a class="headerlink" href="#aggregating-data" title="Link to this heading">#</a></h2>
+<section id="min-and-max">
+<h3>MIN() and MAX()<a class="headerlink" href="#min-and-max" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">MIN</span><span class="p">(</span><span class="n">column1</span><span class="p">),</span>
+<span class="w">       </span><span class="k">MAX</span><span class="p">(</span><span class="n">column2</span><span class="p">),</span><span class="w"> </span><span class="p">...</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The MIN() function returns the smallest value of the selected column</p></li>
+<li><p>The MAX() function returns the largest value of the selected column</p></li>
+</ul>
+</section>
+<section id="avg-count-and-sum">
+<h3>AVG(), COUNT() and SUM()<a class="headerlink" href="#avg-count-and-sum" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">column1</span><span class="p">),</span>
+<span class="w">       </span><span class="k">COUNT</span><span class="p">(</span><span class="n">column2</span><span class="p">),</span>
+<span class="w">       </span><span class="k">SUM</span><span class="p">(</span><span class="n">column3</span><span class="p">),</span><span class="w"> </span><span class="p">...</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The AVG() function returns the average value of a numeric column</p></li>
+<li><p>The COUNT() function returns the number of non NULL values</p></li>
+<li><p>The SUM() function returns the total sum of a numeric column</p></li>
+<li><p>DISTINCT can be used inside AVG(), COUNT() and SUM()</p></li>
+</ul>
+</section>
+<section id="arithmetic-operators">
+<h3>Arithmetic Operators<a class="headerlink" href="#arithmetic-operators" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="o">&lt;</span><span class="n">expression1</span><span class="o">&gt;&lt;</span><span class="k">operator</span><span class="o">&gt;&lt;</span><span class="n">expression2</span><span class="o">&gt;</span><span class="w"> </span><span class="p">...</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Arithmetic operators can perform addition, subtraction,
+multiplication and division on numeric values</p></li>
+<li><p>Performing arithmetic calculations is not limited to column
+names but can be done on single constants, variables or
+results from other SQL queries</p></li>
+</ul>
+<div class="text">
+<table>
+  <tr>
+    <th>Operator</th>
+    <th>Meaning</th>
+  </tr>
+  <tr>
+    <td>+</td>
+    <td>Addition</td>
+  </tr>
+  <tr>
+    <td>-</td>
+    <td>Subtraction</td>
+  </tr>
+  <tr>
+    <td>*</td>
+    <td>Multiplication</td>
+</tr>
+  <tr>
+    <td>/</td>
+    <td>Division</td>
+</tr>
+  <tr>
+    <td>%</td>
+    <td>Modulo</td>
+</tr>
+</table>
+</div>
+</section>
+<section id="group-by">
+<h3>GROUP BY<a class="headerlink" href="#group-by" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>GROUP BY lets you arrange identical data across rows into groups</p></li>
+<li><p>In combination with aggregate functions (MIN(), MAX(), AVG(), COUNT(), SUM()) it’s used to create summary reports across columns</p></li>
+</ul>
+</section>
+<section id="having">
+<h3>HAVING<a class="headerlink" href="#having" title="Link to this heading">#</a></h3>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">column_name</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">HAVING</span><span class="w"> </span><span class="n">condition</span><span class="p">,</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Aggregate functions can’t be used to filter data inside the WHERE clause, instead use HAVING</p></li>
+<li><p>Example: HAVING COUNT(column1) &gt; 5</p></li>
+</ul>
+</section>
+</section>
+<section id="documenting-code">
+<h2>Documenting Code<a class="headerlink" href="#documenting-code" title="Link to this heading">#</a></h2>
+<section id="sql-comments">
+<h3>SQL Comments<a class="headerlink" href="#sql-comments" title="Link to this heading">#</a></h3>
+<p>There are two ways of commenting your SQL code</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="c1">-- single line comment</span>
+
+<span class="cm">/* Multi-line</span>
+<span class="cm">comments</span>
+<span class="cm">*/</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Single line comments starting with –</p></li>
+<li><p>Multi-line comments starting with /* and ending with */</p></li>
+</ol>
+<p>Why use comments?</p>
+<ul class="simple">
+<li><p>Reviewing or taking over long and complicated SQL
+statements is much easier when having proper
+documentation</p></li>
+<li><p>Testing or debugging your code often requires step-by-step
+execution, where being able to prevent execution of certain
+SQL statements proves very useful</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05.1_Intro_to_Databases.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Databases</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="06.1_Gestalt_Principles.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Gestalt <del>Laws</del> Principles</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddl-dml-dcl">DDL, DML &amp; DCL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-sql-do">What can SQL do?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">What can SQL do?</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-control-language-dcl">Data Control Language (DCL)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sql-syntax-overview">SQL Syntax Overview</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-data">Selecting Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#select-from">SELECT FROM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-first-sql-query">Your first SQL query</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#select-distinct">SELECT DISTINCT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limit">LIMIT</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-data">Filtering Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where">WHERE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-operators">WHERE Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-with-and-or-not">WHERE with AND, OR, NOT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-with-null-values">WHERE with NULL values</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-data">Sorting Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#order-by">ORDER BY</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aliasing">Aliasing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aliases-for-columns-and-tables">Aliases for columns and tables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-from-multiple-tables">Selecting from multiple tables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joining-tables">Joining tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#join">JOIN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregating-data">Aggregating Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#min-and-max">MIN() and MAX()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#avg-count-and-sum">AVG(), COUNT() and SUM()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operators">Arithmetic Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-by">GROUP BY</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#having">HAVING</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documenting-code">Documenting Code</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sql-comments">SQL Comments</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1941 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Artificial Neural Networks &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/18_Neural_Networks';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Artificial Neural Networks" href="aipm_sessions/ANN_AIPM.html" />
+    <link rel="prev" title="Designing Data Products" href="17_Data_Products.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Artificial Neural Networks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-basis-function-models">Adaptive basis function models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-and-why">When and Why?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">When and why?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">When and why?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">When and why?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-neuron">The Neuron</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-started">How it started</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-ended">How it ended</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">How it ended</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-different-neuron-the-perceptron">A different neuron: the Perceptron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-function">Activation Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-xor-problem-the-end-of-the-perceptron">The XOR problem - the end of the Perceptron</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">The XOR problem - the end of the Perceptron</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-computations-and-neurons">Logical computations and neurons</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Logical computations and neurons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Logical computations and neurons</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-neural-network">The Neural Network</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network">Neural network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Neural network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Neural network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Neural network</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-neural-networks-and-compact-representations">Deep Neural Networks and compact representations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning-and-parameter-search">Deep learning and parameter search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-the-network">Training the network</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Deep learning and parameter search</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-activation-functions">Non-linear activation functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Non-linear activation functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feed-forward-step">Feed-forward step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#back-propagation">Back-propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feed-forward-and-back-propagation">Feed forward and back propagation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-prop-intuition">Back prop - intuition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-graphs">Computational graphs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-graphs-feed-forward">Computational graphs - feed forward</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-graphs-backward-propagation">Computational graphs - backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-propagation">Backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-propagation-starting-at-the-end">Backward propagation - starting at the end</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">Backward propagation - starting at the end</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Backward propagation - starting at the end</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">Backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">Backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">Backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">Backward propagation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-prop-math">Back prop - math</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#back-propagation-for-binary-loss">Back-propagation for binary loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">Back-propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">Back-propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">Back-propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">Back-propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">Back-propagation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">Feed forward and back propagation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-deep-neural-networks">Training deep neural networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-exploding-gradients">Vanishing/Exploding gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">Vanishing/Exploding gradients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-own-nn">Building your own NN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">Hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-strategies">Search Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id28">Search Strategies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id29">Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id30">Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-effect-of-sub-networks">The effect of sub-networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-effect-of-mid-range-activation-functions">The effect of mid-range activation functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-techniques-in-deep-learning-dropout">Regularization techniques in deep learning - Dropout</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-techniques-in-deep-learning-intuitive-explanation-to-neural-co-adapting">Regularization techniques in deep learning - Intuitive explanation to neural co-adapting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-techniques-in-deep-learning-dropout-mimics-ensembling">Regularization techniques in deep learning - Dropout mimics ensembling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id31">Regularization techniques in deep learning - Dropout mimics ensembling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-techniques-in-deep-learning-early-stopping-can-be-resourceful">Regularization techniques in deep learning - Early stopping can be resourceful</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frameworks">Frameworks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-deep-learning-libraries-deep-learning-frameworks">Python deep learning libraries - Deep learning frameworks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-deep-learning-libraries-tensorflow-and-keras">Python deep learning libraries - TensorFlow and Keras</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-deep-learning-libraries-the-power-of-tensorflow">Python deep learning libraries - The power of TensorFlow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-deep-learning-libraries-tensorboard-tensorflow-visualization">Python deep learning libraries - TensorBoard - TensorFlow visualization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="artificial-neural-networks">
+<h1>Artificial Neural Networks<a class="headerlink" href="#artificial-neural-networks" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If the graphviz pictures cause an error: </span>
+<span class="c1">#(this was removed from requirements.txt file again, after it caused on github an error when running the jupyter book.)</span>
+<span class="c1">#!pip install graphviz</span>
+</pre></div>
+</div>
+</div>
+</div>
+<img src="../images/neural_networks/img_p2_2.png"><img src="../images/neural_networks/img_p3_4.png" width="1350">
+<p><sub><sub><a class="reference external" href="https://books.google.com/ngrams/graph?content=artificial+intelligence%2Cmachine+learning%2Cdeep+learning%2Cneural+networks%2Cperceptron&amp;amp;year_start=1950&amp;amp;year_end=2019&amp;amp;corpus=26&amp;amp;smoothing=3&amp;amp;case_insensitive=true">Source</a></sub></sub></p>
+<section id="adaptive-basis-function-models">
+<h2>Adaptive basis function models<a class="headerlink" href="#adaptive-basis-function-models" title="Link to this heading">#</a></h2>
+<span style="font-size:50px">
+<div class="math notranslate nohighlight">
+\[ f(x) = w_{0} + \sum w_{m}\phi_{m}(x)\]</div>
+</span>
+<div class="group">
+    <div class="text">
+        <p><span class="color-brand">remember ensemble models?</span></p>       
+    </div>
+    <div class="images">
+        <img src="../images/neural_networks/img_p4_2.png">
+    </div>
+</div>
+</section>
+<section id="when-and-why">
+<h2>When and Why?<a class="headerlink" href="#when-and-why" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>non-linearity</p></li>
+<li><p>many dimensions</p></li>
+<li><p>…</p></li>
+</ul>
+<section id="id1">
+<h3>When and why?<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70"> 
+<p><strong>Non linear hypotheses</strong></p>
+<p>Assuming this data: to this dataset you could apply logistic
+regression with a lot of nonlinear features including lots of
+polynomials</p>
+<p>For 100 features, including the second order polynomials you get
+about 5000 features ~ <span class="math notranslate nohighlight">\(O(n^2)\)</span> features</p>
+<div class="math notranslate nohighlight">
+\[ g(b_{0}\,+\,b_{1}x_{1}\,+\,b_{2}x_{2}\,+\,b_{3}x_{1}x_{2}\,+\,b_{4}x_{1}^{2}\,+\,b_{5}x_{2}^{2})\]</div>
+  </div>
+  <div class="images_30"> 
+    <img src="../images/neural_networks/decision_boundary.svg" width="400"> 
+  </div>
+</div>
+</section>
+<section id="id2">
+<h3>When and why?<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70"> 
+<p><strong>Non linear hypotheses</strong></p>
+<p>Assuming this data: to this dataset you could apply logistic
+regression with a lot of nonlinear features including lots of
+polynomials</p>
+<p>For 100 features, including the second order polynomials you get
+about 5000 features ~ <span class="math notranslate nohighlight">\(O(n^2)\)</span> features</p>
+<div class="math notranslate nohighlight">
+\[ g(b_{0}\,+\,b_{1}x_{1}\,+\,b_{2}x_{2}\,+\,b_{3}x_{1}x_{2}\,+\,b_{4}x_{1}^{2}\,+\,b_{5}x_{2}^{2})\]</div>
+<ul>
+<li><p>risk of overfitting</p></li>
+<li><p>computationally expensive</p></li>
+<li><p>picking a subset of features can lead to simpler decision boundaries</p>
+</div>
+<div class="images_30"> 
+  <img src="../images/neural_networks/decision_boundary.svg" width="400"> 
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="id3">
+<h3>When and why?<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70"> 
+<p><strong>Many Dimensions</strong></p>
+<p>So.. let’s look at a picture of cats</p>
+<p>1200 x 1200 pixels</p>
+<p>50 x 50 pixels</p>
+<p>n = 2500 pixels so
+7500 in RGB</p>
+<p>~3 million quadratic features in
+grey scale .. 9 million in RGB</p>
+  </div>
+  <div class="images_30"> 
+    <img src="../images/neural_networks/img_p8_1.png" width="300"> 
+    <img src="../images/neural_networks/img_p8_2.png" width="50"> 
+  </div>
+</div>
+</section>
+</section>
+<section id="the-neuron">
+<h2>The Neuron<a class="headerlink" href="#the-neuron" title="Link to this heading">#</a></h2>
+<section id="how-it-started">
+<h3>How it started<a class="headerlink" href="#how-it-started" title="Link to this heading">#</a></h3>
+<img src="../images/neural_networks/img_p10_1.png" width="900"> 
+<p>“one learning algorithm” hypothesis - plug in any sensor and given
+enough time the brain will learn to deal with it</p>
+</section>
+<section id="how-it-ended">
+<h3>How it ended<a class="headerlink" href="#how-it-ended" title="Link to this heading">#</a></h3>
+<p>A logistic unit</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/nn_2layers.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f6c8af3a555a6f3a5788fee24616289a5a7a078f2f60bf9eed0c7742721dcf4e.svg" src="../_images/f6c8af3a555a6f3a5788fee24616289a5a7a078f2f60bf9eed0c7742721dcf4e.svg" />
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>How it ended<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>A logistic unit with a bias term</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x = \begin{bmatrix}
+x_1\\
+x_2 \\
+x_3
+\end{bmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}w = \begin{bmatrix}
+w_1\\
+w_2 \\
+w_3
+\end{bmatrix}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[bias = b\]</div>
+<p>ACTIVATION FUNCTION - <br />
+for example sigmoid</p>
+<div class="math notranslate nohighlight">
+\[ \ h_w(x) = \frac{1}{1+e^{-w^T x+ b}}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/nn_2layers_bias.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d824063d3acd5f656a9a1bf5a084174d88520841f6198d53d6c1f42f4f046a41.svg" src="../_images/d824063d3acd5f656a9a1bf5a084174d88520841f6198d53d6c1f42f4f046a41.svg" />
+</div>
+</div>
+</section>
+</section>
+<section id="a-different-neuron-the-perceptron">
+<h2>A different neuron: the Perceptron<a class="headerlink" href="#a-different-neuron-the-perceptron" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text"> 
+<ul class="simple">
+<li><p>Input and output are numbers</p></li>
+<li><p>Each input is associated with a weight</p></li>
+</ul>
+<p>Example step function: <br />
+<span class="math notranslate nohighlight">\( s t e p(z)=h e a v i s i d e(z)=\left\{\!\!\begin{array}{c c}{{0}}&amp;{{z&lt;0}}\\ {{1}}&amp;{{z\ge0}}\end{array}\right.\)</span></p>
+  </div>
+  <div class="images"> 
+    <img src="../images/neural_networks/perceprton.png" width="400"> 
+  </div>
+</div>
+<p style="font-size:10px">Rosenblatt, F. (1958), “The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain”
+</p>
+</section>
+<section id="activation-function">
+<h2>Activation Function<a class="headerlink" href="#activation-function" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text"> 
+<p>In the first Perceptron a step-function was used.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \mathrm{heaviside}\ (z)=\begin{cases}
+  0 &amp; \text {if} &amp; z&lt;0\\    
+  1 &amp; \text {if} &amp; z \ge 0
+\end{cases}\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}{sgn}\ (z)=\begin{cases}
+  -1 &amp; \text {if} &amp; z&lt;0\\    
+  0 &amp; \text {if} &amp; z=0\\    
+  +1 &amp; \text {if} &amp; z &gt; 0
+\end{cases}\end{split}\]</div>
+  </div>
+  <div class="images"> 
+    <img src="../images/neural_networks/step_fn.png" width="300"> 
+    <img src="../images/neural_networks/img_p14_1.png" width="500"> 
+  </div>
+</div>
+</section>
+<section id="the-xor-problem-the-end-of-the-perceptron">
+<h2>The XOR problem - the end of the Perceptron<a class="headerlink" href="#the-xor-problem-the-end-of-the-perceptron" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Exclusive OR: (<span class="math notranslate nohighlight">\(x_1\)</span> OR <span class="math notranslate nohighlight">\(x_2\)</span> are 1 but never both)</p></li>
+<li><p>Perceptron fails at this simple problem</p></li>
+<li><p>One of the reasons for the first AI Winter (1973)</p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/perceptrons-logical-functions-and-the-xor-problem-37ca5025790a">https://towardsdatascience.com/perceptrons-logical-functions-and-the-xor-problem-37ca5025790a </a></p></li>
+</ul>
+<section id="id5">
+<h3>The XOR problem - the end of the Perceptron<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text"> 
+<ul>
+<li><p>Exclusive OR: (<span class="math notranslate nohighlight">\(x_1\)</span> OR <span class="math notranslate nohighlight">\(x_2\)</span> are 1 but never both)</p></li>
+<li><p>Perceptron fails at this simple problem</p></li>
+<li><p>One of the reasons for the first AI Winter (1973)</p>
+</div>
+<div class="images"> 
+  <img src="../images/neural_networks/xor.png" width="500"> 
+</li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>x1</p></th>
+<th class="head"><p>x2</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+  </div>
+</div>
+</section>
+</section>
+<section id="logical-computations-and-neurons">
+<h2>Logical computations and neurons<a class="headerlink" href="#logical-computations-and-neurons" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text"> 
+<p><strong>More than one possible outcome - more Perceptrons</strong></p>
+<ul>
+<li><p>Here: three possible outcomes</p></li>
+<li><p>Described as a <span style="color:#E87103;">{fully connected layer}</span> or <span style="color:#E87103;">{dense layer}</span></p>
+</div>
+<div class="images"> 
+  <img src="../images/neural_networks/mlp.png" width="500"> 
+</div>
+</li>
+</ul>
+</div>
+<section id="id6">
+<h3>Logical computations and neurons<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text"> 
+<p><strong>The XOR problem - the end of the Perceptron</strong></p>
+<ul>
+<li><p>Two Lines are needed to separate the classes</p>
+<ul class="simple">
+<li><p><span style="color:#E87103;">Two Perceptrons could solve this
+</span></p></li>
+</ul>
+</li>
+<li><p>But two binary outputs</p>
+<ul class="simple">
+<li><p><span style="color:#E87103;">Two outputs with three combinations: [00, 10, 11]
+</span></p></li>
+</ul>
+</div>
+<div class="images"> 
+  <img src="../images/neural_networks/xor_prob.png" width="300"> 
+</div>
+</li>
+</ul>
+</div>
+<p style="font-size:10px">Minsky, M. and Papert, S. (1969): “Perceptrons: An Introduction to Computational Geometry”
+</p>
+</section>
+<section id="id7">
+<h3>Logical computations and neurons<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text"> 
+<p><strong>The XOR problem - a multilayer problem</strong></p>
+<ul>
+<li><p>Adding a second layer solves the XOR problem</p>
+<ul class="simple">
+<li><p><span style="color:#E87103;"> Multilayer Perceptron (MLP)
+</span></p></li>
+</ul>
+</li>
+<li><p>Breaks problem into sub-problems</p>
+<ul class="simple">
+<li><p><span style="color:#E87103;">Solves sub-problems
+</span></p></li>
+<li><p><span style="color:#E87103;">Combines results
+</span></p></li>
+</ul>
+</div>
+<div class="images"> 
+  <img src="../images/neural_networks/xor_mlp.png" width="800" height="900"> 
+</div>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="the-neural-network">
+<h2>The Neural Network<a class="headerlink" href="#the-neural-network" title="Link to this heading">#</a></h2>
+<section id="neural-network">
+<h3>Neural network<a class="headerlink" href="#neural-network" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/nn_3layers.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2b746c639f815cb38fcd3ff29943d2aa430e6bea92bafbc2370cceec555a2717.svg" src="../_images/2b746c639f815cb38fcd3ff29943d2aa430e6bea92bafbc2370cceec555a2717.svg" />
+</div>
+</div>
+</section>
+<section id="id8">
+<h3>Neural network<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>layer 0 = input layer</p>
+<p>layer 1 = hidden layer (can be more of course)</p>
+<p>layer 2 = output layer</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/nn_3layers_bias.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c3dc1017c5a0c4310c80138a6136bc10837eb466fe20661d2752c99c0b437fb3.svg" src="../_images/c3dc1017c5a0c4310c80138a6136bc10837eb466fe20661d2752c99c0b437fb3.svg" />
+</div>
+</div>
+</section>
+<section id="id9">
+<h3>Neural network<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}  
+\begin{align}
+\text{The input values: }&amp;
+x = \begin{bmatrix}
+x_1\\
+x_2 \\
+x_3
+\end{bmatrix} 
+\\[10px] \text{The tensor of weights: } &amp; W^{(j)}\hspace{1 cm}
+\\[10px] \text{The matrix of biases: } &amp; b^{(j)}\hspace{1 cm}
+\\[10px] \text{The output values of each neuron: }&amp; a_i^{(j)}
+\\[10px] \text{The layer number: }&amp; j
+\end{align} \end{split}\]</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+How many dimensions does W for j =1 have? 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/nn_3layers_bias.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c3dc1017c5a0c4310c80138a6136bc10837eb466fe20661d2752c99c0b437fb3.svg" src="../_images/c3dc1017c5a0c4310c80138a6136bc10837eb466fe20661d2752c99c0b437fb3.svg" />
+</div>
+</div>
+</section>
+<section id="id10">
+<h3>Neural network<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}  
+x = \begin{bmatrix}
+b^{(1)}\\
+x_1\\
+x_2 \\
+x_3
+\end{bmatrix} \hspace{1cm} \  
+W^{(j)} , a_i^{(j)} \end{split}\]</div>
+<p>j is the layer number</p>
+<p>How many dimensions does W for j =1 have?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+a_{1}^{(1)}&amp;=g\Big(W_{10}^{(1)}b^{(1)}\,+\,W_{11}^{(1)}x_{1}\,+\,W_{12}^{(1)}x_{2}\,+\,W_{13}^{(1)}x_{3}\Big)\\
+a_{2}^{(1)}&amp;=\,g\Big(W_{20}^{(1)}b^{(1)}\,+\,W_{21}^{(1)}x_{1}\,+\,W_{22}^{(1)}x_{2}\,+\,W_{23}^{(1)}x_{3}\Big)\\ 
+a_{3}^{(1)}&amp;=\,g\Big(W_{30}^{(1)}b^{(1)}\,+\,W_{31}^{(1)}x_{1}\,+\,W_{32}^{(1)}x_{2}\,+\,W_{33}^{(1)}x_{3}\Big)\\ 
+h_W = a_{1}^{(2)}&amp;=\,g\Big(W_{10}^{(2)}b^{(2)}\,+\,W_{11}^{(2)}a_{1}^{(1)}\,+\,W_{12}^{(2)}a_{2}^{(1)}\,+\,W_{13}^{(2)}a_{3}^{(1)}\Big)
+\end{align}\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/nn_3layers_bias.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c3dc1017c5a0c4310c80138a6136bc10837eb466fe20661d2752c99c0b437fb3.svg" src="../_images/c3dc1017c5a0c4310c80138a6136bc10837eb466fe20661d2752c99c0b437fb3.svg" />
+</div>
+</div>
+<p>In ‘numpy notation’:</p>
+<p><span class="math notranslate nohighlight">\(\begin{align} W^{(j)}\text{.shape} &amp;= \left(\text{size}_{j+1} , (\text{size}_j + 1)\right)\\
+&amp;=(3,4)\\ \end{align}\)</span></p>
+</section>
+</section>
+<section id="deep-neural-networks-and-compact-representations">
+<h2>Deep Neural Networks and compact representations<a class="headerlink" href="#deep-neural-networks-and-compact-representations" title="Link to this heading">#</a></h2>
+<p>What Network architecture can solve the Parity function:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} f_{p a r}(x_{1},...,x_{D})=\left\{\begin{array}{l l}{{0}}&amp;{{\mathrm{if~\sum_{j}x_{j}~\mathrm{odd}}}}\\ {{1}}&amp;{{\mathrm{if~{\mathrm{it~{is}}~e v e n}}}}\end{array}\right.\end{split}\]</div>
+<p>Here for D=4:</p>
+<p>Deep Neural Network with a single hidden layer: <strong>55 neurons</strong> required to solve the problem
+<img alt="" src="../_images/nn-55-neurons.svg" /></p>
+<p>Deep Neural Network with D=4 hidden layers: <strong>16 neurons</strong> required to solve the problem (much more compact as size is linear)
+<img alt="" src="../_images/dnn_16-neurons.svg" /></p>
+<div class="alert alert-block alert-info">
+<b>Note:</b>
+Neural networks with more layers can represent functions in more compact form
+</div></section>
+<section id="deep-learning-and-parameter-search">
+<h2>Deep learning and parameter search<a class="headerlink" href="#deep-learning-and-parameter-search" title="Link to this heading">#</a></h2>
+<div class="group">  
+  <div class="text_70"> 
+<p><strong>Deep Neural Networks</strong></p>
+<ul>
+<li><p>Deep neural networks</p>
+<ul class="simple">
+<li><p><span class="color-brand">At least one hidden layer</span></p></li>
+</ul>
+</li>
+<li><p>Can theoretically approximate any function</p>
+<ul class="simple">
+<li><p><span class="color-brand">Universal Approximation Theorem (Hornik (1991))</span></p></li>
+<li><p><span class="color-brand">With arbitrary activation functions</span></p></li>
+<li><p><span class="color-brand">Even with only a single hidden layer</span></p></li>
+</ul>
+</li>
+<li><p>Why than deeper?</p>
+</div>
+    <div class="images_30"> 
+<img src="../images/neural_networks/dnn_1.png" width="400"> 
+</div>
+</li>
+</ul>
+</div>
+<p style="font-size:10px">Cybenko, G. (1989), “Approximation by Superpositions of a Sigmoidal Function”<br>
+Hornik, K. (1991), “Approximation Capabilities of Multilayer Feedforward Networks”<br>
+Csáji, B.C., (2001), “Approximation with Artificial Neural Networks”
+</p>
+</section>
+<section id="training-the-network">
+<h2>Training the network<a class="headerlink" href="#training-the-network" title="Link to this heading">#</a></h2>
+<section id="id11">
+<h3>Deep learning and parameter search<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<p>How to find the parameters?</p>
+<ul class="simple">
+<li><p>First intuition:  <span class="color-brand"><strong>Gradient descent</strong></span></p>
+<ul>
+<li><p>But how to apply the algorithm with many coupled and nested functions?</p></li>
+</ul>
+</li>
+<li><p><span class="color-brand"><strong>Backpropagation</strong></span> was a breakthrough in research</p>
+<ul>
+<li><p>Makes training of very deep networks possible</p></li>
+<li><p>Error is backpropagated through a network (End to Begin)</p></li>
+<li><p>Gradient is calculated step-wise</p></li>
+</ul>
+</li>
+<li><p>Problem: Gradient of the step function is almost always zero</p>
+<ul>
+<li><p>What now?</p></li>
+</ul>
+</li>
+</ul>
+<p style="font-size:10px">Werbos, P.J. (1974), “Beyond Regression: New Tools For Prediction And Analysis In The Behavioral Sciences”<br>
+Linnainmaa, S. (1970), “The representation of the cumulative rounding error of an algorithm as a Taylor expansion of the local rounding errors”<br>
+Rumelhart, D., Hinton, G. and Williams, R. (1986), “Learning Internal Representations by Error Propagation”
+</p>
+</section>
+<section id="non-linear-activation-functions">
+<h3>Non-linear activation functions<a class="headerlink" href="#non-linear-activation-functions" title="Link to this heading">#</a></h3>
+<div class="group">  
+  <div class="text_70"> 
+<ul>
+<li><p>Make Backpropagation possible</p>
+<ul class="simple">
+<li><p><span class="color-brand">Gradient at almost any point in space</span></p></li>
+</ul>
+</li>
+<li><p>Most common activation functions are</p>
+<ul class="simple">
+<li><p><span class="color-brand">Sigmoid</span><span style="display:inline-block; width: 6.7cm;"></span>
+<span class="math notranslate nohighlight">\(\hspace{0.5cm} \sigma(z) = \frac{1}{1+\exp{(-z)}}\)</span></p></li>
+<li><p><span class="color-brand">Tanh</span><span style="display:inline-block; width: 7.85cm;"></span>
+<span class="math notranslate nohighlight">\(\hspace{0.5cm} \tanh(z) = \frac{\exp{(z)} - \exp{(-z)}}{\exp{(z)}+ \exp{(-z)}}\)</span></p></li>
+<li><p><span class="color-brand">ReLU (Rectified Linear Unit)</span>
+<span class="math notranslate nohighlight">\(\hspace{0.5cm} ReLU(z) = \max(0,z)\)</span></p></li>
+</ul>
+</div>
+    <div class="images_30"> 
+<img src="../images/neural_networks/img_p30_3.png" width="500"> 
+<img src="../images/neural_networks/img_p30_4.png" width="500"> 
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="id12">
+<h3>Non-linear activation functions<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Non-linear activation functions are needed to model more
+interesting output function</p>
+<ul>
+<li><p><span class="color-brand">Linear activation functions give linear models
+</span></p></li>
+</ul>
+</li>
+<li><p>Linear activation functions can be used in Regression problems</p>
+<ul>
+<li><p><span class="color-brand">Hidden layers should be non-linear nevertheless
+</span></p></li>
+</ul>
+</li>
+<li><p>Hidden layers with linear activation functions and a sigmoid
+output:</p>
+<ul>
+<li><p><span class="color-brand">Logistic regression
+</span></p></li>
+</ul>
+</li>
+</ul>
+<p><a class="reference external" href="https://playground.tensorflow.org/#activation=linear&amp;amp;batchSize=10&amp;amp;dataset=gauss&amp;amp;regDataset=reg-plane&amp;amp;learningRate=0.03&amp;amp;regularizationRate=0&amp;amp;noise=20&amp;amp;networkShape=&amp;amp;seed=0.22665&amp;amp;showTestData=false&amp;amp;discretize=false&amp;amp;percTrainData=70&amp;amp;x=true&amp;amp;y=true&amp;amp;xTimesY=false&amp;amp;xSquared=false&amp;amp;ySquared=false&amp;amp;cosX=false&amp;amp;sinX=false&amp;amp;cosY=false&amp;amp;sinY=false&amp;amp;collectStats=false&amp;amp;problem=classification&amp;amp;initZero=false&amp;amp;hideText=false">Playground</a></p>
+</section>
+<section id="feed-forward-step">
+<h3>Feed-forward step<a class="headerlink" href="#feed-forward-step" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>In the feed-forward step the data is propagated through the network from input to output</p></li>
+</ul>
+<img src="../images/neural_networks/ff.png" width="1000"> 
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/feed-forward-step.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e36bb2292affbcad6cf034f360099e9943e51a4ff6744b752b09c4d2ea0111e7.svg" src="../_images/e36bb2292affbcad6cf034f360099e9943e51a4ff6744b752b09c4d2ea0111e7.svg" />
+</div>
+</div>
+</section>
+<section id="back-propagation">
+<h3>Back-propagation<a class="headerlink" href="#back-propagation" title="Link to this heading">#</a></h3>
+<div class="group">  
+  <div class="text_70"> 
+<ul>
+<li><p>How can we discover in which direction and with which magnitude to tweak the parameters?</p>
+<ul class="simple">
+<li><p><span class="color-brand">We do the same as usual: Start at the loss function</span></p></li>
+</ul>
+</div>
+    <div class="images_30"> 
+<img src="../images/neural_networks/img_p33_1.png" width="300"> 
+</div>
+</li>
+</ul>
+</div>
+<ul class="simple">
+<li><p>Binary Loss (like in Logistic regression):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \mathcal{L}(y,\hat{y})=y\log\left(\hat{y}\right)+\left(1-y\right)\log\left(1-\hat{y}\right) \hspace{2cm}\text{ where } \hat{y} = a[5]\]</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+The Label is either 1 or 0 and a[5] the Output of the last layer’s activation function (here: sigmoid)
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/back_prop.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/32cff392db2b2e593c34e490f63ee8c4a248eacb21ff6c21eba8a5f373e562af.svg" src="../_images/32cff392db2b2e593c34e490f63ee8c4a248eacb21ff6c21eba8a5f373e562af.svg" />
+</div>
+</div>
+</section>
+<section id="feed-forward-and-back-propagation">
+<h3>Feed forward and back propagation<a class="headerlink" href="#feed-forward-and-back-propagation" title="Link to this heading">#</a></h3>
+<img src="../images/neural_networks/img_p4_2.png"></section>
+</section>
+<section id="back-prop-intuition">
+<h2>Back prop - intuition<a class="headerlink" href="#back-prop-intuition" title="Link to this heading">#</a></h2>
+<section id="computational-graphs">
+<h3>Computational graphs<a class="headerlink" href="#computational-graphs" title="Link to this heading">#</a></h3>
+<p>A directed graph where the nodes correspond to mathematical operations</p>
+<p><span class="math notranslate nohighlight">\(f(x, y, z) = q * z = (x + y)*z\)</span></p>
+<img src="../images/neural_networks/graph.png" width="300"> 
+</section>
+<section id="computational-graphs-feed-forward">
+<h3>Computational graphs - feed forward<a class="headerlink" href="#computational-graphs-feed-forward" title="Link to this heading">#</a></h3>
+<p>Going left to right</p>
+<p><span class="math notranslate nohighlight">\(f(x, y, z) = (x + y)*z\)</span> eg. <span class="color-brand"> <span class="math notranslate nohighlight">\(x = 1, y = 3, z = -3\)</span></span></p>
+<img src="../images/neural_networks/graph_1.png" width="600"> 
+</section>
+<section id="computational-graphs-backward-propagation">
+<h3>Computational graphs - backward propagation<a class="headerlink" href="#computational-graphs-backward-propagation" title="Link to this heading">#</a></h3>
+<p>Objective: compute gradients for each input with respect to the output, to use in gradient descent</p>
+<p><span class="math notranslate nohighlight">\(f(x, y, z) = (x + y)*z\)</span> eg. <span class="color-brand"> <span class="math notranslate nohighlight">\(x = 1, y = 3, z = -3\)</span></span></p>
+<img src="../images/neural_networks/graph.png" width="300"> 
+<div class="math notranslate nohighlight">
+\[ q\,=\,x\,+\,y\qquad{\frac{\mathrm{d}q}{\mathrm{d}x}}\,=\,1,\;{\frac{\mathrm{d}q}{\mathrm{d}y}}\,=\,1\]</div>
+<div class="math notranslate nohighlight">
+\[ f\,=\,q\,*\,z\qquad{\frac{\mathrm{d}f}{\mathrm{d}q}}\,=\,z,\;{\frac{\mathrm{d}f}{\mathrm{d}z}}\,=\,q\]</div>
+</section>
+<section id="backward-propagation">
+<h3>Backward propagation<a class="headerlink" href="#backward-propagation" title="Link to this heading">#</a></h3>
+<p>going from right to left</p>
+<p><span class="math notranslate nohighlight">\(f(x, y, z) = (x + y)*z\)</span> eg. <span class="color-brand"> <span class="math notranslate nohighlight">\(x = 1, y = 3, z = -3\)</span></span></p>
+<img src="../images/neural_networks/graph_2.png" width="300"> 
+<div class="math notranslate nohighlight">
+\[ q\,=\,x\,+\,y\qquad{\frac{\mathrm{d}q}{\mathrm{d}x}}\,=\,1,\;{\frac{\mathrm{d}q}{\mathrm{d}y}}\,=\,1\]</div>
+<div class="math notranslate nohighlight">
+\[ f\,=\,q\,*\,z\qquad{\frac{\mathrm{d}f}{\mathrm{d}q}}\,=\,z,\;{\frac{\mathrm{d}f}{\mathrm{d}z}}\,=\,q\]</div>
+</section>
+<section id="id13">
+<h3>Backward propagation<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<p>going from right to left</p>
+<p><span class="math notranslate nohighlight">\(f(x, y, z) = (x + y)*z\)</span> eg. <span class="color-brand"> <span class="math notranslate nohighlight">\(x = 1, y = 3, z = -3\)</span>
+</span></p>
+<img src="../images/neural_networks/graph_3.png" width="300"> 
+<div class="math notranslate nohighlight">
+\[ q\,=\,x\,+\,y\qquad{\frac{\mathrm{d}q}{\mathrm{d}x}}\,=\,1,\;{\frac{\mathrm{d}q}{\mathrm{d}y}}\,=\,1\]</div>
+<div class="math notranslate nohighlight">
+\[ f\,=\,q\,*\,z\qquad{\frac{\mathrm{d}f}{\mathrm{d}q}}\,=\,z,\;{\frac{\mathrm{d}f}{\mathrm{d}z}}\,=\,q\]</div>
+</section>
+<section id="backward-propagation-starting-at-the-end">
+<h3>Backward propagation - starting at the end<a class="headerlink" href="#backward-propagation-starting-at-the-end" title="Link to this heading">#</a></h3>
+<p>applying the chain rule of differentials</p>
+<p><span class="math notranslate nohighlight">\(f(x, y, z) = (x + y)*z\)</span> eg. <span class="color-brand"> <span class="math notranslate nohighlight">\(x = 1, y = 3, z = -3\)</span></span></p>
+<img src="../images/neural_networks/graph_4.png" width="300"> 
+<div class="math notranslate nohighlight">
+\[ q\,=\,x\,+\,y\qquad{\frac{\mathrm{d}q}{\mathrm{d}x}}\,=\,1,\;{\frac{\mathrm{d}q}{\mathrm{d}y}}\,=\,1\]</div>
+<div class="math notranslate nohighlight">
+\[ f\,=\,q\,*\,z\qquad{\frac{\mathrm{d}f}{\mathrm{d}q}}\,=\,z,\;{\frac{\mathrm{d}f}{\mathrm{d}z}}\,=\,q\]</div>
+</section>
+<section id="id14">
+<h3>Backward propagation - starting at the end<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<p>applying the chain rule of differentials</p>
+<p><span class="math notranslate nohighlight">\(f(x, y, z) = (x + y)*z\)</span> eg. <span class="color-brand"> <span class="math notranslate nohighlight">\(x = 1, y = 3, z = -3\)</span></span></p>
+<img src="../images/neural_networks/graph_5.png" width="600"> 
+<div class="math notranslate nohighlight">
+\[ q\,=\,x\,+\,y\qquad{\frac{\mathrm{d}q}{\mathrm{d}x}}\,=\,1,\;{\frac{\mathrm{d}q}{\mathrm{d}y}}\,=\,1\]</div>
+<div class="math notranslate nohighlight">
+\[ f\,=\,q\,*\,z\qquad{\frac{\mathrm{d}f}{\mathrm{d}q}}\,=\,z,\;{\frac{\mathrm{d}f}{\mathrm{d}z}}\,=\,q\]</div>
+</section>
+<section id="id15">
+<h3>Backward propagation - starting at the end<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<p>applying the chain rule of differentials</p>
+<p><span class="math notranslate nohighlight">\(f(x, y, z) = (x + y)*z\)</span> eg. <span class="color-brand"> <span class="math notranslate nohighlight">\(x = 1, y = 3, z = -3\)</span></span></p>
+<img src="../images/neural_networks/graph_6.png" width="600"> 
+<div class="math notranslate nohighlight">
+\[ q\,=\,x\,+\,y\qquad{\frac{\mathrm{d}q}{\mathrm{d}x}}\,=\,1,\;{\frac{\mathrm{d}q}{\mathrm{d}y}}\,=\,1\]</div>
+<div class="math notranslate nohighlight">
+\[ f\,=\,q\,*\,z\qquad{\frac{\mathrm{d}f}{\mathrm{d}q}}\,=\,z,\;{\frac{\mathrm{d}f}{\mathrm{d}z}}\,=\,q\]</div>
+</section>
+<section id="id16">
+<h3>Backward propagation<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<p>each node is aware of its surroundings</p>
+<img src="../images/neural_networks/bp_0.png" width="600"> 
+</section>
+<section id="id17">
+<h3>Backward propagation<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<p>each node is aware of its surroundings <br />
+and we know the local gradients - easy to compute (z is usually a <br />
+simple operator: sum, product, exp..)</p>
+<img src="../images/neural_networks/bp_1.png" width="600"> 
+</section>
+<section id="id18">
+<h3>Backward propagation<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+<p>applying the chain rule</p>
+<img src="../images/neural_networks/bp_2.png" width="600"> 
+</section>
+<section id="id19">
+<h3>Backward propagation<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
+<p>gradients add at branches</p>
+<img src="../images/neural_networks/bp_3.png" width="600"> 
+</section>
+</section>
+<section id="back-prop-math">
+<h2>Back prop - math<a class="headerlink" href="#back-prop-math" title="Link to this heading">#</a></h2>
+<section id="back-propagation-for-binary-loss">
+<h3>Back-propagation for binary loss<a class="headerlink" href="#back-propagation-for-binary-loss" title="Link to this heading">#</a></h3>
+<div class="group">  
+  <div class="text_70"> 
+<p>Binary Loss (like in Logistic regression):</p>
+<div class="math notranslate nohighlight">
+\[ \mathcal{L}(y,\hat{y})=-\left(y\log\left(\hat{y}\right)+\left(1-y\right)\log\left(1-\hat{y}\right)\right) \hspace{2cm}\text{ where } \hat{y} = a[5]\]</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+The Label is either 1 or 0 and $a[5]$ the Output of the last layer’s activation function (here: sigmoid)
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/back_prop.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/32cff392db2b2e593c34e490f63ee8c4a248eacb21ff6c21eba8a5f373e562af.svg" src="../_images/32cff392db2b2e593c34e490f63ee8c4a248eacb21ff6c21eba8a5f373e562af.svg" />
+</div>
+</div>
+</section>
+<section id="id20">
+<h3>Back-propagation<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+      <ul>
+      <li>To get the derivation of loss towards the parameters:
+          <ul><li>Consider the {computation graph}</ul>
+      <li>Start at the end and derive
+      </ul>
+    </div>
+    <div class="images_30">
+        <img src="../images/neural_networks/img_p49_1.png" width=200, height=100!>
+    </div>
+</div>
+<div>
+        <img src="../images/neural_networks/img_p98_1.png" width=75%>
+</div>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial\mathcal{L}(y,\hat{y})}{\partial a^{\left[5\right]}}\ = -\frac{y}{a^{\left[5\right]}}\ +\ \frac{1-y}{1-a^{\left[5\right]}}\]</div>
+</section>
+<section id="id21">
+<h3>Back-propagation<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+      <ul>
+      <li>Then, take the next step backwards in the graph
+          <ul><li>Compute the derivation towards the neurons</ul>
+      </ul>
+    </div>
+    <div class="images_30">
+        <img src="../images/neural_networks/img_p50_1.png" width=200, height=100!>
+    </div>
+<div>
+        <img src="../images/neural_networks/img_p98_2.png" width=75%>
+</div>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial{\mathcal{L}}(y,{\hat{y}})}{\partial z^{[5]}}\,=\,\frac{\partial{\mathcal{L}}(y,{\hat{y}})}{\partial a^{[5]}}\,\circ\,\frac{\partial\sigma(z^{[5]})}{\partial z^{[5]}}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/back_prop_step_1.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/48812205c7be00455553ad27d916f872e76ad5728f555df0e525c89c9f048262.svg" src="../_images/48812205c7be00455553ad27d916f872e76ad5728f555df0e525c89c9f048262.svg" />
+</div>
+</div>
+</section>
+<section id="id22">
+<h3>Back-propagation<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+      <ul>
+      <li>To get to the derivation for the last parameters
+          <ul><li><span class="color-brand">Derive the neuron towards its parameters</span></ul>
+      </ul>
+    </div>
+    <div class="images_30">
+        <img src="../images/neural_networks/img_p51_1.png" width="50%">
+    </div>
+</div>
+<div>
+        <img src="../images/neural_networks/img_p98_3.png" width=75%>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/back_prop_step_2.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8f87a16cbf8a2a1bca0bfc1cf99ee68b36aee59b03125ac0d00d2181ea03c810.svg" src="../_images/8f87a16cbf8a2a1bca0bfc1cf99ee68b36aee59b03125ac0d00d2181ea03c810.svg" />
+</div>
+</div>
+</section>
+<section id="id23">
+<h3>Back-propagation<a class="headerlink" href="#id23" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+      <ul>
+      <li>Repeat and step back towards the first layer ...
+          <ul><li><span class="color-brand">... and its parameters</span></ul>
+      </ul>
+    </div>
+    <div class="images_30">
+        <img src="../images/neural_networks/img_p52_1.png" width="50%">
+    </div>
+<div>
+        <img src="../images/neural_networks/img_p98_4.png" width=75%>
+</div>
+<div class="group">
+  <div class="text">
+<div class="math notranslate nohighlight">
+\[ \frac{\partial\mathcal{L}(y,\hat{y})}{\partial b^{[1]}}\,=\,\frac{\partial \mathcal{L}(y,\hat{y})}{\partial z^{[1]}}\,\circ\,\frac{\partial z^{[1]}}{\partial b^{[1]}}\]</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/back_prop_all_steps.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/52546c34c4d40e6b7a1090fa25a0023f0ec217437289a8856fbf11bf614ca17e.svg" src="../_images/52546c34c4d40e6b7a1090fa25a0023f0ec217437289a8856fbf11bf614ca17e.svg" />
+</div>
+</div>
+</section>
+<section id="id24">
+<h3>Back-propagation<a class="headerlink" href="#id24" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+      <ul>
+      <li>Now we have the direction for the parameter update
+          <ul><li><span class="color-brand">As usual learning rate gives step-size</span></ul>
+      <li>Make the parameter update:</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+W^{[l]} &amp;= W^{[l]}+\alpha \dfrac{\partial\mathcal{L}(y,\hat{y})}{\partial W^{[l]}} \\
+b^{[l]} &amp;= b^{[l]}+\alpha \dfrac{\partial\mathcal{L}(y,\hat{y})}{\partial b^{[l]}}\hspace{0.5cm}\text{  for each layer } l
+\end{align}\end{split}\]</div>
+<ul><li>Start again with the {feed-forward} step ...
+          <ul><li><span class="color-brand">... and iterate</span>
+          <li><span class="color-brand">... and iterate</span></ul>
+      </ul>
+    </div>
+    <div class="images_30">
+        <img src="../images/neural_networks/img_p53_2.png" width="50%">
+    </div>
+</div>
+</section>
+</section>
+<section id="id25">
+<h2>Feed forward and back propagation<a class="headerlink" href="#id25" title="Link to this heading">#</a></h2>
+<img src="../images/neural_networks/img_p4_2.png"><section id="training-deep-neural-networks">
+<h3>Training deep neural networks<a class="headerlink" href="#training-deep-neural-networks" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">   
+<ul>
+    <li>Backpropagation enabled researchers to train neural networks in a single algorithm
+        <ul><li><span class="color-brand">Before layerwise training had been used</span></ul>
+    <li>However, networks with a large number of layers still had problems
+        <ul><li><span class="color-brand">Vanishing/exploding gradients</span></ul></ul>
+    </div>
+    <div class="images_30">
+        <img src="../images/neural_networks/img_p54_1.png">
+    </div>
+</div>
+</section>
+<section id="vanishing-exploding-gradients">
+<h3>Vanishing/Exploding gradients<a class="headerlink" href="#vanishing-exploding-gradients" title="Link to this heading">#</a></h3>
+<ul>
+    <li>First approaches to train deep networks with backpropagation failed
+          <ul><li><span class="color-brand">Gradients were becoming very small or very large during training
+        <ul><li>Vanishing: direction for parameter update unknown
+            <li>Exploding: training becomes unstable</span> </ul>
+    <li>Hochreiter (1991) formalized the problem in his Diploma thesis
+    <span class="color-brand"><ul><li>Since then the problem was examined extensively
+        <li>Many approaches have since been developed to tackle the problem</ul>
+        </span></ul></ul>
+<p style="font-size:10px">Hochreiter, S. (1991), “Untersuchungen zu dynamischen neuronalen Netzen”<br>
+Pascanu, R., Mikolov, T. and Bengio, Y. (2013), “On the difficulty of training Recurrent Neural Networks”
+</p>
+</section>
+<section id="id26">
+<h3>Vanishing/Exploding gradients<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
+<div class="group">
+<div class="text_70">   
+<ul>
+    <li>Many layers intensify unbalanced parameter values
+        <span class="color-brand"><ul><li>Holds as well for gradients in backward propagation</ul></span>
+    <li>Initialization is crucial
+    <span class="color-brand"><ul><li>Well balanced parameters help
+        <li>Xavier - Tanh
+        <li>He - ReLU</ul></span>
+    <li>Activation functions can have zero or almost zero gradients
+        <span class="color-brand"><ul><li>Use ReLU - saturates only in one direction</ul></span>
+    </ul></div>
+<div class="images_30">
+<p>activation: linear
+<span class="math notranslate nohighlight">\( \hat{y}=W^{[1]}\cdot W^{[2]}\cdot\cdot\cdot W^{[L]}x\)</span><br>
+<span class="math notranslate nohighlight">\( W^{[l]}=\begin{bmatrix}1.5 &amp; 0\\ 0 &amp; 1.5\end{bmatrix}\)</span><br>
+<img src="../images/neural_networks/img_p97_1.png">
+</div></p>
+</div>
+<p style="font-size:10px">
+Glorot, X., Bordes, A. and Bengio, Y. (2010), “Deep Sparse Rectifier Neural Networks”<br>
+Glorot, X. and Bengio Y. (2010), “Understanding the difficulty of training deep feedforward networks”<br>
+He, K. et al. (2015), “Delving deep into rectifiers: Surpassing human-level performance in ImageNet classification.”<br>
+Sussillo, D. and Abbott, L.F. (2015), “Random Walk Initialization For Training Very Deep Feedforward Networks”<br>
+Mishkin, D. and Matas, J. (2016), “All you need is a good init”
+</p>   </section>
+</section>
+<section id="building-your-own-nn">
+<h2>Building your own NN<a class="headerlink" href="#building-your-own-nn" title="Link to this heading">#</a></h2>
+<img src="../images/neural_networks/img_p4_2.png"></section>
+<section id="hyperparameters">
+<h2>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Link to this heading">#</a></h2>
+<section id="id27">
+<h3>Hyperparameters<a class="headerlink" href="#id27" title="Link to this heading">#</a></h3>
+<ul>
+    <li>What hyperparameters exist?
+        <ul><li><span class="color-brand">Learning rate </span>- <span style="color:#FEDF00;"><b>very important</b></span>
+   <li><span class="color-brand;">Number of layers </span> - not so much
+    <li><span class="color-brand;">Number of neurons per layer </span>- <span style="color:#FEDF00;">important</span>
+    <li><span class="color-brand">Number of features </span>- <span style="color:#FEDF00;">important</span>
+    <li><span class="color-brand">Mini-batch size -</span> <span style="color:#FEDF00;">important</span>
+   <li><span class="color-brand">Optimization algorithm - </span><span style="color:#FEDF00;">important</span>
+   <li><span class="color-brand">Learning rate decay -</span> not so much</ul>
+<li>How to tune them?
+   <ul><li><span class="color-brand">Try random values - do not use a grid!</span></ul>
+</section>
+<section id="search-strategies">
+<h3>Search Strategies<a class="headerlink" href="#search-strategies" title="Link to this heading">#</a></h3>
+<div class="group">
+<div class="text_70">   
+<ul><li>Hyperparameter search in neural networks underlies curse of dimensionality
+    <span class="color-brand"><ul><li>Many parameters to tune
+        <li>Unknown which are the important ones for the problem</ul></span>
+</div></div>
+</section>
+<section id="id28">
+<h3>Search Strategies<a class="headerlink" href="#id28" title="Link to this heading">#</a></h3>
+<div class="group">
+<div class="text_70">   
+<ul><li>Hyperparameter search in neural networks underlies curse of dimensionality
+    <span class="color-brand"><ul><li>Many parameters to tune
+        <li>Unknown which are the important ones for the problem</ul></span>
+<li>Usually it is used an approach based on
+    <span class="color-brand"><ul><li>Random search
+    <li>Coarse-to-fine
+        <li>Well-scaled (often log-scaled)</ul></span></ul>
+</div>
+<div class="images_30">
+        <img src="../images/neural_networks/img_p96_1.png">
+    </div></div>
+</section>
+</section>
+<section id="regularization">
+<h2>Regularization<a class="headerlink" href="#regularization" title="Link to this heading">#</a></h2>
+<section id="id29">
+<h3>Regularization<a class="headerlink" href="#id29" title="Link to this heading">#</a></h3>
+<br>
+<div class="group">
+<div class="text">
+<b>Remember logistic regression:</b>
+<br>
+<ul>
+<li><span class="color-brand">L2 Regularization:</span>
+<p><span class="math notranslate nohighlight">\( ||w||_{2}^{2}=\sum_{j=1}^{m}w_{j}^{2}=w^{T}w \)</span></p>
+</li>        
+<li><span class="color-brand">L1 Regularization:</span>
+<p><span class="math notranslate nohighlight">\( ||w||_{1}=\sum_{j=1}^{m}|w_{j}| \)</span></p>
+</li></ul>
+<br>
+</div>   
+<div class="text">
+</div>
+</div>
+</section>
+<section id="id30">
+<h3>Regularization<a class="headerlink" href="#id30" title="Link to this heading">#</a></h3>
+<br>
+<div class="group">
+<div class="text">
+<b>Remember logistic regression:</b>
+<br>
+<ul>
+<li><span class="color-brand">L2 Regularization:</span>
+<div class="math notranslate nohighlight">
+\[ ||w||_{2}^{2}=\sum_{j=1}^{m}w_{j}^{2}=w^{T}w\]</div>
+</li>      
+<li><span class="color-brand">L1 Regularization:</span>
+<div class="math notranslate nohighlight">
+\[ ||w||_{1}=\sum_{j=1}^{m}|w_{j}|\]</div>
+</li></ul>
+<br>
+</div>
+<div class="text">
+<b>Similar in neural networks:</b><br>
+<ul>
+<li><span class="color-brand">L2 Regularization:</span>
+<div class="math notranslate nohighlight">
+\[||W^{[l]}||_{F}^{2}=\sum_{j=1}^{n_{[l-1]}}\sum_{i=1}^{n_{[l]}}(w_{i j}^{[l]})^{2}\]</div>
+</li>
+<li><span class="color-brand">L1 Regularization:</span>
+</li></ul>   
+<div class="math notranslate nohighlight">
+\[\underbrace{||W^{[l]}||_{1}=\sum_{j=1}^{n_{[l-1]}}\sum_{i=1}^{n_{[l]}}|w_{i j}|^{[l]}}_\text{not used that much}\]</div>
+</div>
+</div>
+<div class="group">
+<div class="text">
+<p><span class="math notranslate nohighlight">\(\scriptsize J(w,b)=\frac{1}{m}\sum_{i=1}^{m}\mathcal{L}(\hat{y}_{i},y_{i})+\frac{\lambda}{2m}||w||_{2}^{2}+\underbrace{\frac{\lambda}{2m}b^{2}}_\text{negligible impact}\)</span></p>
+</div>
+<div class="text">
+<p><span class="math notranslate nohighlight">\(\scriptsize J(W^{[1]},b^{[1]},\cdot\cdot\cdot,W^{[L]},b^{[L]})=\frac{1}{m}\sum_{i=1}^{m}\mathcal{L}(\hat{y_{i}},y_{i})+\frac{\lambda}{2m}\sum_{l=1}^{L}|W||_{F}^{2}\)</span></p>
+</div>
+</div></section>
+<section id="the-effect-of-sub-networks">
+<h3>The effect of sub-networks<a class="headerlink" href="#the-effect-of-sub-networks" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">   
+    <ul>
+        <li>Why does L2 regularization prevent overfitting in neural networks?
+            <span class="color-brand"><ul><li>Intuitively: it creates a simpler network</ul></span>
+        <li>Many parameters will be turned very small
+            <span class="color-brand"><ul><li>Signals flow mainly via some few routes through the network</ul></span>
+    </ul>
+    </div>
+  <div class="images_30">
+        <img src="../images/neural_networks/img_p61_3.png" width="35%">
+    </div>
+</div>
+  <div class="text">
+<p>Extreme L2 Regularization:</p>
+<div class="math notranslate nohighlight">
+\[ {\cal W}^{[l]}\approx 0 \scriptsize{\text{ Increase regularization parameter } \lambda \text{ strongly}}\]</div>
+<div class="math notranslate nohighlight">
+\[ J(W^{[l]},b^{[l]})=\frac{1}{m}\sum_{i=1}^{m}\mathcal{L}(\hat{y},y)+\frac{\lambda}{2m}\sum_{l=1}^{L}||W^{[l]}||_{F}^{2}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_graph_visualization</span><span class="p">(</span><span class="s2">&quot;../images/neural_networks/l2_regularization.gv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/574779c55984edc4f118c64d489bf63066b2813653fe49f57fc64bb65624ed99.svg" src="../_images/574779c55984edc4f118c64d489bf63066b2813653fe49f57fc64bb65624ed99.svg" />
+</div>
+</div>
+</section>
+<section id="the-effect-of-mid-range-activation-functions">
+<h3>The effect of mid-range activation functions<a class="headerlink" href="#the-effect-of-mid-range-activation-functions" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">   
+    <ul>
+        <li>What role play activation functions in L2 regularization?
+            <span class="color-brand"><ul><li>Non-linear activation functions possess nearly-linear parts</ul></span>
+        <li>Sufficiently small parameter values enforce small inputs
+            <span class="color-brand"><ul><li>In this definition range many activation functions are near to linear</ul></span>
+        <li>As a result the network itself is forced to become nearly linear
+            <span class="color-brand"><ul><li>Variance shrinks and bias increases</ul></span>
+    </ul>
+<div class="math notranslate nohighlight">
+\[ z^{[l]}= W^{[l]}a^{[l-1]}+b^{[l]}\]</div>
+</div>
+  <div class="images_30">
+      <img src="../images/neural_networks/img_p62_4.png", height="25%">
+      <img src="../images/neural_networks/img_p62_3.png">
+  </div>
+</div>
+<p><a class="reference external" href="https://playground.tensorflow.org/#activation=relu&amp;amp;batchSize=20&amp;amp;dataset=spiral&amp;amp;regDataset=reg-plane&amp;amp;learningRate=0.1&amp;amp;regularizationRate=0.01&amp;amp;noise=20&amp;amp;networkShape=8,8,8,8,8,8&amp;amp;seed=0.79362&amp;amp;showTestData=false&amp;amp;discretize=false&amp;amp;percTrainData=70&amp;amp;x=true&amp;amp;y=true&amp;amp;xTimesY=false&amp;amp;xSquared=false&amp;amp;ySquared=false&amp;amp;cosX=false&amp;amp;sinX=false&amp;amp;cosY=false&amp;amp;sinY=false&amp;amp;collectStats=false&amp;amp;problem=classification&amp;amp;initZero=false&amp;amp;hideText=false">Playground</a></p>
+</section>
+<section id="regularization-techniques-in-deep-learning-dropout">
+<h3>Regularization techniques in deep learning - Dropout<a class="headerlink" href="#regularization-techniques-in-deep-learning-dropout" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+    <ul>
+        <li>Dropout is a very powerful regularization method for neural
+networks
+            <span style="color:#E87103;"><ul><li>Randomly eliminate nodes in each optimization step</ul></span>
+        <li>Dropout prevents units from co-adapting
+            </ul>
+    </div>
+  <div class="images">
+      <img src="../images/neural_networks/img_p62_4.png", height="25%">
+  </div>
+</div>
+<div class="images">
+    <img src="../images/neural_networks/img_p99_6.png", height=100%>
+</div>
+<div class="text">Hinton et al. (2012), “Improving neural networks by preventing co-adaptation of feature detectors”
+<br>Srivastava et al. (2014), “Dropout: A Simple Way to Prevent Neural Networks from Overfitting”</div>
+</section>
+<section id="regularization-techniques-in-deep-learning-intuitive-explanation-to-neural-co-adapting">
+<h3>Regularization techniques in deep learning - Intuitive explanation to neural co-adapting<a class="headerlink" href="#regularization-techniques-in-deep-learning-intuitive-explanation-to-neural-co-adapting" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+    <ul>
+        <li>A single neuron relies on the input of its predecessor neurons
+            <span style="color:#E87103;"><ul><li>Bears the risk of relying on a few predecessors that activate on noise</ul></span>
+        <li>Dropping neurons randomly then forces the neuron to diversify
+            <span style="color:#E87103;"><ul><li>Each predecessor signal could vanish with dropout</ul></span>
+            </ul>
+    </div>
+  <div class="images">
+      <img src="../images/neural_networks/img_p64_1.png", height="25%">
+  </div>
+</div>
+<div class="images">
+      <img src="../images/neural_networks/img_p99_7.png">
+  </div>
+</section>
+<section id="regularization-techniques-in-deep-learning-dropout-mimics-ensembling">
+<h3>Regularization techniques in deep learning - Dropout mimics ensembling<a class="headerlink" href="#regularization-techniques-in-deep-learning-dropout-mimics-ensembling" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+    <ul>
+        <li>Instead of testing many different networks by training each of them in isolation
+            <span style="color:#E87103;"><ul><li>Dropout tests them during a single optimization</ul></span>
+        <li>Predictions are approximating the average over all thinned networks
+            <span style="color:#E87103;"><ul><li>This is similar to ensemble learners
+                <li>In contrast to ensembles effect is reached by using unthinned network with smaller weights</ul></span></ul>
+      <span style="color:#E87103;">Weights mimic average over thinned networks</span>
+   </div>
+  <div class="images">
+      <img src="../images/neural_networks/drop_1.png",width="100">
+  </div>
+</div>
+</section>
+<section id="id31">
+<h3>Regularization techniques in deep learning - Dropout mimics ensembling<a class="headerlink" href="#id31" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+    <ul>
+        <li>Instead of testing many different networks by training each of them in isolation
+            <span style="color:#E87103;"><ul><li>Dropout tests them during a single optimization</ul></span>
+        <li>Predictions are approximating the average over all thinned networks
+            <span style="color:#E87103;"><ul><li>This is similar to ensemble learners
+                <li>In contrast to ensembles effect is reached by using unthinned network with smaller weights</ul></span></ul>
+      <span style="color:#E87103;">Weights mimic average over thinned networks</span>
+   </div>
+  <div class="images">
+      <img src="../images/neural_networks/drop_2.png",width="100">
+  </div>
+</div>
+</section>
+<section id="regularization-techniques-in-deep-learning-early-stopping-can-be-resourceful">
+<h3>Regularization techniques in deep learning - Early stopping can be resourceful<a class="headerlink" href="#regularization-techniques-in-deep-learning-early-stopping-can-be-resourceful" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+    <ul>
+        <li>Early stopping is used to find the optimal point
+            <span style="color:#E87103;"><ul><li>Validation error raises again</ul></span>
+        <li>Builds on the development of weights during training
+            <span style="color:#E87103;"><ul><li>Weights start small and increase</ul>
+        <li>Not the best method to regularize
+      <span style="color:#E87103;"><ul><li>Orthogonalization of optimizing and regularizing gets lost</ul></span></ul> </div>
+  <div class="images">
+      <img src="../images/neural_networks/img_p66_1.png">
+  </div>
+</div>
+<p>Wang et al. (1994), “Optimal Stopping and Effective Machine Complexity in Learning”
+Caruana et al. (2001), “Overfitting in Neural Nets: Backpropagation, Conjugate Gradient, and Early Stopping”</p>
+</section>
+</section>
+<section id="frameworks">
+<h2>Frameworks<a class="headerlink" href="#frameworks" title="Link to this heading">#</a></h2>
+ <div class="images">
+      <img src="../images/neural_networks/img_p67_2.png">
+  </div><section id="python-deep-learning-libraries-deep-learning-frameworks">
+<h3>Python deep learning libraries - Deep learning frameworks<a class="headerlink" href="#python-deep-learning-libraries-deep-learning-frameworks" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+    <ul>
+        <li>There exist a couple of major deep learning libraries
+            <span style="color:#E87103;"><ul><li>TensorFlow is the one most used in production</ul></span>
+        <li>Since TensorFlow version 2.0 Keras is part of TensorFlow
+            <span style="color:#E87103;"><ul><li>Keras is an high-level API to TensorFlow
+                <li>Abstracts away a lot of complexity in coding</ul>
+        <li>Ease the building and training of models by
+      <span style="color:#E87103;"><ul><li>modules for layers, optimizers and activation functions
+          <li>parallelized training processes</ul></span></ul> </div>
+  <div class="images">
+       <img src="../images/neural_networks/img_p68_1.png" height="5%">
+      <img src="../images/neural_networks/img_p68_2.png" height="5%">
+       <img src="../images/neural_networks/img_p68_3.png" height="5%">
+      <img src="../images/neural_networks/img_p68_4.png" height="5%">
+       <img src="../images/neural_networks/img_p68_5.png" height="5%">
+      <img src="../images/neural_networks/img_p68_6.png" height="5%">
+      <img src="../images/neural_networks/img_p68_7.png" height="5%">
+  </div>
+</div>
+</section>
+<section id="python-deep-learning-libraries-tensorflow-and-keras">
+<h3>Python deep learning libraries - TensorFlow and Keras<a class="headerlink" href="#python-deep-learning-libraries-tensorflow-and-keras" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+    <ul>
+        <li>We focus on TensorFlow and use Keras
+            <span style="color:#E87103;"><ul><li>Well maintained and highly active development
+                <li>Most relevant in business</ul></span>
+        <li>TensorFlow works with a directed acyclic computation graph (DAG)
+            <span style="color:#E87103;"><ul><li>Programmable in Python
+                <li>Gets compiled in C++ and is very fast
+                <li>Tensors flow through the DAG</ul></span>
+                </ul> </div>
+  <div class="images">
+       <img src="../images/neural_networks/img_p69_1.png">
+  </div>
+</div>
+<p>Abadi et al. (2015), “TensorFlow: Large-Scale Machine Learning on Heterogeneous Distributed Systems”</p>
+</section>
+<section id="python-deep-learning-libraries-the-power-of-tensorflow">
+<h3>Python deep learning libraries - The power of TensorFlow<a class="headerlink" href="#python-deep-learning-libraries-the-power-of-tensorflow" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+    <ul>
+        <li>Enables deep learning
+            <span style="color:#E87103;"><ul><li>of very large and deep models
+                <li>on massive data sets</ul></span>
+        <li>Possible via distributed systems with special hardware
+            <span style="color:#E87103;"><ul><li>Subgraphs are placed on different devices
+                <li>Send/Receive nodes communicate across workers</ul></span>
+        <li>Fault tolerance is ensured by
+             <span style="color:#E87103;"><ul><li>monitoring communication between processes
+                    <li>re-executing when errors are detected
+                    <li>saving checkpoints for economic restarts</ul></span>
+                </ul> </div>
+  <div class="images">
+       <img src="../images/neural_networks/img_p70_1.png">
+      <img src="../images/neural_networks/img_p70_2.png">
+  </div>
+</div>
+</section>
+<section id="python-deep-learning-libraries-tensorboard-tensorflow-visualization">
+<h3>Python deep learning libraries - TensorBoard - TensorFlow visualization<a class="headerlink" href="#python-deep-learning-libraries-tensorboard-tensorflow-visualization" title="Link to this heading">#</a></h3>
+<div class="images">
+       <img src="../images/neural_networks/img_p71_1.png">
+  </div>
+Visualize metrics,
+distributions and DAG
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.coursera.org/learn/machine-learning/home/welcome">https://www.coursera.org/learn/machine-learning</a></p></li>
+<li><p>Rosenblatt, F. (1958), “The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain”</p></li>
+<li><p>Minsky, M. and Papert, S. (1969): “Perceptrons: An Introduction to Computational Geometry”</p></li>
+<li><p>Lighthill, J. (1972), “Artificial Intelligence: A General Survey”</p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=d14TUNcbn1k">https://www.youtube.com/watch?v=d14TUNcbn1k</a></p></li>
+<li><p><a class="reference external" href="https://cs231n.github.io">https://cs231n.github.io</a> (stanford course notes)</p></li>
+<li><p><a class="reference external" href="https://playground.tensorflow.org">https://playground.tensorflow.org</a></p></li>
+<li><p><a class="reference external" href="https://datascience.stackexchange.com/questions/44703/how-does-gradient-descent-and-backpropagation-work-together">https://datascience.stackexchange.com/questions/44703/how-does-gradient-descent-and-backpropagation-work-together</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="17_Data_Products.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Designing Data Products</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="aipm_sessions/ANN_AIPM.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Artificial Neural Networks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-basis-function-models">Adaptive basis function models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-and-why">When and Why?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">When and why?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">When and why?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">When and why?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-neuron">The Neuron</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-started">How it started</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-ended">How it ended</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">How it ended</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-different-neuron-the-perceptron">A different neuron: the Perceptron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-function">Activation Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-xor-problem-the-end-of-the-perceptron">The XOR problem - the end of the Perceptron</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">The XOR problem - the end of the Perceptron</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-computations-and-neurons">Logical computations and neurons</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Logical computations and neurons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Logical computations and neurons</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-neural-network">The Neural Network</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network">Neural network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Neural network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Neural network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Neural network</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-neural-networks-and-compact-representations">Deep Neural Networks and compact representations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning-and-parameter-search">Deep learning and parameter search</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-the-network">Training the network</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Deep learning and parameter search</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-activation-functions">Non-linear activation functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Non-linear activation functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feed-forward-step">Feed-forward step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#back-propagation">Back-propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feed-forward-and-back-propagation">Feed forward and back propagation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-prop-intuition">Back prop - intuition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-graphs">Computational graphs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-graphs-feed-forward">Computational graphs - feed forward</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-graphs-backward-propagation">Computational graphs - backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-propagation">Backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-propagation-starting-at-the-end">Backward propagation - starting at the end</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">Backward propagation - starting at the end</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Backward propagation - starting at the end</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">Backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">Backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">Backward propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">Backward propagation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-prop-math">Back prop - math</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#back-propagation-for-binary-loss">Back-propagation for binary loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">Back-propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">Back-propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">Back-propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">Back-propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">Back-propagation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">Feed forward and back propagation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-deep-neural-networks">Training deep neural networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-exploding-gradients">Vanishing/Exploding gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">Vanishing/Exploding gradients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-own-nn">Building your own NN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">Hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-strategies">Search Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id28">Search Strategies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id29">Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id30">Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-effect-of-sub-networks">The effect of sub-networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-effect-of-mid-range-activation-functions">The effect of mid-range activation functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-techniques-in-deep-learning-dropout">Regularization techniques in deep learning - Dropout</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-techniques-in-deep-learning-intuitive-explanation-to-neural-co-adapting">Regularization techniques in deep learning - Intuitive explanation to neural co-adapting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-techniques-in-deep-learning-dropout-mimics-ensembling">Regularization techniques in deep learning - Dropout mimics ensembling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id31">Regularization techniques in deep learning - Dropout mimics ensembling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-techniques-in-deep-learning-early-stopping-can-be-resourceful">Regularization techniques in deep learning - Early stopping can be resourceful</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frameworks">Frameworks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-deep-learning-libraries-deep-learning-frameworks">Python deep learning libraries - Deep learning frameworks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-deep-learning-libraries-tensorflow-and-keras">Python deep learning libraries - TensorFlow and Keras</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-deep-learning-libraries-the-power-of-tensorflow">Python deep learning libraries - The power of TensorFlow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-deep-learning-libraries-tensorboard-tensorflow-visualization">Python deep learning libraries - TensorBoard - TensorFlow visualization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

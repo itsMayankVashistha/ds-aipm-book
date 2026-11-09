@@ -1,0 +1,1458 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to AIPM &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/aipm_sessions/Intro_to_AIPM';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Ethics in Data Science" href="../04_Ethics_Data_Science.html" />
+    <link rel="prev" title="Introduction to Data Science &amp; ML" href="../03_Intro_to_Data_Science_ML.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to AIPM</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-concepts-for-data-science-and-machine-learning">Understanding concepts for Data Science and Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data">What is data?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#once-upon-a-time">Once upon a time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now">Now</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-lifecycle">Data Lifecycle</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-not-machine-learning">What is “NOT machine learning”?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-problems-can-be-solved-by-not-machine-learning">Which problems can be solved by “NOT machine learning”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Which problems can be solved by “NOT machine learning”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cookie-monster-gains-weight">1. Cookie Monster gains weight</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-definition">Algorithm definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cookie-monsters-grandma">2. Cookie Monster’s grandma</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty">Uncertainty</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heuristics-base-model">Heuristics / base model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cookie-monster-gains-weight-mysteriously">3. Cookie Monster gains weight mysteriously</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#humans-or-machine-learning">Humans or Machine Learning?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-if-the-system-is-non-deterministic-and-also-highly-complex">What if the system is non-deterministic and also highly complex?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhaps-the-machine-can-figure-it-out">Perhaps the machine can figure it out?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-is-a-tool-to-deal-with-uncertainty-in-probabilistic-systems">Machine Learning is a tool to deal with  <u>uncertainty</u> in <u>probabilistic</u> systems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-not-solve-deterministic-problems-with-machine-learning">Do <u>NOT</u> solve <u>deterministic</u> problems with Machine Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-ai">What is AI?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">What is AI?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">What is AI?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-machine-learning-help">How can Machine learning help?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-we-do-with-it">What can we do with it?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hot-topics-gpt-3">Hot topics: GPT-3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-ai-be-dangerous">How can AI be dangerous?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-effect-on-society">AI - Effect on Society</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-and-discrimination-pulse-ai">AI and discrimination - PULSE AI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#awful-ai">Awful AI</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-bias-come-from">Where does bias come from?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#who-is-contributing-to-the-data">Who is contributing to the data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-do-with-the-data">What we do with the data?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">Machine Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#birds-eye-view">Birds-Eye View</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">Supervised Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">Unsupervised Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semi-supervised-learning">Semi-supervised Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-vs-classification">Regression vs. Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-vs-regression">Classification vs. Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning-dimensionality-reduction">Unsupervised learning: Dimensionality reduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning-clustering">Unsupervised learning: Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning">Deep Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-forecasting">Time Series Forecasting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#natural-language-processing">Natural Language Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-ai-vs-supervised-learning">Generative AI vs Supervised Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-does-what-in-data">Who does what in data?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-engineer">Data Engineer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analyst">Data Analyst</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-scientist">Data Scientist</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-engineer">Machine Learning Engineer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-role-as-an-ai-pm">Your Role as an AI PM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-product-manager">AI Product Manager</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learn-about-the-subject-and-where-your-past-experience-fits-in">Learn about the subject and where your <strong>past experience</strong> fits in</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-ai-products-in-the-wild">Explore AI products in the wild</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ai-product-lifecycle">The AI Product Lifecycle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">The AI Product Lifecycle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-problem">1. Define the Problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assess-the-data">2. Assess the Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-evaluate">3. Build &amp; Evaluate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy">4. Deploy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monitor-iterate">5. Monitor &amp; Iterate</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-aipm">
+<h1>Introduction to AIPM<a class="headerlink" href="#introduction-to-aipm" title="Link to this heading">#</a></h1>
+<section id="understanding-concepts-for-data-science-and-machine-learning">
+<h2>Understanding concepts for Data Science and Machine Learning<a class="headerlink" href="#understanding-concepts-for-data-science-and-machine-learning" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>What is Data?</p></li>
+<li><p>What is (not) Machine Learning?</p></li>
+<li><p>What is AI? and what is it good for?</p></li>
+<li><p>Who does what in data?</p></li>
+<li><p>Your Role as an AI PM</p></li>
+</ul>
+</section>
+<section id="what-is-data">
+<h2>What is data?<a class="headerlink" href="#what-is-data" title="Link to this heading">#</a></h2>
+<section id="once-upon-a-time">
+<h3>Once upon a time<a class="headerlink" href="#once-upon-a-time" title="Link to this heading">#</a></h3>
+<img src="../../images/intro_to_data_science_ml/once_upon_a_time.png" width="1100" style="display:block; margin:auto"><p>data generated from human interaction with each other or situations they faced</p>
+</section>
+<section id="now">
+<h3>Now<a class="headerlink" href="#now" title="Link to this heading">#</a></h3>
+<img src="../../images/intro_to_data_science_ml/now.png" width="1100" style="display:block; margin:auto"><p>everything can be data:</p>
+<p>a click, walking with your phone, opening zoom, accessing a website, the weather, buying something online, paying by card</p>
+<p>we both produce data and are clients for the data systems.. which collect our data</p>
+</section>
+<section id="data-lifecycle">
+<h3>Data Lifecycle<a class="headerlink" href="#data-lifecycle" title="Link to this heading">#</a></h3>
+<p>interaction - collection - transformation - enriching - modeling - getting insights - improving the application</p>
+<img src="../../images/intro_to_data_science_ml/data_lifecycle_ds_ml.png" width="1100" style="display:block; margin:auto"></section>
+</section>
+<section id="what-is-not-machine-learning">
+<h2>What is “NOT machine learning”?<a class="headerlink" href="#what-is-not-machine-learning" title="Link to this heading">#</a></h2>
+<section id="which-problems-can-be-solved-by-not-machine-learning">
+<h3>Which problems can be solved by “NOT machine learning”<a class="headerlink" href="#which-problems-can-be-solved-by-not-machine-learning" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="images">      
+    <img src="../../images/intro_to_data_science_ml/tic-tac-toe.png" >
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/hang-man.png" width="350">
+  </div>
+</div></section>
+<section id="id1">
+<h3>Which problems can be solved by “NOT machine learning”<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<img src="../../images/intro_to_data_science_ml/cookie_monster_2.png" width="1100"><p>Demystify the term “Machine Learning”. Many problems don’t require ML, but can be solved by writing a simple algorithm. Let’s look at 3 variations of the cookie monster problem.</p>
+</section>
+<section id="cookie-monster-gains-weight">
+<h3>1. Cookie Monster gains weight<a class="headerlink" href="#cookie-monster-gains-weight" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p>Cookie Monster eats <strong>10 kg</strong> of cookies each <strong>day</strong>. For every <strong>10 kg</strong> that it eats, it gets fatter <strong>by 5kg</strong>.
+(It spends a lot of energy hunting for cookies).</p>
+<p>How many <strong>kgs</strong> does Cookie Monster <strong>weigh today</strong> if, its <strong>initial</strong> weight was <strong>100kg</strong>, and it has been eating cookies for <strong>5 days</strong>?</p>
+  </div>
+  <div class="images_30">
+    <img src="../../images/intro_to_data_science_ml/img_p2_1.png">
+  </div>
+</div><p>Demystify the term “Machine Learning”. Many problems don’t require ML, but can be solved by writing a simple algorithm.</p>
+</section>
+<section id="algorithm-definition">
+<h3>Algorithm definition<a class="headerlink" href="#algorithm-definition" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p>“A <strong>finite</strong> set of <strong>unambiguous instructions</strong> that, given some set of <strong>initial conditions</strong>, can be performed in a <strong>prescribed sequence</strong> to achieve a certain goal and that has a recognizable set of <strong>end conditions</strong>.”</p>
+  </div>
+  <div class="text">
+  </div>
+</div><p>In the examples above the Machine is not learning, it’s doing what you told it to. So who’s doing the “learning”?</p>
+<div class="group">
+  <div class="text_70">
+<p>“Learning” - the act, process, or experience of <strong>gaining knowledge or skill</strong>.</p>
+  </div>
+  <div class="images_30">
+    <img src="../../images/intro_to_data_science_ml/img_p3_1.png" width="500">
+  </div>
+</div><p>The algorithms we discussed so far were prescriptive and didn’t exhibit learning.</p>
+</section>
+<section id="cookie-monsters-grandma">
+<h3>2. Cookie Monster’s grandma<a class="headerlink" href="#cookie-monsters-grandma" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p>Grandma Cookie Monster brings <strong>15 kg</strong> of cookies when she visits.
+She visits when she’s in a <strong>good mood</strong> and no <strong>more than twice a week</strong>.</p>
+<p>The following is known about Grandma Cookie Monster’s mood:</p>
+<p>🌞 She likes when it’s sunny outside but not too warm (&lt;28℃). <br>
+👀 She doesn’t like if her neighbor is looking out of the window when she is leaving the house. <br>
+🚃 She likes to take tram number 1 and not tram number 3.</p>
+<p>Grandma has a <strong>good mood</strong> if the number of her <strong>likes outweighs the number of her dislikes</strong> on any given day.
+On average, she has a good mood <strong>3 times a week</strong>.</p>
+<p>How much does Cookie Monster weigh today, if:</p>
+<ul>
+<li><p>Its initial weight is 100 kg, and it has been eating cookies for 5 days.</p></li>
+<li><p>Its grandma came to visit once this week already.</p></li>
+<li><p>It’s been a nice week with 25℃.</p></li>
+<li><p>Tram number 1 is not working.</p>
+</div>
+<div class="images_30">
+  <img src="../../images/intro_to_data_science_ml/cookie_monster_grany.png">
+</div>
+</li>
+</ul>
+</div></section>
+<section id="uncertainty">
+<h3>Uncertainty<a class="headerlink" href="#uncertainty" title="Link to this heading">#</a></h3>
+<p><strong>A deterministic system</strong> is one in which the occurrence of all events is known with certainty. If the description of the system state at a particular point of time of its operation is given, the next state can be perfectly predicted.</p>
+<p><strong>A probabilistic system</strong> is one in which the occurrence of events cannot be perfectly predicted. Though the behavior of such a system can be described in terms of probability, a certain degree of error is always attached to the prediction of the behavior of the system.</p>
+</section>
+<section id="heuristics-base-model">
+<h3>Heuristics / base model<a class="headerlink" href="#heuristics-base-model" title="Link to this heading">#</a></h3>
+<p><strong>A heuristic</strong> is an approach to problem-solving or self-discovery using ‘a calculated guess’ derived from previous experiences.</p>
+<p>Heuristics are mental shortcuts that ease the cognitive load of making a decision.</p>
+<p>Usually, the opposite process to heuristics is the application of algorithms. Algorithms involve calculated answers and guesswork is eliminated.</p>
+</section>
+<section id="cookie-monster-gains-weight-mysteriously">
+<h3>3. Cookie Monster gains weight mysteriously<a class="headerlink" href="#cookie-monster-gains-weight-mysteriously" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p>Cookie Monster has a birthday in <strong>2 weeks</strong> and local municipality would like to give it a
+postcard with its <strong>exact weight</strong> written on it. Can you accurately predict it?</p>
+<p>Very little is known about how Cookie Monster gains weight. The following observations are however available :</p>
+  </div>
+  <div class="images_30">
+    <img src="../../images/intro_to_data_science_ml/cookie_monster_kermit.png" width="400">
+  </div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Day</p></th>
+<th class="head"><p>Kilograms of cookies consumed</p></th>
+<th class="head"><p>Neighbour looking out of the window</p></th>
+<th class="head"><p>Temperature outside</p></th>
+<th class="head"><p>Tram 1 working</p></th>
+<th class="head"><p>Lake water temperature</p></th>
+<th class="head"><p>Evgeny teaching ML class</p></th>
+<th class="head"><p>Weight beginning of day</p></th>
+<th class="head"><p>Weight end of day</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>15</p></td>
+<td><p>Yes</p></td>
+<td><p>25</p></td>
+<td><p>1</p></td>
+<td><p>15</p></td>
+<td><p>1</p></td>
+<td><p>100</p></td>
+<td><p>114.3</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>10</p></td>
+<td><p>No</p></td>
+<td><p>23</p></td>
+<td><p>0</p></td>
+<td><p>15.5</p></td>
+<td><p>0</p></td>
+<td><p>114.3</p></td>
+<td><p>120.7</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>40</p></td>
+<td><p>Yes</p></td>
+<td><p>29</p></td>
+<td><p>1</p></td>
+<td><p>15.3</p></td>
+<td><p>1</p></td>
+<td><p>120.7</p></td>
+<td><p>135.4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="humans-or-machine-learning">
+<h4>Humans or Machine Learning?<a class="headerlink" href="#humans-or-machine-learning" title="Link to this heading">#</a></h4>
+</section>
+</section>
+<section id="what-if-the-system-is-non-deterministic-and-also-highly-complex">
+<h3>What if the system is non-deterministic and also highly complex?<a class="headerlink" href="#what-if-the-system-is-non-deterministic-and-also-highly-complex" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<ul>
+<li><p>It is difficult to understand what the rules are.</p></li>
+<li><p>The rules are too complex to write down.</p></li>
+<li><p>There are too many rules.</p></li>
+<li><p>Rules sometimes apply and sometimes don’t and you don’t know when or why.</p></li>
+<li><p>You have tried heuristics and they don’t work well.</p>
+</div>
+<div class="images_30">
+  <img src="../../images/intro_to_data_science_ml/img_p8_1.png">
+</div>
+</li>
+</ul>
+</div></section>
+<section id="perhaps-the-machine-can-figure-it-out">
+<h3>Perhaps the machine can figure it out?<a class="headerlink" href="#perhaps-the-machine-can-figure-it-out" title="Link to this heading">#</a></h3>
+<p>If it’s too much for you to figure out, perhaps the machine could?</p>
+<div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/img_p3_1.png">
+  </div>
+</div>
+<div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/img_p9_1.png">
+  </div>
+</div></section>
+<section id="machine-learning-is-a-tool-to-deal-with-uncertainty-in-probabilistic-systems">
+<h3>Machine Learning is a tool to deal with  <u>uncertainty</u> in <u>probabilistic</u> systems<a class="headerlink" href="#machine-learning-is-a-tool-to-deal-with-uncertainty-in-probabilistic-systems" title="Link to this heading">#</a></h3>
+<p>Use it when you have exhausted all other options and <strong>not</strong> because you don’t yet have the solution for a deterministic problem.</p>
+<p><strong>As an AI PM:</strong> Be the person who asks “do we actually need ML here?” before the team builds it. Knowing when NOT to use ML is as valuable as knowing when to use it.</p>
+<img src="../../images/intro_to_data_science_ml/img_p10_1.png" style="display:block; margin:auto"></section>
+<section id="do-not-solve-deterministic-problems-with-machine-learning">
+<h3>Do <u>NOT</u> solve <u>deterministic</u> problems with Machine Learning<a class="headerlink" href="#do-not-solve-deterministic-problems-with-machine-learning" title="Link to this heading">#</a></h3>
+<p>Using Machine Learning introduces complexity and overheads that can only be justified <strong>if</strong> they are absolutely necessary</p>
+<p><strong>For the PMs:</strong> Before adding AI to a product feature, ask: can this be solved with a simple rule or formula? If yes — don’t use ML. Your job is to protect the team from unnecessary complexity.</p>
+</section>
+</section>
+<section id="what-is-ai">
+<h2>What is AI?<a class="headerlink" href="#what-is-ai" title="Link to this heading">#</a></h2>
+<section id="id2">
+<h3>What is AI?<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/what_is_ai_1_2.png">
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/what_is_ai_2.png">
+  </div>
+</div><p>It’s not the Terminator</p>
+<p>It is a branch of Computer Science!! with subdomains</p>
+</section>
+<section id="id3">
+<h3>What is AI?<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p><strong>Narrow AI:</strong> real AI .. math / computational statistics on steroids .. solves one task</p>
+<p><strong>General AI:</strong> imaginary AI .. killer robots, paperclip machine (decides to build paper clips and drowns all mankind)</p>
+<p><strong>Technochauvinism:</strong> believing that all problems can be solved by tech</p>
+<p><sub><sub><a class="reference external" href="https://www.c-span.org/video/?457638-2/artificial-unintelligence">Meredith Broussard, Artificial Unintelligence</a></sub></sub></p>
+<p>we work with narrow. movies are about general.</p>
+</section>
+<section id="how-can-machine-learning-help">
+<h3>How can Machine learning help?<a class="headerlink" href="#how-can-machine-learning-help" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<ul>
+<li><p>Smarter weather prediction and agriculture</p></li>
+<li><p>Energy optimization</p></li>
+<li><p>Self-driving cars</p></li>
+<li><p>AI in healthcare / Drug discovery</p></li>
+<li><p>Finance / Fraud detection</p></li>
+<li><p>On-demand language translation</p>
+</div>
+<div class="images_30">
+  <img src="../../images/intro_to_data_science_ml/img_p27_1.png">
+</div>
+</li>
+</ul>
+</div></section>
+<section id="what-can-we-do-with-it">
+<h3>What can we do with it?<a class="headerlink" href="#what-can-we-do-with-it" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Predict if a product will sell or not</p></li>
+<li><p>Demand prediction for a service</p></li>
+<li><p>Traffic prediction</p></li>
+<li><p>Predicting when a large system will break.. a ship, a train and so on</p></li>
+<li><p>Winning a game of chess</p></li>
+</ul>
+</section>
+<section id="hot-topics-gpt-3">
+<h3>Hot topics: GPT-3<a class="headerlink" href="#hot-topics-gpt-3" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p><a class="reference external" href="https://openai.com/blog/openai-api/">https://openai.com/blog/openai-api/</a></p>
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/chat_gpt.png">
+  </div>
+</div>
+<p><a class="reference external" href="https://www.theverge.com/21346343/gpt-3-explainer-openai-examples-errors-agi-potential">https://www.theverge.com/21346343/gpt-3-explainer-openai-examples-errors-agi-potential</a></p>
+<p>Generative Pre-trained Transformer 3 is an autoregressive language model released in 2020 that uses deep learning to produce human-like text. Given an initial text as prompt, it will produce text that continues the prompt.</p>
+</section>
+<section id="how-can-ai-be-dangerous">
+<h3>How can AI be dangerous?<a class="headerlink" href="#how-can-ai-be-dangerous" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<ul class="simple">
+<li><p>Autonomous weapons</p></li>
+<li><p>Social manipulation</p></li>
+<li><p>Invasion of privacy and social grading</p></li>
+<li><p>Recruiting</p></li>
+<li><p>Amplifies discrimination</p></li>
+</ul>
+<p><em>check out Coded Bias on Netflix</em></p>
+<p><strong>As an AI PM:</strong> You are responsible for the product impact of AI features. Ask: Who could this harm? What happens when the model is wrong? Do we have a process for appeals or corrections?</p>
+  </div>
+  <div class="images_30">
+    <img src="../../images/intro_to_data_science_ml/coded_bias.png" width="350">
+  </div>
+</div>
+<p>When MIT Media Lab researcher Joy Buolamwini discovers that facial recognition does not see dark-skinned faces accurately, she embarks on a journey to push for the first-ever U.S. legislation against bias in algorithms that impact us all.</p>
+</section>
+<section id="ai-effect-on-society">
+<h3>AI - Effect on Society<a class="headerlink" href="#ai-effect-on-society" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/Race-After-Technology.png" width="350">
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/Weapons-of-Math-Destruction.png" width="365">
+  </div>
+</div></section>
+<section id="ai-and-discrimination-pulse-ai">
+<h3>AI and discrimination - PULSE AI<a class="headerlink" href="#ai-and-discrimination-pulse-ai" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="images">      
+    <img src="../../images/intro_to_data_science_ml/img_p31_2.png">
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/img_p31_1.png">
+    <img src="../../images/intro_to_data_science_ml/img_p31_3.png" width="600">
+  </div>
+</div>
+</section>
+<section id="awful-ai">
+<h3>Awful AI<a class="headerlink" href="#awful-ai" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p><a class="github reference external" href="https://github.com/daviddao/awful-ai">daviddao/awful-ai</a></p>
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/img_p33_2.png">
+  </div>
+</div></section>
+</section>
+<section id="where-does-bias-come-from">
+<h2>Where does bias come from?<a class="headerlink" href="#where-does-bias-come-from" title="Link to this heading">#</a></h2>
+<section id="who-is-contributing-to-the-data">
+<h3>Who is contributing to the data?<a class="headerlink" href="#who-is-contributing-to-the-data" title="Link to this heading">#</a></h3>
+<img src="../../images/intro_to_data_science_ml/img_p35_1.png" width="900"></section>
+<section id="what-we-do-with-the-data">
+<h3>What we do with the data?<a class="headerlink" href="#what-we-do-with-the-data" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>Algorithms can also be biased.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>Do they care about the average?</p></li>
+<li><p>Is the target of the model really what the system should optimise for?</p></li>
+</ul>
+<p><strong>For the PMs:</strong> You define what the model should optimise for. Choosing the wrong metric embeds bias into the product at design time — not at deployment time.</p>
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/img_p36_3.png">
+  </div>
+  <div class="text">
+<p><sub><sub><a class="reference external" href="https://www.wsj.com/articles/facebook-algorithm-change-zuckerberg-11631654215">today in the Markup newsletter</a></sub></sub></p>
+   </div>
+</div>
+</section>
+</section>
+<section id="machine-learning">
+<h2>Machine Learning<a class="headerlink" href="#machine-learning" title="Link to this heading">#</a></h2>
+<section id="birds-eye-view">
+<h3>Birds-Eye View<a class="headerlink" href="#birds-eye-view" title="Link to this heading">#</a></h3>
+<img src="../../images/intro_to_data_science_ml/img_p40_1.png" width="725">
+<p><sub><sub>Sources:<a class="reference external" href="https://datute.net/bigdata.html">https://datute.net/bigdata.html</a></sub></sub></p>
+</section>
+<section id="supervised-learning">
+<h3>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>Training data (known data) includes the desired output (response) as well.</p>
+<p>Example:</p>
+<p>Predicting house prices based on given features like: number of rooms, bathrooms, garage space, year it was
+built, location, etc.</p>
+<p><strong>For the PMs:</strong> Most business ML problems are supervised. You need labelled data — which means someone had to create or collect the “right answers”. This is often the hardest and most expensive part of the project.</p>
+<p><sub><sub> Sources:
+<a class="reference external" href="https://www.flaticon.com/free-icon/apple_415682?term=apple&amp;amp;page=1&amp;amp;position=12">Apple</a>, <a class="reference external" href="https://www.flaticon.com/free-icon/machine-learning_2464316?term=machine%20learning&amp;amp;page=2&amp;amp;position=5">Machine Learning</a>, <a class="reference external" href="https://www.flaticon.com/free-icon/pc-monitor_81793?term=computer%20screen&amp;amp;page=6&amp;amp;position=14">Computer</a> </sub></sub></p>
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/supervised_learning_ml.png">
+  </div>
+</div>
+</section>
+<section id="unsupervised-learning">
+<h3>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>The training data (known data) does NOT include the desired output (response).</p>
+<p>Example:</p>
+<p>Grouping customers by purchasing behavior</p>
+<p><strong>For the PMs:</strong> Useful for discovery — segmenting users, finding anomalies, recommending content. You don’t need labelled data, but the output is harder to evaluate. “Good clusters” requires domain judgment, not just a metric.</p>
+<p><sub><sub> Sources:
+<a class="reference external" href="https://www.flaticon.com/packs/summer-food-drink">Apple/Banana/And Pearple</a>, <a class="reference external" href="https://www.flaticon.com/free-icon/machine-learning_2464316?term=machine%20learning&amp;amp;page=2&amp;amp;position=5">Machine Learning</a>, <a class="reference external" href="https://www.flaticon.com/free-icon/pc-monitor_81793?term=computer%20screen&amp;amp;page=6&amp;amp;position=14">Computer</a>, <a class="reference external" href="https://www.flaticon.com/free-icon/thinking_522938?term=thinking%20bubble&amp;amp;page=1&amp;amp;position=17">Thinking Bubble</a> </sub></sub></p>
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/unsupervised_learning_ml.png">
+  </div>
+</div>
+</section>
+<section id="semi-supervised-learning">
+<h3>Semi-supervised Learning<a class="headerlink" href="#semi-supervised-learning" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>Training data includes SOME of the desired output</p>
+<p>Example:</p>
+<p>Photo archive, where only some images are labeled (e.g. dog, cat, person) and the majority is unlabeled.</p>
+<p><strong>As an AI PM:</strong> Relevant when labelling is expensive. You can launch with partial labels and improve over time — but plan for the labelling effort and quality control upfront.</p>
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/img_p45_1.png">
+  </div>
+</div>
+</section>
+<section id="reinforcement-learning">
+<h3>Reinforcement Learning<a class="headerlink" href="#reinforcement-learning" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>Training data has a feedback loop</p>
+<p>Example:</p>
+<p>autonomous video game player
+<img src="../../images/intro_to_data_science_ml/img_p46_2.png" width="500"></p>
+<p><strong>As an AI PM:</strong> RL powers recommendation engines, ad bidding, and game AI. The reward function IS the product spec — defining it incorrectly leads to unexpected and sometimes harmful behaviour.</p>
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/img_p46_1.png">
+<p><sub><sub>Sources: <a class="reference external" href="https://www.kdnuggets.com/2018/03/5-things-reinforcement-learning.html">https://www.kdnuggets.com/2018/03/5-things-reinforcement-learning.html</a></sub></sub></p>
+  </div>
+</div>
+</section>
+<section id="regression-vs-classification">
+<h3>Regression vs. Classification<a class="headerlink" href="#regression-vs-classification" title="Link to this heading">#</a></h3>
+<img src="../../images/intro_to_data_science_ml/img_p40_1.png" width="725">
+<p><sub><sub>Sources:<a class="reference external" href="https://datute.net/bigdata.html">https://datute.net/bigdata.html</a></sub></sub></p>
+</section>
+<section id="classification-vs-regression">
+<h3>Classification vs. Regression<a class="headerlink" href="#classification-vs-regression" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/MLIntro_classification_example.png" width="550">
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/MLIntro_regression_example.png" width="550">
+  </div>
+</div></section>
+<section id="unsupervised-learning-dimensionality-reduction">
+<h3>Unsupervised learning: Dimensionality reduction<a class="headerlink" href="#unsupervised-learning-dimensionality-reduction" title="Link to this heading">#</a></h3>
+<img src="../../images/intro_to_data_science_ml/img_p49_1.png" width="800" style="display:block; margin:auto">
+<p><sub><sub>Sources: Hands-on Machine Learning, Geron</sub></sub></p>
+</section>
+<section id="unsupervised-learning-clustering">
+<h3>Unsupervised learning: Clustering<a class="headerlink" href="#unsupervised-learning-clustering" title="Link to this heading">#</a></h3>
+<img src="../../images/intro_to_data_science_ml/img_p50_1.png" width="800" style="display:block; margin:auto">
+<p><sub><sub>Sources: sklearn dataset, own visualization</sub></sub></p>
+</section>
+<section id="deep-learning">
+<h3>Deep Learning<a class="headerlink" href="#deep-learning" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p><strong>Deep Learning</strong> is a class of ML algorithms that <u>uses multiple layers to progressively extract higher level features from the raw input.</u></p>
+<p>For example, in image processing, lower layers may identify edges, while higher layers may identify the concepts relevant to a human such as digits or letters or faces.</p>
+  </div>
+  <div class="images_30">
+    <img src="../../images/intro_to_data_science_ml/MLIntro_deep_learning.png" width="600">
+  </div>
+</div></section>
+<section id="time-series-forecasting">
+<h3>Time Series Forecasting<a class="headerlink" href="#time-series-forecasting" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p><strong>A Time Series</strong> is a series of data points indexed in time order. Most commonly the data points are taken at equal intervals.</p>
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/img_p52_1.png">
+  </div>
+</div></section>
+<section id="natural-language-processing">
+<h3>Natural Language Processing<a class="headerlink" href="#natural-language-processing" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p><strong>NLP</strong> is the field dealing with how to program computers to process and analyze large amounts of natural language data.</p>
+  </div>
+  <div class="images_30">
+    <img src="../../images/intro_to_data_science_ml/img_p53_1.png">
+  </div>
+</div></section>
+<section id="generative-ai-vs-supervised-learning">
+<h3>Generative AI vs Supervised Learning<a class="headerlink" href="#generative-ai-vs-supervised-learning" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<blockquote>
+<div><p>Generative AI is mind-blowing, but remember that Supervised learning is the most profitable Machine Learning technique today. The attached image is from &#64;AndrewYNg’s talk at Stanford University in July 2023. Supervised learning is massive, and he predicts it should double in the next few years. Generative AI should more than double, but it won’t catch up. Don’t let online hype lead you astray. Learning the fundamentals is as important as it’s always been. <br> <a class="reference external" href="https://www.linkedin.com/posts/svpino_generative-ai-is-mind-blowing-but-remember-activity-7124020850646749184-Mc_X?utm_source=share&amp;amp;utm_medium=member_desktop">Santiago Valdarrama</a></p>
+</div></blockquote>
+<p>Also the link to Andrew Ng’s talk: <a class="reference external" href="https://youtu.be/5p248yoa3oE?si=DmffehuDLWa2IAFB">https://youtu.be/5p248yoa3oE?si=DmffehuDLWa2IAFB</a></p>
+<p><strong>For the PMs:</strong> Don’t default to GenAI because it’s trendy. Ask: Is this a generation problem or a prediction problem? GenAI is expensive, hard to evaluate, and unpredictable. Supervised learning is often cheaper, faster, and more reliable for well-defined product problems.</p>
+</div>
+  <div class="images_30">
+    <img src="../../images/intro_to_data_science_ml/andrew-ng-supervised-vs-generative.jpeg" width=850>
+  </div>
+</div>
+</section>
+</section>
+<section id="who-does-what-in-data">
+<h2>Who does what in data?<a class="headerlink" href="#who-does-what-in-data" title="Link to this heading">#</a></h2>
+<p>many roles, which ones have you heard of?</p>
+<p>data journalist, analytics engineer, mle, ds, da, de, data viz, data prod</p>
+<p>let’s focus on 4 common ones (though dae is on the rise)</p>
+<section id="data-engineer">
+<h3>Data Engineer<a class="headerlink" href="#data-engineer" title="Link to this heading">#</a></h3>
+<p><strong>Tasks:</strong></p>
+<p>data warehouse, data lake, data infrastructure, data pipeline, data transformation and enriching, ETL, automation, software engineering</p>
+<div class="group">
+  <div class="text">
+<p><strong>Closely related roles:</strong></p>
+<p>Data ops, ML ops</p>
+<p><strong>Key skills:</strong></p>
+<p>engineering, data modeling, communication</p>
+<img src="../../images/intro_to_data_science_ml/MLIntro_data_engineer_skills.png" width="500">
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/img_p18_1.png" width="500">
+  </div>
+</div>
+</section>
+<section id="data-analyst">
+<h3>Data Analyst<a class="headerlink" href="#data-analyst" title="Link to this heading">#</a></h3>
+<p><strong>Tasks:</strong></p>
+<p>data warehouse, data pipeline, data transformation and enriching, ETL, data analysis, EDA, KPIs, statistics, data exploration, dashboards, visualization, communicating, assessing data products</p>
+<div class="group">
+  <div class="text">
+<p><strong>Closely related roles:</strong></p>
+<p>Product Analyst, Data Scientist, Data Visualizer, (Growth Hacker…)</p>
+<p><strong>Key skills:</strong></p>
+<p>statistics, domain knowledge, communication</p>
+<img src="../../images/intro_to_data_science_ml/img_p16_4.png" width="200">
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/img_p19_1.png" width="500">
+  </div>
+</div></section>
+<section id="data-scientist">
+<h3>Data Scientist<a class="headerlink" href="#data-scientist" title="Link to this heading">#</a></h3>
+<p><strong>Tasks:</strong></p>
+<p>data pipeline, data analysis, KPIs, statistics, data exploration, visualization, EDA, communicating, data modeling, predicting, building data products, deep learning</p>
+<div class="group">
+  <div class="text">
+<p><strong>Closely related roles:</strong></p>
+<p>Product Analyst, ML Engineer, Data Visualizer</p>
+<p><strong>Key skills:</strong></p>
+<p>algorithms, domain knowledge, communication</p>
+<img src="../../images/intro_to_data_science_ml/img_p16_5.png" width="200">
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/img_p20_1.png" width="500">
+  </div>
+</div></section>
+<section id="machine-learning-engineer">
+<h3>Machine Learning Engineer<a class="headerlink" href="#machine-learning-engineer" title="Link to this heading">#</a></h3>
+<p><strong>Tasks:</strong></p>
+<p>data pipeline, data analysis, data modeling, predicting, building data products, automation, software engineering</p>
+<div class="group">
+  <div class="text">
+<p><strong>Closely related roles:</strong></p>
+<p>Data Scientist, Data Engineer</p>
+<p><strong>Key skills:</strong></p>
+<p>engineering, algorithms, communication</p>
+<img src="../../images/intro_to_data_science_ml/MLIntro_ml_engineer_skills.png" width="500">
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/img_p21_1.png" width="550">
+  </div>
+</div></section>
+</section>
+<section id="your-role-as-an-ai-pm">
+<h2>Your Role as an AI PM<a class="headerlink" href="#your-role-as-an-ai-pm" title="Link to this heading">#</a></h2>
+<section id="ai-product-manager">
+<h3>AI Product Manager<a class="headerlink" href="#ai-product-manager" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p><strong>Tasks:</strong></p>
+<p>defining product vision for AI features, writing requirements &amp; acceptance criteria, prioritizing data/ML work, communicating AI trade-offs, managing the AI product lifecycle, stakeholder alignment, make build-vs-buy decisions</p>
+<p><strong>Closely related roles:</strong></p>
+<p>Product Analyst, ML Engineer, Data Scientist, Business Analyst</p>
+<p><strong>Key skills:</strong></p>
+<p>communication, domain knowledge, understanding of ML fundamentals, stakeholder management</p>
+  </div>
+</div>
+<div class="group">
+    <div class="text">
+<p><strong>Key questions to ask:</strong></p>
+<ul>
+<li><p>What problem are we actually solving?</p></li>
+<li><p>Is ML the right tool here?</p></li>
+<li><p>What data do we have — and is it good enough?</p></li>
+<li><p>How do we measure success?</p></li>
+<li><p>What are the risks if the model is wrong?</p></li>
+<li><p>How do we communicate uncertainty to users?</p>
+</div>
+</li>
+</ul>
+</div>    </section>
+<section id="learn-about-the-subject-and-where-your-past-experience-fits-in">
+<h3>Learn about the subject and where your <strong>past experience</strong> fits in<a class="headerlink" href="#learn-about-the-subject-and-where-your-past-experience-fits-in" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p><strong>Books:</strong></p>
+<p><a class="reference external" href="https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/">Designing Machine Learning Systems — Chip Huyen</a></p>
+<p><a class="reference external" href="https://www.oreilly.com/library/view/ai-and-machine/9781492036579/">AI Product Management — Peter Elger &amp; Eoin Shanaghy</a></p>
+<p><strong>Podcast:</strong></p>
+<p><a class="reference external" href="https://open.spotify.com/show/6VHFZ9Q8ysEBbJaTVqNLJg">The Product Podcast by Product School</a></p>
+  </div>
+  <div class="images_30">
+    <img src="../../images/intro_to_data_science_ml/img_p56_6.png">
+  </div>
+</div>
+</section>
+<section id="explore-ai-products-in-the-wild">
+<h3>Explore AI products in the wild<a class="headerlink" href="#explore-ai-products-in-the-wild" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<ul>
+<li><p>Use products powered by ML (Spotify, Netflix, Gmail Smart Compose, Google Maps ETA)</p></li>
+<li><p>Try to identify what the model is predicting and what data it might use</p></li>
+<li><p>Think about edge cases: when would the prediction be wrong?</p></li>
+<li><p>Ask yourself: what would I measure to know if this feature is working?</p>
+  </div>
+  <div class="images">
+      <img src="../../images/intro_to_data_science_ml/img_p57_2.png">
+  </div>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="the-ai-product-lifecycle">
+<h2>The AI Product Lifecycle<a class="headerlink" href="#the-ai-product-lifecycle" title="Link to this heading">#</a></h2>
+<section id="id4">
+<h3>The AI Product Lifecycle<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>Building AI products is an <strong>iterative, cross-functional process</strong> — not a one-time build.</p>
+<p>The lifecycle has 5 key phases:</p>
+<ol class="arabic simple">
+<li><p><strong>Define</strong> the problem</p></li>
+<li><p><strong>Assess</strong> the data</p></li>
+<li><p><strong>Build &amp; Evaluate</strong> the model</p></li>
+<li><p><strong>Deploy</strong></p></li>
+<li><p><strong>Monitor &amp; Iterate</strong></p></li>
+</ol>
+<p>As an AI PM, you are involved in every phase — not just the beginning and end.</p>
+  </div>
+  <div class="images">
+    <img src="../../images/intro_to_data_science_ml/data_lifecycle_ds_ml.png" width="550">
+  </div>
+</div></section>
+<section id="define-the-problem">
+<h3>1. Define the Problem<a class="headerlink" href="#define-the-problem" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p><strong>Questions to answer before building anything:</strong></p>
+<ul class="simple">
+<li><p>What user or business problem are we solving?</p></li>
+<li><p>Is this problem well-defined enough to solve with ML?</p></li>
+<li><p>What does “good enough” look like? (define success <em>before</em> you build)</p></li>
+<li><p>What is the cost of a wrong prediction? (false positive vs. false negative)</p></li>
+<li><p>Who are the stakeholders and what do they need to know?</p></li>
+</ul>
+<p><strong>PM’s responsibility:</strong></p>
+<p>Write a clear problem statement and get stakeholder sign-off <em>before</em> any model development starts.</p>
+<blockquote>
+<div><p>“A problem well-stated is a problem half-solved.” — Charles Kettering</p>
+</div></blockquote>
+  </div>
+</div></section>
+<section id="assess-the-data">
+<h3>2. Assess the Data<a class="headerlink" href="#assess-the-data" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p><strong>Data is the foundation — and the biggest risk.</strong></p>
+<p>Key questions:</p>
+<ul class="simple">
+<li><p>Do we have data at all? If not, how do we get it?</p></li>
+<li><p>Is it <strong>labeled</strong>? Labeling is expensive and slow.</p></li>
+<li><p>Is it <strong>representative</strong> of the real world? (watch out for sampling bias)</p></li>
+<li><p>Is it <strong>fresh</strong> enough? Stale data = stale model.</p></li>
+<li><p>Are there any <strong>legal/privacy</strong> constraints? (GDPR, PII)</p></li>
+</ul>
+<p><strong>Common failure modes:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Issue</p></th>
+<th class="head"><p>Impact</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Not enough data</p></td>
+<td><p>Model won’t generalise</p></td>
+</tr>
+<tr class="row-odd"><td><p>Biased data</p></td>
+<td><p>Unfair or broken predictions</p></td>
+</tr>
+<tr class="row-even"><td><p>Leaky features</p></td>
+<td><p>Overly optimistic results</p></td>
+</tr>
+<tr class="row-odd"><td><p>No ground truth</p></td>
+<td><p>Can’t evaluate the model</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+  <!-- </div>
+  <div class="images_30">
+    <img src="../../images/intro_to_data_science_ml/data_lifecycle_ds_ml.png" width="550">
+  </div>
+</div> --></section>
+<section id="build-evaluate">
+<h3>3. Build &amp; Evaluate<a class="headerlink" href="#build-evaluate" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p><strong>Your job is not to build the model — it is to define what “good” means.</strong></p>
+<p>As PM, you:</p>
+<ul class="simple">
+<li><p>Write <strong>acceptance criteria</strong> (what the model must achieve before shipping)</p></li>
+<li><p>Define the <strong>baseline</strong>: what does the current solution look like? (rule-based? human? nothing?)</p></li>
+<li><p>Distinguish <strong>offline metrics</strong> (measured in the lab) from <strong>online metrics</strong> (measured in production)</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Offline metric</p></th>
+<th class="head"><p>Online metric</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Accuracy, F1, RMSE</p></td>
+<td><p>Click-through rate, conversion, churn</p></td>
+</tr>
+<tr class="row-odd"><td><p>Measured on held-out test set</p></td>
+<td><p>Measured on real users in A/B test</p></td>
+</tr>
+<tr class="row-even"><td><p>Fast to compute</p></td>
+<td><p>Takes time and traffic</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>MVP mindset:</strong> what is the simplest model that moves the needle?</p>
+  </div>
+  <div class="images_30">
+    <img src="../../images/ml_project_data_products/Business_vs_Model_Performance_1.png" width="450">
+  </div>
+</div></section>
+<section id="deploy">
+<h3>4. Deploy<a class="headerlink" href="#deploy" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p><strong>Shipping a model is not the same as shipping a feature.</strong></p>
+<p>Key decisions for the PM:</p>
+<ul class="simple">
+<li><p><strong>Build vs. buy</strong> — use an API (OpenAI, Google Vision) or train your own? Cost, latency, control.</p></li>
+<li><p><strong>Rollout strategy</strong> — shadow mode, canary release, or full launch?</p></li>
+<li><p><strong>Rollback plan</strong> — what happens if the model behaves badly in production?</p></li>
+<li><p><strong>User communication</strong> — do users know they are interacting with an AI? (transparency, trust)</p></li>
+</ul>
+<p><strong>Rollout strategies:</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Strategy</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Shadow mode</p></td>
+<td><p>Model runs silently, output not shown to users yet</p></td>
+</tr>
+<tr class="row-odd"><td><p>Canary / A/B</p></td>
+<td><p>Model shown to a small % of users first</p></td>
+</tr>
+<tr class="row-even"><td><p>Full launch</p></td>
+<td><p>Rolled out to everyone</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+  </div>
+</div></section>
+<section id="monitor-iterate">
+<h3>5. Monitor &amp; Iterate<a class="headerlink" href="#monitor-iterate" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<p><strong>Models degrade. The world changes. Your job does not end at launch.</strong></p>
+<p>What to watch:</p>
+<ul class="simple">
+<li><p><strong>Data drift</strong> — the distribution of incoming data shifts over time</p></li>
+<li><p><strong>Concept drift</strong> — the relationship between input and output changes (e.g. user behaviour shifts)</p></li>
+<li><p><strong>Model degradation</strong> — accuracy, precision, recall drop in production</p></li>
+</ul>
+<p><strong>When to retrain?</strong></p>
+<ul class="simple">
+<li><p>On a schedule (e.g. monthly)</p></li>
+<li><p>When a performance threshold is breached</p></li>
+<li><p>When significant data drift is detected</p></li>
+</ul>
+<p><strong>The iteration loop:</strong></p>
+<p>Collect feedback → Analyse failures → Improve data or model → Re-evaluate → Re-deploy</p>
+<blockquote>
+<div><p>ML products are never “done”. Build processes for continuous improvement from day one.</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions/aipm_sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../03_Intro_to_Data_Science_ML.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Data Science &amp; ML</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../04_Ethics_Data_Science.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Ethics in Data Science</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-concepts-for-data-science-and-machine-learning">Understanding concepts for Data Science and Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data">What is data?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#once-upon-a-time">Once upon a time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now">Now</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-lifecycle">Data Lifecycle</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-not-machine-learning">What is “NOT machine learning”?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-problems-can-be-solved-by-not-machine-learning">Which problems can be solved by “NOT machine learning”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Which problems can be solved by “NOT machine learning”</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cookie-monster-gains-weight">1. Cookie Monster gains weight</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-definition">Algorithm definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cookie-monsters-grandma">2. Cookie Monster’s grandma</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty">Uncertainty</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heuristics-base-model">Heuristics / base model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cookie-monster-gains-weight-mysteriously">3. Cookie Monster gains weight mysteriously</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#humans-or-machine-learning">Humans or Machine Learning?</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-if-the-system-is-non-deterministic-and-also-highly-complex">What if the system is non-deterministic and also highly complex?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perhaps-the-machine-can-figure-it-out">Perhaps the machine can figure it out?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-is-a-tool-to-deal-with-uncertainty-in-probabilistic-systems">Machine Learning is a tool to deal with  <u>uncertainty</u> in <u>probabilistic</u> systems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#do-not-solve-deterministic-problems-with-machine-learning">Do <u>NOT</u> solve <u>deterministic</u> problems with Machine Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-ai">What is AI?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">What is AI?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">What is AI?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-machine-learning-help">How can Machine learning help?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-we-do-with-it">What can we do with it?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hot-topics-gpt-3">Hot topics: GPT-3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-ai-be-dangerous">How can AI be dangerous?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-effect-on-society">AI - Effect on Society</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-and-discrimination-pulse-ai">AI and discrimination - PULSE AI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#awful-ai">Awful AI</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-does-bias-come-from">Where does bias come from?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#who-is-contributing-to-the-data">Who is contributing to the data?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-do-with-the-data">What we do with the data?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning">Machine Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#birds-eye-view">Birds-Eye View</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">Supervised Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">Unsupervised Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semi-supervised-learning">Semi-supervised Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning">Reinforcement Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-vs-classification">Regression vs. Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-vs-regression">Classification vs. Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning-dimensionality-reduction">Unsupervised learning: Dimensionality reduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning-clustering">Unsupervised learning: Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning">Deep Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-series-forecasting">Time Series Forecasting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#natural-language-processing">Natural Language Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-ai-vs-supervised-learning">Generative AI vs Supervised Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-does-what-in-data">Who does what in data?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-engineer">Data Engineer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-analyst">Data Analyst</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-scientist">Data Scientist</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-engineer">Machine Learning Engineer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-role-as-an-ai-pm">Your Role as an AI PM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-product-manager">AI Product Manager</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learn-about-the-subject-and-where-your-past-experience-fits-in">Learn about the subject and where your <strong>past experience</strong> fits in</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-ai-products-in-the-wild">Explore AI products in the wild</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ai-product-lifecycle">The AI Product Lifecycle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">The AI Product Lifecycle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-problem">1. Define the Problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assess-the-data">2. Assess the Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-evaluate">3. Build &amp; Evaluate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy">4. Deploy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monitor-iterate">5. Monitor &amp; Iterate</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

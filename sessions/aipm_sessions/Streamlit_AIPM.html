@@ -1,0 +1,1117 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Streamlit — From AI Prototype to Product &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/aipm_sessions/Streamlit_AIPM';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Git and Github" href="../../RATs/01_Git_RAT.html" />
+    <link rel="prev" title="Streamlit — From Analysis to Application" href="../31_Streamlit.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Streamlit — From AI Prototype to Product</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up">Warm-up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-last-mile-problem">The last mile problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-streamlit-is-and-is-not">What Streamlit is — and is not</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-design-principles">Three design principles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-streamlit-works-the-mental-model">How Streamlit Works: The Mental Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts-not-applications">Scripts, not applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactivity-how-interaction-works">Reactivity: how interaction works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-performance-trade-off">The performance trade-off</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-interface-model">The Interface Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-what-to-show-not-how-to-build-it">Declaring what to show, not how to build it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#widgets-as-inputs">Widgets as inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-rendering">Automatic rendering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#layout-organizing-information-for-stakeholders">Layout: Organizing Information for Stakeholders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-layout-works">How layout works</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-what-streamlit-remembers">State: What Streamlit Remembers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sidebar-pattern">The sidebar pattern</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stateless-paradox">The stateless paradox</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caching-avoiding-recomputation">Caching: avoiding recomputation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-state-multi-step-interactions">Session State: multi-step interactions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters-for-ai-pms">Why this matters for AI PMs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-ai-feature-to-stakeholder-demo">From AI Feature to Stakeholder Demo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-conceptual-distance-is-small">The conceptual distance is small</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-streamlit-is-not-enough">When Streamlit is not enough</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-the-communication-gap">Closing the communication gap</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways-for-ai-pms">Key Takeaways for AI PMs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="streamlit-from-ai-prototype-to-product">
+<h1>Streamlit — From AI Prototype to Product<a class="headerlink" href="#streamlit-from-ai-prototype-to-product" title="Link to this heading">#</a></h1>
+<p>Notes: This lecture frames Streamlit from a product management perspective — understanding the mental model, the trade-offs, and how it fits into an AI product workflow. Technical depth is kept where it helps PMs reason about scope, risk, and stakeholder communication. <strong>Feel free to bring in additional examples from products your cohort knows.</strong></p>
+<section id="warm-up">
+<h2>Warm-up<a class="headerlink" href="#warm-up" title="Link to this heading">#</a></h2>
+<p>Go to <a class="reference external" href="https://streamlit.io/gallery">streamlit.io/gallery</a> and explore a few example apps for 3 minutes. Discuss:</p>
+<ul class="simple">
+<li><p>What kind of product decision could a stakeholder make using one of these apps?</p></li>
+<li><p>How is this different from receiving a static slide deck or PDF report?</p></li>
+<li><p>Where would this fit in your product development cycle — early validation, internal tooling, or something else?</p></li>
+<li><p>If you were a PM, what would you want to test with a Streamlit prototype before commissioning a full build?</p></li>
+</ul>
+</section>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h2>
+<section id="the-last-mile-problem">
+<h3>The last mile problem<a class="headerlink" href="#the-last-mile-problem" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>AI development has a <em>last mile problem</em></p>
+<ul class="simple">
+<li><p>Models, analyses, and prototypes live in Python — technical environments</p></li>
+<li><p>The people who need to act on the AI’s output do not live in that world</p></li>
+<li><p>As an AI PM, you sit exactly at this gap</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><p>The last mile is a concept from logistics — getting the product the final stretch to the customer is often the hardest and most expensive part. In AI, the product is a model or an insight, and the last mile is getting it in front of decision-makers in a form they can actually use. As an AI PM, closing that gap is often your core job.</p>
+<ul class="simple">
+<li><p>Traditionally, two unsatisfying options for sharing AI work:</p>
+<ul>
+<li><p><strong>Static reports</strong> (PDFs, slide decks) — capture a snapshot but lose interactivity; stakeholders can’t explore the model themselves</p></li>
+<li><p><strong>Commission a full product</strong> — preserves interactivity but takes months of engineering time before you can validate whether the idea is even worth building</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>The fundamental tension in AI product development:</p>
+<ul>
+<li><p>Engineers and data scientists think in <strong>Python and models</strong></p></li>
+<li><p>Stakeholders think in <strong>interfaces and decisions</strong></p></li>
+<li><p>PMs are responsible for bridging that gap — cheaply and quickly</p></li>
+</ul>
+</li>
+</ul>
+<p>Streamlit resolves this tension by turning Python analysis directly into a shareable interface. For a PM, this means you can put a working AI prototype in front of stakeholders in hours — not months — and collect real feedback before any engineering investment in a production system.</p>
+</section>
+<section id="what-streamlit-is-and-is-not">
+<h3>What Streamlit is — and is not<a class="headerlink" href="#what-streamlit-is-and-is-not" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Is</strong>: The shortest path from a working Python or AI prototype to a shareable, interactive tool</p></li>
+<li><p><strong>Is not</strong>: A general-purpose web framework — it has no routing, authentication, or user management built in</p></li>
+</ul>
+<ul class="simple">
+<li><p>It is a niche tool for clear purposes:</p>
+<ul>
+<li><p><strong>Internal tools</strong> — let non-technical colleagues query a model or filter data themselves</p></li>
+<li><p><strong>Stakeholder demos</strong> — show a working AI feature before committing to a full build</p></li>
+<li><p><strong>Validation experiments</strong> — test whether a PM hypothesis holds against real model behavior</p></li>
+<li><p><strong>Rapid prototyping</strong> — go from idea to clickable demo in hours, not sprints</p></li>
+</ul>
+</li>
+</ul>
+<p>As a PM, knowing these boundaries is critical. Promising a Streamlit prototype to an enterprise client as a production system is a scope mistake. It is excellent for validating ideas and communicating with stakeholders. It is not a substitute for a properly engineered product.</p>
+</section>
+<section id="three-design-principles">
+<h3>Three design principles<a class="headerlink" href="#three-design-principles" title="Link to this heading">#</a></h3>
+<p>Streamlit rests on three principles that shape everything about the framework:</p>
+<ol class="arabic simple">
+<li><p><strong>An app is a script, not an architecture</strong></p>
+<ul class="simple">
+<li><p>No classes to inherit, no routes to define, no templates to write</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="2">
+<li><p><strong>Interaction = re-execution</strong></p>
+<ul class="simple">
+<li><p>When a user changes an input, the script reruns from the top</p></li>
+<li><p>No callbacks, no event listeners, no wiring</p></li>
+</ul>
+</li>
+</ol>
+<ol class="arabic simple" start="3">
+<li><p><strong>The API should disappear</strong></p>
+<ul class="simple">
+<li><p>So small and intuitive that it never becomes the focus</p></li>
+<li><p>Your analysis stays front and center</p></li>
+</ul>
+</li>
+</ol>
+<p>These three principles are deliberate product decisions by Streamlit’s creators. Each one trades something — flexibility, fine-grained control, feature richness — for radical simplicity. Understanding these trade-offs helps you set correct expectations with your engineering team and your stakeholders.</p>
+</section>
+</section>
+<section id="how-streamlit-works-the-mental-model">
+<h2>How Streamlit Works: The Mental Model<a class="headerlink" href="#how-streamlit-works-the-mental-model" title="Link to this heading">#</a></h2>
+<section id="scripts-not-applications">
+<h3>Scripts, not applications<a class="headerlink" href="#scripts-not-applications" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>In traditional web development, an app is a complex <strong>architecture</strong></p>
+<ul class="simple">
+<li><p>Routes, request handlers, frontend components, API layers</p></li>
+<li><p>Building one typically takes a team and multiple sprints</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p>Streamlit <strong>inverts</strong> this entirely</p>
+<ul>
+<li><p>A Streamlit app is just a Python script that runs from top to bottom</p></li>
+<li><p>Each line that produces output appears in the browser — in order</p></li>
+<li><p><strong>No frontend/backend split, no API design, no routing decisions</strong></p></li>
+</ul>
+</li>
+</ul>
+<p>As a PM, this matters because it directly affects scope and velocity. The script IS the app. There is no separate frontend to build, no API to design. This is why a data scientist or AI engineer can build a functional prototype in a day — and why you should not be quoting web development timelines for Streamlit work.</p>
+</section>
+<section id="reactivity-how-interaction-works">
+<h3>Reactivity: how interaction works<a class="headerlink" href="#reactivity-how-interaction-works" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>When a user interacts with a widget (slider, dropdown, button), Streamlit does something simple:</p>
+<ul class="simple">
+<li><p>It <strong>reruns the entire script</strong> from the beginning</p></li>
+<li><p>The widget remembers its new value</p></li>
+<li><p>Everything downstream recomputes automatically</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p>This is the simplest possible reactivity model</p>
+<ul>
+<li><p>Mental model: “changing an input re-generates the entire page”</p></li>
+<li><p>No callbacks, no complex event wiring — it just reruns</p></li>
+<li><p><strong>PM implication</strong>: interactions feel immediate, but performance depends on how fast the script runs</p></li>
+</ul>
+</li>
+</ul>
+<p>Think of this like a spreadsheet: when you change a cell value, all the dependent cells recalculate immediately. Streamlit applies the same idea to an entire Python application. The user changes an input, and the whole “spreadsheet” recalculates.</p>
+</section>
+<section id="the-performance-trade-off">
+<h3>The performance trade-off<a class="headerlink" href="#the-performance-trade-off" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The simplicity of full re-execution has a direct cost: <strong>speed</strong></p>
+<ul>
+<li><p>If loading a model takes 10 seconds, every interaction takes 10 seconds</p></li>
+<li><p>This is acceptable for demos; it is not acceptable for real users</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Streamlit solves this with <strong>caching</strong> — which we will discuss shortly</p>
+<ul>
+<li><p>For a PM: caching is not optional for AI apps; ask your team whether it is in place</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>This performance ceiling is also a <strong>product signal</strong>:</p>
+<ul>
+<li><p>If the demo feels slow even with caching, it may indicate the underlying model is too slow for a real product</p></li>
+<li><p>Streamlit’s slowness can surface latency problems early — before you’ve invested in a full build</p></li>
+</ul>
+</li>
+</ul>
+<p>This is a PM-relevant insight. If your team’s Streamlit demo of an LLM feature takes 15 seconds to respond to every prompt, that’s not just a Streamlit problem — it may be a sign the model is too slow for real users. Prototypes expose real constraints.</p>
+</section>
+</section>
+<section id="the-interface-model">
+<h2>The Interface Model<a class="headerlink" href="#the-interface-model" title="Link to this heading">#</a></h2>
+<section id="declaring-what-to-show-not-how-to-build-it">
+<h3>Declaring what to show, not how to build it<a class="headerlink" href="#declaring-what-to-show-not-how-to-build-it" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>Traditional web development is <strong>imperative</strong>: you specify every step of construction</p>
+<ul class="simple">
+<li><p>Create a component, position it, register an event listener, update on change</p></li>
+</ul>
+</li>
+<li><p>Streamlit is <strong>declarative</strong>: you specify <em>what</em> should appear</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">st.slider(...)</span></code> → renders a slider, returns its value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">st.dataframe(df)</span></code> → renders an interactive table</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><p>Same distinction as SQL vs. writing database access code by hand.
+SQL: “give me rows where churn_risk &gt; 0.8” — the database figures out how.
+Streamlit: “display this AI model output” — the framework handles the rendering.
+For a PM: you specify the output you want, not the engineering steps to get there.</p>
+</section>
+<section id="widgets-as-inputs">
+<h3>Widgets as inputs<a class="headerlink" href="#widgets-as-inputs" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>In traditional development, a slider is a UI <strong>component</strong> requiring setup and event wiring</p></li>
+<li><p>In Streamlit, a slider is an <strong>expression</strong> that returns a value:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">confidence</span> <span class="pre">=</span> <span class="pre">st.slider(&quot;Confidence</span> <span class="pre">threshold&quot;,</span> <span class="pre">0.0,</span> <span class="pre">1.0,</span> <span class="pre">0.5)</span></code> → the variable <code class="docutils literal notranslate"><span class="pre">confidence</span></code> holds whatever the user set</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>A single line does three things simultaneously:</p>
+<ol class="arabic simple">
+<li><p><strong>Renders</strong> a slider in the browser</p></li>
+<li><p><strong>Returns</strong> the current value to the Python logic</p></li>
+<li><p><strong>Triggers</strong> a full re-execution when changed</p></li>
+</ol>
+</li>
+<li><p>For a PM: widgets are the <strong>parameters</strong> you expose to stakeholders — they define what the user can control</p></li>
+</ul>
+<ul class="simple">
+<li><p>Choosing which widgets to expose is a <strong>product decision</strong>:</p>
+<ul>
+<li><p>Too many parameters → overwhelming, unclear what to change</p></li>
+<li><p>Too few → stakeholders cannot explore what they need</p></li>
+<li><p>The PM’s job: decide what knobs belong in the interface</p></li>
+</ul>
+</li>
+</ul>
+<p>Deciding which parameters to expose is exactly the same problem as product design: what does the user actually need to control? A churn model demo might expose “customer segment” and “date range” but hide the model hyperparameters. The PM defines the surface area of the prototype.</p>
+</section>
+<section id="automatic-rendering">
+<h3>Automatic rendering<a class="headerlink" href="#automatic-rendering" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">st.write()</span></code> inspects the <strong>type</strong> of the object it receives and renders it appropriately:</p>
+<ul>
+<li><p>String → Markdown text</p></li>
+<li><p>DataFrame → interactive table</p></li>
+<li><p>Chart figure → visual chart</p></li>
+<li><p>Dictionary → formatted JSON</p></li>
+</ul>
+</li>
+<li><p><strong>No configuration needed</strong> — the framework chooses the right presentation</p></li>
+</ul>
+<ul class="simple">
+<li><p>For a PM: you can think of <code class="docutils literal notranslate"><span class="pre">st.write()</span></code> as “display this, whatever it is”</p>
+<ul>
+<li><p>It lowers the cost of showing outputs to near-zero</p></li>
+<li><p>This is a useful analogy for user-facing AI features too: smart defaults reduce friction for end users</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="layout-organizing-information-for-stakeholders">
+<h2>Layout: Organizing Information for Stakeholders<a class="headerlink" href="#layout-organizing-information-for-stakeholders" title="Link to this heading">#</a></h2>
+<section id="how-layout-works">
+<h3>How layout works<a class="headerlink" href="#how-layout-works" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Default layout is <strong>vertical</strong>: each output appears below the previous one</p></li>
+<li><p>Several mechanisms to organize information for users:</p>
+<ul>
+<li><p><strong>Columns</strong> — results side by side (comparisons, metrics)</p></li>
+<li><p><strong>Sidebar</strong> — persistent controls on the left (parameters the user adjusts)</p></li>
+<li><p><strong>Tabs</strong> — different views without scrolling (e.g., “Model Output” / “Explanation” / “Data”)</p></li>
+<li><p><strong>Expanders</strong> — optional detail for advanced users</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>The model is a <strong>document with sections</strong>, not a pixel-perfect canvas</p>
+<ul>
+<li><p>Apps look clean and professional by default without any design work</p></li>
+<li><p>Trade-off: no fine-grained visual control, but also no design debt to manage</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="state-what-streamlit-remembers">
+<h2>State: What Streamlit Remembers<a class="headerlink" href="#state-what-streamlit-remembers" title="Link to this heading">#</a></h2>
+<section id="the-sidebar-pattern">
+<h3>The sidebar pattern<a class="headerlink" href="#the-sidebar-pattern" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The most common and most effective layout in Streamlit mirrors professional dashboard tools:</p>
+<ul>
+<li><p><strong>Controls</strong> on the left — the parameters the user adjusts</p></li>
+<li><p><strong>Results</strong> in the center — what the AI produces given those parameters</p></li>
+</ul>
+</li>
+<li><p>This is a strong default for AI product demos because it separates <strong>questions</strong> from <strong>answers</strong></p></li>
+</ul>
+<ul class="simple">
+<li><p>This pattern directly maps to a PM concern: <strong>information hierarchy</strong></p>
+<ul>
+<li><p>Sidebar: “What parameters should the user be able to change?”</p></li>
+<li><p>Main area: “What does the user ultimately need to see?”</p></li>
+<li><p>Tabs: “Is there secondary information that some users need but others don’t?”</p></li>
+</ul>
+</li>
+</ul>
+<p>Thinking through layout is a product exercise. An AI PM should be able to sketch: “this slider goes in the sidebar, the model predictions go in a center table, and we hide the confidence scores in an expander for analysts who want them.” You don’t need to code it — but you should be able to spec it.</p>
+</section>
+<section id="the-stateless-paradox">
+<h3>The stateless paradox<a class="headerlink" href="#the-stateless-paradox" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>Streamlit’s re-execution model is <strong>stateless by design</strong></p>
+<ul class="simple">
+<li><p>Every interaction reruns the script from scratch</p></li>
+</ul>
+</li>
+<li><p>But real AI applications need <strong>memory</strong>:</p>
+<ul class="simple">
+<li><p>A chat history that grows with each message</p></li>
+<li><p>A multi-step configuration workflow</p></li>
+<li><p>User selections that carry forward across steps</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p>Streamlit solves this with two mechanisms: <strong>caching</strong> and <strong>session state</strong></p></li>
+</ul>
+</section>
+<section id="caching-avoiding-recomputation">
+<h3>Caching: avoiding recomputation<a class="headerlink" href="#caching-avoiding-recomputation" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;st.cache_data</span></code> — for data and computations</p>
+<ul class="simple">
+<li><p>Loading a dataset, running a prediction, calling an API</p></li>
+<li><p>If the function is called again with the same inputs, it returns the stored result instead of rerunning</p></li>
+<li><p><strong>PM implication</strong>: this is what makes AI demos feel responsive even when models are expensive</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;st.cache_resource</span></code> — for objects that are expensive to load once</p>
+<ul>
+<li><p>An LLM, an embedding model, a database connection</p></li>
+<li><p>Loaded once, shared across all users and interactions</p></li>
+<li><p><strong>PM implication</strong>: a model loaded into memory is available instantly to everyone using the app</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="session-state-multi-step-interactions">
+<h3>Session State: multi-step interactions<a class="headerlink" href="#session-state-multi-step-interactions" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">st.session_state</span></code> is a dictionary that persists across reruns for each user</p>
+<ul class="simple">
+<li><p>Enables conversational AI demos: the chat history lives here</p></li>
+<li><p>Enables multi-step flows: a user’s choices in step 1 are available in step 2</p></li>
+<li><p><strong>Product use case</strong>: any AI feature that requires context over multiple turns needs session state</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p>Together, <strong>caching</strong> and <strong>session state</strong> make Streamlit feel like a real product</p>
+<ul>
+<li><p>Caching: “the model responds fast”</p></li>
+<li><p>Session state: “the app remembers what happened before”</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>The mental model for a PM:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cache_data</span></code> → <strong>speed</strong>: avoids repeating expensive computation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cache_resource</span></code> → <strong>availability</strong>: one model loaded, available to all users</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">session_state</span></code> → <strong>continuity</strong>: the app remembers each user’s journey</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="why-this-matters-for-ai-pms">
+<h3>Why this matters for AI PMs<a class="headerlink" href="#why-this-matters-for-ai-pms" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>LLM-based features in particular are expensive and slow by default</p></li>
+<li><p>Without caching: every slider move re-calls the model → unusable demo</p></li>
+<li><p>Without session state: the chat loses context on every interaction → broken experience</p></li>
+<li><p><strong>As a PM</strong>: when reviewing an AI Streamlit prototype, check that both are in place</p></li>
+</ul>
+<p>Together, caching and session state create the illusion of a persistent, responsive product — even though the underlying mechanism is repeated full re-execution. From a product standpoint: this illusion is good enough for demos, stakeholder validation, and internal tools. Whether it is good enough for production depends on scale and user expectations.</p>
+<p>A practical checkpoint: before showing a Streamlit prototype to stakeholders, ask your team: “Is the model cached? Does the chat history persist?” If not, the demo will feel broken — not because the AI is bad, but because the prototype mechanics are missing.</p>
+</section>
+</section>
+<section id="from-ai-feature-to-stakeholder-demo">
+<h2>From AI Feature to Stakeholder Demo<a class="headerlink" href="#from-ai-feature-to-stakeholder-demo" title="Link to this heading">#</a></h2>
+<section id="the-conceptual-distance-is-small">
+<h3>The conceptual distance is small<a class="headerlink" href="#the-conceptual-distance-is-small" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>A typical AI engineering workflow:</p>
+<ul class="simple">
+<li><p>Experiment in a notebook → train a model → evaluate → iterate</p></li>
+<li><p>Outputs are technical: metrics, plots, logged artifacts</p></li>
+</ul>
+</li>
+<li><p>A Streamlit app takes that same workflow and wraps it in a usable interface:</p>
+<ul class="simple">
+<li><p>Replace hardcoded inputs with user-controlled widgets</p></li>
+<li><p>Replace internal <code class="docutils literal notranslate"><span class="pre">print()</span></code> and <code class="docutils literal notranslate"><span class="pre">display()</span></code> with <code class="docutils literal notranslate"><span class="pre">st.write()</span></code></p></li>
+<li><p>Cache the expensive steps once</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p><strong>No new model, no new architecture, no new backend</strong></p>
+<ul>
+<li><p>The AI logic stays exactly the same</p></li>
+<li><p>Streamlit adds a layer of interactivity on top of existing work</p></li>
+<li><p><strong>PM implication</strong>: asking your team for a Streamlit demo of an existing model is a small ask</p></li>
+</ul>
+</li>
+</ul>
+<p>Key PM mindset: “Can we wrap what already exists in a Streamlit interface so I can show it to the stakeholders this week?” That is almost always a reasonable ask, and almost always a faster path to feedback than any other option.</p>
+</section>
+<section id="when-streamlit-is-not-enough">
+<h3>When Streamlit is not enough<a class="headerlink" href="#when-streamlit-is-not-enough" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Streamlit’s simplicity has real limits — things that require a proper product build:</p>
+<ul>
+<li><p><strong>User authentication</strong> — who is allowed to see this?</p></li>
+<li><p><strong>Persistent data storage</strong> — users saving their work, audit trails, user profiles</p></li>
+<li><p><strong>Complex navigation</strong> — multiple pages, deep linking, mobile</p></li>
+<li><p><strong>Fine-grained visual design</strong> — custom branding, pixel-level layout control</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Streamlit is best used as a <strong>validation tool</strong>, not a production system:</p>
+<ul>
+<li><p>Build the Streamlit demo to test the idea</p></li>
+<li><p>Show it to stakeholders and collect real feedback</p></li>
+<li><p><strong>Only</strong> invest in a full product build (Flask, FastAPI + React, cloud product) if the idea proves its value</p></li>
+<li><p>This is a lean product development principle applied to AI</p></li>
+</ul>
+</li>
+</ul>
+<p>Notes: This is one of the most important lessons for an AI PM. Knowing the limits of Streamlit — and being able to explain them to stakeholders — prevents scope creep and misaligned expectations. “We can have a demo in a week” and “we can have a production app in a week” are very different statements. Make sure stakeholders understand the distinction before they see the demo.</p>
+</section>
+</section>
+<section id="deployment">
+<h2>Deployment<a class="headerlink" href="#deployment" title="Link to this heading">#</a></h2>
+<section id="closing-the-communication-gap">
+<h3>Closing the communication gap<a class="headerlink" href="#closing-the-communication-gap" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>An app on <code class="docutils literal notranslate"><span class="pre">localhost</span></code> is only useful to the person who built it</p>
+<ul>
+<li><p>Deployment is what actually puts the prototype in stakeholders’ hands</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p><strong>Streamlit Community Cloud</strong>: the fastest path to a shareable link</p>
+<ul>
+<li><p>Connect a GitHub repo with a <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code></p></li>
+<li><p>App is live at a public URL within minutes</p></li>
+<li><p>Free for public repositories — ideal for demos and stakeholder reviews</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p><strong>Any Python host</strong> works if you need more control:</p>
+<ul>
+<li><p>Docker containers, cloud VMs, internal platforms</p></li>
+<li><p>A Streamlit app is just a Python process — no build step, no compiled frontend, no separate API server</p></li>
+<li><p><strong>PM implication</strong>: your infrastructure team can deploy it on existing infrastructure without special tooling</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<section id="key-takeaways-for-ai-pms">
+<h3>Key Takeaways for AI PMs<a class="headerlink" href="#key-takeaways-for-ai-pms" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Streamlit solves the <strong>last mile problem</strong>: getting AI outputs from a Python prototype to stakeholders</p></li>
+</ul>
+<ul class="simple">
+<li><p>The <strong>execution model</strong> is a script that reruns on every interaction — simple by design, fast to build</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Widgets</strong> define what stakeholders can control — choosing them is a product decision, not just an engineering one</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Caching</strong> makes AI demos usable; <strong>session state</strong> makes them feel continuous — both are required for LLM features</p></li>
+</ul>
+<ul class="simple">
+<li><p>Streamlit is a <strong>validation tool</strong>, not a production system — use it to de-risk ideas before commissioning a full build</p></li>
+</ul>
+<ul class="simple">
+<li><p>The gap between AI prototype and stakeholder demo is a change in <strong>inputs and outputs</strong> — the AI logic does not change</p></li>
+</ul>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.streamlit.io/">Streamlit Documentation</a> — Full reference for all components</p></li>
+<li><p><a class="reference external" href="https://docs.streamlit.io/library/api-reference">Streamlit API Reference</a> — Quick lookup for widgets and layout</p></li>
+<li><p><a class="reference external" href="https://streamlit.io/gallery">Streamlit Gallery</a> — Explore what others have built with AI and data</p></li>
+<li><p><a class="reference external" href="https://streamlit.io/cloud">Streamlit Community Cloud</a> — Deploy your app to a public URL in minutes</p></li>
+<li><p><a class="reference external" href="https://30days.streamlit.app/">30 Days of Streamlit</a> — Hands-on self-paced learning challenge</p></li>
+<li><p><a class="reference external" href="https://docs.streamlit.io/library/cheatsheet">Streamlit Cheat Sheet</a> — Everything on one page</p></li>
+<li><p><a class="reference external" href="https://github.com/streamlit/llm-examples">LLM Streamlit example apps</a> — Starting points for LLM-powered demos</p></li>
+<li><p>Murray, D. (2023), <em>Creating Interactive Dashboards with Streamlit and Python</em>, Packt</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions/aipm_sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../31_Streamlit.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Streamlit — From Analysis to Application</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../RATs/01_Git_RAT.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Git and Github</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up">Warm-up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-last-mile-problem">The last mile problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-streamlit-is-and-is-not">What Streamlit is — and is not</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-design-principles">Three design principles</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-streamlit-works-the-mental-model">How Streamlit Works: The Mental Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scripts-not-applications">Scripts, not applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reactivity-how-interaction-works">Reactivity: how interaction works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-performance-trade-off">The performance trade-off</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-interface-model">The Interface Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-what-to-show-not-how-to-build-it">Declaring what to show, not how to build it</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#widgets-as-inputs">Widgets as inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-rendering">Automatic rendering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#layout-organizing-information-for-stakeholders">Layout: Organizing Information for Stakeholders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-layout-works">How layout works</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-what-streamlit-remembers">State: What Streamlit Remembers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sidebar-pattern">The sidebar pattern</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-stateless-paradox">The stateless paradox</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#caching-avoiding-recomputation">Caching: avoiding recomputation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#session-state-multi-step-interactions">Session State: multi-step interactions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters-for-ai-pms">Why this matters for AI PMs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-ai-feature-to-stakeholder-demo">From AI Feature to Stakeholder Demo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-conceptual-distance-is-small">The conceptual distance is small</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-streamlit-is-not-enough">When Streamlit is not enough</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-the-communication-gap">Closing the communication gap</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways-for-ai-pms">Key Takeaways for AI PMs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

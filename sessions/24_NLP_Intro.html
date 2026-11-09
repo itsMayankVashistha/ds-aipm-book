@@ -1,0 +1,1607 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Natural Language Processing &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/24_NLP_Intro';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Natural Language Processing" href="aipm_sessions/NLP_AIPM.html" />
+    <link rel="prev" title="Clustering" href="23_Clustering.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Natural Language Processing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-care-about-text">Why care about text?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-text-data">Working with text data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-text-into-numbers">Converting text into numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-processing-text-to-numbers">Text processing → text to numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Text processing → text to numbers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-encodings">Statistical Encodings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-preprocessing">Text Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenization">Tokenization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#countvectorizer">CountVectorizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">CountVectorizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf">TF-IDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">TF-IDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">TF-IDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-grams">N-grams</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization">Normalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">Stemming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lemmatization">Lemmatization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming-or-lemmatization">Stemming or Lemmatization?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stopwords">Stopwords</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Stopwords</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pos-tagging">POS Tagging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">POS Tagging</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#so-what-do-we-do-with-all-that">So.. what do we do with all that?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-similarity-or-document-similarity">Text similarity or Document Similarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-classification">Text classification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embeddings">Word Embeddings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Word Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-similarity">Word similarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-embeddings">Using Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-get-word-embeddings">How do we get Word Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">How do we get Word Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">How do we get Word Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">How do we get Word Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pre-trained-embeddings">Using pre-trained embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Word Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-semantics-with-graphs">Visualize Semantics with Graphs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hugging-face-transformers">Hugging Face &amp; Transformers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers">Transformers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Transformers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Transformers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-language-models-llms">Large Language Models (LLMs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hugging-face">Hugging Face</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-learning">Zero Shot Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="slide-title">
+<section class="tex2jax_ignore mathjax_ignore" id="natural-language-processing">
+<h1>Natural Language Processing<a class="headerlink" href="#natural-language-processing" title="Link to this heading">#</a></h1>
+</div><center>
+    <img src="../images/nlp/img_p0_1.png" width=1000>
+</center><section id="why-care-about-text">
+<h2>Why care about text?<a class="headerlink" href="#why-care-about-text" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="text">
+<ul>
+<li><p>Chat bots</p></li>
+<li><p>Spell checking</p></li>
+<li><p>Speech recognition</p></li>
+<li><p>Sentiment analysis</p></li>
+<li><p>Book recommender</p></li>
+<li><p>Translators</p></li>
+<li><p>…</p>
+  </div>
+  <div class="images">
+      <img src="../images/nlp/img_p1_1.png">
+  </div>
+</li>
+</ul>
+</div>
+</section>
+<section id="working-with-text-data">
+<h2>Working with text data<a class="headerlink" href="#working-with-text-data" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Algorithms work well with numbers</p></li>
+<li><p>working with text = meaningfully transforming your data into numbers</p></li>
+<li><p>meaningful = depends on your application</p></li>
+</ul>
+</section>
+<section id="converting-text-into-numbers">
+<h2>Converting text into numbers<a class="headerlink" href="#converting-text-into-numbers" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>this is also called <strong>text preprocessing</strong></p></li>
+</ul>
+<section id="text-processing-text-to-numbers">
+<h3>Text processing → text to numbers<a class="headerlink" href="#text-processing-text-to-numbers" title="Link to this heading">#</a></h3>
+<p>Local representations</p>
+<ul class="simple">
+<li><p>Encoding with a unique number</p></li>
+<li><p>Statistical Encodings</p></li>
+</ul>
+<p>Distributed Representations</p>
+<ul class="simple">
+<li><p>Word Embeddings</p></li>
+</ul>
+</section>
+<section id="id1">
+<h3>Text processing → text to numbers<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p><strong>Encoding with a unique number</strong></p>
+<p>Easy to create, but the numbers have no relational representation</p>
+<ul>
+<li><p>the relationship between words is not captured</p></li>
+<li><p>models cannot interpret well these representation</p>
+  </div>
+  <div class="images">
+      <img src="../images/nlp/img_p6_1.png">
+  </div>
+</li>
+</ul>
+</div></section>
+</section>
+<section id="statistical-encodings">
+<h2>Statistical Encodings<a class="headerlink" href="#statistical-encodings" title="Link to this heading">#</a></h2>
+<section id="text-preprocessing">
+<h3>Text Preprocessing<a class="headerlink" href="#text-preprocessing" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Tokenization</p></li>
+<li><p>CountVectorizer</p></li>
+<li><p>TF-IDF</p></li>
+<li><p>N-grams</p></li>
+<li><p>Normalization</p></li>
+<li><p>Stemming</p></li>
+<li><p>Lemmatization</p></li>
+<li><p>Stop Words</p></li>
+</ul>
+</section>
+<section id="tokenization">
+<h3>Tokenization<a class="headerlink" href="#tokenization" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/nlp/img_p11_1.png">
+</center>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;punkt&quot;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;wordnet&quot;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;punkt_tab&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.tokenize</span><span class="w"> </span><span class="kn">import</span> <span class="n">sent_tokenize</span><span class="p">,</span> <span class="n">word_tokenize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.feature_extraction.text</span><span class="w"> </span><span class="kn">import</span> <span class="n">CountVectorizer</span><span class="p">,</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Let us learn some NLP. NLP is amazing!.&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Let&#39;, &#39;us&#39;, &#39;learn&#39;, &#39;some&#39;, &#39;NLP&#39;, &#39;.&#39;, &#39;NLP&#39;, &#39;is&#39;, &#39;amazing&#39;, &#39;!&#39;, &#39;.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Let us learn some NLP.&#39;, &#39;NLP is amazing!.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="countvectorizer">
+<h3>CountVectorizer<a class="headerlink" href="#countvectorizer" title="Link to this heading">#</a></h3>
+<p>Converting a collection of text documents to a matrix of token counts</p>
+<p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html">sklearn’s CountVectorizer</a></p>
+</section>
+<section id="id2">
+<h3>CountVectorizer<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/nlp/img_p13_4.png">
+    <br>
+    <img src="../images/nlp/img_p13_5.png">
+</center>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Gives a lot of weight to frequent (and maybe not so informative) words… → TF-IDF fixes this</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;This is the first Document.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;This document is the second document.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;And this is the third one.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Is this the first document?&#39;</span>
+ <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Features - </span><span class="si">{</span><span class="n">features</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+ 
+<span class="n">output</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">cv</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Features - [&#39;and&#39; &#39;document&#39; &#39;first&#39; &#39;is&#39; &#39;one&#39; &#39;second&#39; &#39;the&#39; &#39;third&#39; &#39;this&#39;]
+
+    and  document  first  is  one  second  the  third  this
+0    0         1      1   1    0       0    1      0     1
+1    0         2      0   1    0       1    1      0     1
+2    1         0      0   1    1       0    1      1     1
+3    0         1      1   1    0       0    1      0     1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;document 1&#39;</span><span class="p">,</span> <span class="s1">&#39;document 2&#39;</span><span class="p">,</span> <span class="s1">&#39;document 3&#39;</span><span class="p">,</span> <span class="s1">&#39;document 4&#39;</span><span class="p">]</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;What is about second document?&#39;</span><span class="p">]</span>
+
+<span class="n">query_transformed</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">query_transformed</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1">#model.predict_proba(query_transformed)[0]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;document 2&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tf-idf">
+<h3>TF-IDF<a class="headerlink" href="#tf-idf" title="Link to this heading">#</a></h3>
+<p><strong>TF-IDF</strong>: Term Frequency * Inverse Document Frequency</p>
+<p>→ measure how important a word is to a document in a corpus</p>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>A frequent word in a document that is also frequent in the corpus is less important to a document than a frequent word in a document that is not frequent in the corpus.</p>
+</div></section>
+<section id="id3">
+<h3>TF-IDF<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p><strong>TF</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\text{tf}(t, d)=\frac{f_{t,d}}{\sum_{t'\in{d}} f_{t', d}} \]</div>
+<p><strong>IDF</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\text{idf}(t, D)= \log\frac{N}{|\{d\in{D}:t\in{d}\}|}\]</div>
+<p><strong>TF-IDF</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\text{tfidf}(t, d, D)=\text{tf}(t, d) \cdot \text{idf}(t, D)\]</div>
+<p><strong>Variables:</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(t\)</span> — the term (word) being evaluated</p></li>
+<li><p><span class="math notranslate nohighlight">\(d\)</span> — a single document</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span> — the corpus (collection of all documents)</p></li>
+<li><p><span class="math notranslate nohighlight">\(N = |D|\)</span> — total number of documents in the corpus</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_{t,d}\)</span> — raw count of term <span class="math notranslate nohighlight">\(t\)</span> in document <span class="math notranslate nohighlight">\(d\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sum_{t' \in d} f_{t',d}\)</span> — total number of tokens in document <span class="math notranslate nohighlight">\(d\)</span> (= document length)</p></li>
+<li><p><span class="math notranslate nohighlight">\(|\{d \in D : t \in d\}|\)</span> — number of documents containing term <span class="math notranslate nohighlight">\(t\)</span></p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>TF-IDF<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/nlp/img_p13_4.png">
+    <br>
+    <img src="../images/nlp/img_p16_3.png">
+</center>
+<p><a class="reference external" href="https://scikit-learn.org/stable/modules/feature_extraction.html#tfidf-term-weighting">sklearn’s TF-IDF</a></p>
+<p>In detail article how <a class="reference external" href="https://medium.com/analytics-vidhya/demonstrating-calculation-of-tf-idf-from-sklearn-4f9526e7e78b">Tf-IDF</a> works.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;This is the first Document.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;This document is the second document.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;And this is the third one.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Is this the first document?&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">tfidf</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">tfidf</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+
+<span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.        , 0.46979139, 0.58028582, 0.38408524, 0.        ,
+        0.        , 0.38408524, 0.        , 0.38408524],
+       [0.        , 0.6876236 , 0.        , 0.28108867, 0.        ,
+        0.53864762, 0.28108867, 0.        , 0.28108867],
+       [0.51184851, 0.        , 0.        , 0.26710379, 0.51184851,
+        0.        , 0.26710379, 0.51184851, 0.26710379],
+       [0.        , 0.46979139, 0.58028582, 0.38408524, 0.        ,
+        0.        , 0.38408524, 0.        , 0.38408524]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">tfidf</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>and</th>
+      <th>document</th>
+      <th>first</th>
+      <th>is</th>
+      <th>one</th>
+      <th>second</th>
+      <th>the</th>
+      <th>third</th>
+      <th>this</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000000</td>
+      <td>0.469791</td>
+      <td>0.580286</td>
+      <td>0.384085</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.384085</td>
+      <td>0.000000</td>
+      <td>0.384085</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000000</td>
+      <td>0.687624</td>
+      <td>0.000000</td>
+      <td>0.281089</td>
+      <td>0.000000</td>
+      <td>0.538648</td>
+      <td>0.281089</td>
+      <td>0.000000</td>
+      <td>0.281089</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.511849</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.267104</td>
+      <td>0.511849</td>
+      <td>0.000000</td>
+      <td>0.267104</td>
+      <td>0.511849</td>
+      <td>0.267104</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000000</td>
+      <td>0.469791</td>
+      <td>0.580286</td>
+      <td>0.384085</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.384085</td>
+      <td>0.000000</td>
+      <td>0.384085</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="n-grams">
+<h3>N-grams<a class="headerlink" href="#n-grams" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p>To model sequences of words… for example ice and cream make more sense as a 2-gram when they appear together</p>
+<p>can be at word level or at character level</p>
+<p><a class="reference external" href="https://books.google.com/ngrams">n-grams</a>
+</div>
+<div class="images_30">
+<img src="../images/nlp/img_p17_2.png">
+</div></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nltk</span><span class="w"> </span><span class="kn">import</span> <span class="n">ngrams</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">t</span> <span class="o">=</span> <span class="s1">&#39;Let us learn some NLP. NLP is amazing! &#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> gram</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ngram</span> <span class="o">=</span> <span class="n">ngrams</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span> <span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">gram</span> <span class="ow">in</span> <span class="n">ngram</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">gram</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 gram
+
+(&#39;Let&#39;,)
+(&#39;us&#39;,)
+(&#39;learn&#39;,)
+(&#39;some&#39;,)
+(&#39;NLP.&#39;,)
+(&#39;NLP&#39;,)
+(&#39;is&#39;,)
+(&#39;amazing!&#39;,)
+----------
+2 gram
+
+(&#39;Let&#39;, &#39;us&#39;)
+(&#39;us&#39;, &#39;learn&#39;)
+(&#39;learn&#39;, &#39;some&#39;)
+(&#39;some&#39;, &#39;NLP.&#39;)
+(&#39;NLP.&#39;, &#39;NLP&#39;)
+(&#39;NLP&#39;, &#39;is&#39;)
+(&#39;is&#39;, &#39;amazing!&#39;)
+----------
+3 gram
+
+(&#39;Let&#39;, &#39;us&#39;, &#39;learn&#39;)
+(&#39;us&#39;, &#39;learn&#39;, &#39;some&#39;)
+(&#39;learn&#39;, &#39;some&#39;, &#39;NLP.&#39;)
+(&#39;some&#39;, &#39;NLP.&#39;, &#39;NLP&#39;)
+(&#39;NLP.&#39;, &#39;NLP&#39;, &#39;is&#39;)
+(&#39;NLP&#39;, &#39;is&#39;, &#39;amazing!&#39;)
+----------
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="normalization">
+<h3>Normalization<a class="headerlink" href="#normalization" title="Link to this heading">#</a></h3>
+<p>[‘List’, ‘listed’, ‘lists’, ‘listing’, ‘listings’, ‘.’]</p>
+<p>→  [‘list’, ‘listed’, ‘lists’, ‘listing’, ‘listings’, ‘.’]</p>
+<p>Do we want to distinguish between “List” and “list”?</p>
+<p>Sometimes we do: “White House” vs. “white house”</p>
+<p>Notes: Normalization is the process of converting text data into a standardized form to reduce complexity and improve the efficiency of machine learning models. This can include lowercasing, stemming/lemmatization, …</p>
+</section>
+<section id="stemming">
+<h3>Stemming<a class="headerlink" href="#stemming" title="Link to this heading">#</a></h3>
+<p>[‘list’, ‘listed’, ‘lists’, ‘listing’, ‘listings’, ‘.’]</p>
+<p>→ [‘list’, ‘list’, ‘list’, ‘list’, ‘list’, ‘.’]</p>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Stemming reduces words to a shorter form, a form that might have no meaning.</p>
+</div></section>
+<section id="lemmatization">
+<h3>Lemmatization<a class="headerlink" href="#lemmatization" title="Link to this heading">#</a></h3>
+<p>[‘list’, ‘listed’, ‘lists’, ‘listing’, ‘listings’, ‘.’]</p>
+<p>→ [‘list’, ‘listed’, ‘list’, ‘listing’, ‘listing’, ‘.’]</p>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Lemmatization uses the language dictionary to get the base word of a word.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stemmer</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">PorterStemmer</span><span class="p">()</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;We are learning how a stemmer works&quot;</span>
+<span class="n">text1</span> <span class="o">=</span> <span class="s2">&quot;People are running so fast.&quot;</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokenized_text</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text1</span><span class="p">)</span>
+<span class="n">stem</span> <span class="o">=</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">tokenized_text</span><span class="p">]</span>
+<span class="n">stem</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;peopl&#39;, &#39;are&#39;, &#39;run&#39;, &#39;so&#39;, &#39;fast&#39;, &#39;.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">WordNetLemmatizer</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokenized_text</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text1</span><span class="p">)</span>
+<span class="n">lemm</span> <span class="o">=</span> <span class="p">[</span><span class="n">lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">tokenized_text</span><span class="p">]</span>
+<span class="n">lemm</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;People&#39;, &#39;are&#39;, &#39;running&#39;, &#39;so&#39;, &#39;fast&#39;, &#39;.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="stemming-or-lemmatization">
+<h3>Stemming or Lemmatization?<a class="headerlink" href="#stemming-or-lemmatization" title="Link to this heading">#</a></h3>
+<p>It depends…</p>
+<ul class="simple">
+<li><p>Stemming is faster</p></li>
+<li><p>Lemmatization preserves more information</p></li>
+</ul>
+</section>
+<section id="stopwords">
+<h3>Stopwords<a class="headerlink" href="#stopwords" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>some words do not provide meaningful information … they are not “content words”</p></li>
+<li><p>the list of non-content words is language specific and corpus specific</p></li>
+</ul>
+<p>What would you say are stop words in this text?</p>
+<p>“Apple is looking at buying U.K. startup for $1 billion”</p>
+</section>
+<section id="id5">
+<h3>Stopwords<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>some words do not provide meaningful information … they are not “content words”</p></li>
+<li><p>the list of non-content words is language specific and corpus specific</p></li>
+</ul>
+<p>What would you say are stop words in this text?</p>
+<p>“Apple <strong>is</strong> looking <strong>at</strong> buying U.K. startup <strong>for</strong> $1 billion”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;stopwords&quot;</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">stopwords</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;a&#39;, &#39;about&#39;, &#39;above&#39;, &#39;after&#39;, &#39;again&#39;, &#39;against&#39;, &#39;ain&#39;, &#39;all&#39;, &#39;am&#39;, &#39;an&#39;, &#39;and&#39;, &#39;any&#39;, &#39;are&#39;, &#39;aren&#39;, &quot;aren&#39;t&quot;, &#39;as&#39;, &#39;at&#39;, &#39;be&#39;, &#39;because&#39;, &#39;been&#39;, &#39;before&#39;, &#39;being&#39;, &#39;below&#39;, &#39;between&#39;, &#39;both&#39;, &#39;but&#39;, &#39;by&#39;, &#39;can&#39;, &#39;couldn&#39;, &quot;couldn&#39;t&quot;, &#39;d&#39;, &#39;did&#39;, &#39;didn&#39;, &quot;didn&#39;t&quot;, &#39;do&#39;, &#39;does&#39;, &#39;doesn&#39;, &quot;doesn&#39;t&quot;, &#39;doing&#39;, &#39;don&#39;, &quot;don&#39;t&quot;, &#39;down&#39;, &#39;during&#39;, &#39;each&#39;, &#39;few&#39;, &#39;for&#39;, &#39;from&#39;, &#39;further&#39;, &#39;had&#39;, &#39;hadn&#39;, &quot;hadn&#39;t&quot;, &#39;has&#39;, &#39;hasn&#39;, &quot;hasn&#39;t&quot;, &#39;have&#39;, &#39;haven&#39;, &quot;haven&#39;t&quot;, &#39;having&#39;, &#39;he&#39;, &quot;he&#39;d&quot;, &quot;he&#39;ll&quot;, &#39;her&#39;, &#39;here&#39;, &#39;hers&#39;, &#39;herself&#39;, &quot;he&#39;s&quot;, &#39;him&#39;, &#39;himself&#39;, &#39;his&#39;, &#39;how&#39;, &#39;i&#39;, &quot;i&#39;d&quot;, &#39;if&#39;, &quot;i&#39;ll&quot;, &quot;i&#39;m&quot;, &#39;in&#39;, &#39;into&#39;, &#39;is&#39;, &#39;isn&#39;, &quot;isn&#39;t&quot;, &#39;it&#39;, &quot;it&#39;d&quot;, &quot;it&#39;ll&quot;, &quot;it&#39;s&quot;, &#39;its&#39;, &#39;itself&#39;, &quot;i&#39;ve&quot;, &#39;just&#39;, &#39;ll&#39;, &#39;m&#39;, &#39;ma&#39;, &#39;me&#39;, &#39;mightn&#39;, &quot;mightn&#39;t&quot;, &#39;more&#39;, &#39;most&#39;, &#39;mustn&#39;, &quot;mustn&#39;t&quot;, &#39;my&#39;, &#39;myself&#39;, &#39;needn&#39;, &quot;needn&#39;t&quot;, &#39;no&#39;, &#39;nor&#39;, &#39;not&#39;, &#39;now&#39;, &#39;o&#39;, &#39;of&#39;, &#39;off&#39;, &#39;on&#39;, &#39;once&#39;, &#39;only&#39;, &#39;or&#39;, &#39;other&#39;, &#39;our&#39;, &#39;ours&#39;, &#39;ourselves&#39;, &#39;out&#39;, &#39;over&#39;, &#39;own&#39;, &#39;re&#39;, &#39;s&#39;, &#39;same&#39;, &#39;shan&#39;, &quot;shan&#39;t&quot;, &#39;she&#39;, &quot;she&#39;d&quot;, &quot;she&#39;ll&quot;, &quot;she&#39;s&quot;, &#39;should&#39;, &#39;shouldn&#39;, &quot;shouldn&#39;t&quot;, &quot;should&#39;ve&quot;, &#39;so&#39;, &#39;some&#39;, &#39;such&#39;, &#39;t&#39;, &#39;than&#39;, &#39;that&#39;, &quot;that&#39;ll&quot;, &#39;the&#39;, &#39;their&#39;, &#39;theirs&#39;, &#39;them&#39;, &#39;themselves&#39;, &#39;then&#39;, &#39;there&#39;, &#39;these&#39;, &#39;they&#39;, &quot;they&#39;d&quot;, &quot;they&#39;ll&quot;, &quot;they&#39;re&quot;, &quot;they&#39;ve&quot;, &#39;this&#39;, &#39;those&#39;, &#39;through&#39;, &#39;to&#39;, &#39;too&#39;, &#39;under&#39;, &#39;until&#39;, &#39;up&#39;, &#39;ve&#39;, &#39;very&#39;, &#39;was&#39;, &#39;wasn&#39;, &quot;wasn&#39;t&quot;, &#39;we&#39;, &quot;we&#39;d&quot;, &quot;we&#39;ll&quot;, &quot;we&#39;re&quot;, &#39;were&#39;, &#39;weren&#39;, &quot;weren&#39;t&quot;, &quot;we&#39;ve&quot;, &#39;what&#39;, &#39;when&#39;, &#39;where&#39;, &#39;which&#39;, &#39;while&#39;, &#39;who&#39;, &#39;whom&#39;, &#39;why&#39;, &#39;will&#39;, &#39;with&#39;, &#39;won&#39;, &quot;won&#39;t&quot;, &#39;wouldn&#39;, &quot;wouldn&#39;t&quot;, &#39;y&#39;, &#39;you&#39;, &quot;you&#39;d&quot;, &quot;you&#39;ll&quot;, &#39;your&#39;, &quot;you&#39;re&quot;, &#39;yours&#39;, &#39;yourself&#39;, &#39;yourselves&#39;, &quot;you&#39;ve&quot;]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to /home/runner/nltk_data...
+[nltk_data]   Unzipping corpora/stopwords.zip.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pos-tagging">
+<h3>POS Tagging<a class="headerlink" href="#pos-tagging" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>P</strong>art <strong>O</strong>f <strong>S</strong>peech tagging - assigning grammatical annotations</p>
+<ul>
+<li><p>ADJ - adjective</p></li>
+<li><p>NOUN</p></li>
+<li><p>VERB</p></li>
+<li><p>…</p></li>
+</ul>
+</li>
+</ul>
+<p>Which are verbs and nouns here?</p>
+<p>“Apple is looking at buying U.K. startup for $1 billion”</p>
+<p><a class="reference external" href="https://universaldependencies.org/docs/u/pos/">universaldependencies</a></p>
+</section>
+<section id="id6">
+<h3>POS Tagging<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>P</strong>art <strong>O</strong>f <strong>S</strong>peech tagging - assigning grammatical annotations</p>
+<ul>
+<li><p>ADJ - adjective</p></li>
+<li><p>NOUN</p></li>
+<li><p>VERB</p></li>
+<li><p>…</p></li>
+</ul>
+</li>
+</ul>
+<p>Which are <strong>verbs</strong> and <em>nouns</em> here?</p>
+<p>“<em>Apple</em> is  <strong>looking</strong> at <strong>buying</strong> U.K. <em>startup</em> for $1 billion”</p>
+<p><a class="reference external" href="https://universaldependencies.org/docs/u/pos/">universaldependencies POS</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nltk</span><span class="w"> </span><span class="kn">import</span> <span class="n">pos_tag</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;averaged_perceptron_tagger_eng&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package averaged_perceptron_tagger_eng to
+[nltk_data]     /home/runner/nltk_data...
+[nltk_data]   Unzipping taggers/averaged_perceptron_tagger_eng.zip.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokenized_text</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">pos_tag</span><span class="p">(</span><span class="n">tokenized_text</span><span class="p">)</span>
+<span class="n">tag</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;We&#39;, &#39;PRP&#39;),
+ (&#39;are&#39;, &#39;VBP&#39;),
+ (&#39;learning&#39;, &#39;VBG&#39;),
+ (&#39;how&#39;, &#39;WRB&#39;),
+ (&#39;a&#39;, &#39;DT&#39;),
+ (&#39;stemmer&#39;, &#39;NN&#39;),
+ (&#39;works&#39;, &#39;NN&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>change the next cell to fragment when using in slides</p>
+<ul class="simple">
+<li><p>VBP - Verb, non-3rd person singular present</p></li>
+<li><p>VBG - Verb, ending in ‘-ing’ or present participle</p></li>
+<li><p>VBZ - Verb, 3rd person singular present</p></li>
+<li><p>WRB - Wh-adverb</p></li>
+</ul>
+</section>
+</section>
+<section id="so-what-do-we-do-with-all-that">
+<h2>So.. what do we do with all that?<a class="headerlink" href="#so-what-do-we-do-with-all-that" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>document similarity</p></li>
+<li><p>text classification</p></li>
+<li><p>…</p></li>
+</ul>
+<section id="text-similarity-or-document-similarity">
+<h3>Text similarity or Document Similarity<a class="headerlink" href="#text-similarity-or-document-similarity" title="Link to this heading">#</a></h3>
+<p>Each document is a vector of features.</p>
+<p>Similarity between documents is the similarity between vectors</p>
+<p>Usage:</p>
+<ul class="simple">
+<li><p>search engines: query to document</p></li>
+<li><p>clustering of documents: document to document</p></li>
+<li><p>Question &amp; Answering platforms: query to query</p></li>
+</ul>
+</section>
+<section id="text-classification">
+<h3>Text classification<a class="headerlink" href="#text-classification" title="Link to this heading">#</a></h3>
+<p>You can use your favourite classifier with text</p>
+<ul class="simple">
+<li><p>Logistic Regression provides nice baseline</p></li>
+<li><p>AUC score as performance metric</p></li>
+</ul>
+<p>Some applications:</p>
+<ul class="simple">
+<li><p>spam detection</p></li>
+<li><p>sentiment analysis</p></li>
+<li><p>hate speech analysis</p></li>
+</ul>
+</section>
+</section>
+<section id="word-embeddings">
+<h2>Word Embeddings<a class="headerlink" href="#word-embeddings" title="Link to this heading">#</a></h2>
+<section id="id7">
+<h3>Word Embeddings<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Represent feature space in smaller dimension</p></li>
+<li><p>Similar words are near in embedding space</p></li>
+<li><p>Trained by using neural networks<br />
+ → Use those trained weights as first layer in your NLP neural network.</p></li>
+</ul>
+</section>
+<section id="word-similarity">
+<h3>Word similarity<a class="headerlink" href="#word-similarity" title="Link to this heading">#</a></h3>
+<p>Is “St Pauli” more similar to:</p>
+<ul class="simple">
+<li><p>De Wallen → Similar type</p></li>
+</ul>
+<p>or</p>
+<ul class="simple">
+<li><p>HSV → Similar topic?</p></li>
+</ul>
+<p>Result depends on the context … or on the feature space / embedding you chose</p>
+</section>
+<section id="using-embeddings">
+<h3>Using Embeddings<a class="headerlink" href="#using-embeddings" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Relevant items for your task should be similar in the embedding space / i.e close to each other.</p>
+<p>.
+</div>
+<div class="images">
+<img src="../images/nlp/img_p8_1.png">
+</div></p>
+</div></section>
+<section id="how-do-we-get-word-embeddings">
+<h3>How do we get Word Embeddings<a class="headerlink" href="#how-do-we-get-word-embeddings" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Having lots of data and:</p>
+<ul class="simple">
+<li><p>Read the text</p></li>
+<li><p>Process text</p></li>
+<li><p>Create x, y data points - for example each 2 words appearing in a text</p></li>
+<li><p>Create one hot encodings</p></li>
+<li><p>Train a neural network</p></li>
+<li><p>Extract the weights from the input layer</p></li>
+</ul>
+<p><a class="reference external" href="https://github.com/Eligijus112/word-embedding-creation">Example 1</a>,
+<a class="reference external" href="https://towardsdatascience.com/creating-word-embeddings-coding-the-word2vec-algorithm-in-python-using-deep-learning-b337d0ba17a8">Example 2</a>
+</div>
+<div class="text">
+</div></p>
+</div></section>
+<section id="id8">
+<h3>How do we get Word Embeddings<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+CBOW - Continuous Bag of Words
+    </div>
+    <div class="images">
+        <img src="../images/nlp/CBOW.png">    
+    </div>
+</div></section>
+<section id="id9">
+<h3>How do we get Word Embeddings<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+Skip-Gram
+    </div>
+    <div class="images">
+        <img src="../images/nlp/SkipGram.png">    
+    </div>
+</div></section>
+<section id="id10">
+<h3>How do we get Word Embeddings<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="images">
+        <img src="../images/nlp/img_p39_3.png">    
+    </div>
+    <div class="images">
+        <img src="../images/nlp/img_p39_4.png">
+    </div>
+</div>
+<p><a class="reference external" href="https://towardsdatascience.com/creating-word-embeddings-coding-the-word2vec-algorithm-in-python-using-deep-learning-b337d0ba17a8">Creating word embeddings</a></p>
+</section>
+<section id="using-pre-trained-embeddings">
+<h3>Using pre-trained embeddings<a class="headerlink" href="#using-pre-trained-embeddings" title="Link to this heading">#</a></h3>
+<p>Most times you do not have enough data to get good word embeddings for your task, instead you can use pre-trained word embeddings.</p>
+<p>There are different kinds of word embeddings:</p>
+<ul class="simple">
+<li><p>static word embeddings: Word2vec (google), GloVe (Stanford University), fastText (Facebook),</p></li>
+<li><p>contextual word embeddings: ELMo, Bert (google), gpt-2/3/4 (openAI), …</p></li>
+</ul>
+<p>example: <a class="reference external" href="https://keras.io/examples/nlp/pretrained_word_embeddings/">pretrained word embeddings</a></p>
+</section>
+<section id="id11">
+<h3>Word Embeddings<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>gensim
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>scipy
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">gensim.downloader</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">api</span>
+
+<span class="c1">## List available embeddings of gensim</span>
+<span class="n">info</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model_data</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;models&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># caveat: If you don&#39;t have enough RAM, this cell can crash your kernel</span>
+
+<span class="n">wv</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;word2vec-google-news-300&quot;</span><span class="p">)</span>
+<span class="n">glove</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;glove-twitter-100&quot;</span><span class="p">)</span>
+<span class="n">fasttext</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;fasttext-wiki-news-subwords-300&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## If you do not have enough memory</span>
+<span class="c1">## You can download &#39;GoogleNews-vectors-negative300.bin.gz&#39; from https://github.com/mmihaltz/word2vec-GoogleNews-vectors</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">gensim.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">KeyedVectors</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## uncomment this line</span>
+
+<span class="c1"># wv = KeyedVectors.load_word2vec_format(&#39;GoogleNews-vectors-negative300.bin.gz&#39;, binary=True, limit=200000)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="s2">&quot;coffee&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wv</span><span class="o">.</span><span class="n">get_vector</span><span class="p">(</span><span class="s2">&quot;coffee&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">glove</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="s2">&quot;coffee&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fasttext</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="s2">&quot;coffee&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wv</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="s2">&quot;coffee&quot;</span><span class="p">,</span> <span class="s2">&quot;garlic&quot;</span><span class="p">)</span>
+<span class="c1">#wv.distance(&quot;coffee&quot;,&quot;coffees&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wv</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="s2">&quot;coffee&quot;</span><span class="p">,</span> <span class="s2">&quot;onion&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">positive</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;king&quot;</span><span class="p">,</span> <span class="s2">&quot;woman&quot;</span><span class="p">],</span> <span class="n">negative</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;man&quot;</span><span class="p">])</span> <span class="c1"># (king - man)+ woman = </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">positive</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;restaurant&quot;</span><span class="p">,</span> <span class="s2">&quot;coffee&quot;</span><span class="p">],</span> <span class="n">negative</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dinner&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wv</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">positive</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Berlin&quot;</span><span class="p">,</span> <span class="s2">&quot;France&quot;</span><span class="p">],</span> <span class="n">negative</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Germany&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wv</span><span class="o">.</span><span class="n">doesnt_match</span><span class="p">([</span><span class="s2">&quot;sklearn&quot;</span><span class="p">,</span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="s2">&quot;pandas&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find out which other methods there are and test their function</span>
+<span class="nb">dir</span><span class="p">(</span><span class="n">wv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-semantics-with-graphs">
+<h3>Visualize Semantics with Graphs<a class="headerlink" href="#visualize-semantics-with-graphs" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://projector.tensorflow.org">TensorFlow projector</a></p>
+<center>
+    <img src="../images/nlp/img_p41_2.png" width=1100>
+</center></section>
+</section>
+<section id="hugging-face-transformers">
+<h2>Hugging Face &amp; Transformers<a class="headerlink" href="#hugging-face-transformers" title="Link to this heading">#</a></h2>
+<center>
+    <img src="../images/nlp/img_p42_1.png">
+</center></section>
+<section id="transformers">
+<h2>Transformers<a class="headerlink" href="#transformers" title="Link to this heading">#</a></h2>
+<p><img alt="transformer1.png" src="../_images/transformer1.png" /></p>
+<p>Notes:</p>
+<ul class="simple">
+<li><p>The Transformer architecture uses an encoder to process the input sentence into a set of deep mathematical representations that capture the context of each word. These representations are then passed to the decoder, which uses them to generate the translated output one word at a time.</p></li>
+<li><p>The “context” is found by the attention mechanism. For more details: <a class="reference external" href="https://www.3blue1brown.com/lessons/attention">https://www.3blue1brown.com/lessons/attention</a>.</p></li>
+<li><p>While the encoder “understands” the sentence, the decoder is for text generation. That’s why apart from Encode-Decoder models for translations, there are also encoder only models (e.g. for text classification, BERT) or decoder only models (GPT-5)</p></li>
+</ul>
+</section>
+<section id="id12">
+<h2>Transformers<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<p><img alt="transformer2.png" src="../_images/transformer2.png" /></p>
+<p>Notes:</p>
+<p>The encoder’s inputs first flow through a self-attention layer – a layer that helps the encoder look at other words in the input sentence as it encodes a specific word.
+The outputs of the self-attention layer are fed to a feed-forward neural network. The exact same feed-forward network is independently applied to each position.</p>
+<p>The decoder has both those layers, but between them is an attention layer that helps the decoder focus on relevant parts of the input sentence</p>
+</section>
+<section id="id13">
+<h2>Transformers<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<p><img alt="transformer3.png" src="../_images/transformer3.png" /></p>
+<p>Notes:</p>
+<p>What does “it” in this sentence refer to? Is it referring to the street or to the animal? It’s a simple question to a human, but not as simple to an algorithm.</p>
+<p>When the model is processing the word “it”, self-attention allows it to associate “it” with “animal”.</p>
+<p>As the model processes each word (each position in the input sequence), self attention allows it to look at other positions in the input sequence for clues that can help lead to a better encoding for this word.</p>
+</section>
+<section id="large-language-models-llms">
+<h2>Large Language Models (LLMs)<a class="headerlink" href="#large-language-models-llms" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>“An LLM is a Transformer trained on massive text data to predict the next word.”</p>
+</div></blockquote>
+<div style="font-size: 28px">
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>What are LLMs Good at</p></th>
+<th class="head"><p>What are LLMs Bad at</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Text generation</p></td>
+<td><p>Hallucinations</p></td>
+</tr>
+<tr class="row-odd"><td><p>Summarization</p></td>
+<td><p>Outdated knowledge</p></td>
+</tr>
+<tr class="row-even"><td><p>Classification</p></td>
+<td><p>Non-determinism</p></td>
+</tr>
+<tr class="row-odd"><td><p>Extraction</p></td>
+<td><p>Bias</p></td>
+</tr>
+<tr class="row-even"><td><p>Reasoning (to an extent)</p></td>
+<td><p>Cost and Latency</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="hugging-face">
+<h3>Hugging Face<a class="headerlink" href="#hugging-face" title="Link to this heading">#</a></h3>
+<p>~ 2.5M pre trained NLP models on <a class="reference external" href="https://huggingface.co">huggingface.co</a> (Feb 2026)</p>
+<center>
+    <img src="../images/nlp/img_p43_1.png" width=800>
+</center><p>Notes: On the huggingface website you can show</p>
+<ol class="arabic simple">
+<li><p>the number of text models available</p></li>
+<li><p>Can open any famous model like Ollama or Deepseek and can show its repository. Can talk about how similar it looks to github and how you can download the models from huggingface by going to <code class="docutils literal notranslate"><span class="pre">files</span> <span class="pre">and</span> <span class="pre">version</span></code> tab.</p></li>
+<li><p>Under files and version you will also see a <code class="docutils literal notranslate"><span class="pre">tokenizer.json</span></code> file for every model, telling that every model may have its own way to tokenize text</p></li>
+<li><p>On the right hand side, you will see a black button <code class="docutils literal notranslate"><span class="pre">Use</span> <span class="pre">this</span> <span class="pre">model</span></code>. Click on this and chose transformers to show the python code which can be used or click on Google Colab which will open colab with all the code written already in the cells</p></li>
+</ol>
+</section>
+<section id="zero-shot-learning">
+<h3>Zero Shot Learning<a class="headerlink" href="#zero-shot-learning" title="Link to this heading">#</a></h3>
+<p>When you have little data.</p>
+<p><strong>Zero-shot learning (ZSL)</strong> is a problem setup in machine <strong>learning</strong>, where at test time, a learner
+observes samples from classes that were not observed during <strong>training</strong>, and needs to predict the
+class they belong to.</p>
+<p>(see notebook 2 in workbooks)</p>
+</section>
+<section id="resources">
+<h3>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/pyladieshamburg/getting-started-with-nlp">Getting started with NLP (Pyladies)</a></p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/google-ngram-downloader/">NGram Loader</a></p></li>
+<li><p><a class="reference external" href="https://spacy.io/">spaCy</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/&#64;adriensieg/text-similarities-da019229c894">Text similarities</a></p></li>
+<li><p><a class="reference external" href="https://www.microsoft.com/en-us/research/video/neural-models-information-retrieval-video/">Neural models for information retrieval</a></p></li>
+<li><p><a class="reference external" href="https://nlp.stanford.edu/projects/glove/">Glove</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=wjZofJX0v4M">What is a transformer? (3blue1brown)</a></p></li>
+<li><p>How does zero shot learning work [<a class="reference external" href="https://blog.roboflow.com/zero-shot-learning-computer-vision/">video</a>, <a class="reference external" href="https://www.kdnuggets.com/2022/12/zeroshot-learning-explained.html">text</a>]?</p></li>
+<li><p>Sentiment Analysis with VADER [<a class="reference external" href="https://vadersentiment.readthedocs.io/en/latest/">stand alone</a>, <a class="reference external" href="https://www.nltk.org/howto/sentiment.html">using nltk</a>]</p></li>
+<li><p><a class="reference external" href="https://jalammar.github.io/illustrated-transformer/">The Illustrated Transformer by Jay Alammar</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="23_Clustering.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Clustering</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="aipm_sessions/NLP_AIPM.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Natural Language Processing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-care-about-text">Why care about text?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-text-data">Working with text data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-text-into-numbers">Converting text into numbers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-processing-text-to-numbers">Text processing → text to numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Text processing → text to numbers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-encodings">Statistical Encodings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-preprocessing">Text Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tokenization">Tokenization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#countvectorizer">CountVectorizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">CountVectorizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf">TF-IDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">TF-IDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">TF-IDF</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-grams">N-grams</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization">Normalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming">Stemming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lemmatization">Lemmatization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stemming-or-lemmatization">Stemming or Lemmatization?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stopwords">Stopwords</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Stopwords</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pos-tagging">POS Tagging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">POS Tagging</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#so-what-do-we-do-with-all-that">So.. what do we do with all that?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-similarity-or-document-similarity">Text similarity or Document Similarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-classification">Text classification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word-embeddings">Word Embeddings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Word Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-similarity">Word similarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-embeddings">Using Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-get-word-embeddings">How do we get Word Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">How do we get Word Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">How do we get Word Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">How do we get Word Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pre-trained-embeddings">Using pre-trained embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Word Embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-semantics-with-graphs">Visualize Semantics with Graphs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hugging-face-transformers">Hugging Face &amp; Transformers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers">Transformers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Transformers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Transformers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-language-models-llms">Large Language Models (LLMs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hugging-face">Hugging Face</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-learning">Zero Shot Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1014 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bias Variance Tradeoff &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/aipm_sessions/Bias_Variance_Tradeoff_AIPM';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Regularization" href="../09.2_Regularization.html" />
+    <link rel="prev" title="Bias Variance Tradeoff" href="../09.1_Bias_Variance_Tradeoff.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bias Variance Tradeoff</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-start-with-icecream">Let’s start with IceCream</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Let’s start with IceCream</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-approach">Visual Approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-it-necessary-to-split-the-data-into-train-and-test">Why is it necessary to split the data into train and test?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-model">Simple  Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-model">Complex  Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-data-residuals">Train Data Residuals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data-residuals">Test Data Residuals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-terminology">Machine Learning Terminology</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Machine Learning Terminology</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-and-cost-functions">Loss and Cost functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">Variance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">The Bias-Variance-Tradeoff</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bulls-eye-a-model-that-predicts-perfectly">Bulls-eye - a model that predicts perfectly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desirable-properties-of-estimators">Desirable properties of estimators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-analysis">Error Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-curves-underfitting">Learning Curves - underfitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-curves-overfitting">Learning Curves - overfitting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-vs-variance">Bias vs. Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-vs-underfitting">Overfitting vs. Underfitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-examples-bias-variance-in-practice">Product Examples: Bias-Variance in Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pm-s-perspective">The PM’s Perspective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-examples">Product Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-product-examples">More Product Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#can-you-solve-this-little-riddle">Can you solve this little riddle?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#its-obvious-isnt-it">It’s obvious, isn’t it?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#at-least-if-you-apply-this-function">At least if you apply this function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bias-variance-tradeoff">
+<h1>Bias Variance Tradeoff<a class="headerlink" href="#bias-variance-tradeoff" title="Link to this heading">#</a></h1>
+<section id="let-s-start-with-icecream">
+<h2>Let’s start with IceCream<a class="headerlink" href="#let-s-start-with-icecream" title="Link to this heading">#</a></h2>
+<br>
+<div class="images">
+ <img src="../../images/bias_variance_tradeoff/bv_transparent.jpg" width=1000 height=1000 align="middle">
+</div></section>
+<section id="id1">
+<h2>Let’s start with IceCream<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<br>
+<div class="images">
+ <img src="../../images/bias_variance_tradeoff/bv_transparent_x.jpg" width=1000 heigth=1000 align="middle">
+</div><section id="visual-approach">
+<h3>Visual Approach<a class="headerlink" href="#visual-approach" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+<img src="../../images/bias_variance_tradeoff/train_test_bv_1_transparent_bg.png">
+    </div>
+      <div class="images">
+    </div>
+</div></section>
+</section>
+<section id="why-is-it-necessary-to-split-the-data-into-train-and-test">
+<h2>Why is it necessary to split the data into train and test?<a class="headerlink" href="#why-is-it-necessary-to-split-the-data-into-train-and-test" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">   
+<p>Data is typically split into a train and a test set.</p>
+<ul>
+<li><p>to <strong>evaluate how the model performs</strong> on unseen data <br> i.e. if the model ‘generalises’ well
+<p></p></li>
+<li><p>typical splits are <strong>70% train data</strong> (or more)  and <strong>30% test</strong> data (or less)
+<p></p></li>
+<li><p>sometimes an additional <strong>validation set</strong> is used</p>
+  </div>
+  <div class="images">
+      <img src="../../images/bias_variance_tradeoff/train_test_bv_2_transparent_bg.png">
+  </div>
+</li>
+</ul>
+</div>
+<p><a class="reference external" href="https://machinelearningmastery.com/train-test-split-for-evaluating-machine-learning-algorithms/#:~:text=The%20train%2Dtest%20split%20is,dividing%20it%20into%20two%20subsets">Read more on splitting</a></p>
+<section id="simple-model">
+<h3>Simple  Model<a class="headerlink" href="#simple-model" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+<img src="../../images/bias_variance_tradeoff/train_test_bv_3_transparent_bg.png">
+    </div></section>
+<section id="complex-model">
+<h3>Complex  Model<a class="headerlink" href="#complex-model" title="Link to this heading">#</a></h3>
+<div class="images">
+        <img src="../../images/bias_variance_tradeoff/train_test_bv_4_transparent_bg.png">
+    </div></section>
+<section id="train-data-residuals">
+<h3>Train Data Residuals<a class="headerlink" href="#train-data-residuals" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+<img src="../../images/bias_variance_tradeoff/train_test_bv_5_transparent_bg.png">
+    </div>
+      <div class="images">
+        <img src="../../images/bias_variance_tradeoff/train_test_bv_6_transparent_bg.png">
+    </div>
+</div></section>
+<section id="test-data-residuals">
+<h3>Test Data Residuals<a class="headerlink" href="#test-data-residuals" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+<img src="../../images/bias_variance_tradeoff/train_test_bv_8_transparent_bg.png">
+    </div>
+      <div class="images">
+        <img src="../../images/bias_variance_tradeoff/train_test_bv_7_transparent_bg.png">
+    </div>
+</div></section>
+</section>
+<section id="machine-learning-terminology">
+<h2>Machine Learning Terminology<a class="headerlink" href="#machine-learning-terminology" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">   
+<img src="../../images/bias_variance_tradeoff/train_test_bv_3_transparent_bg.png">
+<p>Too simple model:</p>
+<ul class="simple">
+<li><p>high bias</p></li>
+<li><p>under-fits the data</p></li>
+<li><p><font color = "lightgrey">low variance</font></p></li>
+<li><p><font color = "lightgrey">generalizes better on new data</font></p></li>
+</ul>
+</div>
+      <div class="images">
+        <img src="../../images/bias_variance_tradeoff/train_test_bv_4_transparent_bg.png">
+<p>Too complex model:</p>
+<ul>
+<li><p>low bias</p></li>
+<li><p>over-fits the data</p></li>
+<li><p><font color = "lightgrey">high variance</font></p></li>
+<li><p><font color = "lightgrey">generalizes bad on new data</font></p>
+  </div>
+</li>
+</ul>
+</div>
+<section id="id2">
+<h3>Machine Learning Terminology<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+<img src="../../images/bias_variance_tradeoff/train_test_bv_8_transparent_bg.png">
+<p>Too simple model:</p>
+<ul>
+<li><p><font color = "lightgrey">high bias</font></p></li>
+<li><p><font color = "lightgrey">under-fits the data</font></p></li>
+<li><p>low variance</p></li>
+<li><p>generalizes better on new data</p>
+  </div>
+    <div class="images">
+      <img src="../../images/bias_variance_tradeoff/train_test_bv_7_transparent_bg.png">
+</li>
+</ul>
+<p>Too complex model:</p>
+<ul>
+<li><p><font color = "lightgrey">low bias</font></p></li>
+<li><p><font color = "lightgrey">over-fits the data</font></p></li>
+<li><p>high variance</p></li>
+<li><p>generalizes bad on new data</p>
+  </div>
+</li>
+</ul>
+</div></section>
+</section>
+<section id="loss-and-cost-functions">
+<h2>Loss and Cost functions<a class="headerlink" href="#loss-and-cost-functions" title="Link to this heading">#</a></h2>
+<p><strong>Loss function</strong></p>
+<p>The loss function quantifies how much a model <span class="math notranslate nohighlight">\(f\)</span>‘s prediction   <span class="math notranslate nohighlight">\(\hat{y}=f(x)\)</span> deviates from the ground truth <span class="math notranslate nohighlight">\(y=y(x)\)</span> for one particular object <span class="math notranslate nohighlight">\(\mathbf{x}\)</span>.</p>
+<p>So, when we calculate loss, we do it for a <strong>single object</strong> in the training or test sets. There are many different loss functions we can choose from, and each has its advantages and shortcomings. In general, any <strong>distance metric</strong> defined over the space of target values can act as a loss function.</p>
+<p><strong>Cost function</strong></p>
+<p>The cost function measures the model’s <strong>error on a group of objects</strong>. So, if L is our loss function, then we calculate the cost function by aggregating the loss L over the training, validation, or test data.</p>
+</section>
+<section id="linear-regression">
+<h2>Linear Regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">    
+<p>MSE (mean squared errors) here is an example of a <strong>cost function</strong> - we’ve aggregated the loss of individual predictions into a single value we can use to gauge the quality of our model.<br />
+</div>
+<div class="images"></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\hat{y} &amp;= b_{0}+b_{1}x_{1}+\text{...}+b_{m}x_{m}\\[8pt]
+e &amp;= y-\hat{y}\\[12pt]
+\text{MSE} &amp;= {\frac{1}{n}}\sum_{i=1}^{n}{(y_{i}-{\hat{y}}_{i})}^{2}
+\end{align}\end{split}\]</div>
+</div>
+</div><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/8fdc928e0fec83ba593ee896dedff8c946bbafc8c575c6be8ed2cb41bfa11292.png" src="../../_images/8fdc928e0fec83ba593ee896dedff8c946bbafc8c575c6be8ed2cb41bfa11292.png" />
+</div>
+</div>
+<section id="bias">
+<h3>Bias<a class="headerlink" href="#bias" title="Link to this heading">#</a></h3>
+<p><strong>Bias</strong>: simplifying assumptions made by a model to make the target function easier to learn. (“How far away are the decisions from the data.”)</p>
+<ul class="simple">
+<li><p><strong>Underfitting</strong> the training data</p></li>
+<li><p><strong>Making assumptions</strong> without caring about the data</p></li>
+<li><p>Model is <strong>not complex</strong> enough</p></li>
+</ul>
+<p>Linear algorithms tend to have high bias, this makes them fast to learn and easier to understand but less flexible.</p>
+</section>
+<section id="variance">
+<h3>Variance<a class="headerlink" href="#variance" title="Link to this heading">#</a></h3>
+<p>Variance is the amount that the estimate of the target will change if different training data was used.</p>
+<p>How sensitive is the algorithm to the specific training data used.</p>
+<ul class="simple">
+<li><p><strong>Overfitting</strong> the training data</p></li>
+<li><p>Being <strong>extremely perceptive</strong> of the training data</p></li>
+<li><p>Model is <strong>too complex</strong></p></li>
+</ul>
+</section>
+</section>
+<section id="the-bias-variance-tradeoff">
+<h2>The Bias-Variance-Tradeoff<a class="headerlink" href="#the-bias-variance-tradeoff" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">   
+<img src="../../images/bias_variance_tradeoff/model_complexity_transparent_bg.png">
+    </div>
+    <div class="images">
+<br>
+<br>       
+<div class="math notranslate nohighlight">
+\[\frac{d\,Bias^{2}}{d\,Complexity}=-\frac{d\,Variance}{d\,Complexity}\]</div>
+</div>
+</div><section id="bulls-eye-a-model-that-predicts-perfectly">
+<h3>Bulls-eye - a model that predicts perfectly<a class="headerlink" href="#bulls-eye-a-model-that-predicts-perfectly" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+<img src="../../images/bias_variance_tradeoff/img_p21_1.png">
+    </div>
+    <div class="images">
+Do you want a clock that is sometimes 10 mins late or a clock that is always 10 mins late?
+    </div>
+</div>
+</section>
+<section id="desirable-properties-of-estimators">
+<h3>Desirable properties of estimators<a class="headerlink" href="#desirable-properties-of-estimators" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">   
+<p>Minimum variance estimators</p>
+<ul class="simple">
+<li><p>Prevent overfitting</p></li>
+</ul>
+<p>Unbiased estimators</p>
+<ul class="simple">
+<li><p>Prevent underfitting</p></li>
+</ul>
+<p>A model as simple as possible</p>
+<p>“A simple model is the best model” - Occam’s Razor
+</div>
+<div class="images">
+<img src="../../images/bias_variance_tradeoff/img_p23_1.png">
+</div></p>
+</div>
+</section>
+</section>
+<section id="error-analysis">
+<h2>Error Analysis<a class="headerlink" href="#error-analysis" title="Link to this heading">#</a></h2>
+<p>The EDA for the errors your model makes</p>
+<ul class="simple">
+<li><p>comparing the errors on test / train / validation</p>
+<ul>
+<li><p>expecting them to be close</p></li>
+<li><p>low error on train but high on validation is a clear sign of overfitting</p></li>
+</ul>
+</li>
+<li><p>plotting residuals</p>
+<ul>
+<li><p>expecting no pattern</p></li>
+<li><p>pattern in residual plots are a sign for underfitting =&gt; your model is not complex enough</p></li>
+</ul>
+</li>
+</ul>
+<p><a class="reference external" href="https://www.qualtrics.com/support/stats-iq/analyses/regression-guides/interpreting-residual-plots-improve-regression/">Analyzing residuals</a></p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/756797c1d11966c8ff5d8f38bc0d021f5dca9780a0759deac7e270d236b2caea.png" src="../../_images/756797c1d11966c8ff5d8f38bc0d021f5dca9780a0759deac7e270d236b2caea.png" />
+</div>
+</div>
+</section>
+<section id="learning-curves-underfitting">
+<h2>Learning Curves - underfitting<a class="headerlink" href="#learning-curves-underfitting" title="Link to this heading">#</a></h2>
+<p>Model Performance (training and validation) against an increasing set of training data</p>
+<ul class="simple">
+<li><p>Start: Training loss is low, generalization is very bad</p></li>
+<li><p>Adding more data: Both are very close and at a high level</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/7b4d620827f93791769cebf37fa3fe03c449f10cd654342ff7593becfb3aeae8.png" src="../../_images/7b4d620827f93791769cebf37fa3fe03c449f10cd654342ff7593becfb3aeae8.png" />
+</div>
+</div>
+<section id="learning-curves-overfitting">
+<h3>Learning Curves - overfitting<a class="headerlink" href="#learning-curves-overfitting" title="Link to this heading">#</a></h3>
+<p>Model Performance (training and validation) against an increasing set of training data</p>
+<ul class="simple">
+<li><p>Training error is much lower</p></li>
+<li><p>There is a gap: validation error is way higher than training error</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/b62aa9600621443ab40b3d9fb25f49ff3dbb95e4ebe835b24b45921d41461096.png" src="../../_images/b62aa9600621443ab40b3d9fb25f49ff3dbb95e4ebe835b24b45921d41461096.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="bias-vs-variance">
+<h2>Bias vs. Variance<a class="headerlink" href="#bias-vs-variance" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">   
+<p><strong>High Bias</strong>:</p>
+<p>more assumptions of the target function</p>
+<ul class="simple">
+<li><p>Linear Regression, Linear Discriminant Analysis, Logistic Regression</p></li>
+</ul>
+<p><strong>High Variance</strong>:</p>
+<p>large changes to the estimate when train data changed</p>
+<ul class="simple">
+<li><p>Decision Trees, K-Nearest Neighbors, SVM</p></li>
+</ul>
+</div>
+<div class="images">
+<p><strong>Low Bias</strong>:</p>
+<p>fewer assumptions about the target function</p>
+<ul class="simple">
+<li><p>Decision Trees, K-Nearest Neighbors, SVM</p></li>
+</ul>
+<p><strong>Low Variance</strong>:</p>
+<p>small changes to the estimate when the train data changes</p>
+<ul>
+<li><p>Linear Regression, Linear Discriminant Analysis, Logistic Regression</p>
+</div>
+</li>
+</ul>
+</div></section>
+<section id="overfitting-vs-underfitting">
+<h2>Overfitting vs. Underfitting<a class="headerlink" href="#overfitting-vs-underfitting" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">   
+<p><strong>Overfitting</strong>:</p>
+<ul class="simple">
+<li><p>Reduce the complexity of the model</p></li>
+<li><p>Get more data</p></li>
+<li><p>Regularize the model</p></li>
+</ul>
+</div>
+<div class="images">
+<p><strong>Underfitting</strong>:</p>
+<ul>
+<li><p>Bring in a better model</p></li>
+<li><p>Feature engineering</p></li>
+<li><p>Ease regularization parameters</p>
+</div>
+</li>
+</ul>
+</div></section>
+<section id="product-examples-bias-variance-in-practice">
+<h2>Product Examples: Bias-Variance in Practice<a class="headerlink" href="#product-examples-bias-variance-in-practice" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">
+<p><strong>Recommendation Engine</strong></p>
+<ul>
+<li><p><strong>High Bias</strong> (underfit): Always recommends the same bestsellers — misses personalization</p></li>
+<li><p><strong>High Variance</strong> (overfit): Perfectly matches a user’s past behavior — fails on new users or new products</p>
+</div>
+<div class="images">
+</li>
+</ul>
+<p><strong>Spam Filter</strong></p>
+<ul>
+<li><p><strong>High Bias</strong>: Lets most spam through — rules are too simple to catch modern spam</p></li>
+<li><p><strong>High Variance</strong>: Also blocks legitimate emails — over-learned quirks of training data</p>
+</div>
+</li>
+</ul>
+</div><p>Notes: Ask the audience which real products they use might suffer from high bias or high variance. Recruitment screening: high bias if it always rejects non-target-university candidates. Fraud detection: high variance if it flags every unusual transaction, including legitimate ones.</p>
+</section>
+<section id="the-pm-s-perspective">
+<h2>The PM’s Perspective<a class="headerlink" href="#the-pm-s-perspective" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">
+<p><strong>Questions to ask your team:</strong></p>
+<ul>
+  <li>Is training performance much better than production? → variance problem</li>
+  <li>Is performance equally poor on train and test? → bias problem</li>
+  <li>Does the model degrade on new user segments or time periods?</li>
+  <li>Is a simpler rule-based approach "good enough" for this use case?</li>
+</ul>
+  </div>
+  <div class="images">
+<p><strong>Red flags in model reports:</strong></p>
+<ul>
+  <li>Train accuracy 95%, test accuracy 60% → <b>overfitting</b> (high variance)</li>
+  <li>Train accuracy 60%, test accuracy 58% → <b>underfitting</b> (high bias)</li>
+  <li>Great metrics on old data, poor on new cohorts → <b>distribution shift + variance</b></li>
+</ul>
+  </div>
+</div><p>Notes: As a PM you don’t need to derive the math, but you do need to recognize when a model is failing due to bias vs variance — because the fix is different. Overfitting often needs more/better data or regularization; underfitting needs a more expressive model or better features.</p>
+</section>
+<section id="product-examples">
+<h2>Product Examples<a class="headerlink" href="#product-examples" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">
+<p><strong>Churn Prediction</strong></p>
+<ul>
+<li><p><strong>High Bias</strong>: Simple rule “flag users inactive &gt; 30 days” — misses users who are active but disengaging</p></li>
+<li><p><strong>High Variance</strong>: Model learned every quirk of last quarter’s data — fails when user behavior shifts seasonally</p>
+</div>
+<div class="images">
+</li>
+</ul>
+<p><strong>Search Ranking</strong></p>
+<ul>
+<li><p><strong>High Bias</strong>: Always ranks by popularity — misses intent and context</p></li>
+<li><p><strong>High Variance</strong>: Perfectly ranks for past queries — breaks on novel search terms or new content</p>
+</div>
+</li>
+</ul>
+</div></section>
+<section id="more-product-examples">
+<h2>More Product Examples<a class="headerlink" href="#more-product-examples" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">
+<p><strong>Dynamic Pricing</strong></p>
+<ul>
+<li><p><strong>High Bias</strong>: Fixed price tiers — leaves money on the table and loses price-sensitive customers</p></li>
+<li><p><strong>High Variance</strong>: Price fluctuates wildly based on minor signals — erodes customer trust and brand perception</p>
+</div>
+<div class="images">
+</li>
+</ul>
+<p><strong>Content Moderation</strong></p>
+<ul>
+<li><p><strong>High Bias</strong>: Only catches obvious slurs — misses context-dependent harmful content</p></li>
+<li><p><strong>High Variance</strong>: Over-triggers on edge cases — silences legitimate speech, high false-positive rate</p>
+</div>
+</li>
+</ul>
+</div></section>
+<section id="can-you-solve-this-little-riddle">
+<h2>Can you solve this little riddle?<a class="headerlink" href="#can-you-solve-this-little-riddle" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+f(1)&amp;=1 \\
+f(2)&amp;=3 \\
+f(3)&amp;=5 \\
+f(4)&amp;=7 \\
+f(5)&amp;=??? \\
+\end{align}\end{split}\]</div>
+<section id="its-obvious-isnt-it">
+<h3>It’s obvious, isn’t it?<a class="headerlink" href="#its-obvious-isnt-it" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[f(5)=217341\]</div>
+</section>
+<section id="at-least-if-you-apply-this-function">
+<h3>At least if you apply this function<a class="headerlink" href="#at-least-if-you-apply-this-function" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[ f(x)=\frac{1811}{2}x^{4}-90555x^{3}+\frac{633885}{2}x^{2}-452773x+217331\]</div>
+<p>This is a nice example taken from University of Berkeley to showcase how you can overdo it when it comes to fitting a model.</p>
+<p>What kind of error have you done with your personal model?</p>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.amazon.com/Hands-Machine-Learning-Scikit-Learn-TensorFlow/dp/1491962291">Hands-on ML with scikit-learn and TensorFlow, Geron</a>,</p>
+<p><a class="reference external" href="http://scott.fortmann-roe.com/docs/BiasVariance.html">http://scott.fortmann-roe.com/docs/BiasVariance.html</a></p>
+<p><a class="reference external" href="https://medium.com/analytics-vidhya/bias-variance-tradeoff-for-dummies-9f13147ab7d0">https://medium.com/analytics-vidhya/bias-variance-tradeoff-for-dummies-9f13147ab7d0</a></p>
+<p>Machine Learning - A probabilistic Perspective - Kevin P. Murphy</p>
+<p><a class="reference external" href="https://explained.ai/regularization/constraints.html">https://explained.ai/regularization/constraints.html</a></p>
+<p><a class="reference external" href="https://explained.ai/statspeak/index.html">https://explained.ai/statspeak/index.html</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions/aipm_sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../09.1_Bias_Variance_Tradeoff.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Bias Variance Tradeoff</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../09.2_Regularization.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Regularization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-start-with-icecream">Let’s start with IceCream</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Let’s start with IceCream</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-approach">Visual Approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-it-necessary-to-split-the-data-into-train-and-test">Why is it necessary to split the data into train and test?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-model">Simple  Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-model">Complex  Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-data-residuals">Train Data Residuals</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data-residuals">Test Data Residuals</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-terminology">Machine Learning Terminology</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Machine Learning Terminology</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-and-cost-functions">Loss and Cost functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance">Variance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">The Bias-Variance-Tradeoff</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bulls-eye-a-model-that-predicts-perfectly">Bulls-eye - a model that predicts perfectly</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#desirable-properties-of-estimators">Desirable properties of estimators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-analysis">Error Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-curves-underfitting">Learning Curves - underfitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-curves-overfitting">Learning Curves - overfitting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-vs-variance">Bias vs. Variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-vs-underfitting">Overfitting vs. Underfitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-examples-bias-variance-in-practice">Product Examples: Bias-Variance in Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pm-s-perspective">The PM’s Perspective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-examples">Product Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-product-examples">More Product Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#can-you-solve-this-little-riddle">Can you solve this little riddle?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#its-obvious-isnt-it">It’s obvious, isn’t it?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#at-least-if-you-apply-this-function">At least if you apply this function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

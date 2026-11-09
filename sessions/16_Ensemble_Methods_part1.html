@@ -1,0 +1,1074 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Ensemble Methods - Part 1 &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/16_Ensemble_Methods_part1';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Ensemble Methods - Part 2" href="16_Ensemble_Methods_part2.html" />
+    <link rel="prev" title="Recap" href="Recap.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Ensemble Methods - Part 1</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-cart-classification-and-regression-trees">Recap CART - Classification and regression trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cart-classification-and-regression-tree">CART (Classification and Regression Tree)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cart">CART</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cart-pros-and-cons">CART - pros and cons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trees-being-unstable">Trees being unstable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trees-being-greedy-and-overfitting">Trees being greedy and overfitting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wisdom-of-crowds-theory">Wisdom of Crowds Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#who-wants-to-be-a-millionaire-wikipedia">Who Wants to Be a Millionaire 💸  //  📖 Wikipedia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-variance-by-aggregation">Reducing variance by aggregation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-learning-asking-for-more-opinions-and-making-a-judgment-call">Ensemble learning… asking for more opinions and making a judgment call</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#majority-voting-how-it-works">Majority Voting - how it works</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Majority Voting - how it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-calibration">Classifier calibration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#majority-voting-why-it-works">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-weak-learners">Example of weak learners</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Example of weak learners</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-my-model-look-as-an-ensemble-model">How does my model look as an ensemble model?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-basis-function-models">Adaptive basis function models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-i-produce-different-models-with-the-same-data">How do I produce different models with the same data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i-different-models">I. Different models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-different-models">Using different models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-stacking">II. Stacking</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-model-to-aggregate">Use a model to aggregate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-bagging">III. Bagging</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging">Bagging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">Random forest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grow-a-forest-rather-than-a-tree">Grow a forest rather than a tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#out-of-bag-evaluation">Out-of-Bag Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-patches-and-subspaces">Random patches and Subspaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-trees-extremely-randomized-trees">Extra-Trees - Extremely Randomized Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-vs-variance">Accuracy vs variance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ensemble-methods-part-1">
+<h1>Ensemble Methods - Part 1<a class="headerlink" href="#ensemble-methods-part-1" title="Link to this heading">#</a></h1>
+<section id="recap-cart-classification-and-regression-trees">
+<h2>Recap CART - Classification and regression trees<a class="headerlink" href="#recap-cart-classification-and-regression-trees" title="Link to this heading">#</a></h2>
+<section id="cart-classification-and-regression-tree">
+<h3>CART (Classification and Regression Tree)<a class="headerlink" href="#cart-classification-and-regression-tree" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p><strong>General:</strong></p>
+<ul class="simple">
+<li><p>Finding the optimal split of the data is NP-complete.</p></li>
+<li><p>CART uses a greedy procedure to compute a <strong>locally minimal MLE</strong> (Maximum likelihood estimation).</p></li>
+<li><p>The split function chooses <strong>best feature and best value to split on</strong>.</p></li>
+</ul>
+<p><strong>Cost functions:</strong></p>
+<ul>
+<li><p>Regression <span class="math notranslate nohighlight">\(\rightarrow J(b)=\frac{1}{n}\sum_{i=1}^{n}{(y_{i}-\hat{y_{i}})^2}\)</span> (MSE)</p></li>
+<li><p>Classification <span class="math notranslate nohighlight">\(\rightarrow I_{G}(p)= 1-\sum_{i=1}^{J}\,p_{i}^{2}\)</span> (Gini impurity)</p>
+  </div>
+  <br><br><br>
+  <div class="images_30">
+      <img src="../images/decision_tree/img_p13_1.png">
+  </div>
+</li>
+</ul>
+</div> <div class="alert alert-block alert-info">
+<b>Note:</b> 
+NP-complete (nondeterministic polynomial-time complete) defines a problem which is easy to understand, easy to verify but difficult to solve e.g. a jigsaw puzzle.
+</div></section>
+<section id="cart">
+<h3>CART<a class="headerlink" href="#cart" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p><strong>Regularisation:</strong></p>
+<ul>
+<li><p>pruning to avoid overfitting</p></li>
+<li><p>Grow a full tree and then prune e.g.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">max_leaves</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_depth</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_sample_size</span></code></p></li>
+</ul>
+  </div>
+  <br><br><br>
+  <div class="images_30">
+      <img src="../images/decision_tree/img_p13_1.png">
+  </div>
+</li>
+</ul>
+</div> 
+</section>
+<section id="cart-pros-and-cons">
+<h3>CART - pros and cons<a class="headerlink" href="#cart-pros-and-cons" title="Link to this heading">#</a></h3>
+<br>
+<table class="confusion_matrix" border="1" width="1800">
+  <thead>
+    <tr>
+      <th><b>PROS</b></th>
+      <th><b>CONS</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="smaller-font-size">white box model - easy to interpret</td>
+      <td class="smaller-font-size">not very accurate ...</td>
+    </tr>
+    <tr>
+      <td class="smaller-font-size">can handle mixed data, discrete and continuous</td>
+      <td class="smaller-font-size">greedy nature of constructing</td>
+    </tr>
+    <tr>
+      <td class="smaller-font-size">insensitive to transformations of data... split points based on ranking  </td>
+      <td class="smaller-font-size">trees are unstable, small changes to the input can lead to large changes in tree structure</td>
+    </tr>
+    <tr>
+      <td class="smaller-font-size">relative robust to outliers</td>
+      <td class="smaller-font-size">tend to overfit (aka high variance estimators)</td>
+    </tr>
+  </tbody>
+</table></section>
+<section id="trees-being-unstable">
+<h3>Trees being unstable<a class="headerlink" href="#trees-being-unstable" title="Link to this heading">#</a></h3>
+<p><strong>Q:</strong> Should you trust and follow a single CART?</p>
+<div class="group">
+    <div class="text_70">       
+<ul>
+<li><p>Changes in your trees can lead to different structure and maybe different decisions</p></li>
+<li><p>As in investment, it is not advisable to lay all eggs in one basket</p>
+  </div>
+  <div class="images_30">   
+      <img src="../images/ensemble_methods/img_p7_1.png">
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="trees-being-greedy-and-overfitting">
+<h3>Trees being greedy and overfitting<a class="headerlink" href="#trees-being-greedy-and-overfitting" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p>How to find out what to order at the restaurant?</p>
+<ul class="simple">
+<li><p><strong>Try everything!</strong> <br>… and then order what you liked best.</p></li>
+<li><p><strong>Ask your friends to try something</strong>, <br>find out which they preferred more and try those maybe?</p></li>
+</ul>
+<p><strong>Q:</strong> Which do you find more feasible?
+</div>
+<br><br><br>
+<div class="images_30">
+<img src="../images/ensemble_methods/eating_cloud.png">
+</div></p>
+</div> 
+<center>
+    <img src="../images/ensemble_methods/img_p9_1.png" position="center" size="cover">
+</center><center>
+    <img src="../images/ensemble_methods/img_p10_1.png" position="center" width=800>
+</center>
+</section>
+</section>
+<section id="wisdom-of-crowds-theory">
+<h2>Wisdom of Crowds Theory<a class="headerlink" href="#wisdom-of-crowds-theory" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Diversity of opinions</p></li>
+<li><p>Independence of opinions</p></li>
+<li><p>Decentralisation</p></li>
+<li><p>Aggregation</p></li>
+</ul>
+<section id="who-wants-to-be-a-millionaire-wikipedia">
+<h3>Who Wants to Be a Millionaire 💸  //  📖 Wikipedia<a class="headerlink" href="#who-wants-to-be-a-millionaire-wikipedia" title="Link to this heading">#</a></h3>
+<br>
+<table class="confusion_matrix" >
+  <thead>
+    <tr>
+      <th><b>Who Wants to Be a Millionaire 💸</b></th>
+      <th><b>Wikipedia 📖</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan=2 class="cell-class">Each person has private information.</td>
+    </tr>
+    <tr>
+      <td class="smaller-font-size">The audience members should have opinions of their own.</td>
+      <td class="smaller-font-size">Wikipedians have opinions of their own.</td>
+    </tr>
+    <tr>
+      <td colspan=2 class="cell-class">Independence of opinions.</td>
+    </tr>
+    <tr>
+      <td class="smaller-font-size">There might be some small local effects.</td>
+      <td class="smaller-font-size">Wikipedians often don’t know each other.</td>
+    </tr>
+    <tr>
+      <td colspan=2 class="cell-class">Decentralisation</td>
+    </tr>
+    <tr>
+      <td class="smaller-font-size">Trivia knowledge isn’t specialised. People can make educated guesses.</td>
+      <td class="smaller-font-size">Wikipedia is decentralized by definition. Single-author pages require review.</td>
+    </tr>
+    <tr>
+      <td colspan=2 class="cell-class">Aggregation</td>
+    </tr>
+    <tr>
+      <td class="smaller-font-size">People chose the most popular vote: max()</td>
+      <td class="smaller-font-size">Talk pages to discuss and mediate disagreements. Decisions by consensus or executive decision. Loss of independence or lack of aggregation.</td>
+    </tr>
+  </tbody>
+</table></section>
+<section id="reducing-variance-by-aggregation">
+<h3>Reducing variance by aggregation<a class="headerlink" href="#reducing-variance-by-aggregation" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/ensemble_methods/img_p14_1.png" position="center">
+</center></section>
+</section>
+<section id="ensemble-learning-asking-for-more-opinions-and-making-a-judgment-call">
+<h2>Ensemble learning… asking for more opinions and making a judgment call<a class="headerlink" href="#ensemble-learning-asking-for-more-opinions-and-making-a-judgment-call" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="text_70">
+<p>A collection of models working together on same dataset</p>
+<p><strong>Mechanism:</strong></p>
+<ul class="simple">
+<li><p>majority voting</p></li>
+</ul>
+<p><strong>There are different ways to do it:</strong></p>
+<ul class="simple">
+<li><p><strong><span class="color-brand">bagging</span></strong> (same model on different parts of the data)</p></li>
+<li><p><strong><span class="color-brand">boosting</span></strong> (seq. adjusts for importance of observations)</p></li>
+<li><p><strong><span class="color-brand">stacking / blending</span></strong> (training in parallel and combining)</p></li>
+</ul>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li><p>less sensitive to overfitting</p></li>
+<li><p>better model performance</p>
+  </div>
+  <br><br><br>
+  <div class="images_30">
+      <img src="../images/ensemble_methods/more_opinions.png">
+  </div>
+</li>
+</ul>
+</div> 
+</section>
+<section id="majority-voting-how-it-works">
+<h2>Majority Voting - how it works<a class="headerlink" href="#majority-voting-how-it-works" title="Link to this heading">#</a></h2>
+<p>For <strong>each observation</strong> you have <strong>different predictions</strong> from <strong>different models</strong></p>
+<p>You need one prediction… so you aggregate</p>
+<p>Aggregating the different models can be done in many ways e.g. averages, mode, median</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://mermaid.ink/img/JSV7aW5pdDogeyd0aGVtZSc6J2Jhc2UnLCAndGhlbWVWYXJpYWJsZXMnOiB7ICdmb250U2l6ZSc6ICcxNnB4JywgJ2ZvbnRGYW1pbHknOiAndHJlYnVjaGV0IG1zJywgJ3ByaW1hcnlDb2xvcic6ICcjRkZEN0REJywgJ3ByaW1hcnlCb3JkZXJDb2xvcic6ICcjRkZBREI5JywgJ3NlY29uZGFyeUNvbG9yJzogJyNCRjkxRkYnLCAndGVydGlhcnlDb2xvcic6ICcjQzVGMEY0JywgJ3RlcnRpYXJ5Qm9yZGVyQ29sb3InOiAnIzNCQ0NEQScsICdsaW5lQ29sb3InOiAnIzNGMDA5Nyd9fX0lJQpmbG93Y2hhcnQgVEQKICAgIEEoVHJhaW5pbmcgU2V0KSAtLT4gQihNb2RlbCAxIAogICAgZmE6ZmEtY29ncykgLS1OZXcgSW5zdGFuY2UtLT4gRigoIDEgKSkgLS0+IEp7Vm90aW5nfSAtLT4gSygoMSkpCiAgICBBIC0tPiBDKE1vZGVsIDIKICAgIGZhOmZhLWNvZ3MpIC0tTmV3IEluc3RhbmNlLS0+IEcoKCAwICkpIC0tPiBKCiAgICBBIC0tPiBEKE1vZGVsIDMgCiAgICBmYTpmYS1jb2dzKSAtLU5ldyBJbnN0YW5jZS0tPiBIKCggMSApKSAtLT4gSgogICAgQSAtLT4gRShNb2RlbCA0CiAgICBmYTpmYS1jb2dzKSAtLU5ldyBJbnN0YW5jZS0tPiBJKCggMSApKSAtLT4gSgogICAgc3ViZ3JhcGggIkVuc2VtYmxlIgogICAgICAgIEIKICAgICAgICBDCiAgICAgICAgRAogICAgICAgIEUKICAgIGVuZAo="/></div></div>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Methods based on the values of the probabilities need to return calibrated probabilities.</p>
+</div><section id="id1">
+<h3>Majority Voting - how it works<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>For each observation you have different predictions. How do you aggregate this to get one value?</p>
+<p><strong><center>Hard Voting                            </center></strong></p>
+<center>takes the majority class  &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;</center><p><strong><center>Soft Voting                            </center></strong></p>
+<center>average of summed probability vectors &nbsp;  &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;</center><div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://mermaid.ink/img/JSV7aW5pdDogeyd0aGVtZSc6J2Jhc2UnLCAndGhlbWVWYXJpYWJsZXMnOiB7ICdmb250U2l6ZSc6ICcxNnB4JywgJ2ZvbnRGYW1pbHknOiAndHJlYnVjaGV0IG1zJywgJ3ByaW1hcnlDb2xvcic6ICcjRkZEN0REJywgJ3ByaW1hcnlCb3JkZXJDb2xvcic6ICcjRkZBREI5JywgJ3NlY29uZGFyeUNvbG9yJzogJyNCRjkxRkYnLCAndGVydGlhcnlDb2xvcic6ICcjQzVGMEY0JywgJ3RlcnRpYXJ5Qm9yZGVyQ29sb3InOiAnIzNCQ0NEQScsICdsaW5lQ29sb3InOiAnIzNGMDA5Nyd9fX0lJQpmbG93Y2hhcnQgVEQKICAgIEEoVHJhaW5pbmcgU2V0KSAtLT4gQihNb2RlbCAxIAogICAgZmE6ZmEtY29ncykgLS1OZXcgSW5zdGFuY2UtLT4gRigoIDAgKSkgLS0+IEp7bW9kZQogICAgMH0gLS0+IEsoKDApKQogICAgQSAtLT4gQyhNb2RlbCAyCiAgICBmYTpmYS1jb2dzKSAtLU5ldyBJbnN0YW5jZS0tPiBHKCggMSApKSAtLT4gSgogICAgQSAtLT4gRChNb2RlbCAzIAogICAgZmE6ZmEtY29ncykgLS1OZXcgSW5zdGFuY2UtLT4gSCgoIDAgKSkgLS0+IEoKICAgIEEgLS0+IEUoTW9kZWwgNAogICAgZmE6ZmEtY29ncykgLS1OZXcgSW5zdGFuY2UtLT4gSSgoIDAgKSkgLS0+IEoKICAgIHN1YmdyYXBoICJFbnNlbWJsZSIKICAgICAgICBCCiAgICAgICAgQwogICAgICAgIEQKICAgICAgICBFCiAgICBlbmQK"/></div></div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://mermaid.ink/img/JSV7aW5pdDogeyd0aGVtZSc6J2Jhc2UnLCAndGhlbWVWYXJpYWJsZXMnOiB7ICdmb250U2l6ZSc6ICcxNnB4JywgJ2ZvbnRGYW1pbHknOiAndHJlYnVjaGV0IG1zJywgJ3ByaW1hcnlDb2xvcic6ICcjRkZEN0REJywgJ3ByaW1hcnlCb3JkZXJDb2xvcic6ICcjRkZBREI5JywgJ3NlY29uZGFyeUNvbG9yJzogJyNCRjkxRkYnLCAndGVydGlhcnlDb2xvcic6ICcjQzVGMEY0JywgJ3RlcnRpYXJ5Qm9yZGVyQ29sb3InOiAnIzNCQ0NEQScsICdsaW5lQ29sb3InOiAnIzNGMDA5Nyd9fX0lJQpmbG93Y2hhcnQgVEQKICAgIEEoVHJhaW5pbmcgU2V0KSAtLT4gQihNb2RlbCAxIAogICAgZmE6ZmEtY29ncykgLS1OZXcgSW5zdGFuY2UtLT4gRigoIDAuNDEgKSkgLS0+IEp7bWVhbgogICAgMC41Nn0gLS0+IEsoKDEpKQogICAgQSAtLT4gQyhNb2RlbCAyCiAgICBmYTpmYS1jb2dzKSAtLU5ldyBJbnN0YW5jZS0tPiBHKCggMC45OSApKSAtLT4gSgogICAgQSAtLT4gRChNb2RlbCAzIAogICAgZmE6ZmEtY29ncykgLS1OZXcgSW5zdGFuY2UtLT4gSCgoIDAuMzUgKSkgLS0+IEoKICAgIEEgLS0+IEUoTW9kZWwgNAogICAgZmE6ZmEtY29ncykgLS1OZXcgSW5zdGFuY2UtLT4gSSgoIDAuNDggKSkgLS0+IEoKICAgIHN1YmdyYXBoICJFbnNlbWJsZSIKICAgICAgICBCCiAgICAgICAgQwogICAgICAgIEQKICAgICAgICBFCiAgICBlbmQK"/></div></div>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Soft voting tends to outperform hard voting.</p>
+</div></section>
+<section id="classifier-calibration">
+<h3>Classifier calibration<a class="headerlink" href="#classifier-calibration" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Fitting a regressor (called a calibrator) that maps the output of the classifier (decision_function or predict_proba) to a calibrated probability in [0, 1]</p>
+<p><a class="reference external" href="https://scikit-learn.org/stable/modules/calibration.html">sklearn - calibrated probabilities</a>
+</div>
+<div class="images">
+<img src="../images/ensemble_methods/img_p56_3.png">
+</div></p>
+</div></section>
+<section id="majority-voting-why-it-works">
+<h3>Majority Voting - why it works<a class="headerlink" href="#majority-voting-why-it-works" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p><strong>Intuition:</strong> at observation level not all classifiers will be wrong in the same way at the same time</p>
+<p><strong>Prerequisites</strong> for this to work:</p>
+<ul>
+<li><p>models need to be better than random, i.e. <strong>weak learners</strong></p></li>
+<li><p>you want the models to be different and that get translated in statistics to non-correlated or <strong>sufficiently independent</strong> or .. diverse</p></li>
+<li><p>you need a <strong>sufficient amount</strong> of weak learners</p>
+  </div>
+  <br><br><br>
+  <div class="images_30">
+      <img src="../images/ensemble_methods/multible_learners.png">
+  </div>
+</li>
+</ul>
+</div> 
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>A weak learner model has an average true positive rate slightly better than 50% and an average false positive rate slightly less than 50%.</p>
+</div></section>
+<section id="id2">
+<h3>Majority Voting - why it works<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p><strong>What does it mean that the models are independent/ different?</strong></p>
+<p>If two weak learners would be correlated then a observation is likely to have same prediction by both weak learners.</p>
+<p><strong>Why do you think it is important?</strong></p>
+<p>Probability of an observation x to be misclassified by the ensemble learner is basically equivalent to it being misclassified by a majority of the weak learners.
+</div>
+<br>
+<div class="images_30">
+<img src="../images/ensemble_methods/weak_learners.png">
+<strong><span class="color-brand">A weak learner is 51% right and 49% wrong</span></strong>
+</div></p>
+</div> 
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>This can be proven by math. Feel free :D to try.. or <br>
+run 1000 coin toss experiments and aggregate.</p>
+</div></section>
+<section id="id3">
+<h3>Majority Voting - why it works<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(X_i\)</span> are independent identically distributed:</p>
+<p><span class="math notranslate nohighlight">\(\text{Var} (X_{i})=\sigma^{2}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\text{Var} (\bar{X})=\text{Var}\left(\frac{1}{n}\sum_{i=1}^{n}X_i\right) = \frac{\sigma^2}{n}\)</span>, according to the central limit theorem.</p>
+<p>Drop the independence assumption <span class="math notranslate nohighlight">\(X_i\)</span> are correlated by <span class="math notranslate nohighlight">\(\rho\)</span>:</p>
+<p><span class="math notranslate nohighlight">\( \text{Var}(\bar{X})=\rho\sigma^{2}+(1-\rho)\frac{\sigma^{2}}{n}\)</span></p>
+</section>
+<section id="example-of-weak-learners">
+<h3>Example of weak learners<a class="headerlink" href="#example-of-weak-learners" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<div class="math notranslate nohighlight">
+\[m=1000, \ p=0.51\]</div>
+<div class="math notranslate nohighlight">
+\[p(x&lt;k) = cdf(k=500) = 27.4\%\]</div>
+<p>Chances to be wrong with m = 1000 weak learners.
+</div>
+<div class="images">
+Cumulative distribution function (cdf)
+<img src="../images/ensemble_methods/img_p21_1.png" width=400>
+</div></p>
+</div> </section>
+<section id="id4">
+<h3>Example of weak learners<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<div class="math notranslate nohighlight">
+\[m=1000, \ p=0.55\]</div>
+<div class="math notranslate nohighlight">
+\[p(x&lt;k) = cdf(k=500) = 0.08\% \]</div>
+<p>Chances to be wrong with m = 1000 weak learners.
+</div>
+<div class="images">
+Cumulative distribution function (cdf)
+<img src="../images/ensemble_methods/img_p22_1.png" width=400>
+</div></p>
+</div> </section>
+</section>
+<section id="how-does-my-model-look-as-an-ensemble-model">
+<h2>How does my model look as an ensemble model?<a class="headerlink" href="#how-does-my-model-look-as-an-ensemble-model" title="Link to this heading">#</a></h2>
+<section id="adaptive-basis-function-models">
+<h3>Adaptive basis function models<a class="headerlink" href="#adaptive-basis-function-models" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[ f(x)=b_{0}~\ + \sum b_{m}\phi_{m}(x)\]</div>
+<p>This framework covers many models: decision trees, neural networks, random forest, boosting trees and so on… basically we have m parametric basis functions.</p>
+<p><strong>How does the formula look like for a decision tree?</strong></p>
+</section>
+</section>
+<section id="how-do-i-produce-different-models-with-the-same-data">
+<h2>How do I produce different models with the same data?<a class="headerlink" href="#how-do-i-produce-different-models-with-the-same-data" title="Link to this heading">#</a></h2>
+</section>
+<section id="i-different-models">
+<h2>I. Different models<a class="headerlink" href="#i-different-models" title="Link to this heading">#</a></h2>
+<section id="using-different-models">
+<h3>Using different models<a class="headerlink" href="#using-different-models" title="Link to this heading">#</a></h3>
+<p>Really different models, not necessarily weak models. So you could use 3 or more of different types:</p>
+<ul class="simple">
+<li><p>decision trees</p></li>
+<li><p>random forest</p></li>
+<li><p>neural networks</p></li>
+<li><p>SVMs</p></li>
+<li><p>NBs</p></li>
+<li><p>KNN</p></li>
+<li><p>Ridge Classifier</p></li>
+<li><p>…</p></li>
+</ul>
+</section>
+</section>
+<section id="ii-stacking">
+<h2>II. Stacking<a class="headerlink" href="#ii-stacking" title="Link to this heading">#</a></h2>
+<section id="use-a-model-to-aggregate">
+<h3>Use a model to aggregate<a class="headerlink" href="#use-a-model-to-aggregate" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul class="simple">
+<li><p><strong>train</strong> weak learners in <strong>parallel</strong></p></li>
+<li><p>combine by choosing the best for each observation</p></li>
+<li><p>this will obviously overfit</p></li>
+<li><p>using cross-validation to avoid overfitting</p></li>
+</ul>
+<p>Applications: netflix competition winners in 2009</p>
+<p>Blending (holdout)  → Stacking (CV)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chart</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">flowchart TD</span>
+<span class="s2">    A(New instance) --&gt; B(Model 1 </span>
+<span class="s2">    fa:fa-cogs) --&gt; F(( 3.1 )) --&gt; J{blending</span>
+<span class="s2">    } --&gt; K((3.0))</span>
+<span class="s2">    A --&gt; C(Model 2</span>
+<span class="s2">    fa:fa-cogs) --&gt; G(( 2.7 )) --&gt; J</span>
+<span class="s2">    A --&gt; D(Model 3 </span>
+<span class="s2">    fa:fa-cogs) --&gt; H(( 2.9 )) --&gt; J</span>
+
+<span class="s2">    subgraph &quot;Predict&quot;</span>
+<span class="s2">        B</span>
+<span class="s2">        C</span>
+<span class="s2">        D</span>
+<span class="s2">    end</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://mermaid.ink/img/JSV7aW5pdDogeyd0aGVtZSc6J2Jhc2UnLCAndGhlbWVWYXJpYWJsZXMnOiB7ICdmb250U2l6ZSc6ICcxNnB4JywgJ2ZvbnRGYW1pbHknOiAndHJlYnVjaGV0IG1zJywgJ3ByaW1hcnlDb2xvcic6ICcjRkZEN0REJywgJ3ByaW1hcnlCb3JkZXJDb2xvcic6ICcjRkZBREI5JywgJ3NlY29uZGFyeUNvbG9yJzogJyNCRjkxRkYnLCAndGVydGlhcnlDb2xvcic6ICcjQzVGMEY0JywgJ3RlcnRpYXJ5Qm9yZGVyQ29sb3InOiAnIzNCQ0NEQScsICdsaW5lQ29sb3InOiAnIzNGMDA5Nyd9fX0lJQpmbG93Y2hhcnQgVEQKICAgIEEoTmV3IGluc3RhbmNlKSAtLT4gQihNb2RlbCAxIAogICAgZmE6ZmEtY29ncykgLS0+IEYoKCAzLjEgKSkgLS0+IEp7YmxlbmRpbmcKICAgIH0gLS0+IEsoKDMuMCkpCiAgICBBIC0tPiBDKE1vZGVsIDIKICAgIGZhOmZhLWNvZ3MpIC0tPiBHKCggMi43ICkpIC0tPiBKCiAgICBBIC0tPiBEKE1vZGVsIDMgCiAgICBmYTpmYS1jb2dzKSAtLT4gSCgoIDIuOSApKSAtLT4gSgoKICAgIHN1YmdyYXBoICJQcmVkaWN0IgogICAgICAgIEIKICAgICAgICBDCiAgICAgICAgRAogICAgZW5kCg=="/></div></div>
+</div>
+</section>
+</section>
+<section id="iii-bagging">
+<h2>III. Bagging<a class="headerlink" href="#iii-bagging" title="Link to this heading">#</a></h2>
+<section id="bagging">
+<h3>Bagging<a class="headerlink" href="#bagging" title="Link to this heading">#</a></h3>
+<p><span class="color-brand" style="font-weight:bold;">B</span>ootsprap <span class="color-brand" style="font-weight:bold;">agg</span>regat<span class="color-brand" style="font-weight:bold;">ing</span></p>
+<div class="math notranslate nohighlight">
+\[ f(x)= \frac{1}{m}\sum f_{m}(x)\]</div>
+<p>Training <span class="math notranslate nohighlight">\(m\)</span> <strong>different trees</strong> on <strong>different subsets</strong> of data chosen randomly with replacement.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><img src="https://mermaid.ink/img/JSV7aW5pdDogeyd0aGVtZSc6J2Jhc2UnLCAndGhlbWVWYXJpYWJsZXMnOiB7ICdmb250U2l6ZSc6ICcxNnB4JywgJ2ZvbnRGYW1pbHknOiAndHJlYnVjaGV0IG1zJywgJ3ByaW1hcnlDb2xvcic6ICcjRkZEN0REJywgJ3ByaW1hcnlCb3JkZXJDb2xvcic6ICcjRkZBREI5JywgJ3NlY29uZGFyeUNvbG9yJzogJyNCRjkxRkYnLCAndGVydGlhcnlDb2xvcic6ICcjQzVGMEY0JywgJ3RlcnRpYXJ5Qm9yZGVyQ29sb3InOiAnIzNCQ0NEQScsICdsaW5lQ29sb3InOiAnIzNGMDA5Nyd9fX0lJQpmbG93Y2hhcnQgVEQKICAgIEEoVHJhaW5pbmcgRGF0YQogICAgb2JzZXJ2YXRpb24gMQogICAgb2JzZXJ2YXRpb24gMgogICAgb2JzZXJ2YXRpb24gMwogICAgb2JzZXJ2YXRpb24gNAogICAgb2JzZXJ2YXRpb24gNQogICAgKSAtLT4gQihCb290c3RyYXBwZWQgRGF0YSAxCiAgICBvYnNlcnZhdGlvbiAxCiAgICBvYnNlcnZhdGlvbiAyCiAgICBvYnNlcnZhdGlvbiAyCiAgICBvYnNlcnZhdGlvbiAzCiAgICBvYnNlcnZhdGlvbiA1KSAtLT4gRihNb2RlbCAxIAogICAgZmE6ZmEtY29ncykgLS0+IEooTWFqb3JpdHkgVm90aW5nKQogICAgQSAtLT4gQyhCb290c3RyYXBwZWQgRGF0YSAyCiAgICBvYnNlcnZhdGlvbiAyCiAgICBvYnNlcnZhdGlvbiAzCiAgICBvYnNlcnZhdGlvbiA0CiAgICBvYnNlcnZhdGlvbiA0CiAgICBvYnNlcnZhdGlvbiA1KSAtLT4gRyhNb2RlbCAyIAogICAgZmE6ZmEtY29ncykgLS0+IEoKICAgIEEgLS0+IEQoQm9vdHN0cmFwcGVkIERhdGEgMwogICAgb2JzZXJ2YXRpb24gMgogICAgb2JzZXJ2YXRpb24gMgogICAgb2JzZXJ2YXRpb24gNQogICAgb2JzZXJ2YXRpb24gNQogICAgb2JzZXJ2YXRpb24gNSkgLS0+IEgoTW9kZWwgMwogICAgZmE6ZmEtY29ncykgLS0+IEoKICAgIEEgLS0+IEUoQm9vdHN0cmFwcGVkIERhdGEgNAogICAgb2JzZXJ2YXRpb24gMQogICAgb2JzZXJ2YXRpb24gMQogICAgb2JzZXJ2YXRpb24gMgogICAgb2JzZXJ2YXRpb24gNAogICAgb2JzZXJ2YXRpb24gNCktLT4gSShNb2RlbCA0IAogICAgZmE6ZmEtY29ncykgLS0+IEoKICAgIHN1YmdyYXBoICJCYWdnaW5nIgogICAgICAgIEIKICAgICAgICBDCiAgICAgICAgRAogICAgICAgIEUKICAgICAgICBGCiAgICAgICAgRwogICAgICAgIEgKICAgICAgICBJCiAgICAgICAgc3ViZ3JhcGggIkJvb3RzdHJhcHBpbmciCiAgICAgICAgICAgIEIKICAgICAgICAgICAgQwogICAgICAgICAgICBECiAgICAgICAgICAgIEUKICAgICAgICBlbmQKICAgICAgICBzdWJncmFwaCAiQWdncmVnYXRpbmciCiAgICAgICAgICAgIEYKICAgICAgICAgICAgRwogICAgICAgICAgICBICiAgICAgICAgICAgIEkKICAgICAgICBlbmQKICAgIGVuZAoK"/></div></div>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Running same learning algorithms on different subsets can result in still highly correlated predictors.</p>
+</div></section>
+<section id="random-forest">
+<h3>Random forest<a class="headerlink" href="#random-forest" title="Link to this heading">#</a></h3>
+<p>Random forest is a technique that tries to decorrelate the predictors</p>
+<ul class="simple">
+<li><p>randomly chosen <strong>subset of input variables (features)</strong></p>
+<ul>
+<li><p>leading to different features used at each node</p></li>
+</ul>
+</li>
+<li><p>randomly chosen <strong>subset of data cases (observations)</strong></p>
+<ul>
+<li><p>leading to out of bag instances</p></li>
+</ul>
+</li>
+</ul>
+<p>Random forest gain in performance but lose in interpretability.</p>
+</section>
+<section id="grow-a-forest-rather-than-a-tree">
+<h3>Grow a forest rather than a tree<a class="headerlink" href="#grow-a-forest-rather-than-a-tree" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Ensemble of decision trees</p></li>
+<li><p>Trained using bagging for selecting the train data</p></li>
+<li><p>Uses a random subset of features at each node</p></li>
+</ul>
+</section>
+<section id="out-of-bag-evaluation">
+<h3>Out-of-Bag Evaluation<a class="headerlink" href="#out-of-bag-evaluation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For each model, there are instances that are not trained on (because of the replacement). They are called out-of-bag instances (oob).</p></li>
+<li><p>oobs are ideal for evaluation even without a separate validation set (out of bag error)</p></li>
+</ul>
+</section>
+<section id="random-patches-and-subspaces">
+<h3>Random patches and Subspaces<a class="headerlink" href="#random-patches-and-subspaces" title="Link to this heading">#</a></h3>
+<p>Why not sample the features too?</p>
+<ul class="simple">
+<li><p>Random patches: sampling <strong>both</strong> features and instances</p></li>
+<li><p>Random subspaces: Sample <strong>features only</strong></p></li>
+<li><p>Can be used for getting feature importance (How ?)</p></li>
+</ul>
+</section>
+<section id="extra-trees-extremely-randomized-trees">
+<h3>Extra-Trees - Extremely Randomized Trees<a class="headerlink" href="#extra-trees-extremely-randomized-trees" title="Link to this heading">#</a></h3>
+<p>Changing how we build the trees to introduce more variation</p>
+<ul class="simple">
+<li><p>all the data in train is used to build each split</p></li>
+<li><p>to get the root node or any node: searching in a subset of random features, the split is chosen randomly</p></li>
+<li><p>random selection → Saves a lot of computational power</p></li>
+</ul>
+</section>
+<section id="accuracy-vs-variance">
+<h3>Accuracy vs variance<a class="headerlink" href="#accuracy-vs-variance" title="Link to this heading">#</a></h3>
+<p><strong>Accuracy</strong></p>
+<ul class="simple">
+<li><p>Random Forest and Extra Trees outperform Decision Trees</p></li>
+</ul>
+<p><strong>Variance</strong></p>
+<ul class="simple">
+<li><p>Decision trees → high</p></li>
+<li><p>Random Forest → medium</p></li>
+<li><p>Extra Trees → low</p></li>
+</ul>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Machine learning a probabilistic perspective - Kevin p. Murphy</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1106.0257.pdf">https://arxiv.org/pdf/1106.0257.pdf</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1307.6522.pdf">https://arxiv.org/pdf/1307.6522.pdf</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/&#64;sanchitamangale12/voting-classifier-1be10db6d7a5">Voting classifier blogpost</a></p></li>
+<li><p><a class="reference external" href="https://quantdare.com/what-is-the-difference-between-extra-trees-and-random-fo">Difference between extra trees and random forest</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/model-design-and-selection-with-scikit-learn-18a29041d02a">Model design and selection with sklearn</a></p></li>
+<li><p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book">Interpretable ML book</a></p></li>
+<li><p><a class="reference external" href="https://www.kaggle.com/dansbecker/partial-dependence-plots">Partial dependency plots</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Recap.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Recap</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="16_Ensemble_Methods_part2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Ensemble Methods - Part 2</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-cart-classification-and-regression-trees">Recap CART - Classification and regression trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cart-classification-and-regression-tree">CART (Classification and Regression Tree)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cart">CART</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cart-pros-and-cons">CART - pros and cons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trees-being-unstable">Trees being unstable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trees-being-greedy-and-overfitting">Trees being greedy and overfitting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wisdom-of-crowds-theory">Wisdom of Crowds Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#who-wants-to-be-a-millionaire-wikipedia">Who Wants to Be a Millionaire 💸  //  📖 Wikipedia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-variance-by-aggregation">Reducing variance by aggregation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-learning-asking-for-more-opinions-and-making-a-judgment-call">Ensemble learning… asking for more opinions and making a judgment call</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#majority-voting-how-it-works">Majority Voting - how it works</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Majority Voting - how it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classifier-calibration">Classifier calibration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#majority-voting-why-it-works">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-weak-learners">Example of weak learners</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Example of weak learners</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-my-model-look-as-an-ensemble-model">How does my model look as an ensemble model?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-basis-function-models">Adaptive basis function models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-i-produce-different-models-with-the-same-data">How do I produce different models with the same data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#i-different-models">I. Different models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-different-models">Using different models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ii-stacking">II. Stacking</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-model-to-aggregate">Use a model to aggregate</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iii-bagging">III. Bagging</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging">Bagging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">Random forest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grow-a-forest-rather-than-a-tree">Grow a forest rather than a tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#out-of-bag-evaluation">Out-of-Bag Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-patches-and-subspaces">Random patches and Subspaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-trees-extremely-randomized-trees">Extra-Trees - Extremely Randomized Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-vs-variance">Accuracy vs variance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

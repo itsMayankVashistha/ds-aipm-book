@@ -1,0 +1,1622 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Image Modeling &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/19_Image_Modelling';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Capstone Phase" href="20_Capstone_Phase.html" />
+    <link rel="prev" title="Artificial Neural Networks" href="aipm_sessions/ANN_AIPM.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Image Modeling</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up">Warm-up 🌶️</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-data">Image Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-image-data-look-like">How does image data look like?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unstructured-data-and-locality">Unstructured data and locality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-of-locality">Principle of locality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-and-unstructured-data">Structured and unstructured data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Structured and unstructured data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Structured and unstructured data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-ideal-feature-information">What is ideal feature information?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-feature-engineering">Image feature engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ideal-feature-information">The ideal feature information</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-models-for-image-modeling">Linear models for image modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-prepare-the-image-data-for-a-linear-model">How to prepare the image data for a linear model?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks-of-linear-models">Drawbacks of linear models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-neural-networks-for-image-modeling">Deep Neural Networks for image modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-neural-networks-perform-better-on-image-data">Deep Neural Networks perform better on image data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks-of-deep-neural-networks-in-image-modeling">Drawbacks of Deep Neural Networks in image modeling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imagenet-competition">ImageNet Competition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-layers">Convolutional layers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Introduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution-as-a-grouping-of-information">Convolution as a grouping of information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-a-convolution-layer-work">How does a convolution layer work?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edge-detection">Edge detection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#major-idea-of-a-convolutional-layer">Major idea of a convolutional layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduction-of-dimensions">Reduction of dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-we-build-deep-convolutional-networks">How can we build deep convolutional networks?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-great-strides">Making great strides</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-during-training">What happens during training?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stationarity-principle">Stationarity principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-through-the-channels">Working through the channels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Working through the channels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-sharing-is-caring">Parameter sharing is caring</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling-layers">Pooling layers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-pooling">What is pooling?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-a-pooling-layer-work">How does a Pooling layer work?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-pooling">Why pooling?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Why pooling?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compositionality-principle">Compositionality principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-network">Building the network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Feature Extraction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation-and-transfer-learning">Data augmentation and transfer learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-with-convolutional-neural-networks">Challenges with convolutional neural networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation">Data augmentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning">Transfer learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-transfer-learning-work">How does transfer learning work?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-do-we-get-pre-trained-models">Where do we get pre-trained models?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Image Modeling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="image-modeling">
+<h1>Image Modeling<a class="headerlink" href="#image-modeling" title="Link to this heading">#</a></h1>
+<section id="warm-up">
+<h2>Warm-up 🌶️<a class="headerlink" href="#warm-up" title="Link to this heading">#</a></h2>
+<p>Spend some time looking at this explanation of <a class="reference external" href="https://setosa.io/ev/image-kernels/">Image Kernels</a> (feel free to play around with all the settings!) and discuss the following questions:</p>
+<ul class="simple">
+<li><p>What does the number at each pixel location in a greyscale image mean?</p></li>
+<li><p>What is a kernel?</p></li>
+<li><p>How is a kernel applied to an image?</p></li>
+<li><p>How does changing the numbers in the kernel affect the output image?</p></li>
+<li><p>What features of an image can we highlight using a kernel?</p></li>
+</ul>
+</section>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">#</a></h2>
+<section id="image-data">
+<h3>Image Data<a class="headerlink" href="#image-data" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>There is possibly no other data that has increased as much over the last decade - and filled our everyday life - as image data</p>
+  </div>
+  <div class="images_30">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p>In a single day on Instagram 1.3 billion photos and videos are uploaded (2023)</p></li>
+</ul>
+<ul class="simple">
+<li><p>We want to process such data for many reasons</p>
+<ul>
+<li><p>Image classification and captioning</p></li>
+<li><p>Toxic content detection</p></li>
+<li><p>Image quality improvements, etc.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<section id="how-does-image-data-look-like">
+<h3>How does image data look like?<a class="headerlink" href="#how-does-image-data-look-like" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>Image data has height, width and depth</p>
+<ul class="simple">
+<li><p>Height and width are given in pixels</p></li>
+<li><p>Depth is the number of channels (3 for <strong>R</strong>ed<strong>G</strong>reen<strong>B</strong>lue, 1 for <strong>B</strong>lack<strong>W</strong>hite)</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+      <img src="../images/image_modelling/image_example.png">     
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p>Each pixel corresponds to an integer between 0 and 255</p></li>
+</ul>
+<ul class="simple">
+<li><p>Example: A <strong>1280 x 720</strong> px color image has <strong>1280 x 720 x 3</strong> = <strong>2,764,800</strong> pixels = <strong>2.76</strong> MB</p>
+<ul>
+<li><p>That is a lot to digest for an ML model using thousands of images for training and maybe hundreds in a batch</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="unstructured-data-and-locality">
+<h3>Unstructured data and locality<a class="headerlink" href="#unstructured-data-and-locality" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">  
+<ul>
+<li><p>In contrast to structured table data images show regularly transformations in local features</p>
+<ul class="simple">
+<li><p>Different angles, rotations, flipping, scaling, translations</p></li>
+</ul>
+</li>
+<li><p>Humans can see the same objects just naturally</p></li>
+<li><p>For an ML model this is a challenge</p>
+<ul class="simple">
+<li><p>Transformation invariance is desired</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+      <img src="../images/image_modelling/fish.png" width="90%">     
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="principle-of-locality">
+<h3>Principle of locality<a class="headerlink" href="#principle-of-locality" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70"> 
+<ul>
+<li><p>Nearby pixels often show the same or a similar color</p></li>
+<li><p>As pixels become further apart this similarity decreases or even breaks</p></li>
+<li><p>Locality describes this phenomenon:</p>
+<ul class="simple">
+<li><p>Locally pixels are correlated</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+      <img src="../images/image_modelling/img_p11_2.png">     
+  </div>
+</li>
+</ul>
+</div>
+</section>
+<section id="structured-and-unstructured-data">
+<h3>Structured and unstructured data<a class="headerlink" href="#structured-and-unstructured-data" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul class="simple">
+<li><p>With structured data we would simply compare two feature vectors</p>
+<ul>
+<li><p>Example: Structured truck data</p></li>
+</ul>
+</li>
+</ul>
+</div>
+    <div class="images">
+        <img src="../images/image_modelling/img_p13_3.png">  
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Height (in m)</p></th>
+<th class="head"><p>Weight (in m)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2.420</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.849</p></td>
+<td><p>28</p></td>
+</tr>
+<tr class="row-even"><td><p>2.975</p></td>
+<td><p>50</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a class="reference external" href="https://www.thelocal.de/20110217/33185">Source</a></p>
+</div>
+</div></section>
+<section id="id1">
+<h3>Structured and unstructured data<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul class="simple">
+<li><p>With structured data we would simply compare two feature vectors</p>
+<ul>
+<li><p>Example: Structured truck data</p></li>
+</ul>
+</li>
+</ul>
+<p>Comparing the euclidean distance:</p>
+<p><span class="math notranslate nohighlight">\((2.849-2.420)^{2}+(28-11)^{2}=289.19\)</span> <br />
+<span class="math notranslate nohighlight">\((2.975-2.420)^{2}+(50-11)^{2}=1,521.31\)</span></p>
+</div>
+    <div class="images">
+        <img src="../images/image_modelling/img_p13_3.png">  
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Height (in m)</p></th>
+<th class="head"><p>Weight (in m)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>2.420</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.849</p></td>
+<td><p>28</p></td>
+</tr>
+<tr class="row-even"><td><p>2.975</p></td>
+<td><p>50</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a class="reference external" href="https://www.thelocal.de/20110217/33185">Source</a></p>
+</div>
+</div></section>
+<section id="id2">
+<h3>Structured and unstructured data<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul class="simple">
+<li><p>With structured data we would simply compare two feature vectors</p>
+<ul>
+<li><p>Example: Structured truck data</p></li>
+</ul>
+</li>
+<li><p>This does not work with image data comparing the vectors of all pixels (rolling them out)</p>
+<ul>
+<li><p>The reason is locality (more generally transformation)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+    <div class="images">
+        <img src="../images/image_modelling/img_p13_3.png"> 
+        <img src="../images/image_modelling/fishes.png" width="80%">        
+</div>
+</div></section>
+<section id="what-is-ideal-feature-information">
+<h3>What is ideal feature information?<a class="headerlink" href="#what-is-ideal-feature-information" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70"> 
+<ul class="simple">
+<li><p>The primary information to identify objects in an image are the pixel relations</p>
+<ul>
+<li><p>Pixels distributed in a certain way identify a certain object</p></li>
+<li><p>Colour compositions play in certain areas a crucial role</p></li>
+</ul>
+</li>
+<li><p>But how can we extract features that contain this information from an image?</p>
+<ul>
+<li><p>This is a demanding task</p></li>
+</ul>
+</li>
+<li><p>How do we humans identify a fish as a fish?</p></li>
+</ul>
+<p><a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0031320316303582?via%3Dihub">Source</a></p>
+</div>
+    <div class="images_30">
+        <img src="../images/image_modelling/img_p16_3.png" width=300> 
+        <img src="../images/image_modelling/img_p16_4.png" width=300>
+        <img src="../images/image_modelling/pixles.gif">
+</div>
+</div></section>
+<section id="image-feature-engineering">
+<h3>Image feature engineering<a class="headerlink" href="#image-feature-engineering" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70"> 
+<ul class="simple">
+<li><p>Earlier approaches to image processing relied heavily on feature engineering by hand</p>
+<ul>
+<li><p>Using edges to identify shape: edges are sharp changes in color</p></li>
+</ul>
+</li>
+<li><p>Some popular image features developed at these times</p>
+<ul>
+<li><p>HOG (Histogram of Oriented Gradients) - Looking at changes in pixels</p></li>
+<li><p>SIFT (Scale Invariant Feature Transform)</p></li>
+<li><p>SURF (Speeded-Up Robust Feature)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+    <div class="images_30">
+        <img src="../images/image_modelling/img_p17_2.png"> 
+</div>
+</div></section>
+<section id="the-ideal-feature-information">
+<h3>The ideal feature information<a class="headerlink" href="#the-ideal-feature-information" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>As an ideal, we want the model itself to find the best features to fulfill its task</p></li>
+<li><p>How can a model map the high-dimensional image space to a lower dimensional subspace?</p>
+<ul>
+<li><p>In which each image is represented by a long feature vector that behaves like structural data</p></li>
+</ul>
+</li>
+<li><p>In the following we try to find a model that can achieve this</p></li>
+</ul>
+</section>
+</section>
+<section id="linear-models-for-image-modeling">
+<h2>Linear models for image modeling<a class="headerlink" href="#linear-models-for-image-modeling" title="Link to this heading">#</a></h2>
+<section id="how-to-prepare-the-image-data-for-a-linear-model">
+<h3>How to prepare the image data for a linear model?<a class="headerlink" href="#how-to-prepare-the-image-data-for-a-linear-model" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul>
+<li><p>Given an image with height and width:</p>
+<ul class="simple">
+<li><p>We could flatten the 2-dimensional tensor into a 1-dimensional one</p></li>
+<li><p>Then just concatenating the channels therein</p></li>
+</ul>
+</li>
+<li><p>Given the label to be one of [T-shirt, Trouser, Pullover, Dress, Coat, Sandal, Shirt, Sneaker, Bag, Ankle boot]:</p>
+<ul class="simple">
+<li><p>The label is represented by an integer between 0 and 9</p></li>
+</ul>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/flattend_2.png"> 
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="logistic-regression">
+<h3>Logistic regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul>
+<li><p>The logistic classification works on image data</p>
+<ul class="simple">
+<li><p>On the MNIST Fashion dataset it reaches a 86% accuracy</p></li>
+<li><p>That is almost a 15% error that could become costly in business</p></li>
+</ul>
+</li>
+<li><p>Can we improve modeling these image data?</p>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/flattend.png"> 
+  </div>
+</li>
+</ul>
+</div>
+</section>
+<section id="drawbacks-of-linear-models">
+<h3>Drawbacks of linear models<a class="headerlink" href="#drawbacks-of-linear-models" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Remember the TensorFlow playground</p>
+<ul>
+<li><p>Linear models perform bad on non-linear data</p></li>
+<li><p>Complex structures in data are hard to capture for linear boundaries</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>We need models capable of complex relationships between pixels</p>
+<ul>
+<li><p>They must be able to approximate non-linear functions of high complexity</p></li>
+<li><p>Such models must be able to do the feature engineering themselves</p></li>
+</ul>
+</li>
+</ul>
+<p><a class="reference external" href="https://playground.tensorflow.org/#activation=tanh&amp;amp;batchSize=10&amp;amp;dataset=spiral&amp;amp;regDataset=reg-plane&amp;amp;learningRate=0.03&amp;amp;regularizationRate=0&amp;amp;noise=10&amp;amp;networkShape=4,1&amp;amp;seed=0.52914&amp;amp;showTestData=false&amp;amp;discretize=false&amp;amp;percTrainData=50&amp;amp;x=true&amp;amp;y=true&amp;amp;xTimesY=false&amp;amp;xSquared=false&amp;amp;ySquared=false&amp;amp;cosX=false&amp;amp;sinX=false&amp;amp;cosY=false&amp;amp;sinY=false&amp;amp;collectStats=false&amp;amp;problem=classification&amp;amp;initZero=false&amp;amp;hideText=false">TensorFlow Playground</a></p>
+</section>
+</section>
+<section id="deep-neural-networks-for-image-modeling">
+<h2>Deep Neural Networks for image modeling<a class="headerlink" href="#deep-neural-networks-for-image-modeling" title="Link to this heading">#</a></h2>
+<section id="deep-neural-networks-perform-better-on-image-data">
+<h3>Deep Neural Networks perform better on image data<a class="headerlink" href="#deep-neural-networks-perform-better-on-image-data" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul>
+<li><p>Remember</p>
+<ul class="simple">
+<li><p>Non-linear activation functions enable networks to model nonlinear functions</p></li>
+<li><p>Hierarchy of neurons through layers make a complex feature extraction possible</p></li>
+</ul>
+</li>
+<li><p>Deep Neural Network on MNIST Fashion gets to a 91% accuracy</p>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/dnn.png"> 
+  </div>
+</li>
+</ul>
+</div>
+</section>
+<section id="drawbacks-of-deep-neural-networks-in-image-modeling">
+<h3>Drawbacks of Deep Neural Networks in image modeling<a class="headerlink" href="#drawbacks-of-deep-neural-networks-in-image-modeling" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70"> 
+<ul>
+<li><p>Theoretically we can build a very deep network and approximate any function to classify images (universal approximation theorem), but</p>
+<ul class="simple">
+<li><p>Very deep networks have <strong>high risk of overfitting</strong></p></li>
+<li><p>Real-world images have way more pixels</p></li>
+<li><p>DNNs are not transformation invariant but are not dependent on the order of pixels either</p>
+<ul>
+<li><p>i.e. the relationship between pixels does not count</p></li>
+</ul>
+</li>
+</ul>
+  </div>
+  <div class="images_30">
+      <img src="../images/image_modelling/dnn_small.png"> 
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="imagenet-competition">
+<h3>ImageNet Competition<a class="headerlink" href="#imagenet-competition" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70"> 
+<ul>
+<li><p>ImageNet is the largest image recognition competition</p>
+<ul class="simple">
+<li><p>~1.2M images and 1,000 categories</p></li>
+</ul>
+</li>
+<li><p>Until 2011 feature engineering defined a dominant part for winning teams</p>
+<ul class="simple">
+<li><p>Xerox XRCE team won by using Fisher Vectors (multi-dimensional SWIFT) and SVMs</p></li>
+</ul>
+</li>
+<li><p>2012 AlexNet improved significantly and presented an implicit feature extraction</p>
+<ul class="simple">
+<li><p>The authors used a {convolutional neural network (CNN)}</p></li>
+</ul>
+  </div>
+  <div class="images_30">
+      <img src="../images/image_modelling/cnn.png"> 
+  </div>
+</li>
+</ul>
+</div></section>
+</section>
+<section id="convolutional-layers">
+<h2>Convolutional layers<a class="headerlink" href="#convolutional-layers" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>Introduction<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul>
+<li><p>A convolutional neural network consists of two special layers:</p>
+<ul class="simple">
+<li><p>Convolutional layers</p></li>
+<li><p>Pooling layers</p></li>
+</ul>
+</li>
+<li><p>In the following we will consider these layers in detail</p>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/cnn_detail.png"> 
+  </div>
+</li>
+</ul>
+</div>
+</section>
+<section id="convolution-as-a-grouping-of-information">
+<h3>Convolution as a grouping of information<a class="headerlink" href="#convolution-as-a-grouping-of-information" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul>
+<li><p>We found out that the local relationships between pixels in an image contain important information</p>
+<ul class="simple">
+<li><p>How can this relationship be captured?</p></li>
+</ul>
+</li>
+<li><p>Convolutional layers use a special mathematical method to capture these relationships: a <strong>{convolution}</strong></p>
+<ul class="simple">
+<li><p>Intuitively, they take snapshots from all regions of an image and apply filters to them</p></li>
+</ul>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/convolution.png"> 
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="how-does-a-convolution-layer-work">
+<h3>How does a convolution layer work?<a class="headerlink" href="#how-does-a-convolution-layer-work" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70"> 
+        <img src="../images/image_modelling/convolution_process.png">    
+    </div>
+    <div class="images_30">
+<br>
+<div class="math notranslate nohighlight">
+\[ y_{i,j}=\sum_{k}\,\sum_{l}\,w_{k l}\,x_{i+k,j+l}\]</div>
+</div>
+</div></section>
+<section id="edge-detection">
+<h3>Edge detection<a class="headerlink" href="#edge-detection" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul class="simple">
+<li><p>A filter can detect different features in an image</p>
+<ul>
+<li><p>Edges</p></li>
+<li><p>Sharpening (edge detection + original image)</p></li>
+<li><p>Blurring</p></li>
+</ul>
+</li>
+<li><p>Here we only look at edge detection to get an intuition how filtering works</p></li>
+</ul>
+<img src="../images/image_modelling/calculation.png"  width=600> 
+    </div>
+    <div class="images">
+        <img src="../images/image_modelling/fish_calculation.png" width=500 > 
+    </div>
+</div>
+</section>
+<section id="major-idea-of-a-convolutional-layer">
+<h3>Major idea of a convolutional layer<a class="headerlink" href="#major-idea-of-a-convolutional-layer" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul>
+<li><p>Filters can be constructed by hand</p>
+<ul class="simple">
+<li><p>Why not learning filter values {parameters} in training?</p></li>
+</ul>
+</li>
+<li><p>A convolutional layer contains many filters</p>
+<ul class="simple">
+<li><p>Each filter forms during training</p></li>
+</ul>
+</li>
+<li><p>Each filter is of the same size and can process groups of nearby pixels</p>
+<ul class="simple">
+<li><p>It looks at relationships between pixels {locality}</p></li>
+</ul>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/convolutional_layer.png" width=550> 
+  </div>
+</li>
+</ul>
+</div>
+</section>
+<section id="reduction-of-dimensions">
+<h3>Reduction of dimensions<a class="headerlink" href="#reduction-of-dimensions" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul class="simple">
+<li><p>Convolutional layers reduce the dimension of the image</p>
+<ul>
+<li><p>A 28 x 28 picture filtered by a 3 x 3 kernel shrinks to a dimension of 26 x 26</p></li>
+</ul>
+</li>
+<li><p>This limits the number of convolutional layers applied to an image</p>
+<ul>
+<li><p>At each layer the image shrinks</p></li>
+</ul>
+</li>
+<li><p>Formula for the resulting image dimension:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[m=n-k+1\]</div>
+<div class="math notranslate nohighlight">
+\[28-3+1=26\]</div>
+</div>
+    <div class="images">
+        <img src="../images/image_modelling/convolutional_gif.gif">
+<p><a class="reference external" href="https://www.freecodecamp.org/news/an-intuitive-guide-to-convolutional-neural-networks-260c2de0a050/#:~:text=Left:%20the%20filter%20slides%20over%20the%20input.%20Right:%20the%20result">Source</a></p>
+</div>
+</div>
+</section>
+<section id="how-can-we-build-deep-convolutional-networks">
+<h3>How can we build deep convolutional networks?<a class="headerlink" href="#how-can-we-build-deep-convolutional-networks" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>To avoid shrinking the image too quickly <strong>{padding}</strong> is applied</p></li>
+</ul>
+<div class="group">
+    <div class="text"> 
+<ul class="simple">
+<li><p>The image is ‘framed’ by zeros</p>
+<ul>
+<li><p>A 28 x 28 image with a padding of 1 has dimension 30 x 30</p></li>
+<li><p>WIth a kernel of 3 x 3 this results again in a 28 x 28 image</p></li>
+</ul>
+</li>
+<li><p>Formula for the resulting image size</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[m=n+2p-k+1\]</div>
+<div class="math notranslate nohighlight">
+\[28+2*1-3+1=28\]</div>
+</div>
+    <div class="images">
+        <img src="../images/image_modelling/kernel.png">
+    </div>
+</div></section>
+<section id="making-great-strides">
+<h3>Making great strides<a class="headerlink" href="#making-great-strides" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70"> 
+<ul class="simple">
+<li><p>Stride is the step size of the filter {kernel} by which it moves along the image</p></li>
+<li><p>Sometimes a larger stride is desired</p>
+<ul>
+<li><p>It reduces large image sizes to optimize memory usage and reduces computational costs</p></li>
+<li><p>It reduces the risk of overfitting</p></li>
+</ul>
+</li>
+<li><p>Formula for the resulting image dimension (stride of 2):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[m=\big\lfloor{\frac{n+2p-k}{s}}+1\big\rfloor\]</div>
+<div class="math notranslate nohighlight">
+\[m=\big\lfloor{\frac{28+2\cdot0-3}{2}}+1\big\rfloor=13\]</div>
+</div>
+    <div class="images_30">
+        <img src="../images/image_modelling/stride_2.png">
+    </div>
+</div></section>
+<section id="what-happens-during-training">
+<h3>What happens during training?<a class="headerlink" href="#what-happens-during-training" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The filters {kernels} of a convolutional layer are variable</p>
+<ul>
+<li><p>They get learned during training of the network</p></li>
+</ul>
+</li>
+<li><p>The network learns thereby optimal filters to fulfill its task</p></li>
+</ul>
+<center>
+    <img src="../images/image_modelling/feature_map.png" width=1000>
+</center></section>
+<section id="stationarity-principle">
+<h3>Stationarity principle<a class="headerlink" href="#stationarity-principle" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>There are features in an image that are essential and repeat themselves at different locations</p></li>
+<li><p>Statistical signals are uniformly distributed:</p>
+<ul>
+<li><p>These features have therefore also be detected at each location</p></li>
+</ul>
+</li>
+<li><p>This justifies {parameter sharing} which makes CNNs very parameter-efficient</p></li>
+</ul>
+</section>
+<section id="working-through-the-channels">
+<h3>Working through the channels<a class="headerlink" href="#working-through-the-channels" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul>
+<li><p>Color images have three channels</p>
+<ul class="simple">
+<li><p>Convolutions take place across channels</p></li>
+<li><p>I.e. a filter {kernel} is actually a cube</p></li>
+</ul>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/rgb.jpeg">
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="id4">
+<h3>Working through the channels<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul>
+<li><p>Color images have three channels</p>
+<ul class="simple">
+<li><p>Convolutions take place across channels</p></li>
+<li><p>I.e. a filter {kernel} is actually a cube</p></li>
+</ul>
+</li>
+<li><p>Per convolutional layer there are usually many filters applied</p>
+<ul class="simple">
+<li><p>A filter per feature</p></li>
+<li><p>I.e. the output is actually again multi-channel</p></li>
+<li><p>The channel of the output is also called {feature map}</p></li>
+</ul>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/rgb_2.png">
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="parameter-sharing-is-caring">
+<h3>Parameter sharing is caring<a class="headerlink" href="#parameter-sharing-is-caring" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Remember the large image example (1280px x 720px):</p>
+<ul>
+<li><p>27.6 Mio. parameters with 10 neurons in a DNN</p></li>
+<li><p>110 MB in memory</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Consider instead a convolutional layer with 64 filters of size 3x3 applied to a colour image</p>
+<ul>
+<li><p>3x3x3x64 + 64= 1792 parameters!</p></li>
+<li><p>7 KiB in memory</p></li>
+</ul>
+</li>
+<li><p>With parameter sharing we can train</p>
+<ul>
+<li><p>faster</p></li>
+<li><p>deeper networks</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="pooling-layers">
+<h2>Pooling layers<a class="headerlink" href="#pooling-layers" title="Link to this heading">#</a></h2>
+<section id="what-is-pooling">
+<h3>What is pooling?<a class="headerlink" href="#what-is-pooling" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Pooling is aggregating features from {feature maps}</p>
+<ul>
+<li><p>We pool over a certain window: we apply a summary of nearby pixels</p></li>
+<li><p>The window is then moved across a feature map</p></li>
+</ul>
+</li>
+<li><p>Pooling reduces a feature map in size:</p>
+<ul>
+<li><p>A 26 x 26 feature map with a 2x2 pooling layer reduces the feature map to dimension 25x25</p></li>
+</ul>
+</li>
+<li><p>Formula for the resulting dimension:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[m=\big\lfloor{\frac{n+2p-k}{s}}+1\big\rfloor\]</div>
+<div class="math notranslate nohighlight">
+\[m=\big\lfloor{\frac{26+2\cdot0-2}{1}}+1\big\rfloor=25\]</div>
+<p>In practice pooling layers often use a stride corresponding to the kernel size:
+2x2 kernel with stride of 2</p>
+</section>
+<section id="how-does-a-pooling-layer-work">
+<h3>How does a Pooling layer work?<a class="headerlink" href="#how-does-a-pooling-layer-work" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/image_modelling/max_pooling.png" width=1000>
+</center></section>
+<section id="why-pooling">
+<h3>Why pooling?<a class="headerlink" href="#why-pooling" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<p>Pooling has two major effects:</p>
+<ul>
+<li><p>It makes the network invariant to translations</p>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/pooling_translation.png" width=300 height=300>
+  </div>
+</li>
+</ul>
+</div>
+<p><a class="reference external" href="https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/">source</a></p>
+</section>
+<section id="id5">
+<h3>Why pooling?<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<p>Pooling has two major effects:</p>
+<ul>
+<li><p>It makes the network invariant to translations</p></li>
+<li><p>It strengthens the signal while it is running through the network</p>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/pooling_translation.png" width=300 height=300>
+      <img src="../images/image_modelling/network.png" width=600>
+  </div>
+</li>
+</ul>
+</div>
+</section>
+<section id="compositionality-principle">
+<h3>Compositionality principle<a class="headerlink" href="#compositionality-principle" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Any image is compositional:</p>
+<ul>
+<li><p>Features compose the image in a hierarchical manner</p></li>
+</ul>
+</li>
+<li><p>This justifies the use of multiple layers</p>
+<ul>
+<li><p>Each layer composes features of the prior layer to a more complex one</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="building-the-network">
+<h3>Building the network<a class="headerlink" href="#building-the-network" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Stack layers together with a softmax or sigmoid layer at the end</p></li>
+<li><p>Train with gradient descent to optimize parameters</p></li>
+</ul>
+<center>
+    <img src="../images/image_modelling/building_network.png">
+</center>    </section>
+<section id="feature-extraction">
+<h3>Feature extraction<a class="headerlink" href="#feature-extraction" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul>
+<li><p>Hierarchical feature extraction</p>
+<ul class="simple">
+<li><p>One pixel in deeper layer is connected to many pixels in shallow layer {sparse interactions}</p></li>
+</ul>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/layer.png">
+  </div>
+</li>
+</ul>
+</div><ul class="simple">
+<li><p>Feature complexity grows in each layer</p>
+<ul>
+<li><p>First layers learn simple structures, like edges and corners</p></li>
+<li><p>Later layers learn complex structures like eyes, nose, etc.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id6">
+<h3>Feature Extraction<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/image_modelling/feature_extraction.png" width=1300>
+</center>    </section>
+</section>
+<section id="data-augmentation-and-transfer-learning">
+<h2>Data augmentation and transfer learning<a class="headerlink" href="#data-augmentation-and-transfer-learning" title="Link to this heading">#</a></h2>
+<section id="challenges-with-convolutional-neural-networks">
+<h3>Challenges with convolutional neural networks<a class="headerlink" href="#challenges-with-convolutional-neural-networks" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Deep convolutional neural networks are data hungry</p>
+<ul>
+<li><p>Imagine all the features it has to learn from images</p></li>
+</ul>
+</li>
+<li><p>Data sparsity then is a challenge</p>
+<ul>
+<li><p>Could be too less, low-quality, too few variations</p></li>
+</ul>
+</li>
+<li><p>Two ideas have emerged in the deep learning community to overcome these problems:</p>
+<ul>
+<li><p>Data augmentation</p></li>
+<li><p>Transfer learning</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="data-augmentation">
+<h3>Data augmentation<a class="headerlink" href="#data-augmentation" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul>
+<li><p>Idea:</p>
+<ul class="simple">
+<li><p>Randomly transform images during training</p>
+<ul>
+<li><p>Translate</p></li>
+<li><p>Rotate</p></li>
+<li><p>Zoom</p></li>
+<li><p>Flip</p></li>
+<li><p>…</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Enlarges the data set by a significant factor</p></li>
+<li><p>Makes the network more robust</p>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/data_augmentation.png">
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="transfer-learning">
+<h3>Transfer learning<a class="headerlink" href="#transfer-learning" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text"> 
+<ul>
+<li><p>Human beings learn tasks by transferring knowledge from other tasks they learned before</p>
+<ul class="simple">
+<li><p>Can ANNs do the same?</p></li>
+</ul>
+</li>
+<li><p>They can - given some conditions</p>
+<ul class="simple">
+<li><p>Same input distribution for both tasks</p></li>
+<li><p>Well-learned representations on the first task</p></li>
+</ul>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/transfer_learning.png">
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="how-does-transfer-learning-work">
+<h3>How does transfer learning work?<a class="headerlink" href="#how-does-transfer-learning-work" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A model is trained on many data for one task</p>
+<ul>
+<li><p>For example classifying fishes</p></li>
+</ul>
+</li>
+</ul>
+<div class="group">
+    <div class="text"> 
+<ul>
+<li><p>Then the upper layers are replaced by a classifier for the second task</p>
+<ul class="simple">
+<li><p>For example classifying hymenoptera (wasps, bees, etc.)</p></li>
+</ul>
+</li>
+<li><p>This classifier for the second task gets trained</p>
+<ul class="simple">
+<li><p>Usually significantly less data is needed for this task</p></li>
+</ul>
+  </div>
+  <div class="images">
+      <img src="../images/image_modelling/transfer_learning2.png">
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="where-do-we-get-pre-trained-models">
+<h3>Where do we get pre-trained models?<a class="headerlink" href="#where-do-we-get-pre-trained-models" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Famous ML frameworks offer pre-trained models</p>
+<ul>
+<li><p><a class="reference external" href="https://www.tensorflow.org/hub">TensorFlow Hub</a></p></li>
+<li><p><a class="reference external" href="https://keras.io/api/applications/#:~:text=Keras%20Applications%20are%20deep%20learning,They%20are%20stored%20at%20~%2F.">Keras Applications</a></p></li>
+<li><p><a class="reference external" href="https://pytorch.org/vision/stable/models.html">PyTorch Torchvision Models</a></p></li>
+</ul>
+</li>
+<li><p>GitHub:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/Cadene/pretrained-models.pytorch">Pretrained Models for PyTorch</a></p></li>
+<li><p><a class="reference external" href="https://github.com/onnx/models">ONNX</a></p></li>
+<li><p><a class="reference external" href="https://github.com/deepset-ai/FARM">Deepset.ai</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://awesomeopensource.com/projects/pretrained-models">Awesome Opensource List</a></p></li>
+</ul>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<section id="id7">
+<h3>Image Modeling<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Image data is <strong>unstructured</strong> and shows regularly <strong>transformations</strong></p>
+<ul>
+<li><p>Locality, stationarity, compositionality principle</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Image models are able to offer <strong>translation invariance</strong></p></li>
+</ul>
+<ul class="simple">
+<li><p>Special layers in image models are:</p>
+<ul>
+<li><p><strong>Convolutional layers</strong>: Extract features by filters</p></li>
+<li><p><strong>Pooling layers</strong>: Strengthen filter signals and make the net translation invariant</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Data <strong>augmentation</strong> helps to increase the data size and robustness of the net</p></li>
+</ul>
+<ul class="simple">
+<li><p>Transfer learning enables to use <strong>pre-trained models</strong> from one task for a second one</p></li>
+</ul>
+</section>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Géron, A. (2019), Chapter 14: Deep Computer Vision Using Convolutional Neural Networks</p></li>
+<li><p>Li, F.-F. and Johnson, J. (2017), Convolutional Neural Networks for Visual Recognition (much broader, lectures 1-5)</p></li>
+</ul>
+<p>Image Feature Engineering:</p>
+<ul class="simple">
+<li><p>Dalal, N. and Triggs, B. (2005), “Histograms of Oriented Gradients for Human Detection”, CVPR 2005. IEEE Computer Society Conference on. IEEE, 2005. S. 886–893</p></li>
+<li><p>Lowe, D. (1999), “Object Recognition from Local Scale-Invariant Features”, ICCV ‘99 Proceedings of the International Conference on Computer Vision. Band 2, Seiten 1150–1157.</p></li>
+<li><p>Lowe, D. (2004), “Distinctive Image Features from Scale-Invariant Keypoints”, International Journal of Computer Vision. Band 60, Nr. 2, Seiten 91–110, 2004</p></li>
+<li><p>Bay, H. et al. (2006), “SURF: Speeded Up Robust Features”, European Conference for Computer Vision 2006</p></li>
+</ul>
+<p>Drawbacks of deep neural networks:</p>
+<ul class="simple">
+<li><p>Hornik (1991), “Approximation Capabilities of Multilayer Feedforward Networks”</p></li>
+<li><p>Csáji (2001), “Approximation with Artificial Neural Networks”</p></li>
+</ul>
+<p>ImageNet Competition:</p>
+<ul class="simple">
+<li><p>Perronin and Sanchez (2011), “Compressed Fisher Vectors for LSVRC”</p></li>
+<li><p>Krizhevsky et al. (2012), “ImageNet Classification with Deep Convolutional Neural Networks”</p></li>
+</ul>
+<p>Strive:</p>
+<ul class="simple">
+<li><p>Springenberg et al. (2015), “Striving for Simplicity: The All Convolutional Net”</p></li>
+<li><p>Kong and Lucey (2017), “Take it in your stride: Do we need striding in CNNs?”</p></li>
+</ul>
+<p>Data Augmentation:</p>
+<ul class="simple">
+<li><p>LeCun et al. (1998), “Gradient-Based Learning Applied to Document Recognition”</p></li>
+<li><p>Krizhevsky et al. (2012), “ImageNet Classification with Deep Convolutional Neural Networks”</p></li>
+<li><p>Wang, J. and Perez, L. (2017), “The Effectiveness of Data Augmentation in Image Classification Using Deep Learning”</p></li>
+</ul>
+<p>Transfer Learning:</p>
+<ul class="simple">
+<li><p>Caruana, R. (1995), “Learning Many Different Tasks at the Same Time with Backpropagation”</p></li>
+<li><p>Yosinski, J. et al. (2014), “How transferable are features in deep neural networks?”</p></li>
+<li><p>Weiss, K. et al. (2016), “A survey of transfer learning”</p></li>
+</ul>
+<p>Feature Extraction:</p>
+<ul class="simple">
+<li><p>Garcia, D. et al. (2018), “On the Behavior of Convolutional Nets for Feature Extraction”</p></li>
+<li><p>Zeiler, M.D. and Fergus, R. (2014), “Visualizing and Understanding Convolutional Networks”</p></li>
+<li><p>Yosinski, J. et al. (2015), “Understanding Neural Networks Through Deep Visualization”</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="aipm_sessions/ANN_AIPM.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Artificial Neural Networks</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="20_Capstone_Phase.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Capstone Phase</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#warm-up">Warm-up 🌶️</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-data">Image Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-image-data-look-like">How does image data look like?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unstructured-data-and-locality">Unstructured data and locality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-of-locality">Principle of locality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-and-unstructured-data">Structured and unstructured data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Structured and unstructured data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Structured and unstructured data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-ideal-feature-information">What is ideal feature information?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-feature-engineering">Image feature engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ideal-feature-information">The ideal feature information</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-models-for-image-modeling">Linear models for image modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-prepare-the-image-data-for-a-linear-model">How to prepare the image data for a linear model?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks-of-linear-models">Drawbacks of linear models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-neural-networks-for-image-modeling">Deep Neural Networks for image modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-neural-networks-perform-better-on-image-data">Deep Neural Networks perform better on image data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks-of-deep-neural-networks-in-image-modeling">Drawbacks of Deep Neural Networks in image modeling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imagenet-competition">ImageNet Competition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-layers">Convolutional layers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Introduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution-as-a-grouping-of-information">Convolution as a grouping of information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-a-convolution-layer-work">How does a convolution layer work?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edge-detection">Edge detection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#major-idea-of-a-convolutional-layer">Major idea of a convolutional layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduction-of-dimensions">Reduction of dimensions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-we-build-deep-convolutional-networks">How can we build deep convolutional networks?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-great-strides">Making great strides</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-during-training">What happens during training?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stationarity-principle">Stationarity principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-through-the-channels">Working through the channels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Working through the channels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-sharing-is-caring">Parameter sharing is caring</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling-layers">Pooling layers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-pooling">What is pooling?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-a-pooling-layer-work">How does a Pooling layer work?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-pooling">Why pooling?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Why pooling?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compositionality-principle">Compositionality principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-network">Building the network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Feature Extraction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation-and-transfer-learning">Data augmentation and transfer learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-with-convolutional-neural-networks">Challenges with convolutional neural networks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation">Data augmentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning">Transfer learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-transfer-learning-work">How does transfer learning work?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-do-we-get-pre-trained-models">Where do we get pre-trained models?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Image Modeling</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

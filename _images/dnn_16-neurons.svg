@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 443 142" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <g id="Artboard1" transform="matrix(1,0,0,1,-466.818,-182.582)">
+        <rect x="466.818" y="182.582" width="442.125" height="141.944" style="fill:none;"/>
+        <g transform="matrix(0.575944,0,0,0.575944,208.056,45.4407)">
+            <path d="M544,273L657,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,273L657,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,273L657,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,273L657,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,318L657,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,318L657,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,318L657,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,318L657,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,363L657,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,363L657,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,363L657,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,363L657,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,408L657,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,408L657,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,408L657,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M544,408L657,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,273L770,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,318L770,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,363L770,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,408L770,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,273L770,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,273L770,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,273L770,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,318L770,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,318L770,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,318L770,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,363L770,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,363L770,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,363L770,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,408L770,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,408L770,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M657,408L770,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,273L883,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,273L883,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,273L883,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,273L883,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,318L883,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,318L883,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,318L883,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,318L883,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,363L883,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,363L883,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,363L883,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,363L883,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,408L883,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,408L883,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,408L883,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M770,408L883,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,273L996,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,273L996,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,273L996,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,273L996,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,318L996,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,318L996,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,318L996,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,318L996,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,363L996,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,363L996,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,363L996,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,363L996,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,408L996,273" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,408L996,318" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,408L996,363" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M883,408L996,408" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M996,273L1109,340.5" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M996,318L1109,340.5" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M996,363L1109,340.5" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <path d="M996,408L1109,340.5" style="fill:none;fill-rule:nonzero;stroke:rgb(80,80,80);stroke-opacity:0.81;stroke-width:0.43px;"/>
+            <circle id="_0_0" serif:id="0_0" cx="544" cy="273" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_0_1" serif:id="0_1" cx="544" cy="318" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_0_2" serif:id="0_2" cx="544" cy="363" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_0_3" serif:id="0_3" cx="544" cy="408" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_1_0" serif:id="1_0" cx="657" cy="273" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_1_1" serif:id="1_1" cx="657" cy="318" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_1_2" serif:id="1_2" cx="657" cy="363" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_1_3" serif:id="1_3" cx="657" cy="408" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_2_0" serif:id="2_0" cx="770" cy="273" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,509,457.2)">
+                <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;">Input Layer</text>
+                <text x="63.375px" y="0px" style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;font-size:12px;">∈</text>
+                <text x="76.165px" y="0px" style="font-family:'Menlo-Regular', 'Menlo', monospace;font-size:12px;">ℝ</text>
+                <text x="83.39px" y="0px" style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;font-size:12px;">⁴</text>
+            </g>
+            <g transform="matrix(1,0,0,1,622,457.2)">
+                <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;">Hidden Layer</text>
+                <text x="74.713px" y="0px" style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;font-size:12px;">∈</text>
+                <text x="87.503px" y="0px" style="font-family:'Menlo-Regular', 'Menlo', monospace;font-size:12px;">ℝ</text>
+                <text x="94.727px" y="0px" style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;font-size:12px;">⁴</text>
+            </g>
+            <g transform="matrix(1,0,0,1,735,457.2)">
+                <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;">Hidden Layer</text>
+                <text x="74.713px" y="0px" style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;font-size:12px;">∈</text>
+                <text x="87.503px" y="0px" style="font-family:'Menlo-Regular', 'Menlo', monospace;font-size:12px;">ℝ</text>
+                <text x="94.727px" y="0px" style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;font-size:12px;">⁴</text>
+            </g>
+            <circle id="_2_1" serif:id="2_1" cx="770" cy="318" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_2_2" serif:id="2_2" cx="770" cy="363" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_2_3" serif:id="2_3" cx="770" cy="408" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_3_0" serif:id="3_0" cx="883" cy="273" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_3_1" serif:id="3_1" cx="883" cy="318" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_3_2" serif:id="3_2" cx="883" cy="363" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_3_3" serif:id="3_3" cx="883" cy="408" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,848,457.2)">
+                <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;">Hidden Layer</text>
+                <text x="74.713px" y="0px" style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;font-size:12px;">∈</text>
+                <text x="87.503px" y="0px" style="font-family:'Menlo-Regular', 'Menlo', monospace;font-size:12px;">ℝ</text>
+                <text x="94.727px" y="0px" style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;font-size:12px;">⁴</text>
+            </g>
+            <circle id="_4_0" serif:id="4_0" cx="996" cy="273" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_4_1" serif:id="4_1" cx="996" cy="318" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_4_2" serif:id="4_2" cx="996" cy="363" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <circle id="_4_3" serif:id="4_3" cx="996" cy="408" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,961,457.2)">
+                <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;">Hidden Layer</text>
+                <text x="74.713px" y="0px" style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;font-size:12px;">∈</text>
+                <text x="87.503px" y="0px" style="font-family:'Menlo-Regular', 'Menlo', monospace;font-size:12px;">ℝ</text>
+                <text x="94.727px" y="0px" style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;font-size:12px;">⁴</text>
+            </g>
+            <circle id="_5_0" serif:id="5_0" cx="1109" cy="340.5" r="12.5" style="fill:white;stroke:rgb(51,51,51);stroke-width:1px;"/>
+            <g transform="matrix(1,0,0,1,1074,457.2)">
+                <text x="0px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;">Output Layer</text>
+                <text x="72.709px" y="0px" style="font-family:'PingFangSC-Regular', 'PingFang SC', sans-serif;font-size:12px;">∈</text>
+                <text x="85.499px" y="0px" style="font-family:'Menlo-Regular', 'Menlo', monospace;font-size:12px;">ℝ</text>
+                <text x="92.724px" y="0px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:12px;">¹</text>
+            </g>
+        </g>
+    </g>
+</svg>

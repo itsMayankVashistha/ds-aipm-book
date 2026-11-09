@@ -1,0 +1,933 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>KNN &amp; Distance Metrics &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/13_KNN_Distance_Metrics';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Testing" href="14_Testing.html" />
+    <link rel="prev" title="Logistic Regression" href="aipm_sessions/Logistic_Regression_AIPM.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>KNN & Distance Metrics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-on-general-concepts">Recap on general concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-the-difference-between-supervised-and-unsupervised-learning">What’s the difference between supervised and unsupervised learning?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-two-different-tasks-that-can-be-solved-with-supervised-learning">What are the two different tasks that can be solved with supervised learning?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-knn-algorithm">The KNN Algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-knn">Overview of KNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-using-knn">Why using KNN?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-would-you-classify-the-question-mark">How would you classify the question mark?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">How would you classify the question mark?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">How would you classify the question mark?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-measure-close-proximity">How to measure “close proximity”?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#knn">KNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-train-knn">How to train KNN?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-predict-for-new-instances">How to predict for new instances?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">How to predict for new instances?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-assumptions-of-knn">What are the assumptions of KNN?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-influences-the-performance-of-knn">What influences the performance of KNN?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-hyperparameters-of-knn">What are hyperparameters of KNN?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#influence-of-k">Influence of K</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Influence of K</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Influence of K</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Influence of K</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Influence of K</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-determine-the-best-value-for-k">How do we determine the best value for K?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-metrics">Distance Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-distance-metrics-exist">What Distance Metrics exist?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minkowski-distance-mostly-used-cases">Minkowski Distance, mostly used cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-distance">Cosine Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-which-distance-metric">When to use which Distance Metric?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-distance-metrics">Applications of Distance Metrics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="knn-distance-metrics">
+<h1>KNN &amp; Distance Metrics<a class="headerlink" href="#knn-distance-metrics" title="Link to this heading">#</a></h1>
+<section id="recap-on-general-concepts">
+<h2>Recap on general concepts<a class="headerlink" href="#recap-on-general-concepts" title="Link to this heading">#</a></h2>
+<section id="whats-the-difference-between-supervised-and-unsupervised-learning">
+<h3>What’s the difference between supervised and unsupervised learning?<a class="headerlink" href="#whats-the-difference-between-supervised-and-unsupervised-learning" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/knn_distance_metrics/img_p4_2.png">
+    Supervised Learning vs. Unsupervised Learning
+</center></section>
+<section id="what-are-the-two-different-tasks-that-can-be-solved-with-supervised-learning">
+<h3>What are the two different tasks that can be solved with supervised learning?<a class="headerlink" href="#what-are-the-two-different-tasks-that-can-be-solved-with-supervised-learning" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="images">  
+    <img src="../images/knn_distance_metrics/img_p6_2.png" width="400">
+  </div>
+  <div class="images">
+    <img src="../images/knn_distance_metrics/img_p6_3.png" width="350">
+  </div>
+</div></section>
+</section>
+<section id="the-knn-algorithm">
+<h2>The KNN Algorithm<a class="headerlink" href="#the-knn-algorithm" title="Link to this heading">#</a></h2>
+<section id="overview-of-knn">
+<h3>Overview of KNN<a class="headerlink" href="#overview-of-knn" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text_70">
+<ul class="simple">
+<li><p>KNN is a supervised learning algorithm</p></li>
+<li><p>used to solve both regression and classification problems</p></li>
+<li><p>KNN assumes that similar things exist in close proximity</p></li>
+</ul>
+<p>→ “Birds of a feather flock together”</p>
+  </div>
+  <div class="images_30">
+    <img src="../images/knn_distance_metrics/img_p8_1.png" width="450">
+  </div>
+</div></section>
+<section id="why-using-knn">
+<h3>Why using KNN?<a class="headerlink" href="#why-using-knn" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Despite its simplicity, it was often successful for both classification and regression problems:</p>
+<ul>
+<li><p>handwritten digits</p></li>
+<li><p>satellite image scenes</p></li>
+</ul>
+</li>
+<li><p>it’s good for situations where decision boundary is very irregular</p></li>
+</ul>
+</section>
+<section id="how-would-you-classify-the-question-mark">
+<h3>How would you classify the question mark?<a class="headerlink" href="#how-would-you-classify-the-question-mark" title="Link to this heading">#</a></h3>
+<center>
+<img src="../images/knn_distance_metrics/caterpillar_k.png" width="800">
+</center></section>
+<section id="id1">
+<h3>How would you classify the question mark?<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<center>
+<img src="../images/knn_distance_metrics/caterpillar_k1.png" width="800">
+</center></section>
+<section id="id2">
+<h3>How would you classify the question mark?<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<center>
+<img src="../images/knn_distance_metrics/caterpillar_k15.png" width="800">
+</center></section>
+<section id="how-to-measure-close-proximity">
+<h3>How to measure “close proximity”?<a class="headerlink" href="#how-to-measure-close-proximity" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>KNN is based on the idea of <strong>“similarity”</strong></p></li>
+<li><p>mathematically speaking similarity can be calculated via <strong>distances</strong></p></li>
+<li><p>simplest distance would be bee line distance → Euclidean Distance</p></li>
+</ul>
+<div class="alert alert-block alert-warning">
+Which features will cause problems for calculating distances?
+What could you do against it?
+</div></section>
+<section id="knn">
+<h3>KNN<a class="headerlink" href="#knn" title="Link to this heading">#</a></h3>
+<p>Input:</p>
+<ul class="simple">
+<li><p>data with features that are comparable (i.e. can calculate a distance) &amp; <strong>target variable</strong></p></li>
+</ul>
+<p>How KNN works:</p>
+<ul class="simple">
+<li><p>loop over the observations:</p></li>
+<li><p>calculate distance to all (brute force) or some (optimized) data points</p></li>
+<li><p><strong>sort</strong> them and pick K “closest”</p></li>
+</ul>
+<div class="alert alert-block alert-warning">
+What would be the output for Regression and Classification?
+</div>
+<p>Output:</p>
+<ul class="simple">
+<li><p>Regression: the <strong>mean</strong> of the neighbors</p></li>
+<li><p>Classification: the <strong>mode</strong> of the neighbors</p></li>
+</ul>
+</section>
+<section id="how-to-train-knn">
+<h3>How to train KNN?<a class="headerlink" href="#how-to-train-knn" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p>What’s happening when we call <code class="docutils literal notranslate"><span class="pre">knn.fit()</span></code>:</p>
+<ul class="simple">
+<li><p>training phase consists of “remembering” / storing all data points</p></li>
+</ul>
+<p>→ training time is very short</p>
+  </div>
+  <div class="images">
+    <img src="../images/knn_distance_metrics/img_p14_1.png" width="450">
+  </div>
+</div>
+</section>
+<section id="how-to-predict-for-new-instances">
+<h3>How to predict for new instances?<a class="headerlink" href="#how-to-predict-for-new-instances" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul class="simple">
+<li><p><b>calculate distance</b> between new observations and every
+training data point</p></li>
+<li><p><b>K closest points</b> are determined</p></li>
+<li><p>test data are assigned to the class of their K nearest
+neighbors according to <b>majority voting</b></p></li>
+</ul>
+<p>→ prediction time can be very high</p>
+  </div>
+  <div class="images">
+    <img src="../images/knn_distance_metrics/img_p15_1.png" width="400">
+  </div>
+</div>
+<div class="alert alert-block alert-warning">
+<p>What would you predict for k = 3 and k =6 ?</p>
+</div>
+</section>
+<section id="id3">
+<h3>How to predict for new instances?<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p><b>k = 3:</b></p>
+<p>1 neighbor is orange (p=⅓)</p>
+<p>2 neighbors are blue (p=⅔)</p>
+<p>→ green point belongs to <b>class B</b></p>
+<p><b>k = 6:</b></p>
+<p>4 neighbors are orange ( p=⅔)</p>
+<p>2 neighbors are blue (p=⅓)</p>
+<p>→ green point belongs to <b>class A</b></p>
+  </div>
+  <div class="images">
+    <img src="../images/knn_distance_metrics/img_p15_1.png" width="400">
+  </div>
+</div>
+<p>Notes:<br />
+Usually at least one clever student asks what happens in case of a tie.</p>
+<p>When there is a tie in k-Nearest Neighbors (KNN) classification, such as when k=3 and there are 3 different classes represented by the nearest neighbors, several tie-breaking methods can be employed. (Uneven k’s only always work for binary classification problems).</p>
+<ul class="simple">
+<li><p>In binary classification problems use an uneven number for k.</p></li>
+<li><p>Random selection: One of the tied classes is chosen randomly.</p></li>
+<li><p>Weighted voting: Instead of simple majority voting, the algorithm can use weighted KNN. In this approach, the distances of the neighbors are considered, giving more weight to closer neighbors.</p></li>
+<li><p>Reduce k: The value of k can be decreased until the tie is broken. This method always works, as a tie is impossible when k=1.</p></li>
+<li><p>Prior probability: The class with the higher prior probability (most frequent class overall in the training set) can be selected.</p></li>
+<li><p>Nearest neighbor: The class of the single nearest neighbor among the tied groups can be used.</p></li>
+<li><p>Smallest index: The class with the smallest index among tied groups can be chosen.</p></li>
+<li><p>Include ties: Some implementations allow including all neighbors with distances equal to the kth smallest distance, potentially breaking the tie by considering more neighbors.</p></li>
+</ul>
+</section>
+<section id="what-are-the-assumptions-of-knn">
+<h3>What are the assumptions of KNN?<a class="headerlink" href="#what-are-the-assumptions-of-knn" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul class="simple">
+<li><p>similar observations belong to the same class / have a
+similar outcome</p></li>
+<li><p>no assumption is made on data distribution / mapping
+function</p></li>
+</ul>
+<p>→ KNN is a <b>non-parametric algorithm</b></p>
+  </div>
+  <div class="images">
+    <img src="../images/knn_distance_metrics/img_p17_1.png" width="400">
+  </div>
+</div>
+<div class="alert alert-block alert-warning">
+<p>What are some assumptions of linear regression?</p>
+</div>
+</section>
+</section>
+<section id="hyperparameters">
+<h2>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Link to this heading">#</a></h2>
+<section id="what-influences-the-performance-of-knn">
+<h3>What influences the performance of KNN?<a class="headerlink" href="#what-influences-the-performance-of-knn" title="Link to this heading">#</a></h3>
+</section>
+<section id="what-are-hyperparameters-of-knn">
+<h3>What are hyperparameters of KNN?<a class="headerlink" href="#what-are-hyperparameters-of-knn" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>The <strong>number of neighbors (K)</strong> which is taken to classify.</p></li>
+<li><p>The <strong>distance metric</strong> used to determine the nearest neighbors.</p></li>
+<li><p>The <strong>weight</strong> applied to neighbours during prediction phase.</p></li>
+</ol>
+</section>
+<section id="influence-of-k">
+<h3>Influence of K<a class="headerlink" href="#influence-of-k" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p><strong>dashed line</strong>: decision boundary of data generating process</p>
+</div>
+<div class="images">
+  <img src="../images/knn_distance_metrics/img_p20a_1.png" width="400">
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="id4">
+<h3>Influence of K<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p><strong>dashed line</strong>: decision boundary of data generating process</p></li>
+<li><p><strong>circles</strong>: training data</p>
+</div>
+<div class="images">
+  <img src="../images/knn_distance_metrics/img_p20a_2.png" width="400">
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="id5">
+<h3>Influence of K<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p><strong>dashed line</strong>: decision boundary of data generating process</p></li>
+<li><p><strong>circles</strong>: training data</p></li>
+<li><p><strong>solid line</strong>: model</p></li>
+<li><p><strong>grid points</strong>: indicating which class is predicted in this area</p>
+</div>
+<div class="images">
+  <img src="../images/knn_distance_metrics/img_p20_1.png" width="400">
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="id6">
+<h3>Influence of K<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>How would you interpret these models?</p>
+<center>
+    <img src="../images/knn_distance_metrics/k_1_10_100.png">
+</center></section>
+<section id="id7">
+<h3>Influence of K<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="column">
+<p>K=1 → overfitting</p>
+  </div>
+  <div class="column">
+<p>K=10 → good fit</p>
+  </div>
+  <div class="column">
+<p>K=100 → underfitting</p>
+  </div>
+</div>  
+<center>
+    <img src="../images/knn_distance_metrics/k_1_10_100.png">
+</center></section>
+<section id="how-do-we-determine-the-best-value-for-k">
+<h3>How do we determine the best value for K?<a class="headerlink" href="#how-do-we-determine-the-best-value-for-k" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul class="simple">
+<li><p>test different numbers for K (e.g. with GridSearch)</p></li>
+</ul>
+<p>→ take K with <strong>lowest error on validation data set</strong></p>
+  </div>
+  <div class="images">
+    <img src="../images/knn_distance_metrics/img_p20_1.png" width="400">
+  </div>
+</div></section>
+</section>
+<section id="distance-metrics">
+<h2>Distance Metrics<a class="headerlink" href="#distance-metrics" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">
+<p>In this example the <b>Euclidean Distance</b> is used.</p>
+<p>The Euclidean distance between two points (<span class="math notranslate nohighlight">\(a_1\)</span> and <span class="math notranslate nohighlight">\(a_2\)</span> ) is the length of the path connecting them.</p>
+<p><span class="math notranslate nohighlight">\(\sqrt{\Sigma_{i=1}^{n}(a_{1,i} - a_{2,i})^2}\)</span></p>
+  </div>
+  <div class="images">
+    <img src="../images/knn_distance_metrics/img_p15_1.png" width="400">
+  </div>
+</div>
+<div class="alert alert-block alert-info">
+n = number of features
+</div><section id="what-distance-metrics-exist">
+<h3>What Distance Metrics exist?<a class="headerlink" href="#what-distance-metrics-exist" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<p><font color ="green">Euclidean Distance</font> <span class="math notranslate nohighlight">\(\sqrt{\Sigma_{i=1}^{n}(a_{1,i} - a_{2,i})^2}\)</span></p>
+<p><font color ="red">Manhattan Distance</font> <span class="math notranslate nohighlight">\(\Sigma_{i=1}^{n}|a_{1,i} - a_{2,i}|\)</span></p>
+<p>sum of the absolute differences between the   x-coordinates and y-coordinates</p>
+<p>(Minkowski Distance <span class="math notranslate nohighlight">\(\sqrt[p]{\Sigma_{i=1}^{n}|a_{1,i} - a_{2,i}|^p}\)</span>)</p>
+  </div>
+  <div class="images">
+    <img src="../images/knn_distance_metrics/img_p26_2.png" width="400">
+  </div>
+</div></section>
+<section id="minkowski-distance-mostly-used-cases">
+<h3>Minkowski Distance, mostly used cases<a class="headerlink" href="#minkowski-distance-mostly-used-cases" title="Link to this heading">#</a></h3>
+<p><strong>Minkowski Distance:</strong>     <span class="math notranslate nohighlight">\( \sqrt[p]{\Sigma_{i=1}^{n}|a_{1,i} - a_{2,i}|^p}\)</span>    generalized Distance Metric</p>
+<p><strong>Minkowski Distance with p=1</strong>:     <span class="math notranslate nohighlight">\( \Sigma_{i=1}^{n}|a_{1,i} - a_{2,i}|\)</span>     <font color ="red">Manhattan Distance</font></p>
+<p><strong>Minkowski Distance with p=2</strong>:    
+<span class="math notranslate nohighlight">\( \sqrt{\Sigma_{i=1}^{n}(a_{1,i} - a_{2,i})^2}\)</span>   <font color ="green">Euclidean Distance</font></p>
+<p><strong>Minkowski Distance with p=∞</strong>:     
+<span class="math notranslate nohighlight">\( \sqrt[∞]{\Sigma_{i=1}^{n}|a_{1,i} - a_{2,i}|^∞}\)</span>   Chebyshev Distance</p>
+</section>
+<section id="cosine-distance">
+<h3>Cosine Distance<a class="headerlink" href="#cosine-distance" title="Link to this heading">#</a></h3>
+<p>COSINE SIMILARITY: the measure of similarity between two non-zero vectors defined in an inner product space. Cosine similarity is the cosine of the angle between the vectors.</p>
+<p><strong>Cosine Similarity</strong>:     
+<span class="math notranslate nohighlight">\( S_c(\vec A,\vec B)= cos(\Theta)= { \vec A \cdot \vec B} \div {|\vec A| |\vec B|} \)</span>   </p>
+<p><strong>COSINE DISTANCE</strong> =    
+<span class="math notranslate nohighlight">\( 1 -  S_c(\vec A,\vec B) \)</span></p>
+  </div>
+  <div class="images">
+    <img src="../images/knn_distance_metrics/cosine_distance.png" width="400">
+  </div>
+</div>
+<p>source: <a class="reference external" href="https://pub.aimind.so/understanding-cosine-similarity-and-cosine-distance-in-depth-cc91eac3ef2">https://pub.aimind.so/understanding-cosine-similarity-and-cosine-distance-in-depth-cc91eac3ef2</a></p>
+</section>
+<section id="when-to-use-which-distance-metric">
+<h3>When to use which Distance Metric?<a class="headerlink" href="#when-to-use-which-distance-metric" title="Link to this heading">#</a></h3>
+<p><strong>Euclidean Distance</strong> (Minkowski p=2 / L2-norm): most commonly used; when data is dense or
+continuous, this is the best proximity measure.</p>
+<p><strong>Manhattan Distance</strong> (Minkowski p=1 / L1-norm, Taxicab or Cityblock distance):
+Better for sparse data (high dimensional data).</p>
+<p><strong>→ Whenever Distance Metrics are used, keep in mind to scale the data</strong></p>
+</section>
+<section id="applications-of-distance-metrics">
+<h3>Applications of Distance Metrics<a class="headerlink" href="#applications-of-distance-metrics" title="Link to this heading">#</a></h3>
+<p></p>
+<ul class="simple">
+<li><p>KNN</p></li>
+<li><p>K-means clustering</p></li>
+<li><p>NLP</p></li>
+</ul>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p></p>
+<div class="group">
+  <div class="text">
+- Hastie, T., Hastie, T., Tibshirani, R., & Friedman, J. H.
+(2001). The elements of statistical learning: Data
+mining, inference, and prediction. New York:
+Springer.
+  </div>
+  <div class="images">
+    <img src="../images/knn_distance_metrics/img_p30_1.png" width="400">
+  </div>
+</div></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="aipm_sessions/Logistic_Regression_AIPM.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Logistic Regression</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="14_Testing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Testing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-on-general-concepts">Recap on general concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-the-difference-between-supervised-and-unsupervised-learning">What’s the difference between supervised and unsupervised learning?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-two-different-tasks-that-can-be-solved-with-supervised-learning">What are the two different tasks that can be solved with supervised learning?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-knn-algorithm">The KNN Algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-knn">Overview of KNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-using-knn">Why using KNN?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-would-you-classify-the-question-mark">How would you classify the question mark?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">How would you classify the question mark?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">How would you classify the question mark?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-measure-close-proximity">How to measure “close proximity”?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#knn">KNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-train-knn">How to train KNN?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-predict-for-new-instances">How to predict for new instances?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">How to predict for new instances?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-assumptions-of-knn">What are the assumptions of KNN?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-influences-the-performance-of-knn">What influences the performance of KNN?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-hyperparameters-of-knn">What are hyperparameters of KNN?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#influence-of-k">Influence of K</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Influence of K</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Influence of K</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Influence of K</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Influence of K</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-determine-the-best-value-for-k">How do we determine the best value for K?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-metrics">Distance Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-distance-metrics-exist">What Distance Metrics exist?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minkowski-distance-mostly-used-cases">Minkowski Distance, mostly used cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-distance">Cosine Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-which-distance-metric">When to use which Distance Metric?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-distance-metrics">Applications of Distance Metrics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

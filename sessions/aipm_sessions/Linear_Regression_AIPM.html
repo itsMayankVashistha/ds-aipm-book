@@ -1,0 +1,1031 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Linear Regression AIPM &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/aipm_sessions/Linear_Regression_AIPM';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bias Variance Tradeoff" href="../09.1_Bias_Variance_Tradeoff.html" />
+    <link rel="prev" title="Linear Regression" href="../08_Linear_Regression.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear Regression AIPM</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-linear-regression-visualizations">Additional linear-regression visualizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-origin-regression-to-the-mean">Historical Origin: Regression to the Mean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-pms-should-care">Why PMs should care</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-of-regression-in-product-work">Goal of regression in product work</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-could-a-pm-estimate-outcomes">How could a PM estimate outcomes?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-a-pm-facing-regression-rule">Example: a PM-facing regression rule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-model-for-pm-decisions">Building a model for PM decisions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-the-line-behind-the-model">Intuition: the line behind the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-core-idea">The core idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-equation">Linear Equation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-line-to-real-world-prediction">From line to real-world prediction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-in-pm-terms">Linear regression in PM terms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-more-than-2-points">What about more than 2 points?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-dataset">Example dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-candidate-models-which-one-should-a-pm-trust">Two candidate models: which one should a PM trust?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-know-which-line-is-better">How do we know which line is better?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals-prediction-errors">Residuals (prediction errors)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-example">Residual example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-we-score-a-line-least-squares">How we score a line: least squares</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-several-fitted-lines">Trying several fitted lines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#there-are-infinitely-many-possible-lines">There are infinitely many possible lines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-how-is-the-model-fitted">So how is the model fitted?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-residual-sanity-checks">Quick residual sanity checks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-performance">Model performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-first-model-second">Baseline first, model second</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-mean-vs-fitted-regression">Baseline Mean vs Fitted Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-squares-decomposition-variance-analysis">Sum of Squares Decomposition (Variance Analysis)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explained-vs-unexplained-variation">Explained vs unexplained variation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rmse-average-prediction-miss">RMSE (average prediction miss)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-metric-answers-which-pm-question">Which metric answers which PM question?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metric-comparison-for-two-candidate-lines">Metric Comparison for Two Candidate Lines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pm-playbook">PM playbook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pm-checklist-when-linear-regression-is-a-good-choice">PM checklist: when linear regression is a good choice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-more-than-one-feature">What about more than one feature?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression-concept">Multiple linear regression (concept)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-in-practice">Fitting in practice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-feature-models-evaluating-usefulness">Multiple-feature models: evaluating usefulness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pm-summary-what-to-remember">PM summary: what to remember</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-regression-aipm">
+<h1>Linear Regression AIPM<a class="headerlink" href="#linear-regression-aipm" title="Link to this heading">#</a></h1>
+<section id="additional-linear-regression-visualizations">
+<h2>Additional linear-regression visualizations<a class="headerlink" href="#additional-linear-regression-visualizations" title="Link to this heading">#</a></h2>
+</section>
+<section id="historical-origin-regression-to-the-mean">
+<h2>Historical Origin: Regression to the Mean<a class="headerlink" href="#historical-origin-regression-to-the-mean" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text">
+<ul class="simple">
+<li><p>In the 19th century, Francis Galton studied parent and child heights.</p></li>
+<li><p>He observed that extreme values tend to be followed by values closer to the average.</p></li>
+<li><p>He called this pattern <i>regression toward mediocrity</i> (now: regression to the mean).</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Why this matters:</b><br>
+The term <b>regression</b> originally came from this statistical phenomenon, before modern ML usage.
+</div>
+  </div>
+  <div class="images">
+    <img src="../../images/linear_regression/francis_galton_1850s.jpg" width="320"><br>
+    <small>Francis Galton (via Wikipedia/Wikimedia Commons)</small>
+  </div>
+</div>
+</section>
+<section id="why-pms-should-care">
+<h2>Why PMs should care<a class="headerlink" href="#why-pms-should-care" title="Link to this heading">#</a></h2>
+<p>How linear regression supports product planning, prioritization, and stakeholder communication.</p>
+<section id="goal-of-regression-in-product-work">
+<h3>Goal of regression in product work<a class="headerlink" href="#goal-of-regression-in-product-work" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p>You are planning next quarter for a B2B SaaS product.</p></li>
+<li><p>You want to estimate monthly trial signups from drivers like ad spend, seasonality, and sales outreach.</p></li>
+<li><p>You need a model that is simple enough to explain to stakeholders and useful enough for planning.</p>
+</div>
+<div class="images">
+  <img src="../../images/linear_regression/img_p3_1.png">
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="how-could-a-pm-estimate-outcomes">
+<h3>How could a PM estimate outcomes?<a class="headerlink" href="#how-could-a-pm-estimate-outcomes" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p>Option A: pick one similar historical month</p></li>
+<li><p>Quick, but brittle and hard to generalize</p>
+</div>
+<div class="text">
+</li>
+<li><p>Option B: learn a general relationship from many months</p></li>
+<li><p>More reliable for planning and scenario analysis</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="example-a-pm-facing-regression-rule">
+<h3>Example: a PM-facing regression rule<a class="headerlink" href="#example-a-pm-facing-regression-rule" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">predicted_monthly_signups</span> <span class="o">=</span>
+    <span class="mi">1200</span>                    <span class="c1"># baseline demand</span>
+  <span class="o">+</span> <span class="mf">4.5</span> <span class="o">*</span> <span class="n">ad_spend_k</span>        <span class="c1"># +4.5 signups per additional 1k EUR spend</span>
+  <span class="o">-</span> <span class="mi">35</span>  <span class="o">*</span> <span class="n">avg_response_hr</span>   <span class="c1"># slower responses hurt conversion</span>
+  <span class="o">+</span> <span class="mi">90</span>  <span class="o">*</span> <span class="n">campaign_flag</span>     <span class="c1"># effect of campaign period (0/1)</span>
+</pre></div>
+</div>
+<div class="alert alert-block alert-info">
+<b>PM interpretation:</b><br>
+Each coefficient is an estimated directional effect, assuming other variables stay constant.
+</div>
+</section>
+<section id="building-a-model-for-pm-decisions">
+<h3>Building a model for PM decisions<a class="headerlink" href="#building-a-model-for-pm-decisions" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+  <h4> Explanation (insight) </h4>
+  Use linear regression to understand drivers
+<p>-&gt; Which factors are most associated with movement in the KPI?</p>
+<p>-&gt; Which levers look worth testing further?</p>
+  <h4> Prediction (planning) </h4>
+  Use linear regression to forecast likely outcomes
+<p>-&gt; What should we expect next month?</p>
+<p>-&gt; What happens if we change one lever?</p>
+  </div>
+  <div class="images">
+    <img src="../../images/linear_regression/img_p6_1.png">
+  </div>
+</div>
+</section>
+</section>
+<section id="intuition-the-line-behind-the-model">
+<h2>Intuition: the line behind the model<a class="headerlink" href="#intuition-the-line-behind-the-model" title="Link to this heading">#</a></h2>
+<section id="the-core-idea">
+<h3>The core idea<a class="headerlink" href="#the-core-idea" title="Link to this heading">#</a></h3>
+<p>A linear model combines a baseline plus weighted feature effects.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/e130a8110f82de8ff6e27e7abab648e6ad09b3be7ec5c9284111dac22f42aefe.png" src="../../_images/e130a8110f82de8ff6e27e7abab648e6ad09b3be7ec5c9284111dac22f42aefe.png" />
+</div>
+</div>
+</section>
+<section id="linear-equation">
+<h3>Linear Equation<a class="headerlink" href="#linear-equation" title="Link to this heading">#</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/0523dad36b8ad3f6f9d5a5ffa004ae8756b5e79986ad5cffb85861d4a541ee1e.png" src="../../_images/0523dad36b8ad3f6f9d5a5ffa004ae8756b5e79986ad5cffb85861d4a541ee1e.png" />
+</div>
+</div>
+<div class="alert alert-block alert-info">
+<b>Key terms:</b>
+<ul>
+  <li>Intercept (<i>b</i><sub>0</sub>): predicted value of <i>y</i> when <i>x</i> = 0.</li>
+  <li>Slope (<i>b</i><sub>1</sub>): expected change in <i>y</i> when <i>x</i> increases by 1 unit.</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="from-line-to-real-world-prediction">
+<h2>From line to real-world prediction<a class="headerlink" href="#from-line-to-real-world-prediction" title="Link to this heading">#</a></h2>
+<section id="linear-regression-in-pm-terms">
+<h3>Linear regression in PM terms<a class="headerlink" href="#linear-regression-in-pm-terms" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Question 1: Which product or business signals move with our KPI?</p></li>
+<li><p>Question 2: Can we use those signals to make useful forecasts?</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Important:</b><br>
+Correlation and regression show association, not guaranteed causation. Use experiments or quasi-experiments for causal claims.
+</div>
+</section>
+<section id="what-about-more-than-2-points">
+<h3>What about more than 2 points?<a class="headerlink" href="#what-about-more-than-2-points" title="Link to this heading">#</a></h3>
+<center>
+<img src="../../images/linear_regression/img_p14_1.png" width=600>  
+</center></section>
+<section id="example-dataset">
+<h3>Example dataset<a class="headerlink" href="#example-dataset" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text">
+<ul>
+<li><p>week of bootcamp, <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p>coffee consumption, <span class="math notranslate nohighlight">\(y\)</span></p></li>
+<li><p>clear positive relationship</p>
+</div>
+<div class="images">
+</li>
+</ul>
+<p><span class="math notranslate nohighlight">\(y = b_{0}+b_{1}\cdot x+e\)</span></p>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> Find the line that predicts best on average</p>
+  </div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/1ab93dd3bea75dacfb3bcc93132627985fb2391ebb2422bb2ed37ad4bcec3f0d.png" src="../../_images/1ab93dd3bea75dacfb3bcc93132627985fb2391ebb2422bb2ed37ad4bcec3f0d.png" />
+</div>
+</div>
+</section>
+<section id="two-candidate-models-which-one-should-a-pm-trust">
+<h3>Two candidate models: which one should a PM trust?<a class="headerlink" href="#two-candidate-models-which-one-should-a-pm-trust" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Model A and Model B both look plausible visually.</p></li>
+<li><p>We need a quantitative criterion, not just intuition.</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b> <br>
+$\hat{y}$ (y-hat) is the model prediction, not an observed value.
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/fb5e12a053390e2e7b1d935d2b8d6945a4df4a819d4d38eb3aca477f27fe09fd.png" src="../../_images/fb5e12a053390e2e7b1d935d2b8d6945a4df4a819d4d38eb3aca477f27fe09fd.png" />
+</div>
+</div>
+</section>
+<section id="how-do-we-know-which-line-is-better">
+<h3>How do we know which line is better?<a class="headerlink" href="#how-do-we-know-which-line-is-better" title="Link to this heading">#</a></h3>
+</section>
+<section id="residuals-prediction-errors">
+<h3>Residuals (prediction errors)<a class="headerlink" href="#residuals-prediction-errors" title="Link to this heading">#</a></h3>
+<p>For each observation <span class="math notranslate nohighlight">\(i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[e_i = y_i - \hat{y}_i\]</div>
+<p>PM interpretation:</p>
+<ul class="simple">
+<li><p>Residual tells how wrong the model is for one point.</p></li>
+<li><p>Positive residual: model predicted too low.</p></li>
+<li><p>Negative residual: model predicted too high.</p></li>
+<li><p>Residual size indicates miss severity.</p></li>
+</ul>
+</section>
+<section id="residual-example">
+<h3>Residual example<a class="headerlink" href="#residual-example" title="Link to this heading">#</a></h3>
+<p>Suppose one observation has:</p>
+<ul class="simple">
+<li><p>Observed value: <span class="math notranslate nohighlight">\(y = 4.8\)</span></p></li>
+<li><p>Predicted value: <span class="math notranslate nohighlight">\(\hat{y} = 3.3\)</span></p></li>
+</ul>
+<p>Then:
+$<span class="math notranslate nohighlight">\(e = 4.8 - 3.3 = 1.5\)</span>$</p>
+<p>Meaning: the model underpredicted by 1.5 units.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/053debd311cbc8e433376c2b845719ade81467c8b08aee321dc9f151cb200620.png" src="../../_images/053debd311cbc8e433376c2b845719ade81467c8b08aee321dc9f151cb200620.png" />
+</div>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/a8d4349d722f58c52382b9585d02ec884fb713eb8c046349372bfefc4f3a4c4a.png" src="../../_images/a8d4349d722f58c52382b9585d02ec884fb713eb8c046349372bfefc4f3a4c4a.png" />
+</div>
+</div>
+</section>
+<section id="how-we-score-a-line-least-squares">
+<h3>How we score a line: least squares<a class="headerlink" href="#how-we-score-a-line-least-squares" title="Link to this heading">#</a></h3>
+<p>To compare candidate lines, we use one error score:</p>
+<div class="math notranslate nohighlight">
+\[ J = \sum_{i=1}^{n}(y_{i} - \hat{y}_{i})^{2} \]</div>
+<p>How to read this:</p>
+<ul class="simple">
+<li><p>Compute error at each point.</p></li>
+<li><p>Square errors (large misses hurt more).</p></li>
+<li><p>Sum them into one total score.</p></li>
+<li><p>Lower <span class="math notranslate nohighlight">\(J\)</span> means better fit on this data.</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/4ee21d41e0fc8035d63ea37ffc00b49e56a6140d52ad10dd2b4c40375e5f739d.png" src="../../_images/4ee21d41e0fc8035d63ea37ffc00b49e56a6140d52ad10dd2b4c40375e5f739d.png" />
+</div>
+</div>
+</section>
+<section id="trying-several-fitted-lines">
+<h3>Trying several fitted lines<a class="headerlink" href="#trying-several-fitted-lines" title="Link to this heading">#</a></h3>
+<p>By comparing the sum of squared residuals, we can decide which line fits better:</p>
+<div class="math notranslate nohighlight">
+\[ J(b_{0}, b_{1}) = \sum_{i=1}^{n} e_{i}^{2} = \sum_{i=1}^{n}(y_{i} - \hat{y}_{i})^{2} = \sum_{i=1}^{n}(y_{i} - (b_{0} + b_{1}x_{i}))^{2} \]</div>
+<p>Beginner view:</p>
+<ul class="simple">
+<li><p>Each candidate line gets one score: <span class="math notranslate nohighlight">\(J\)</span></p></li>
+<li><p>Lower score = line stays closer to points overall.</p></li>
+</ul>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/11a7429bd3252f4945572319208933c736c41db97d94e3ba6976deee62d090e6.png" src="../../_images/11a7429bd3252f4945572319208933c736c41db97d94e3ba6976deee62d090e6.png" />
+</div>
+</div>
+</section>
+<section id="there-are-infinitely-many-possible-lines">
+<h3>There are infinitely many possible lines<a class="headerlink" href="#there-are-infinitely-many-possible-lines" title="Link to this heading">#</a></h3>
+</section>
+<section id="so-how-is-the-model-fitted">
+<h3>So how is the model fitted?<a class="headerlink" href="#so-how-is-the-model-fitted" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>We search for coefficient values that minimize prediction error.</p></li>
+<li><p>In practice, libraries perform this optimization automatically.</p></li>
+<li><p>Your PM role is to validate assumptions, data quality, and decision usefulness.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ J = \sum (y_{i} - \hat{y}_{i})^{2} \]</div>
+<p>Plain language: pick the model with the lowest validated error, not the prettiest equation.</p>
+</section>
+<section id="quick-residual-sanity-checks">
+<h3>Quick residual sanity checks<a class="headerlink" href="#quick-residual-sanity-checks" title="Link to this heading">#</a></h3>
+<p>After fitting, check whether errors look random (not patterned).</p>
+<p>Practical checks:</p>
+<ul class="simple">
+<li><p>Residuals should be centered around zero.</p></li>
+<li><p>No obvious trend of residuals versus fitted values.</p></li>
+<li><p>Large structured errors suggest missing variables or wrong model form.</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>PM takeaway:</b> If residuals have structure, your model is missing part of the story.
+</div>
+</section>
+</section>
+<section id="model-performance">
+<h2>Model performance<a class="headerlink" href="#model-performance" title="Link to this heading">#</a></h2>
+<section id="baseline-first-model-second">
+<h3>Baseline first, model second<a class="headerlink" href="#baseline-first-model-second" title="Link to this heading">#</a></h3>
+<p>Before modeling, define a baseline prediction (often the mean).</p>
+<p>Then ask:</p>
+<ul class="simple">
+<li><p>Does regression materially beat this baseline?</p></li>
+<li><p>Is the improvement large enough to influence decisions?</p></li>
+</ul>
+</section>
+<section id="baseline-mean-vs-fitted-regression">
+<h3>Baseline Mean vs Fitted Regression<a class="headerlink" href="#baseline-mean-vs-fitted-regression" title="Link to this heading">#</a></h3>
+<p>A constant mean line is a simple baseline model.
+A fitted regression line should reduce error compared with this baseline.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/5c658ce36b6eb89196c2220e0e4b6403b1b658e6f3e38f94e2a80e5a2e6b6c2d.png" src="../../_images/5c658ce36b6eb89196c2220e0e4b6403b1b658e6f3e38f94e2a80e5a2e6b6c2d.png" />
+</div>
+</div>
+<div class="group">
+  <div class="images">
+    <img src="../../images/linear_regression/mean_variance.png" width="1000">
+  </div>
+</div></section>
+<section id="sum-of-squares-decomposition-variance-analysis">
+<h3>Sum of Squares Decomposition (Variance Analysis)<a class="headerlink" href="#sum-of-squares-decomposition-variance-analysis" title="Link to this heading">#</a></h3>
+<div class="images">
+  <img src="../../images/linear_regression/variance_analysis.png" width="1000"><br>
+</div>
+</section>
+<section id="explained-vs-unexplained-variation">
+<h3>Explained vs unexplained variation<a class="headerlink" href="#explained-vs-unexplained-variation" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[SST = SSE + SSR\]</div>
+<p>Interpretation:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(SST\)</span>: total variation in the target KPI</p></li>
+<li><p><span class="math notranslate nohighlight">\(SSE\)</span>: variation explained by the model</p></li>
+<li><p><span class="math notranslate nohighlight">\(SSR\)</span>: variation left unexplained</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>PM reading:</b> better models reduce unexplained variation, but some uncertainty always remains.
+</div></section>
+<section id="rmse-average-prediction-miss">
+<h3>RMSE (average prediction miss)<a class="headerlink" href="#rmse-average-prediction-miss" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[ RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-{\hat{y}}_{i}\right)^{2}} \]</div>
+<p>PM interpretation:</p>
+<ul class="simple">
+<li><p>RMSE is the typical size of prediction error.</p></li>
+<li><p>It uses the same unit as the KPI (easy to explain).</p></li>
+<li><p>Lower RMSE is better, but always compare to baseline and business tolerance.</p></li>
+</ul>
+</section>
+<section id="which-metric-answers-which-pm-question">
+<h3>Which metric answers which PM question?<a class="headerlink" href="#which-metric-answers-which-pm-question" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><b>RMSE</b>: “How wrong are we on average?”
+Use when planning risk and setting forecast confidence.</p></li>
+<li><p><b><span class="math notranslate nohighlight">\(R^2\)</span></b>: “How much KPI variation is captured?”
+Use for model explanatory power at a high level.</p></li>
+<li><p><b>Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></b>: “Did adding more features actually help?”
+Use to avoid complexity without real gain.</p></li>
+</ul>
+</section>
+<section id="metric-comparison-for-two-candidate-lines">
+<h3>Metric Comparison for Two Candidate Lines<a class="headerlink" href="#metric-comparison-for-two-candidate-lines" title="Link to this heading">#</a></h3>
+<p>Same dataset, two fitted lines.
+Use <b>RMSE</b> and <span class="math notranslate nohighlight">\(R^2\)</span> to compare their quality directly.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/7b69641eaf4649f16d70b92d2cf7b836d958d12f0a47903ef19486c28570b6a1.png" src="../../_images/7b69641eaf4649f16d70b92d2cf7b836d958d12f0a47903ef19486c28570b6a1.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="pm-playbook">
+<h2>PM playbook<a class="headerlink" href="#pm-playbook" title="Link to this heading">#</a></h2>
+<section id="pm-checklist-when-linear-regression-is-a-good-choice">
+<h3>PM checklist: when linear regression is a good choice<a class="headerlink" href="#pm-checklist-when-linear-regression-is-a-good-choice" title="Link to this heading">#</a></h3>
+<p>Use linear regression when:</p>
+<ul class="simple">
+<li><p>You predict a continuous KPI (e.g., revenue, demand, time, spend).</p></li>
+<li><p>You need interpretable driver effects for stakeholder discussions.</p></li>
+<li><p>Relationships are approximately linear in the relevant range.</p></li>
+<li><p>You need a fast baseline before trying more complex models.</p></li>
+</ul>
+<p>Be careful when:</p>
+<ul class="simple">
+<li><p>Outcome is categorical (use classification methods instead).</p></li>
+<li><p>Strong non-linearity dominates and linear approximation fails.</p></li>
+<li><p>Data has major missing drivers, leakage, or unstable definitions.</p></li>
+</ul>
+</section>
+<section id="what-about-more-than-one-feature">
+<h3>What about more than one feature?<a class="headerlink" href="#what-about-more-than-one-feature" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="multiple-linear-regression">
+<h2>Multiple Linear Regression<a class="headerlink" href="#multiple-linear-regression" title="Link to this heading">#</a></h2>
+<section id="multiple-linear-regression-concept">
+<h3>Multiple linear regression (concept)<a class="headerlink" href="#multiple-linear-regression-concept" title="Link to this heading">#</a></h3>
+<p>Same idea, more drivers:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y} = b_0 + b_1x_1 + b_2x_2 + ... + b_mx_m\]</div>
+<p>PM interpretation:</p>
+<ul class="simple">
+<li><p>Each coefficient estimates directional effect, holding other included variables constant.</p></li>
+<li><p>Coefficients help prioritize levers, but they do not prove causality.</p></li>
+<li><p>More features can improve fit, but also increase risk of overfitting and noise.</p></li>
+</ul>
+</section>
+<section id="fitting-in-practice">
+<h3>Fitting in practice<a class="headerlink" href="#fitting-in-practice" title="Link to this heading">#</a></h3>
+<p>Whether using one feature or many, modern libraries estimate coefficients for you.</p>
+<p>What matters for PMs:</p>
+<ul class="simple">
+<li><p>Define the decision question clearly.</p></li>
+<li><p>Check stability over time and by segment.</p></li>
+<li><p>Communicate uncertainty, not only point predictions.</p></li>
+</ul>
+</section>
+<section id="multiple-feature-models-evaluating-usefulness">
+<h3>Multiple-feature models: evaluating usefulness<a class="headerlink" href="#multiple-feature-models-evaluating-usefulness" title="Link to this heading">#</a></h3>
+<p>Use two complementary views:</p>
+<ul class="simple">
+<li><p><b>RMSE</b>: average miss size in KPI units (lower is better)</p></li>
+<li><p><b>Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></b>: did added features create real signal or just complexity?</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Practical rule:</b>
+Prefer the simpler model unless the more complex one gives a clear, stable gain on validation data.
+</div>
+</section>
+<section id="pm-summary-what-to-remember">
+<h3>PM summary: what to remember<a class="headerlink" href="#pm-summary-what-to-remember" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Linear regression predicts continuous outcomes using weighted inputs.</p></li>
+<li><p>Coefficients are interpretable estimates, not automatic causal truths.</p></li>
+<li><p>Residuals reveal where and how the model fails.</p></li>
+<li><p>RMSE communicates typical miss size; adjusted <span class="math notranslate nohighlight">\(R^2\)</span> helps manage complexity.</p></li>
+<li><p>Baselines and validation are mandatory before trusting forecasts.</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Decision lens:</b>
+Use the model when it improves planning quality and can be explained clearly to stakeholders.
+</div>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>Suggested resources for deeper understanding and practical application:</p>
+<p><a class="reference external" href="https://www.oreilly.com/library/view/practical-statistics-for/9781491952955/">Practical Statistics for Data Science</a> - Peter Bruce &amp; Andrew Bruce</p>
+<p><a class="reference external" href="https://learningstatisticswithr.com/book/regression.html">Written explanation of linear regression</a></p>
+<p><a class="reference external" href="https://www.investopedia.com/ask/answers/012615/whats-difference-between-rsquared-and-adjusted-rsquared.asp">Difference between <span class="math notranslate nohighlight">\(R^2\)</span> and adjusted <span class="math notranslate nohighlight">\(R^2\)</span></a></p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=7ArmBVF2dCs">StatQuest: Linear Regression</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions/aipm_sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../08_Linear_Regression.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Linear Regression</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../09.1_Bias_Variance_Tradeoff.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bias Variance Tradeoff</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-linear-regression-visualizations">Additional linear-regression visualizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#historical-origin-regression-to-the-mean">Historical Origin: Regression to the Mean</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-pms-should-care">Why PMs should care</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-of-regression-in-product-work">Goal of regression in product work</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-could-a-pm-estimate-outcomes">How could a PM estimate outcomes?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-a-pm-facing-regression-rule">Example: a PM-facing regression rule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-model-for-pm-decisions">Building a model for PM decisions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-the-line-behind-the-model">Intuition: the line behind the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-core-idea">The core idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-equation">Linear Equation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-line-to-real-world-prediction">From line to real-world prediction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-in-pm-terms">Linear regression in PM terms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-more-than-2-points">What about more than 2 points?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-dataset">Example dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-candidate-models-which-one-should-a-pm-trust">Two candidate models: which one should a PM trust?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-know-which-line-is-better">How do we know which line is better?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residuals-prediction-errors">Residuals (prediction errors)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-example">Residual example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-we-score-a-line-least-squares">How we score a line: least squares</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trying-several-fitted-lines">Trying several fitted lines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#there-are-infinitely-many-possible-lines">There are infinitely many possible lines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#so-how-is-the-model-fitted">So how is the model fitted?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-residual-sanity-checks">Quick residual sanity checks</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-performance">Model performance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-first-model-second">Baseline first, model second</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-mean-vs-fitted-regression">Baseline Mean vs Fitted Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-squares-decomposition-variance-analysis">Sum of Squares Decomposition (Variance Analysis)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explained-vs-unexplained-variation">Explained vs unexplained variation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rmse-average-prediction-miss">RMSE (average prediction miss)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-metric-answers-which-pm-question">Which metric answers which PM question?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metric-comparison-for-two-candidate-lines">Metric Comparison for Two Candidate Lines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pm-playbook">PM playbook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pm-checklist-when-linear-regression-is-a-good-choice">PM checklist: when linear regression is a good choice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-about-more-than-one-feature">What about more than one feature?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression-concept">Multiple linear regression (concept)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-in-practice">Fitting in practice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-feature-models-evaluating-usefulness">Multiple-feature models: evaluating usefulness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pm-summary-what-to-remember">PM summary: what to remember</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

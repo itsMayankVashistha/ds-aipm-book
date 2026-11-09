@@ -1,0 +1,918 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Testing &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/14_Testing';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Decision Trees" href="15_Decision_Tree.html" />
+    <link rel="prev" title="KNN &amp; Distance Metrics" href="13_KNN_Distance_Metrics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aipm_sessions/Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Testing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-your-code">Testing your code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-we-test">Why should we test?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-test-cases">Finding test cases</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tdd">TDD</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-tests-that-would-check-the-functionality-of-your-code-prior-to-writing-the-actual-code">Writing tests that would check the functionality of your code prior to writing the actual code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-driven-development">Test Driven Development</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-tests">Unit Tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-small-and-encapsulated-parts-of-the-application">Testing “small” and encapsulated parts of the application.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-testing">Unit Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Unit Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Unit Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-it-important-that-tests-are-independent-from-each-other">Why is it important that tests are independent from each other?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-test-example">Unit Test Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Unit Test Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries-for-testing">Libraries for testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-your-tests">Naming your tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-pytest">Running pytest</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-test">Integration Test</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-dependencies-and-interactions-between-parts-of-the-software">Testing dependencies and interactions between parts of the Software</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Integration Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reasons-for-integration-testing">Reasons for Integration Testing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-data">Testing Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-data-scientists-write-tests">Why should Data Scientists write tests?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-in-data-science">Testing in Data Science</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-in-data-science-example">Testing in Data Science Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Testing in Data Science Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-edge-cases-in-data-science">Typical Edge Cases in Data Science</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-and-when-would-you-use-tests-in-your-workflow">Why and when would you use tests in your workflow?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h1>
+<section id="testing-your-code">
+<h2>Testing your code<a class="headerlink" href="#testing-your-code" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="text_70">
+<p>Testing production grade code is hard. And you can never cover all outcomes.</p>
+<p>There are multiple types of tests, some rough definitions:</p>
+<p>→ <strong>Unit Tests</strong>: Testing “small” and encapsulated parts of the
+application. Most of the time this refers to explicitly testing a
+function written as part of the package</p>
+<p>→ <strong>Integration Tests / Service Tests</strong>: Testing dependencies
+between parts of the Software. For example the interaction
+with databases, APIs etc.</p>
+<p>→ <strong>End2End / UI Test</strong>: Testing the working application starting
+from the end. For example checking that an interaction in the UI
+will lead to the expected results
+</div>
+<div class="images_30">
+<img src="../images/testing/img_p1_1.png">
+</div></p>
+</div></section>
+<section id="why-should-we-test">
+<h2>Why should we test?<a class="headerlink" href="#why-should-we-test" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="text">
+<p><strong>→ Time spend with debugging</strong></p>
+<p><strong>→ Reduce technical debt</strong></p>
+<p><strong>→ Enable refactoring</strong></p>
+</div>
+<div class="text">
+<p><strong>→ Writing better code</strong></p>
+<p><strong>→ Document what code really does</strong></p>
+<p><strong>→ Improve the deployment workflow</strong>
+</div></p>
+</div><p><strong>Time:</strong></p>
+<p>Debugging: Finding errors in your code is very time consuming for you and for other developers in your team that look over your pull request.</p>
+<p><strong>Better code:</strong></p>
+<p>Test let you think about your code before you write it. What is the functionality? What parameters should you expect? Why are you writing the code in a specific way? How do you think the code could break?</p>
+<p><strong>Documentation:</strong></p>
+<p>Tests must necessarily be kept up-to-date with code modifications. Else they cannot pass.</p>
+<p><strong>Refactor:</strong></p>
+<p>Tests are a safety net for refactoring. If somebody at some point want to refactor code without breaking it you need tests to be sure that it kept the intended purpose.</p>
+<p><strong>Deployment:</strong></p>
+<p>When you start to track how the new and refactored code is actually tested, you relieve yourself from a lot of stress and frictions once the code is deployed.</p>
+<section id="finding-test-cases">
+<h3>Finding test cases<a class="headerlink" href="#finding-test-cases" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p>How to come up with tests:</p>
+<p>→ Think about how your function will be <strong>used</strong></p>
+<p>→ Think about how it could be <strong>misused (edge cases)</strong></p>
+<p>→ And don’t forget to test the <strong>“happy”</strong> cases as well (<strong>“perfect” inputs</strong>)
+</div>
+<div class="images_30">
+<img src="../images/testing/img_p3_2.png">
+</div></p>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>You should write your tests with all outcomes in mind: Good and bad. You will probably never cover
+all edge cases!</p>
+</div></section>
+</section>
+<section id="tdd">
+<h2>TDD<a class="headerlink" href="#tdd" title="Link to this heading">#</a></h2>
+<section id="writing-tests-that-would-check-the-functionality-of-your-code-prior-to-writing-the-actual-code">
+<h3>Writing tests that would check the functionality of your code prior to writing the actual code<a class="headerlink" href="#writing-tests-that-would-check-the-functionality-of-your-code-prior-to-writing-the-actual-code" title="Link to this heading">#</a></h3>
+</section>
+<section id="test-driven-development">
+<h3>Test Driven Development<a class="headerlink" href="#test-driven-development" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>It helps you plan out the work ahead</p>
+<p>You can divide it into 3 Phases:</p>
+<p>→ <strong>Red Phase</strong> - write the test or tests to validate the functionality</p>
+<p>→ <strong>Green Phase</strong> - implement the simplest code that will make the failed test pass</p>
+<p>→ <strong>Refactor Phase</strong> - improve the code without changing the functionality
+</div>
+<div class="images">
+<img src="../images/testing/img_p6_2.png">
+</div></p>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>When you start writing code follow the KISS principle: Keep it Simple, Stupid.</p>
+</div></section>
+</section>
+<section id="unit-tests">
+<h2>Unit Tests<a class="headerlink" href="#unit-tests" title="Link to this heading">#</a></h2>
+<section id="testing-small-and-encapsulated-parts-of-the-application">
+<h3>Testing “small” and encapsulated parts of the application.<a class="headerlink" href="#testing-small-and-encapsulated-parts-of-the-application" title="Link to this heading">#</a></h3>
+</section>
+<section id="unit-testing">
+<h3>Unit Testing<a class="headerlink" href="#unit-testing" title="Link to this heading">#</a></h3>
+<p>Tests should tell you the expected behavior of the unit. Keep them short and to the point.</p>
+<p>The GIVEN, WHEN, THEN structure can help with this:</p>
+<p>→ <strong>GIVEN</strong> - what are the initial conditions for the test?</p>
+<p>→ <strong>WHEN</strong> - what is occurring that needs to be tested?</p>
+<p>→ <strong>THEN</strong> - what is the expected response?</p>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>You should prepare your environment for testing, execute the behavior, and check that output meets
+expectations.</p>
+</div></section>
+<section id="id1">
+<h3>Unit Testing<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p>Each piece of behavior should be tested once – and only once.</p>
+<p>Why is that?</p>
+<p>→ If you make a small change to your code base and then twenty tests break, how do you know which functionality is broken?</p>
+<p>→ When only a single test fails, it’s much easier to find the bug.
+</div>
+<div class="images_30">
+<img src="../images/testing/img_p10_1.png">
+</div></p>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Write tests for each piece of code, to check if it gives back the expected results and to make it easier
+to find mistakes.</p>
+</div>
+</section>
+<section id="id2">
+<h3>Unit Testing<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Each test must be independent from other tests.</p>
+<p>Rules for creating tests:</p>
+<p>→ Must be able to run alone</p>
+<p>→ The order of the tests should not matter</p>
+<p>→ Use descriptive names for testing functions.</p>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>These imply that each test must be loaded with a fresh dataset and may have to do some cleanup
+afterwards</p>
+</div></section>
+<section id="why-is-it-important-that-tests-are-independent-from-each-other">
+<h3>Why is it important that tests are independent from each other?<a class="headerlink" href="#why-is-it-important-that-tests-are-independent-from-each-other" title="Link to this heading">#</a></h3>
+</section>
+<section id="unit-test-example">
+<h3>Unit Test Example<a class="headerlink" href="#unit-test-example" title="Link to this heading">#</a></h3>
+<p>Let’s look at an example:</p>
+<center>
+    <img src="../images/testing/img_p13_1.png" width=800>
+</center>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Assertions let you write sanity checks in your code. You can use these to test if certain assumptions
+are true or false.</p>
+</div>
+</section>
+<section id="id3">
+<h3>Unit Test Example<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>Let’s look at an example:</p>
+<center>
+    <img src="../images/testing/example_unit_test.png" width=1000>
+</center>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Based on the test we could assume how the code looked like or we could write a function based on
+the test that solves the same problem.</p>
+</div>
+</section>
+<section id="libraries-for-testing">
+<h3>Libraries for testing<a class="headerlink" href="#libraries-for-testing" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p>Libraries that we can use</p>
+<p>There are a few:</p>
+<p>→ <strong>unittest</strong>: Comes as standard library with python</p>
+<p>→ <strong>doctest</strong>: Comes as standard library with python</p>
+<p>→ <strong>pytest</strong>: The most used testing library
+</div>
+<div class="images_30">
+<img src="../images/testing/img_p15_2.png">
+<img src="../images/testing/img_p15_1.png">
+</div></p>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>In the repo we will show you examples for pytest!</p>
+</div></section>
+<section id="naming-your-tests">
+<h3>Naming your tests<a class="headerlink" href="#naming-your-tests" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Pytest is looking for tests by subfolder name, file name and function name</p>
+<p>→ <strong>Subfolder name</strong>: tests</p>
+<p>→ <strong>File name</strong>: test_something.py</p>
+<p>→ <strong>Function name</strong>: test_your_function_name()
+</div>
+<div class="images">
+<img src="../images/testing/img_p14_2.png">
+<img src="../images/testing/img_p16_1.png">
+</div></p>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>You have to import the functions you want to test into your test python file!</p>
+</div></section>
+<section id="running-pytest">
+<h3>Running pytest<a class="headerlink" href="#running-pytest" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">      
+How passed and failed tests look like:
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pytest</span> <span class="pre">-q</span> <span class="pre">tests/test_something.py</span></code>
+</div>
+<div class="images_30">
+<img src="../images/testing/img_p17_3.png" width=250>
+</div></p>
+</div>
+<center>
+    <img src="../images/testing/passed_failed_test.png">
+</center></section>
+</section>
+<section id="integration-test">
+<h2>Integration Test<a class="headerlink" href="#integration-test" title="Link to this heading">#</a></h2>
+<section id="testing-dependencies-and-interactions-between-parts-of-the-software">
+<h3>Testing dependencies and interactions between parts of the Software<a class="headerlink" href="#testing-dependencies-and-interactions-between-parts-of-the-software" title="Link to this heading">#</a></h3>
+</section>
+<section id="id4">
+<h3>Integration Test<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p>What does integration testing involve?</p>
+<p>Characteristics of creating integration tests:</p>
+<p>→ integrating the various modules of an application</p>
+<p>→ testing their behaviour as a combined, or integrated, unit</p>
+<p>→ Verifying if the individual units are communicating with each other properly
+</div>
+<div class="images_30">
+<img src="../images/testing/img_p20_1.png" width=300>
+</div></p>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>To perform integration testing, testers use dummy programs that act as substitutes for any missing
+modules and simulate data communications between modules for testing purposes.</p>
+</div><center>
+    <img src="../images/testing/integration_tests.png" width=1000>
+</center>
+<div class="group">
+    <div class="text">
+<p><strong>Unit tests</strong></p>
+<ul>
+<li><p>Smallest piece of code, or unit, is tested</p></li>
+<li><p>Each unit can be logically isolated</p></li>
+<li><p><strong>Individual modules are tested</strong></p>
+  </div>
+  <div class="text">
+</li>
+</ul>
+<p><strong>Integration tests</strong></p>
+<ul>
+<li><p>check the functionality of the overall application</p></li>
+<li><p>combined, or integrated, unit</p></li>
+<li><p><strong>Modules are tested as a combined unit</strong></p>
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="reasons-for-integration-testing">
+<h3>Reasons for Integration Testing<a class="headerlink" href="#reasons-for-integration-testing" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p>Why integration testing is essential:</p>
+<p>→ Integrating different modules into a working application</p>
+<p>→ Ensuring that changing requirements are incorporated into the application</p>
+<p>→ Eliminating common issues missed during unit testing
+</div>
+<div class="images_30">
+<img src="../images/testing/img_p22_1.png">
+</div></p>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Even when each module of the application is unit-tested, some errors may still exist. To identify these
+errors and ensure that the modules work well together after integration, integration testing is crucial.</p>
+</div></section>
+</section>
+<section id="testing-data">
+<h2>Testing Data<a class="headerlink" href="#testing-data" title="Link to this heading">#</a></h2>
+<section id="why-should-data-scientists-write-tests">
+<h3>Why should Data Scientists write tests?<a class="headerlink" href="#why-should-data-scientists-write-tests" title="Link to this heading">#</a></h3>
+</section>
+<section id="testing-in-data-science">
+<h3>Testing in Data Science<a class="headerlink" href="#testing-in-data-science" title="Link to this heading">#</a></h3>
+<p>Is it unit testing or integration testing?</p>
+<p>What can we write tests for in Data Science?</p>
+<p>→ Code that we turn from notebook cells into python files</p>
+<p>→ Data integrity tests: Do our data transformations introduce any errors in the data?</p>
+<p>→ Data quality tests: Does the data in our system meet our needs?</p>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Data tests can be unit tests where we test the functions that we use to transform our data but
+quickly become integration tests when we look at the outcome of a collection of transformations.</p>
+</div><center>
+    <img src="../images/testing/testing_data.png" width=1000>
+</center>
+<div class="group">
+    <div class="text">
+<p><strong>Code tests</strong></p>
+<p>Test whether your functions, classes, modules, or services do what you want them to.
+</div>
+<div class="text">
+<strong>Data tests</strong></p>
+<p>Test whether your data is in the right format and your data values are correct.
+</div></p>
+</div>    
+</section>
+<section id="testing-in-data-science-example">
+<h3>Testing in Data Science Example<a class="headerlink" href="#testing-in-data-science-example" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Let’s say you want to impute NaN values with the mean:</p>
+<p>We are calculating the mean of a pandas series and fill the NaN values with it using fillna().
+</div>
+<div class="images">
+<img src="../images/testing/img_p28_1.png">
+</div></p>
+</div>
+</section>
+<section id="id5">
+<h3>Testing in Data Science Example<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>We can now (or before) write a test that checks if the returned series looks as expected:</p>
+<p>pandas has a build in module called testing, which we can use to compare two pandas data frames or two
+pandas series.
+</div>
+<div class="images">
+<img src="../images/testing/img_p29_1.png">
+</div></p>
+</div></section>
+<section id="typical-edge-cases-in-data-science">
+<h3>Typical Edge Cases in Data Science<a class="headerlink" href="#typical-edge-cases-in-data-science" title="Link to this heading">#</a></h3>
+<p>What are typical edge cases?</p>
+<p>→ NaN and None as input values</p>
+<p>→ 0 values and empty strings</p>
+<p>→ Minimum and maximum values</p>
+<p>→ numbers that have special meaning in the function (e.g. constants)</p>
+<p>→ Invalid inputs (e.g. int vs float)</p>
+<p>→ Negative numbers</p>
+<p>… and all sorts of random combinations of edge cases together</p>
+</section>
+<section id="why-and-when-would-you-use-tests-in-your-workflow">
+<h3>Why and when would you use tests in your workflow?<a class="headerlink" href="#why-and-when-would-you-use-tests-in-your-workflow" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../images/testing/img_p31_1.png" width=800>
+</center></section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="13_KNN_Distance_Metrics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">KNN &amp; Distance Metrics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="15_Decision_Tree.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Decision Trees</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-your-code">Testing your code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-we-test">Why should we test?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-test-cases">Finding test cases</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tdd">TDD</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-tests-that-would-check-the-functionality-of-your-code-prior-to-writing-the-actual-code">Writing tests that would check the functionality of your code prior to writing the actual code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-driven-development">Test Driven Development</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-tests">Unit Tests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-small-and-encapsulated-parts-of-the-application">Testing “small” and encapsulated parts of the application.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-testing">Unit Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Unit Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Unit Testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-it-important-that-tests-are-independent-from-each-other">Why is it important that tests are independent from each other?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-test-example">Unit Test Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Unit Test Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libraries-for-testing">Libraries for testing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#naming-your-tests">Naming your tests</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-pytest">Running pytest</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-test">Integration Test</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-dependencies-and-interactions-between-parts-of-the-software">Testing dependencies and interactions between parts of the Software</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Integration Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reasons-for-integration-testing">Reasons for Integration Testing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-data">Testing Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-should-data-scientists-write-tests">Why should Data Scientists write tests?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-in-data-science">Testing in Data Science</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-in-data-science-example">Testing in Data Science Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Testing in Data Science Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-edge-cases-in-data-science">Typical Edge Cases in Data Science</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-and-when-would-you-use-tests-in-your-workflow">Why and when would you use tests in your workflow?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1462 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Evaluation Metrics &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/aipm_sessions/Evaluation_Metrics_AIPM';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Logistic Regression" href="../12_Logistic_Regression.html" />
+    <link rel="prev" title="Evaluation Metrics" href="../11_Evaluation_Metrics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ensemble_Methods_AIPM.html">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Evaluation Metrics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orientation">Orientation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-model-performance">Evaluate Model Performance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#short-recap-on-regression-metrics">Short Recap on Regression Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-metrics-can-we-use-to-evaluate-model-performance">Which Metrics Can We Use to Evaluate Model Performance?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-talk-about-classification">Let’s Talk About Classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks">Drawbacks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-might-not-be-good-enough">Accuracy Might Not Be Good Enough</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-and-recall">Precision and Recall</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-proportion-of-actual-positives-was-predicted-correctly">What Proportion of Actual Positives Was Predicted Correctly?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tweaking-the-model">Tweaking the Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Tweaking the Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#after-tweaking-the-model">After Tweaking the Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-proportion-of-positive-predictions-is-actually-correct">What Proportion of Positive Predictions Is Actually Correct?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-recall-curve">Precision-Recall Curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Precision-Recall Curve</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f1-score">F1-Score</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">F1-Score</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-take-negatives-into-the-equation">Let’s Take Negatives into the Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-proportion-of-actual-negatives-was-predicted-as-positives">What Proportion of Actual Negatives Was Predicted as Positives?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-proportion-of-actual-negatives-was-predicted-correctly">What Proportion of Actual Negatives Was Predicted Correctly?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#receiver-operating-characteristic-roc-curve">Receiver Operating Characteristic (ROC) Curve</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-and-the-area-under-the-curve-roc-auc">ROC and the Area Under the Curve (ROC AUC)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-of-roc-curve">Explanation of ROC Curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Explanation of ROC Curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imbalanced-classes">Imbalanced Classes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#going-beyond-aggregated-metrics">Going Beyond Aggregated Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-your-model-inspect-how-it-performs">Validate Your Model → Inspect How It Performs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#product-goal-metric-choice-quick-guide">Product Goal → Metric Choice (Quick Guide)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-metrics-for-product-decisions-wrap-up">Choosing Metrics for Product Decisions (Wrap-up)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="slide-title"> 
+<section class="tex2jax_ignore mathjax_ignore" id="evaluation-metrics">
+<h1>Evaluation Metrics<a class="headerlink" href="#evaluation-metrics" title="Link to this heading">#</a></h1>
+</div> <section id="orientation">
+<h2>Orientation<a class="headerlink" href="#orientation" title="Link to this heading">#</a></h2>
+<div class="group">
+  <div class="text"> 
+<p><strong>Where are we now?</strong></p>
+<p><strong>06 PREDICTIVE MODELING:</strong></p>
+<ul>
+<li><p>select an ML algorithm</p></li>
+<li><p>train the ML model
+<i><li><span class="color-brand">evaluate performance</span></li></i></p></li>
+<li><p>make predictions</p>
+</div>
+<div class="images">
+  <img src="../../images/evaluation_metrics/img_p0_6.png" width="650">
+</div>
+</li>
+</ul>
+</div>
+<section id="evaluate-model-performance">
+<h3>Evaluate Model Performance<a class="headerlink" href="#evaluate-model-performance" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Regression metrics (R-squared, RMSE…)</p></li>
+<li><p>Classification metrics (accuracy, precision, recall…)</p></li>
+<li><p>Custom metrics <br />
+→ e.g., based on worst-case scenarios in your product</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<b>Note:</b>
+For stakeholder communication, choose one primary metric tied to the product goal.
+Then add 1-2 guardrail metrics (e.g., precision, recall, cost, or latency).
+</div></section>
+</section>
+<section id="short-recap-on-regression-metrics">
+<h2>Short Recap on Regression Metrics<a class="headerlink" href="#short-recap-on-regression-metrics" title="Link to this heading">#</a></h2>
+<section id="which-metrics-can-we-use-to-evaluate-model-performance">
+<h3>Which Metrics Can We Use to Evaluate Model Performance?<a class="headerlink" href="#which-metrics-can-we-use-to-evaluate-model-performance" title="Link to this heading">#</a></h3>
+<p>R2 (R-squared)</p>
+<div class="math notranslate nohighlight">
+\[{R}^{2}=1-\frac{R S S}{T S S}=1-\frac{\sum_{i=1}^{n}(y_{i}-{\hat{y}}_{i})^{2}}{\sum_{i=1}^{n}(y_{i}-{\bar{y}})^{2}}=1-\frac{\sum_{i=1}^{n}e_{i}^{2}}{\sum_{i=1}^{n}(y_{i}-{\bar{y}})^{2}}\]</div>
+<p>MSE (<strong>M</strong>ean <strong>S</strong>quare <strong>E</strong>rror)</p>
+<div class="math notranslate nohighlight">
+\[MSE={\frac{1}{n}}\sum_{i=1}^{n}\left(y_{i}-{\hat{y}}_{i}\right)^{2}\]</div>
+<p>RMSE (<strong>R</strong>oot <strong>M</strong>ean <strong>S</strong>quare <strong>E</strong>rror)</p>
+<div class="math notranslate nohighlight">
+\[RMSE = \sqrt{MSE}\]</div>
+<p>MAPE (<strong>M</strong>ean <strong>A</strong>bsolute <strong>P</strong>ercentage <strong>E</strong>rror)</p>
+<div class="math notranslate nohighlight">
+\[{MAPE}=\frac{1}{n}\sum_{i=1}^{n}\frac{|y_{i}-\hat{y}_{i}|}{\mathrm{max}(\epsilon,\left|y_{i}\right|)}\]</div>
+</section>
+</section>
+<section id="let-s-talk-about-classification">
+<h2>Let’s Talk About Classification<a class="headerlink" href="#let-s-talk-about-classification" title="Link to this heading">#</a></h2>
+<center>
+    <img src="../../images/evaluation_metrics/img_p5_2.png" width=800>
+</center>
+<p><a class="reference external" href="https://towardsdatascience.com/regression-or-classification-linear-or-logistic-f093e8757b9c">source</a></p>
+</section>
+<section id="confusion-matrix">
+<h2>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h2>
+<p>Counts how often the model predicted correctly and how often it got confused.</p>
+<div class="group">
+    <div class="text">
+<ul>
+<li><p>False Positive: false alarm / type I error</p></li>
+<li><p>False Negative: missed detection / type II error</p>
+  </div>
+  <div class="text">
+</li>
+</ul>
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">TN</span></td>
+            <td><span style="color:#E1BE6A">FP</span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A">FN</span></td>
+            <td><span style="color:#40B0A6">TP</span></td>
+        </tr> 
+    </tbody>   
+</table>
+   </div>
+</div>    
+</section>
+<section id="accuracy">
+<h2>Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h2>
+<p>How often the model is right.</p>
+<div class="group">
+  <div class="text">
+<div class="math notranslate nohighlight">
+\[\frac{Correct}{All}=\frac{TP+TN}{TP+FP+TN+FN}\]</div>
+  </div>
+  <div class="text">
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">TN</span></td>
+            <td><span style="color:#E1BE6A">FP</span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A">FN</span></td>
+            <td><span style="color:#40B0A6">TP</span></td>
+        </tr> 
+    </tbody>   
+</table>
+   </div>
+</div>  <section id="drawbacks">
+<h3>Drawbacks<a class="headerlink" href="#drawbacks" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>When one class is very rare, it can lead to false conclusions.</p></li>
+<li><p>Here, accuracy is 94%.</p></li>
+<li><p>But 5 out of 6 positives were predicted incorrectly.</p></li>
+</ul>
+<div class="group">
+  <div class="text">
+<div class="math notranslate nohighlight">
+\[\frac{Correct}{All}=\frac{1+93}{1+5+93+1}\]</div>
+  </div>
+  <div class="text">
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">93</span></td>
+            <td><span style="color:#E1BE6A">1</span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A">5</span></td>
+            <td><span style="color:#40B0A6">1</span></td>
+        </tr> 
+    </tbody>   
+</table>
+   </div>
+</div>  </section>
+<section id="accuracy-might-not-be-good-enough">
+<h3>Accuracy Might Not Be Good Enough<a class="headerlink" href="#accuracy-might-not-be-good-enough" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../../images/evaluation_metrics/img_p9_2.png" width=800>
+</center>
+<p><a class="reference external" href="https://web.stanford.edu/~kalouche/cs229.html">source</a></p>
+</section>
+</section>
+<section id="precision-and-recall">
+<h2>Precision and Recall<a class="headerlink" href="#precision-and-recall" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Focus on the positive class</p></li>
+<li><p>The number of true negatives is not taken into account</p></li>
+<li><p>Useful when trying to detect a rare event</p></li>
+<li><p>The number of negatives is very large</p></li>
+</ul>
+<section id="what-proportion-of-actual-positives-was-predicted-correctly">
+<h3>What Proportion of Actual Positives Was Predicted Correctly?<a class="headerlink" href="#what-proportion-of-actual-positives-was-predicted-correctly" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The TPR is also called sensitivity or recall.</p></li>
+<li><p>Here, the true positive rate is 1/6 (~16.67%).</p></li>
+</ul>
+<div class="group">
+  <div class="text"> 
+<div class="math notranslate nohighlight">
+\[Recall=\frac{TP}{TP+FN}\]</div>
+  </div>
+  <div class="text">
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">93</span></td>
+            <td><span style="color:#E1BE6A">1</span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A"><b>5</b></span></td>
+            <td><span style="color:#40B0A6"><b>1</b></span></td>
+        </tr> 
+    </tbody>   
+</table>
+  </div>
+</div></section>
+<section id="tweaking-the-model">
+<h3>Tweaking the Model<a class="headerlink" href="#tweaking-the-model" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Every model has a threshold that separates positive from negative predictions.</p></li>
+<li><p>Typically, instances are predicted as positive if the probability is <span class="math notranslate nohighlight">\(\geq\)</span> 0.5.</p></li>
+</ul>
+<br>
+<br>
+<div class="group">
+  <div class="images"> 
+          <span class="color-brand">Before tweaking</span>    
+  <img src="../../images/evaluation_metrics/img_p12_2.png" width="500">
+  </div>
+  <div class="text">
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">93</span></td>
+            <td><span style="color:#E1BE6A">1</span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A"><b>5</b></span></td>
+            <td><span style="color:#40B0A6"><b>1</b></span></td>
+        </tr> 
+    </tbody>   
+</table>
+  </div>
+</div>
+</section>
+<section id="id1">
+<h3>Tweaking the Model<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The lower the threshold, the more instances are predicted as positive.</p></li>
+<li><p>This automatically raises the true positive rate (TPR), also called recall.</p></li>
+</ul>
+<br>
+<br>
+<div class="group">
+  <div class="images"> 
+              <span class="color-brand">After tweaking</span>
+  <img src="../../images/evaluation_metrics/img_p13_1.png" width="500">
+  </div>
+  <div class="text">
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">14</span></td>
+            <td><span style="color:#E1BE6A">80</span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A"><b>0</b></span></td>
+            <td><span style="color:#40B0A6"><b>6</b></span></td>
+        </tr> 
+    </tbody>   
+</table>
+  </div>
+</div>
+</section>
+<section id="after-tweaking-the-model">
+<h3>After Tweaking the Model<a class="headerlink" href="#after-tweaking-the-model" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>After tweaking, the true positive rate (TPR) is 100%.</p></li>
+<li><p>But are we entirely happy?</p></li>
+</ul>
+<br>
+<br>
+<div class="group">
+    <div class="text">
+        <span class="color-brand">Before tweaking</span>
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">93</span></td>
+            <td><span style="color:#E1BE6A">1</span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A"><b>5</b></span></td>
+            <td><span style="color:#40B0A6"><b>1</b></span></td>
+        </tr> 
+    </tbody>   
+</table> 
+    </div>
+    <div class="text">
+        <span class="color-brand">After tweaking</span>
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">14</span></td>
+            <td><span style="color:#E1BE6A">80</span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A"><b>0</b></span></td>
+            <td><span style="color:#40B0A6"><b>6</b></span></td>
+        </tr> 
+    </tbody>   
+</table>
+    </div>
+</div>
+</section>
+<section id="what-proportion-of-positive-predictions-is-actually-correct">
+<h3>What Proportion of Positive Predictions Is Actually Correct?<a class="headerlink" href="#what-proportion-of-positive-predictions-is-actually-correct" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Precision is 6/86 (~6.97%), which is even lower than recall before tweaking.</p></li>
+<li><p>Whether this is acceptable depends on the business case.</p></li>
+<li><p>For cancer screening, this might be acceptable to stakeholders. <br />
+→ Still, screening millions of people can be very expensive.</p></li>
+</ul>
+<br>
+<br>
+<div class="group">
+  <div class="text">
+<div class="math notranslate nohighlight">
+\[Precision=\frac{TP}{TP+FP}\]</div>
+  </div>
+  <div class="text">
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">14</span></td>
+            <td><span style="color:#E1BE6A"><b>80</b></span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A">0</span></td>
+            <td><span style="color:#40B0A6"><b>6</b></span></td>
+        </tr> 
+    </tbody>   
+</table>
+    </div>
+</div>
+</section>
+<section id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(N_+\)</span> : actual positives \
+<span class="math notranslate nohighlight">\(N_-\)</span> : actual negatives \
+<span class="math notranslate nohighlight">\(\hat{N}_+\)</span> : predicted positives \
+<span class="math notranslate nohighlight">\(\hat{N}_-\)</span> : predicted negatives \
+n = # observations</p>
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=3>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives / 0</td>
+            <td class="cell-class">Positives / 1</td>
+            <td class="cell-class">&sum;</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives / 0</td>
+            <td>TN</td>
+            <td>FP</td>
+            <td>$N_-$ = TN + FP</td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives / 1</td>  
+            <td>FN</td>
+            <td>TP</td>
+            <td>$N_+$ = TP + FN</td>
+        </tr>
+        <tr>
+            <th>&nbsp;</th>          
+            <td class="cell-class">&sum;</td>  
+            <td>$\hat{N}_-$ = TN + FN</td>
+            <td>$\hat{N}_+$ = TP + FP</td>
+            <td>n = TP + FP + FN + TN</td>
+        </tr>
+    </tbody>   
+</table>
+</section>
+<section id="precision-recall-curve">
+<h3>Precision-Recall Curve<a class="headerlink" href="#precision-recall-curve" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text"> 
+<ul>
+<li><p>Plots Precision vs. Recall depending on the <strong>threshold</strong>.</p></li>
+<li><p>If threshold is <strong>high</strong>: <br />
+→ Precision is close to 1. <br />
+→ Recall will be very low.</p>
+</div>
+<div class="images">
+  <img src="../../images/evaluation_metrics/precision_recall.png" width="500">
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="id2">
+<h3>Precision-Recall Curve<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="text"> 
+<ul>
+<li><p>If threshold is <strong>effectively zero</strong>: <br />
+→ Predicting all instances as positives. <br />
+→ Recall will be 1. <br />
+→ Precision is equal to the share of positives.</p></li>
+<li><p>Goal: Choose a threshold that stakeholders agree on based on cost-benefit trade-offs.</p></li>
+<li><p>Starting point: estimate expected economic benefit and operational cost.</p>
+</div>
+<div class="images">
+  <img src="../../images/evaluation_metrics/precision_recall.png" width="500">
+</div>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="f1-score">
+<h2>F1-Score<a class="headerlink" href="#f1-score" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="text">
+<ul>
+<li><p>The harmonic mean of precision and recall</p></li>
+<li><p>Here, the F1-score is 13.08%</p>
+  </div>
+  <div class="text">
+</li>
+</ul>
+<p><span class="math notranslate nohighlight">\(F_1 = 2\cdot\frac{Precision\;\cdot\;Recall}{Precision\;+\;Recall}\)</span></p>
+<p><span class="math notranslate nohighlight">\(F_1 = 2\cdot\frac{7\cdot100}{7+100}=13.08\%\)</span>
+</div></p>
+</div>  
+<br>
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6">14</span></td>
+            <td><span style="color:#E1BE6A"><b>80</b></span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A"><b>0</b></span></td>
+            <td><span style="color:#40B0A6"><b>6</b></span></td>
+        </tr> 
+    </tbody>   
+</table><section id="id3">
+<h3>F1-Score<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<ul>
+<li><p>The harmonic mean punishes low rates.</p>
+  </div>
+  <div class="text">
+</li>
+</ul>
+<p><span class="math notranslate nohighlight">\(F_1 = 2\cdot\frac{Precision\;\cdot\;Recall}{Precision\;+\;Recall}\)</span><br />
+</div></p>
+</div> 
+<br>
+<table class="confusion_matrix">
+  <thead>
+    <tr>
+      <th><b>Precision</b></th>
+      <th><b>Recall</b></th>
+      <th><b>F1-Score</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5%</td>
+      <td>50%</td>
+      <td>9%</td>
+    </tr>
+    <tr>
+      <td>90%</td>
+      <td>90%</td>
+      <td>90%</td>
+    </tr>
+    <tr>
+      <td>30%</td>
+      <td>60%</td>
+      <td>40%</td>
+    </tr>
+    </tbody>
+</table></section>
+</section>
+<section id="let-s-take-negatives-into-the-equation">
+<h2>Let’s Take Negatives into the Equation<a class="headerlink" href="#let-s-take-negatives-into-the-equation" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="text_70">
+<ul>
+<li><p>The amount of correct negative predictions is sometimes just as important.</p></li>
+<li><p>Spam vs. ham is one common example (email spam detection).</p>
+  </div>
+  <div class="images_30">
+</li>
+</ul>
+<img src="../../images/evaluation_metrics/img_p21_2.png">
+<p><a class="reference external" href="https://www.slideshare.net/func_i/introduction-to-machine-learning-classifiers">Image source</a>
+</div></p>
+</div> <section id="what-proportion-of-actual-negatives-was-predicted-as-positives">
+<h3>What Proportion of Actual Negatives Was Predicted as Positives?<a class="headerlink" href="#what-proportion-of-actual-negatives-was-predicted-as-positives" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>False Positive Rate (FPR)</p></li>
+<li><p>Here, FPR is: <span class="math notranslate nohighlight">\(\frac{80}{80+14} = 85.11\%\)</span></p></li>
+</ul>
+<br>
+<br>
+<div class="group">
+  <div class="text">
+<p><span class="math notranslate nohighlight">\(\mathrm{FPR}=\frac{FP}{TN+FP}\)</span></p>
+  </div>
+  <div class="text">
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6"><b>14</b></span></td>
+            <td><span style="color:#E1BE6A"><b>80</b></span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A">0</span></td>
+            <td><span style="color:#40B0A6">6</span></td>
+        </tr> 
+    </tbody>   
+</table>
+    </div>
+</div> 
+</section>
+<section id="what-proportion-of-actual-negatives-was-predicted-correctly">
+<h3>What Proportion of Actual Negatives Was Predicted Correctly?<a class="headerlink" href="#what-proportion-of-actual-negatives-was-predicted-correctly" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>True Negative Rate (TNR), also called specificity</p></li>
+<li><p>Here, TNR is: <span class="math notranslate nohighlight">\(\frac{14}{80+14} = 14.89\%\)</span></p></li>
+<li><p>FPR = 1 - specificity</p></li>
+</ul>
+<br>
+<br>
+<div class="group">
+  <div class="text">
+<div class="math notranslate nohighlight">
+\[TNR=\frac{TN}{TN+FP}\]</div>
+  </div>
+  <div class="text">
+<table class="confusion_matrix">
+    <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            <th colspan=2>Predicted</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>&nbsp;</th>
+            <td class="cell-class">&nbsp;</td>
+            <td class="cell-class">Negatives</td>
+            <td class="cell-class">Positives</td>
+        </tr>
+        <tr>
+            <th rowspan=2>Actual</th>
+            <td class="cell-class">Negatives</td>
+            <td><span style="color:#40B0A6"><b>14</b></span></td>
+            <td><span style="color:#E1BE6A"><b>80</b></span></td>
+        </tr>
+        <tr>
+            <td class="cell-class">Positives</td>  
+            <td><span style="color:#E1BE6A">0</span></td>
+            <td><span style="color:#40B0A6">6</span></td>
+        </tr> 
+    </tbody>   
+</table>
+    </div>
+</div> 
+</section>
+</section>
+<section id="receiver-operating-characteristic-roc-curve">
+<h2>Receiver Operating Characteristic (ROC) Curve<a class="headerlink" href="#receiver-operating-characteristic-roc-curve" title="Link to this heading">#</a></h2>
+<p>TPR vs. FPR plotted for different <strong>thresholds</strong></p>
+<div class="group">
+  <div class="text"> 
+<ul>
+<li><p>The 45° line is equivalent to random guessing.</p></li>
+<li><p>If all positives are correctly predicted and no negatives are incorrectly predicted, the ROC curve would follow the green path.</p></li>
+<li><p>Aim: move the ROC curve as close as possible to (0,1).</p>
+</div>
+<div class="images">
+  <img src="../../images/evaluation_metrics/img_p24_1.png" width=450>
+</div>
+</li>
+</ul>
+</div>
+<section id="roc-and-the-area-under-the-curve-roc-auc">
+<h3>ROC and the Area Under the Curve (ROC AUC)<a class="headerlink" href="#roc-and-the-area-under-the-curve-roc-auc" title="Link to this heading">#</a></h3>
+<p>Metric to compare different classifiers</p>
+<div class="group">
+  <div class="text"> 
+<ul>
+<li><p>Random classifier: <br />
+→ ROC AUC is 0.5 <br />
+→ ROC curve is on the 45° line</p></li>
+<li><p>Perfect classifier: <br />
+→ ROC AUC is 1</p>
+</div>
+<div class="images">
+  <img src="../../images/evaluation_metrics/img_p25_1.png" width="450">
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="explanation-of-roc-curve">
+<h3>Explanation of ROC Curve<a class="headerlink" href="#explanation-of-roc-curve" title="Link to this heading">#</a></h3>
+<div class="group">
+  <div class="images"> 
+    <img src="../../images/evaluation_metrics/ROC_animation.gif" alt="cutoff.gif" scale="0">
+  </div>
+  <div class="images">
+    <img src="../../images/evaluation_metrics/img_p26_3.png" width="500">
+    <img src="../../images/evaluation_metrics/img_p26_4.png" width="500">
+  </div>
+</div></section>
+<section id="id4">
+<h3>Explanation of ROC Curve<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<center>
+<img src="../../images/evaluation_metrics/ROC_animation2.gif" alt="" scale="0">
+</center>
+<p><a class="reference external" href="https://paulvanderlaken.com/2019/08/16/roc-auc-precision-and-recall-visually-explained/">Image source</a></p>
+</section>
+<section id="imbalanced-classes">
+<h3>Imbalanced Classes<a class="headerlink" href="#imbalanced-classes" title="Link to this heading">#</a></h3>
+<center>
+<img src="../../images/evaluation_metrics/imbalance_class_roc_pr_auc.gif" alt="" scale="0">
+</center>
+<p><a class="reference external" href="https://paulvanderlaken.com/2019/08/16/roc-auc-precision-and-recall-visually-explained/">Image source</a></p>
+</section>
+</section>
+<section id="going-beyond-aggregated-metrics">
+<h2>Going Beyond Aggregated Metrics<a class="headerlink" href="#going-beyond-aggregated-metrics" title="Link to this heading">#</a></h2>
+<p>All the performance metrics we have seen today are aggregated metrics.</p>
+<p>They help determine whether a model has learned well from a dataset or needs
+improvement.</p>
+<p><strong>Next step</strong>: <br />
+Examine results and errors to understand why and how the model is failing or succeeding.</p>
+<p><span class="color-brand">Why: validation and iteration</span></p>
+<div class="alert alert-block alert-info">
+Performance metrics can be deceptive: on highly imbalanced datasets, a classifier can reach very high accuracy without real predictive power.
+</div>
+<section id="validate-your-model-inspect-how-it-performs">
+<h3>Validate Your Model → Inspect How It Performs<a class="headerlink" href="#validate-your-model-inspect-how-it-performs" title="Link to this heading">#</a></h3>
+<p>There are many ways to do this. The goal is to compare your model’s predictions with the actual data (targets and/or features).</p>
+<p><strong>Regression</strong>: <br />
+Examine residuals, perform exploratory data analysis (EDA), and look for patterns or outliers.</p>
+<p><strong>Classification</strong>: <br />
+Start with a confusion matrix to analyze how well predicted classes match true classes.</p>
+</section>
+<section id="product-goal-metric-choice-quick-guide">
+<h3>Product Goal → Metric Choice (Quick Guide)<a class="headerlink" href="#product-goal-metric-choice-quick-guide" title="Link to this heading">#</a></h3>
+<p>Use one <strong>primary metric</strong> for decisions and one or two <strong>guardrails</strong> to control risk.</p>
+<p><strong>PR AUC</strong> = area under the precision-recall curve. It summarizes precision-recall trade-offs across thresholds and is especially informative when the positive class is rare.</p>
+<p><strong>FNR</strong> = false negative rate, the share of actual positives the model misses.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Product goal</p></th>
+<th class="head"><p>Primary metric</p></th>
+<th class="head"><p>Guardrail metric(s)</p></th>
+<th class="head"><p>Why this works</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Catch as many true cases as possible (e.g., fraud/cancer pre-screening)</p></td>
+<td><p>Recall (TPR)</p></td>
+<td><p>Precision, FPR</p></td>
+<td><p>Maximizes detection while controlling false alarms</p></td>
+</tr>
+<tr class="row-odd"><td><p>Avoid false alarms (e.g., spam filter for important inboxes)</p></td>
+<td><p>Precision</p></td>
+<td><p>Recall, FNR</p></td>
+<td><p>Keeps positive predictions trustworthy</p></td>
+</tr>
+<tr class="row-even"><td><p>Balance misses and false alarms when both matter</p></td>
+<td><p>F1-score</p></td>
+<td><p>Precision, Recall</p></td>
+<td><p>Single score balancing both error types</p></td>
+</tr>
+<tr class="row-odd"><td><p>Compare classifier ranking quality across thresholds</p></td>
+<td><p>ROC AUC and, when positives are rare, PR AUC as a complementary view</p></td>
+<td><p>Chosen operating threshold, class balance context</p></td>
+<td><p>Good for model comparison before threshold selection</p></td>
+</tr>
+<tr class="row-even"><td><p>Communicate baseline classification performance quickly</p></td>
+<td><p>Accuracy</p></td>
+<td><p>Class balance check, Recall</p></td>
+<td><p>Simple, but only meaningful when classes are not highly imbalanced</p></td>
+</tr>
+<tr class="row-odd"><td><p>Regression forecast quality in original units</p></td>
+<td><p>RMSE</p></td>
+<td><p>MAPE, error-by-segment</p></td>
+<td><p>RMSE is interpretable in target units and penalizes large errors. Use MAPE cautiously when true values can be near zero, because percentage errors become unstable.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="alert alert-block alert-info">
+<b>Decision pattern:</b> Objective → Primary metric → Guardrails → Threshold policy.
+</div></section>
+<section id="choosing-metrics-for-product-decisions-wrap-up">
+<h3>Choosing Metrics for Product Decisions (Wrap-up)<a class="headerlink" href="#choosing-metrics-for-product-decisions-wrap-up" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Business objective</strong>: Define the outcome to optimize (e.g., catch fraud, reduce churn).</p></li>
+<li><p><strong>Primary metric</strong>: Pick one decision metric (e.g., Recall at threshold, PR AUC, RMSE).</p></li>
+<li><p><strong>Guardrail metric(s)</strong>: Add metrics that prevent harmful trade-offs (e.g., precision, FPR, review cost).</p></li>
+<li><p><strong>Threshold policy</strong>: Set and revisit thresholds based on estimated benefit vs. cost.</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+Use this sequence in stakeholder updates: objective → primary metric → guardrails → threshold decision.
+</div></section>
+<section id="resources">
+<h3>Resources<a class="headerlink" href="#resources" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://paulvanderlaken.com/2019/08/16/roc-auc-precision-and-recall-visually-explained/">roc-auc-precision-and-recall-visually-explained</a></p>
+<p><a class="reference external" href="https://www.amazon.com/Building-Machine-Learning-Powered-Applications/dp/149204511X">Building Machine Learning Powered Applications</a> - Emmanuel Ameisen</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions/aipm_sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../11_Evaluation_Metrics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Evaluation Metrics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../12_Logistic_Regression.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Logistic Regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orientation">Orientation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-model-performance">Evaluate Model Performance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#short-recap-on-regression-metrics">Short Recap on Regression Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-metrics-can-we-use-to-evaluate-model-performance">Which Metrics Can We Use to Evaluate Model Performance?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-talk-about-classification">Let’s Talk About Classification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks">Drawbacks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-might-not-be-good-enough">Accuracy Might Not Be Good Enough</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-and-recall">Precision and Recall</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-proportion-of-actual-positives-was-predicted-correctly">What Proportion of Actual Positives Was Predicted Correctly?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tweaking-the-model">Tweaking the Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Tweaking the Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#after-tweaking-the-model">After Tweaking the Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-proportion-of-positive-predictions-is-actually-correct">What Proportion of Positive Predictions Is Actually Correct?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-recall-curve">Precision-Recall Curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Precision-Recall Curve</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f1-score">F1-Score</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">F1-Score</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-take-negatives-into-the-equation">Let’s Take Negatives into the Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-proportion-of-actual-negatives-was-predicted-as-positives">What Proportion of Actual Negatives Was Predicted as Positives?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-proportion-of-actual-negatives-was-predicted-correctly">What Proportion of Actual Negatives Was Predicted Correctly?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#receiver-operating-characteristic-roc-curve">Receiver Operating Characteristic (ROC) Curve</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#roc-and-the-area-under-the-curve-roc-auc">ROC and the Area Under the Curve (ROC AUC)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-of-roc-curve">Explanation of ROC Curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Explanation of ROC Curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imbalanced-classes">Imbalanced Classes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#going-beyond-aggregated-metrics">Going Beyond Aggregated Metrics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate-your-model-inspect-how-it-performs">Validate Your Model → Inspect How It Performs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#product-goal-metric-choice-quick-guide">Product Goal → Metric Choice (Quick Guide)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-metrics-for-product-decisions-wrap-up">Choosing Metrics for Product Decisions (Wrap-up)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

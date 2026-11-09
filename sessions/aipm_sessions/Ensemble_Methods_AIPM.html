@@ -1,0 +1,1354 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Ensemble Methods - Practical Overview &#8212; DS Course Material</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=738afb81" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sessions/aipm_sessions/Ensemble_Methods_AIPM';</script>
+    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Designing Data Products" href="../17_Data_Products.html" />
+    <link rel="prev" title="Ensemble Methods - Part 2" href="../16_Ensemble_Methods_part2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/nf_logo_orange.png" class="logo__image only-light" alt="DS Course Material - Home"/>
+    <img src="../../_static/nf_logo_orange.png" class="logo__image only-dark pst-js-only" alt="DS Course Material - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Coding fundamentals &amp; Introduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_Orientation.html">Welcome to the <br/> Data Science &amp; AI Bootcamp!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Git_Workflows.html">Let’s talk about git..</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Intro_to_Data_Science_ML.html">Introduction to Data Science &amp; ML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Intro_to_AIPM.html">Introduction to AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_Ethics_Data_Science.html">Ethics in Data Science</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.1_Intro_to_Databases.html">Introduction to Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05.2_Intro_to_SQL.html">Introduction to SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.1_Gestalt_Principles.html">Gestalt <del>Laws</del> Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06.2_Fantastic_Charts.html">Introduction to Visualisation Charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Intro_EDA.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07.2_EDA_process.html">EDA &amp; Presenting your Results</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Basics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../08_Linear_Regression.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Linear_Regression_AIPM.html">Linear Regression AIPM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.1_Bias_Variance_Tradeoff.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bias_Variance_Tradeoff_AIPM.html">Bias Variance Tradeoff</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09.2_Regularization.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../10_Gradient_Descent.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_Evaluation_Metrics.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Evaluation_Metrics_AIPM.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_Logistic_Regression.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Logistic_Regression_AIPM.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_KNN_Distance_Metrics.html">KNN &amp; Distance Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14_Testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../15_Decision_Tree.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Decision_Tree_AIPM.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Recap.html">Recap</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">More Machine Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../16_Ensemble_Methods_part1.html">Ensemble Methods - Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../16_Ensemble_Methods_part2.html">Ensemble Methods - Part 2</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Ensemble Methods - Practical Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../17_Data_Products.html">Designing Data Products</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../18_Neural_Networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ANN_AIPM.html">Artificial Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../19_Image_Modelling.html">Image Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../20_Capstone_Phase.html">Capstone Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../21_Time_Series_Analysis_Intro.html">Time Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../22_Dimensionality_Reduction.html">Unsupervised Learning - Dimensionality Reduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../23_Clustering.html">Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../24_NLP_Intro.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NLP_AIPM.html">Natural Language Processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25.1_Prompt_Engineering.html">Prompt Engineering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../25.2_RAG_Systems.html">RAG Systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../26_AI_Agents.html">AI Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../27_Distributions_CI.html">Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../28_Hypothesis_Testing.html">Hypothesis Testing And A/B Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../29_Recommender_Systems.html">Recommender Systems, an Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../30_MCP.html">Model Context Protocol (MCP)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../31_Streamlit.html">Streamlit — From Analysis to Application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Streamlit_AIPM.html">Streamlit — From AI Prototype to Product</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Rapid Assessment Test</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/01_Git_RAT.html">Git and Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/02_Intro_to_ML_RAT.html">Intro to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/03_Python_Part_1_RAT.html">Python Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/04_Python_Part_2_RAT.html">Python Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/05_pandas_NumPy.html">pandas &amp; NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/06_EDA_RAT.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/07_Linear_Regression_RAT.html">Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/08_Bias_Variance_RAT.html">Bias Variance Trade-Off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/09_Gradient_Descent_RAT.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/10_Evaluation_Metrics_RAT.html">Evaluation Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/11_Logistic_Regression_RAT.html">Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/12_KNN_RAT.html">K-nearest Neighbors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/13_Decision_Trees_RAT.html">Decision Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/14_Ensemble_Methods_RAT.html">Ensemble Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/15_CNNs_RAT.html">Convolutional Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../RATs/16_Clustering_RAT.html">Clustering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Job Interview Questions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_01.html">Bias-Variance Tradeoff &amp; Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_02.html">Supervised vs Unsupervised ML &amp; Data Cleaning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_03.html">Data Roles &amp; Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_04.html">Favorite ML model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_05.html">Data Science Lifecycle &amp; Missing data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_06.html">Train-Test split &amp; Scaling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_07.html">Dimensionality reduction &amp; PCA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_08.html">SQL &amp; Relational Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_09.html">Evaluation-Metrics &amp; ROC-Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_10.html">Random Forest &amp; Black-box vs White-box</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_12.html">Deep Learning &amp; Backpropagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_13.html">Cross-Validation &amp; Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_14.html">Time-Series Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_15.html">Unbalanced data &amp; Outlier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_16.html">Categorical Features &amp; Data Leakage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_17.html">Normal Distribution &amp; Skewness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_18.html">Success Metrics &amp; Confusion Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Job_Interview/Day_19.html">Correlation</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Ensemble Methods - Practical Overview</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-cart-classification-and-regression-trees">1. Recap CART - Classification and regression trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cart-classification-and-regression-tree">CART (Classification and Regression Tree)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cart">CART</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cart-pros-and-cons">CART - pros and cons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trees-being-unstable">Trees being unstable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trees-being-greedy-and-overfitting">2. Trees being greedy and overfitting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wisdom-of-crowds-theory">Wisdom of Crowds Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging">Bagging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrapping">Bootstrapping</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#majority-voting-how-it-works">Majority Voting - how it works</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Majority Voting - how it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-voting">Hard Voting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-voting">Soft Voting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#majority-voting-why-it-works">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-weak-learners">Example of weak learners</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Example of weak learners</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-variance-by-aggregation">Reducing variance by aggregation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">Random forest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Random Forest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-trees-extremely-randomized-trees">Extra-Trees - Extremely Randomized Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-vs-variance">Accuracy vs variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#out-of-bag-evaluation">Out-of-Bag Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boosting">Boosting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boosting-algorithm">Boosting algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Boosting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#well-known-boosting-algorithms">Well-known Boosting Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacking">Stacking</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-learning-leveraging-multiple-perspectives">Ensemble Learning: Leveraging Multiple Perspectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Ensemble Learning: Leveraging Multiple Perspectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-comparison-which-ensemble-should-i-use">Quick Comparison: Which Ensemble Should I Use?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibrated-probabilities">Calibrated probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-of-predicted-probabilities">Frequency of predicted probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-black-box-models-like-ensemble-models">Interpreting black box models (like ensemble models)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-dependence-plots-pros">Partial dependence plots - Pros</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-dependence-plots-cons">Partial dependence plots - Cons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-feature-importance-pros">Permutation feature importance - Pros</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-feature-importance-cons">Permutation feature importance - Cons</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ensemble-methods-practical-overview">
+<h1>Ensemble Methods - Practical Overview<a class="headerlink" href="#ensemble-methods-practical-overview" title="Link to this heading">#</a></h1>
+<p>Notes:<br />
+This session is adapted for the AIPM cohort.<br />
+Focus: choosing the right ensemble approach for product and business problems, not deriving formulas.</p>
+<p>Notes:<br />
+“recap” in case random forests have been shown the day before.</p>
+<section id="recap-cart-classification-and-regression-trees">
+<h2>1. Recap CART - Classification and regression trees<a class="headerlink" href="#recap-cart-classification-and-regression-trees" title="Link to this heading">#</a></h2>
+<section id="cart-classification-and-regression-tree">
+<h3>CART (Classification and Regression Tree)<a class="headerlink" href="#cart-classification-and-regression-tree" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p><strong>General:</strong></p>
+<ul class="simple">
+<li><p>Finding the globally best split sequence is computationally hard.</p></li>
+<li><p>CART uses a greedy strategy: best split now, then repeat.</p></li>
+<li><p>At each node, CART picks the <strong>best feature</strong> and <strong>best threshold</strong> for that local split.</p></li>
+</ul>
+<p><strong>How split quality is measured:</strong></p>
+<ul>
+<li><p>Regression: pick splits that reduce average prediction error (MSE).</p></li>
+<li><p>Classification: pick splits that increase class purity (for example with Gini impurity).</p>
+  </div>
+  <br><br><br>
+  <div class="images_30">
+      <img src="../../images/decision_tree/img_p13_1.png">
+  </div>
+</li>
+</ul>
+</div> <div class="alert alert-block alert-info">
+<b>Note:</b> 
+NP-complete (nondeterministic polynomial-time complete) defines a problem which is easy to understand, easy to verify but difficult to solve e.g. a jigsaw puzzle.
+</div></section>
+<section id="cart">
+<h3>CART<a class="headerlink" href="#cart" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p><strong>Regularisation:</strong></p>
+<ul>
+<li><p>pruning to avoid overfitting</p></li>
+<li><p>Grow a full tree and then prune e.g.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">max_leaves</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_depth</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_sample_size</span></code></p></li>
+</ul>
+  </div>
+  <br><br><br>
+  <div class="images_30">
+      <img src="../../images/decision_tree/img_p13_1.png">
+  </div>
+</li>
+</ul>
+</div> 
+</section>
+<section id="cart-pros-and-cons">
+<h3>CART - pros and cons<a class="headerlink" href="#cart-pros-and-cons" title="Link to this heading">#</a></h3>
+<br>
+<table class="confusion_matrix" border="1" width="1400">
+  <thead>
+    <tr>
+      <th><b>PROS</b></th>
+      <th><b>CONS</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="smaller-font-size">white box model - easy to interpret</td>
+      <td class="smaller-font-size">not very accurate ...</td>
+    </tr>
+    <tr>
+      <td class="smaller-font-size">can handle mixed data, discrete and continuous</td>
+      <td class="smaller-font-size">greedy nature of constructing</td>
+    </tr>
+    <tr>
+      <td class="smaller-font-size">insensitive to transformations of data... split points based on ranking  </td>
+      <td class="smaller-font-size">trees are unstable, small changes to the input can lead to large changes in tree structure</td>
+    </tr>
+    <tr>
+      <td class="smaller-font-size">relative robust to outliers</td>
+      <td class="smaller-font-size">tend to overfit (aka high variance estimators)</td>
+    </tr>
+  </tbody>
+</table></section>
+<section id="trees-being-unstable">
+<h3>Trees being unstable<a class="headerlink" href="#trees-being-unstable" title="Link to this heading">#</a></h3>
+<p><strong>Q:</strong> Should you trust and follow a single CART?</p>
+<div class="group">
+    <div class="text_70">       
+<ul>
+<li><p>Small data changes can produce very different tree structures and decisions.</p></li>
+<li><p>As in investing, it is risky to put all eggs in one basket.</p>
+  </div>
+  <div class="images_30">   
+      <img src="../../images/ensemble_methods/img_p7_1.png">
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="trees-being-greedy-and-overfitting">
+<h3>2. Trees being greedy and overfitting<a class="headerlink" href="#trees-being-greedy-and-overfitting" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p>How to find out what to order at the restaurant?</p>
+<ul class="simple">
+<li><p><strong>Try everything!</strong> <br>… and then order what you liked best.</p></li>
+<li><p><strong>Ask your friends to try something</strong>, <br>find out which they preferred more and try those maybe?</p></li>
+</ul>
+<p><strong>Q:</strong> Which do you find more feasible?
+</div>
+<br><br><br>
+<div class="images_30">
+<img src="../../images/ensemble_methods/eating_cloud.png">
+</div></p>
+</div> 
+<center>
+    <img src="../../images/ensemble_methods/img_p9_1.png" position="center" size="cover">
+</center></section>
+</section>
+<section id="wisdom-of-crowds-theory">
+<h2>Wisdom of Crowds Theory<a class="headerlink" href="#wisdom-of-crowds-theory" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Diversity of opinions</p></li>
+<li><p>Independence of opinions</p></li>
+<li><p>Decentralisation</p></li>
+<li><p>Aggregation</p></li>
+</ul>
+<section id="bagging">
+<h3>Bagging<a class="headerlink" href="#bagging" title="Link to this heading">#</a></h3>
+<p><span class="color-brand" style="font-weight:bold;">B</span>ootstrap <span class="color-brand" style="font-weight:bold;">agg</span>regat<span class="color-brand" style="font-weight:bold;">ing</span></p>
+<p>Train many models on different bootstrap samples, then combine predictions:</p>
+<ul class="simple">
+<li><p>Classification: majority vote</p></li>
+<li><p>Regression: average prediction</p></li>
+</ul>
+<p>Training many <strong>different trees</strong> on <strong>different subsets</strong> of data chosen randomly with replacement.</p>
+<p>Notes:<br />
+mean (instead of mode) when we have a regression problem.</p>
+</section>
+<section id="bootstrapping">
+<h3>Bootstrapping<a class="headerlink" href="#bootstrapping" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p><strong>Intuition:</strong> Create many training samples from one dataset by…</p>
+<p>…<em>sampling with replacement</em>
+</div>
+<br><br><br>
+<div class="images_30">
+<img src="../../images/ensemble_methods/bootstrapping.png">
+</div></p>
+</div><p>Notes:</p>
+<ol class="arabic simple">
+<li><p>In Random Forest, we sample observations with replacement for each tree.</p></li>
+<li><p>We also sample a subset of features to increase model diversity.</p></li>
+<li><p>Repeating this process creates many different trees.</p></li>
+</ol>
+<p>Bootstrapping resamples one dataset into many simulated samples. Each sample trains one model, and predictions are aggregated by voting (classification) or averaging (regression).</p>
+<p>Reference: <a class="reference external" href="https://statisticsbyjim.com/hypothesis-testing/bootstrapping/">https://statisticsbyjim.com/hypothesis-testing/bootstrapping/</a></p>
+</section>
+</section>
+<section id="majority-voting-how-it-works">
+<h2>Majority Voting - how it works<a class="headerlink" href="#majority-voting-how-it-works" title="Link to this heading">#</a></h2>
+<p>For <strong>each observation</strong> you have <strong>different predictions</strong> from <strong>different models</strong></p>
+<p>You need one prediction… so you aggregate</p>
+<p>Aggregating the different models can be done in many ways e.g. averages, mode, median</p>
+<section id="id1">
+<h3>Majority Voting - how it works<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>For each observation you have different predictions. How do you aggregate this to get one value?</p>
+</section>
+<section id="hard-voting">
+<h3>Hard Voting<a class="headerlink" href="#hard-voting" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+takes the majority  
+class 
+    </div>
+    <br><br><br>
+    <div class="images_30">
+        <img src="../../images/ensemble_methods/hard_voting.png">
+    </div>
+</div> 
+</section>
+<section id="soft-voting">
+<h3>Soft Voting<a class="headerlink" href="#soft-voting" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+average of summed probability 
+vectors  
+    </div>
+    <br><br><br>
+    <div class="images_30">
+        <img src="../../images/ensemble_methods/hard_voting.png">
+    </div>
+</div> 
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Soft voting tends to outperform hard voting.</p>
+</div></section>
+<section id="majority-voting-why-it-works">
+<h3>Majority Voting - why it works<a class="headerlink" href="#majority-voting-why-it-works" title="Link to this heading">#</a></h3>
+<p>When models make different mistakes, combining them cancels out part of the noise.</p>
+<p>Key idea:</p>
+<ul class="simple">
+<li><p>Averaging multiple predictions usually makes results more stable than relying on one model.</p></li>
+<li><p>The gain is strongest when models are both:</p>
+<ul>
+<li><p>individually better than random</p></li>
+<li><p>not too similar to each other</p></li>
+</ul>
+</li>
+<li><p>If all models are highly correlated, the benefit drops.</p></li>
+</ul>
+<p>Practical takeaway for AIPM:</p>
+<ul class="simple">
+<li><p>More models is not automatically better.</p></li>
+<li><p>Better diversity in models and data slices often matters more than raw model count.</p></li>
+</ul>
+<p>A business-friendly way to explain this:</p>
+<ul class="simple">
+<li><p>Imagine asking many analysts for the same forecast.</p></li>
+<li><p>If each analyst has small independent errors, the average forecast is usually closer to reality.</p></li>
+<li><p>If all analysts copy each other, you lose that benefit.</p></li>
+</ul>
+<p>So ensemble quality depends on two levers:</p>
+<ol class="arabic simple">
+<li><p>Competence of each learner</p></li>
+<li><p>Diversity across learners</p></li>
+</ol>
+</section>
+<section id="id2">
+<h3>Majority Voting - why it works<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Model error has three parts in practice:</p>
+<ul class="simple">
+<li><p>bias: model is too simple for the pattern</p></li>
+<li><p>variance: model is too sensitive to training noise</p></li>
+<li><p>irreducible noise: randomness in the real world</p></li>
+</ul>
+<p>Bagging and Random Forests are especially useful for reducing variance.</p>
+<p>Notes:<br />
+Students might remember this Error Decomposition from Bias-Variance Tradeoff lesson.<br />
+While the Bias is small for decision trees, the variance gets small by using many of them (RF). Unfortunately bootstrapping can lead to correlations between the trees.</p>
+</section>
+<section id="id3">
+<h3>Majority Voting - why it works<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p><strong>Intuition:</strong> not all classifiers fail on the same observation at the same time.</p>
+<p><strong>Prerequisites:</strong></p>
+<ul>
+<li><p>models should be better than random (weak learners)</p></li>
+<li><p>models should be diverse (low correlation)</p></li>
+<li><p>you need a sufficient number of learners</p>
+  </div>
+  <br><br><br>
+  <div class="images_30">
+      <img src="../../images/ensemble_methods/multible_learners.png">
+  </div>
+</li>
+</ul>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>In classification, a weak learner performs slightly better than random guessing.</p>
+</div><p>Notes:<br />
+This statement refers to weak classification learners.<br />
+In context of regression weak learners: They should at least be slightly better than simple average or simple linear regression.</p>
+</section>
+<section id="id4">
+<h3>Majority Voting - why it works<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+<p><strong>What does model independence mean?</strong></p>
+<p>If two weak learners are highly correlated, they tend to repeat the same mistakes.
+</div>
+<br>
+<div class="images_30">
+<img src="../../images/ensemble_methods/weak_learners.png">
+<strong><span class="color-brand">A weak learner is at least slightly better than random.</span></strong>
+</div></p>
+</div>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>You can demonstrate this with simulation (for example, repeated coin-toss style experiments) without using formal derivations.</p>
+</div></section>
+<section id="example-of-weak-learners">
+<h3>Example of weak learners<a class="headerlink" href="#example-of-weak-learners" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>If each learner is correct only slightly more than half the time,
+majority voting can still produce a strong ensemble.</p>
+<p>Scenario:</p>
+<ul class="simple">
+<li><p>1000 learners</p></li>
+<li><p>each learner: about 51 percent accurate</p></li>
+</ul>
+<p>Even this small edge can produce a much better combined decision.
+</div>
+<div class="images">
+Cumulative distribution function (cdf)
+<img src="../../images/ensemble_methods/img_p21_1.png" width=400>
+</div></p>
+</div> </section>
+<section id="id5">
+<h3>Example of weak learners<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>If learner quality increases a bit more, ensemble reliability improves sharply.</p>
+<p>Scenario:</p>
+<ul class="simple">
+<li><p>1000 learners</p></li>
+<li><p>each learner: about 55 percent accurate</p></li>
+</ul>
+<p>The chance that majority voting is wrong becomes very small.
+</div>
+<div class="images">
+Cumulative distribution function (cdf)
+<img src="../../images/ensemble_methods/img_p22_1.png" width=400>
+</div></p>
+</div> </section>
+<section id="reducing-variance-by-aggregation">
+<h3>Reducing variance by aggregation<a class="headerlink" href="#reducing-variance-by-aggregation" title="Link to this heading">#</a></h3>
+<center>
+    <img src="../../images/ensemble_methods/img_p14_1.png" position="center">
+</center></section>
+<section id="random-forest">
+<h3>Random forest<a class="headerlink" href="#random-forest" title="Link to this heading">#</a></h3>
+<p>Random Forest decorrelates trees by introducing randomness in both data and features.</p>
+<ul class="simple">
+<li><p>randomly chosen <strong>subset of input variables (features)</strong></p>
+<ul>
+<li><p>different features are considered at different nodes</p></li>
+</ul>
+</li>
+<li><p>randomly chosen <strong>subset of observations</strong></p>
+<ul>
+<li><p>creates out-of-bag instances for validation</p></li>
+</ul>
+</li>
+</ul>
+<p>Random Forest usually improves predictive performance, but reduces interpretability versus a single tree.</p>
+</section>
+<section id="id6">
+<h3>Random Forest<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+using several 
+decision trees
+    </div>
+    <br><br><br>
+    <div class="images_30">
+        <img src="../../images/ensemble_methods/randomforest_concept.png">
+    </div>
+</div> 
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Running same learning algorithms on different subsets can result in still highly correlated predictors.</p>
+</div></section>
+<section id="extra-trees-extremely-randomized-trees">
+<h3>Extra-Trees - Extremely Randomized Trees<a class="headerlink" href="#extra-trees-extremely-randomized-trees" title="Link to this heading">#</a></h3>
+<p>Introduce even more randomness</p>
+<ul class="simple">
+<li><p>For each node, random split points are generated (rather than exhaustively testing all possibilities).<br />
+The splitting point with the best outcome is used for that node.</p></li>
+<li><p><em>All</em> the data in train is used to build each split (no bootstrapping).<br />
+(But like in random forest, a subset of random features is used.)</p></li>
+<li><p>The trees are usually not pruned (similar to random forest).</p></li>
+</ul>
+<p>Notes:<br />
+(One common implementation approach.)</p>
+<ol class="arabic simple">
+<li><p>More random split selection can increase bias but reduce correlation and training cost.</p></li>
+<li><p>Lower correlation improves the ensemble effect.</p></li>
+<li><p>Overall, this can still lead to strong generalization.</p></li>
+</ol>
+<p>In summary: ensembles reduce variance most effectively when base learners are diverse.</p>
+</section>
+<section id="accuracy-vs-variance">
+<h3>Accuracy vs variance<a class="headerlink" href="#accuracy-vs-variance" title="Link to this heading">#</a></h3>
+<p><strong>Accuracy</strong></p>
+<ul class="simple">
+<li><p>Random Forest and Extra Trees outperform Decision Trees</p></li>
+</ul>
+<p><strong>Variance</strong></p>
+<ul class="simple">
+<li><p>Decision trees → high</p></li>
+<li><p>Random Forest → medium</p></li>
+<li><p>Extra Trees → low</p></li>
+</ul>
+<p>Notes:<br />
+bagging helps decrease variance and reduce overfitting of base models<br />
+boosting helps decrease bias by correcting errors iteratively<br />
+stacking improves overall error by combining complementary model families</p>
+</section>
+<section id="out-of-bag-evaluation">
+<h3>Out-of-Bag Evaluation<a class="headerlink" href="#out-of-bag-evaluation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For each model, there are instances that are not trained on (because of the replacement). They are called out-of-bag instances (oob).</p></li>
+<li><p>oobs are used for evaluation without the need for a separate validation set (out of bag error)</p></li>
+</ul>
+</section>
+<section id="boosting">
+<h3>Boosting<a class="headerlink" href="#boosting" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Boosting builds a strong model by adding weak learners step by step.</p>
+<p>Where:</p>
+<ul class="simple">
+<li><p>each new learner focuses on errors made so far</p></li>
+<li><p>later learners are trained on a reweighted or residual-focused view of the data</p></li>
+<li><p>learners are added <strong>sequentially</strong>, not independently</p></li>
+<li><p>decision trees are common base learners</p></li>
+</ul>
+<p>AIPM intuition: think of iterative error-correction, where each round targets what the previous round missed.
+</div>
+<div class="images">
+<img src="../../images/ensemble_methods/boosting_step.png" width="750">
+</div></p>
+</div> </section>
+<section id="boosting-algorithm">
+<h3>Boosting algorithm<a class="headerlink" href="#boosting-algorithm" title="Link to this heading">#</a></h3>
+<p>INIT</p>
+<ul class="simple">
+<li><p>Start with equal weight for all training instances.</p></li>
+</ul>
+<p>LOOP</p>
+<ul class="simple">
+<li><p>Increase attention on previously mispredicted cases (or residuals).</p></li>
+<li><p>Train the next learner.</p></li>
+<li><p>Combine all learners into one weighted prediction.</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>Boosting<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>We do not go back and adjust earlier parameters → method is called <strong>forward stagewise additive modeling</strong>
+</div>
+<div class="images">
+<img src="../../images/ensemble_methods/boosting.png">
+</div></p>
+</div><p>Notes:<br />
+Compared with bagging, boosting does not train all models independently.<br />
+Instead, each new learner focuses on what previous learners missed.<br />
+Instance weighting and learner weighting are related but distinct concepts.</p>
+</section>
+<section id="well-known-boosting-algorithms">
+<h3>Well-known Boosting Algorithms<a class="headerlink" href="#well-known-boosting-algorithms" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Algorithm</p></th>
+<th class="head"><p>Key Characteristics</p></th>
+<th class="head"><p>Pros</p></th>
+<th class="head"><p>Cons</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AdaBoost</p></td>
+<td><p>- Focuses on misclassified samples<br>- Assigns weights to weak learners</p></td>
+<td><p>- Simple and intuitive<br>- Effective for binary classification<br>- Less prone to overfitting</p></td>
+<td><p>- Sensitive to noisy data and outliers<br>- Can be computationally expensive<br></p></td>
+</tr>
+<tr class="row-odd"><td><p>Gradient Boosting</p></td>
+<td><p>- Instead of weighing difficult datapoint, GB cares for the <em>residuals</em><br>- Uses gradient descent for minimization<br>- Builds trees sequentially</p></td>
+<td><p>- Flexible and versatile<br>- Handles different loss functions<br>- Good performance on various tasks</p></td>
+<td><p>- Can be slow to train<br>- Prone to overfitting if not tuned properly<br>- Requires careful parameter tuning</p></td>
+</tr>
+<tr class="row-even"><td><p>XGBoost</p></td>
+<td><p>- Regularized form of Gradient Boosting<br>- Uses second-order gradients<br>- most widely used</p></td>
+<td><p>- Fast and efficient (parallelization)<br>- Handles missing values well<br>- Built-in regularization</p></td>
+<td><p>- Can be memory-intensive<br>- May overfit on small datasets<br>- Complex to tune</p></td>
+</tr>
+<tr class="row-odd"><td><p>LightGBM</p></td>
+<td><p>- Uses histogram-based algorithms<br>- Leaf-wise tree growth</p></td>
+<td><p>- Fast training and prediction<br>- Low memory usage<br>- Handles large datasets efficiently</p></td>
+<td><p>- May overfit on small datasets<br>- Sensitive to overfitting if not configured properly<br>- Less interpretable than simpler models</p></td>
+</tr>
+<tr class="row-even"><td><p>CatBoost</p></td>
+<td><p>- Handles categorical features automatically<br>- Uses ordered boosting</p></td>
+<td><p>- Excellent performance on categorical data<br>- Good default parameters<br>- Less prone to overfitting</p></td>
+<td><p>- Can be slower than other algorithms<br>- May underperform on purely numerical data<br>- Limited hyperparameter tuning options</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notes:<br />
+In boosting, difficult instances often get higher importance in later rounds.<br />
+How learner outputs are weighted depends on the algorithm:</p>
+<ul class="simple">
+<li><p>AdaBoost weights learners by individual performance.</p></li>
+<li><p>Gradient Boosting adds learners to reduce residual error step by step.</p></li>
+</ul>
+<p>Choose among algorithms based on data type, compute budget, and tuning capacity.</p>
+</section>
+<section id="stacking">
+<h3>Stacking<a class="headerlink" href="#stacking" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text_70">
+combining different  
+models 
+    </div>
+    <br><br><br>
+    <div class="images_30">
+        <img src="../../images/ensemble_methods/stacking.png">
+    </div>
+</div> 
+<p>Notes:</p>
+<ul class="simple">
+<li><p>Base models generate predictions from training data.</p></li>
+<li><p>These predictions become new features for a final model (meta-learner).</p></li>
+<li><p>To avoid leakage, do not train the meta-learner on predictions from the same rows used to train base models.</p></li>
+<li><p>Use either:</p>
+<ul>
+<li><p>a holdout set (blending), or</p></li>
+<li><p>out-of-fold predictions from cross-validation.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="ensemble-learning-leveraging-multiple-perspectives">
+<h2>Ensemble Learning: Leveraging Multiple Perspectives<a class="headerlink" href="#ensemble-learning-leveraging-multiple-perspectives" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="text_70">
+<p>A collection of models working together to produce a single, stronger prediction.</p>
+<p><strong>Key Strategies:</strong></p>
+<ul>
+<li><p><strong><span class="color-brand">Bagging</span></strong>: trains independent models on random subsets to reduce variance.</p></li>
+<li><p><strong><span class="color-brand">Boosting</span></strong>: trains sequentially to correct errors and reduce bias.</p></li>
+<li><p><strong><span class="color-brand">Stacking</span></strong>: combines different model families with a meta-learner.</p>
+  </div>
+  <br><br><br>
+  <div class="images_30">
+      <img src="../../images/ensemble_methods/more_opinions.png">
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="id8">
+<h2>Ensemble Learning: Leveraging Multiple Perspectives<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<div class="group">
+    <div class="text_70">
+<p><strong>AIPM selection guide:</strong></p>
+<ul class="simple">
+<li><p>Use <strong>Bagging / Random Forest</strong> for fast, strong tabular baselines with lower overfitting risk.</p></li>
+<li><p>Use <strong>Extra Trees</strong> when you want speed and strong variance reduction.</p></li>
+<li><p>Use <strong>Boosting</strong> when top predictive performance matters and tuning time is available.</p></li>
+<li><p>Use <strong>Stacking</strong> when you already have several good but different models.</p></li>
+</ul>
+<p><strong>Core advantages:</strong></p>
+<ul>
+<li><p>better robustness</p></li>
+<li><p>better generalization</p></li>
+<li><p>less dependence on one model’s blind spots</p>
+  </div>
+  <br><br><br>
+  <div class="images_30">
+      <img src="../../images/ensemble_methods/more_opinions.png">
+  </div>
+</li>
+</ul>
+</div><p>Notes:<br />
+This overview slide helps students reset the mental map after finishing bagging and before moving into boosting.</p>
+</section>
+<section id="quick-comparison-which-ensemble-should-i-use">
+<h2>Quick Comparison: Which Ensemble Should I Use?<a class="headerlink" href="#quick-comparison-which-ensemble-should-i-use" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Technique</p></th>
+<th class="head"><p>Best when</p></th>
+<th class="head"><p>Strengths</p></th>
+<th class="head"><p>Trade-offs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Bagging / Random Forest</p></td>
+<td><p>You need a strong baseline fast on tabular data</p></td>
+<td><p>Stable, robust, low tuning effort, handles nonlinearity</p></td>
+<td><p>Less interpretable than one tree; can be large</p></td>
+</tr>
+<tr class="row-odd"><td><p>Extra Trees</p></td>
+<td><p>You want faster training and lower variance</p></td>
+<td><p>Very fast, strong variance reduction, good default behavior</p></td>
+<td><p>Slightly higher bias than Random Forest in some cases</p></td>
+</tr>
+<tr class="row-even"><td><p>Gradient Boosting family</p></td>
+<td><p>You need top predictive performance</p></td>
+<td><p>Often best accuracy on structured data; flexible objectives</p></td>
+<td><p>More tuning, longer training, easier to overfit</p></td>
+</tr>
+<tr class="row-odd"><td><p>XGBoost / LightGBM / CatBoost</p></td>
+<td><p>You have medium-to-large data and care about leaderboard-level quality</p></td>
+<td><p>Efficient implementations, advanced regularization, strong practical performance</p></td>
+<td><p>Tool choice and tuning complexity increase</p></td>
+</tr>
+<tr class="row-even"><td><p>Stacking</p></td>
+<td><p>You already have several diverse good models</p></td>
+<td><p>Can improve performance by combining complementary strengths</p></td>
+<td><p>Higher complexity, stricter validation setup, harder to debug</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>AIPM rule of thumb:</p>
+<ol class="arabic simple">
+<li><p>Start with Random Forest as your baseline.</p></li>
+<li><p>Move to boosting when baseline quality is not enough.</p></li>
+<li><p>Use stacking only when the extra complexity is justified by business impact.</p></li>
+</ol>
+<div class="alert alert-block alert-info">
+<b>Note:</b> 
+<p>Methods based on the values of the probabilities need to return calibrated probabilities.</p>
+</div><p>Notes:<br />
+Classifiers output probabilities, but those probabilities are often not perfectly calibrated.<br />
+Calibration maps raw model confidence to probabilities that better match observed outcomes.</p>
+<p>Core idea: for a well-calibrated model, predictions around a given confidence level should be correct at about that same frequency.</p>
+<section id="calibrated-probabilities">
+<h3>Calibrated probabilities<a class="headerlink" href="#calibrated-probabilities" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>Fitting a regressor (called a calibrator) that maps the output of the classifier (decision_function or predict_proba) to a calibrated probability in [0, 1]</p>
+<p><a class="reference external" href="https://scikit-learn.org/stable/modules/calibration.html">sklearn - calibrated probabilities</a>
+</div>
+<div class="images">
+<img src="../../images/ensemble_methods/img_p56_3_1.png">
+</div></p>
+</div><p>Notes:<br />
+Calibration workflow:</p>
+<ol class="arabic simple">
+<li><p>Collect predicted probabilities and true labels.</p></li>
+<li><p>Group predictions into probability bins.</p></li>
+<li><p>Compare predicted confidence with observed positive rate in each bin.</p></li>
+<li><p>Fit a calibrator to map raw probabilities to calibrated probabilities.</p></li>
+</ol>
+</section>
+<section id="frequency-of-predicted-probabilities">
+<h3>Frequency of predicted probabilities<a class="headerlink" href="#frequency-of-predicted-probabilities" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<p>confidence and falsehood vs. shyness and correctness</p>
+<p><em>example</em>
+</div>
+<div class="images">
+<img src="../../images/ensemble_methods/img_p56_3_2.png">
+</div></p>
+</div><p>Notes:<br />
+This chart shows how often each classifier predicts different confidence levels.<br />
+It is related to model behavior, not calibration quality by itself.</p>
+<ul class="simple">
+<li><p>U-shaped curves: more confident predictions.</p></li>
+<li><p>Mountain-shaped curves: more cautious predictions around 50-50.</p></li>
+</ul>
+</section>
+<section id="interpreting-black-box-models-like-ensemble-models">
+<h3>Interpreting black box models (like ensemble models)<a class="headerlink" href="#interpreting-black-box-models-like-ensemble-models" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Linear models are popular due to interpretability, but poor performance</p></li>
+<li><p>Conclusions on the importance of a variable should be based on models with good accuracy</p></li>
+<li><p>Some of the approaches for measuring the effect of variables:</p>
+<ul>
+<li><p>partial dependence plot</p></li>
+<li><p>permutation feature importance</p></li>
+</ul>
+</li>
+</ul>
+<p>Notes:<br />
+Why discuss interpretability here? Ensemble methods are often black-box models, but we still need feature-level insight for product decisions.<br />
+Two practical tools shown here are partial dependence plots (PDP) and permutation feature importance (PFI).</p>
+</section>
+<section id="partial-dependence-plots-pros">
+<h3>Partial dependence plots - Pros<a class="headerlink" href="#partial-dependence-plots-pros" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<ul>
+<li><p>Intuitive: the partial dependence function at a particular feature value represents the average prediction if we force all data points to assume that value</p></li>
+<li><p>causal interpretation (for the model)</p>
+  </div>
+  <div class="images">
+      <img src="../../images/ensemble_methods/img_p59_1.png">
+  </div>
+</li>
+</ul>
+</div><p>Notes:</p>
+<ol class="arabic simple">
+<li><p>Train the model.</p></li>
+<li><p>Set one feature to a fixed value across all rows.</p></li>
+<li><p>Predict and average the output.</p></li>
+<li><p>Repeat this across many values of that feature.</p></li>
+<li><p>Repeat for other features.</p></li>
+</ol>
+<p>This reveals how model predictions change as a feature value changes, while averaging over the rest.</p>
+</section>
+<section id="partial-dependence-plots-cons">
+<h3>Partial dependence plots - Cons<a class="headerlink" href="#partial-dependence-plots-cons" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<ul>
+<li><p>maximum 2 features per plot</p></li>
+<li><p>assumption of independence between features</p></li>
+<li><p>Some PDPs omit showing feature value distribution, risking misinterpretation.</p>
+  </div>
+  <div class="images">
+      <img src="../../images/ensemble_methods/img_p59_1.png">
+  </div>
+</li>
+</ul>
+</div></section>
+<section id="permutation-feature-importance-pros">
+<h3>Permutation feature importance - Pros<a class="headerlink" href="#permutation-feature-importance-pros" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<ul>
+<li><p>nice interpretation: the loss if the feature is removed</p></li>
+<li><p>it takes into account the interaction with other features</p></li>
+<li><p>does not require retraining the model</p>
+  </div>
+  <div class="images">
+      <img src="../../images/ensemble_methods/img_p60_1.png">
+  </div>
+</li>
+</ul>
+</div><p>Notes:</p>
+<ol class="arabic simple">
+<li><p>Evaluate baseline model performance (for example, accuracy or MSE).</p></li>
+<li><p>Shuffle one feature column.</p></li>
+<li><p>Re-evaluate performance and measure the drop.</p></li>
+<li><p>Repeat several times for stability.</p></li>
+</ol>
+<p>Larger performance drops indicate more important features.</p>
+</section>
+<section id="permutation-feature-importance-cons">
+<h3>Permutation feature importance - Cons<a class="headerlink" href="#permutation-feature-importance-cons" title="Link to this heading">#</a></h3>
+<div class="group">
+    <div class="text">
+<ul>
+<li><p>linked to the error of model</p></li>
+<li><p>doesn’t deal well with correlated features</p></li>
+<li><p>lacks directional insight</p>
+  </div>
+  <div class="images">
+      <img src="../../images/ensemble_methods/img_p60_1.png">
+  </div>
+</li>
+</ul>
+</div><p>Notes:<br />
+“Linked to model error”: if the model underfits or overfits, PFI can be misleading.<br />
+“Lacks directional insight”: PFI shows importance magnitude, but not whether increasing a feature pushes predictions up or down.</p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Machine learning a probabilistic perspective - Kevin p. Murphy</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1106.0257.pdf">https://arxiv.org/pdf/1106.0257.pdf</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1307.6522.pdf">https://arxiv.org/pdf/1307.6522.pdf</a></p></li>
+<li><p><a class="reference external" href="https://medium.com/&#64;sanchitamangale12/voting-classifier-1be10db6d7a5">Voting classifier blogpost</a></p></li>
+<li><p><a class="reference external" href="https://quantdare.com/what-is-the-difference-between-extra-trees-and-random-fo">Difference between extra trees and random forest</a></p></li>
+<li><p><a class="reference external" href="https://www.digitalocean.com/community/tutorials/adaboost-optimizer">Explaining Adaboost, also including bagging and stacking</a></p></li>
+<li><p><a class="reference external" href="https://classifier-calibration.github.io/videos/">Videos about calibration</a></p></li>
+<li><p><a class="reference external" href="https://machinelearningmastery.com/calibrated-classification-model-in-scikit-learn/">Calibration with sklearn</a></p></li>
+<li><p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book">Interpretable ML book</a></p></li>
+<li><p><a class="reference external" href="https://www.kaggle.com/dansbecker/partial-dependence-plots">Partial dependency plots</a></p></li>
+<li><p>→ <a class="reference external" href="https://shap.readthedocs.io/en/latest/">SHapley Additive exPlanations</a> ←</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./sessions/aipm_sessions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../16_Ensemble_Methods_part2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Ensemble Methods - Part 2</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../17_Data_Products.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Designing Data Products</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-cart-classification-and-regression-trees">1. Recap CART - Classification and regression trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cart-classification-and-regression-tree">CART (Classification and Regression Tree)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cart">CART</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cart-pros-and-cons">CART - pros and cons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trees-being-unstable">Trees being unstable</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trees-being-greedy-and-overfitting">2. Trees being greedy and overfitting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wisdom-of-crowds-theory">Wisdom of Crowds Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging">Bagging</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrapping">Bootstrapping</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#majority-voting-how-it-works">Majority Voting - how it works</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Majority Voting - how it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-voting">Hard Voting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-voting">Soft Voting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#majority-voting-why-it-works">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Majority Voting - why it works</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-weak-learners">Example of weak learners</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Example of weak learners</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-variance-by-aggregation">Reducing variance by aggregation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">Random forest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Random Forest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-trees-extremely-randomized-trees">Extra-Trees - Extremely Randomized Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy-vs-variance">Accuracy vs variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#out-of-bag-evaluation">Out-of-Bag Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boosting">Boosting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boosting-algorithm">Boosting algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Boosting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#well-known-boosting-algorithms">Well-known Boosting Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stacking">Stacking</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-learning-leveraging-multiple-perspectives">Ensemble Learning: Leveraging Multiple Perspectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Ensemble Learning: Leveraging Multiple Perspectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-comparison-which-ensemble-should-i-use">Quick Comparison: Which Ensemble Should I Use?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calibrated-probabilities">Calibrated probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-of-predicted-probabilities">Frequency of predicted probabilities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-black-box-models-like-ensemble-models">Interpreting black box models (like ensemble models)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-dependence-plots-pros">Partial dependence plots - Pros</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-dependence-plots-cons">Partial dependence plots - Cons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-feature-importance-pros">Permutation feature importance - Pros</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-feature-importance-cons">Permutation feature importance - Cons</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The DS Coach Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
