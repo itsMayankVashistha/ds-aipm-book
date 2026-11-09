@@ -1,0 +1,38 @@
+[
+    {
+        "question": "What is deep learning?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                 "feedback": "Deep Learning is a subset of machine learning that involves training neural networks with more than 1 hidden layer between input and output layers, also known as deep neural networks. These networks can learn intricate patterns and representations from data, making them exceptionally powerful for complex tasks such as image and speech recognition. The depth of the architecture enables the model to extract hierarchical features, learning and refining representations at different levels of abstraction. Deep learning has proven highly successful in various domains, including natural language processing, computer vision, and speech recognition, and continues to drive advancements in artificial intelligence."
+            }
+        ]
+    },
+    {
+        "question": "How should the first and last layer of a neural network look like?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "The design of the first and last layers in a neural network depends on the characteristics of the input data and the nature of the task. The first layer should match the input dimensions of the data, ensuring compatibility. Activation functions used in the first layers, such as ReLU, facilitate the network's ability to learn complex patterns. The last layer, on the other hand, is tailored to the specific task. For instance, in a binary classification task, a sigmoid activation function is suitable, while softmax is applied for multi-class classification. The number of neurons in the last layer corresponds to the output classes. Overall, careful consideration of the input and output requirements guides the design of these critical network components."
+            }
+        ]
+    },
+    {
+        "question": "What is backpropagation in neural network training? What is feedforward?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Backpropagation is a fundamental optimization algorithm used in training neural networks. During the feedforward phase, training data propagate through the network layer by layer. Subsequently, the network produces predictions. With that, backpropagation calculates the gradient of the error with respect to the model's weights. This gradient is then used to update the weights, minimizing the overall prediction error. The whole process of feedfoward and backpropagation iteratively repeats until the model converges to a state where the error is minimized. Essentially, backpropagation allows neural networks to learn and adjust their parameters, optimizing their ability to make accurate predictions across various tasks."
+            }
+        ]
+    }
+]

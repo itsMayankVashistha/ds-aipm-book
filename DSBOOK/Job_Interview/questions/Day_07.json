@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What is Dimensionality Reduction and why is it useful?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Dimensionality Reduction is a critical technique in machine learning that aims to reduce the number of features in a dataset while preserving its essential information. The primary goal is to address the curse of dimensionality, where an increased number of features can lead to model inefficiency and computational challenges. By eliminating irrelevant or redundant features, Dimensionality Reduction improves model efficiency, reduces computational complexity, and enhances interpretability. This process is particularly useful when dealing with high-dimensional datasets, contributing to more manageable and comprehensible data representations. Moreover, it can prevent overfitting by focusing on the most informative features, resulting in improved model generalization and performance on new, unseen data. Techniques such as Principal Component Analysis (PCA - linear technique) and t-Distributed Stochastic Neighbor Embedding (t-SNE - nonlinear technique) are commonly employed for Dimensionality Reduction, offering diverse approaches suitable for different types of data and modeling objectives."
+            }
+        ]
+    },
+    {
+        "question": "What is Principal Component Analysis?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Principal Component Analysis (PCA) is a widely used Dimensionality Reduction technique that transforms high-dimensional data into a lower-dimensional space while retaining as much of the original variance as possible. It achieves this by identifying orthogonal axes, called principal components, which capture the maximum variance in the data. The first principal component accounts for the most significant variance, followed by subsequent components in decreasing order with each components orthogonal to the other components. PCA is valuable for simplifying complex datasets, reducing computational demands, and facilitating more efficient model training and interpretation. Moreover, it aids in visualizing high-dimensional data in a lower-dimensional space, uncovering underlying patterns and relationships. PCA is applicable across various domains, from image processing to genetics, providing a versatile tool for improving the efficiency and interpretability of machine learning models."
+            }
+        ]
+    }
+]

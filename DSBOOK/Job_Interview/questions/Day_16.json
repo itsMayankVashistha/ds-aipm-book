@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What different kinds of categorical features do you know and what is the difference between them? How can you deal with them?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Categorical features include nominal (unordered categories) and ordinal (ordered categories). Nominal features, like colors, gender, country etc. lack inherent order, while ordinal features, like education levels, age, ratings, temperature, etc. possess a defined order. Dealing with them involves encoding techniques, such as one-hot encoding for nominal features and ordinal encoding for ordered ones. Label encoding assigns numerical values based on the order, but this may introduce unintended relationships. Frequency encoding replaces each category with its frequency (or count) in the dataset. This can be useful for nominal categorical features with a large number of categories (high-cardinality), as it reduces the dimensionality and sparsity of the feature space. Target encoding replaces each category with the mean of the target variable (e.g., the mean of the dependent variable) for that category. This can be useful for improving the predictive performance of models, especially when dealing with high-cardinality categorical features. Careful consideration of the data and task requirements guides the choice of encoding, ensuring accurate representation and optimal model performance with categorical features."
+            }
+        ]
+    },
+    {
+        "question": "What is data/information leakage and why is it a problem?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Data leakage occurs when information from the future or external sources inadvertently influences the model during training, leading to overly optimistic performance estimates. This can result in a model that fails to generalize to new data. Especially, leakage from test data into training data can lead to wrong impressions from model evaluation and can unintentionally lead to overfitting. Preventing leakage involves robust validation techniques, such as time-based splits or ensuring that external information is not included in the training set. Careful feature engineering, feature selection, and awareness of potential sources of leakage are essential to build models that accurately reflect their true predictive capabilities on unseen data."
+            }
+        ]
+    }
+]

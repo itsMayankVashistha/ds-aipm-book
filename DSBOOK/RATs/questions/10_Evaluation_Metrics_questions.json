@@ -1,0 +1,118 @@
+[
+    {
+        "question": "With your model you get the following confusion matrix. Please try to calculate the following evaluation metrics and check all statements that are correct.",
+        "code": "                   Predicted\n                   negative | positive\n Actual negative |    25    |    25    \n        positive |    15    |    35    ",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "The model has an accuracy of 60 %, recall is at 70 % and precision at 58 %.",
+                "correct": true,
+                "feedback": "That's right. Accuracy = TP+ TN / All = 35 + 25 / 100 = 60 %; Recall = TP / TP + FN = 35 / 35 + 15 = 70 %; Precision = TP / TP + FP = 35 / 35 + 25 = 58 %."
+            },
+            {
+                "answer": "The model has an accuracy of 60 %, recall is at 50 % and precision at 58 %.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The model has an accuracy of 60 %, recall is at 70 % and precision at 63 %.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The model has an accuracy of 60 %, recall is at 50 % and precision at 63 %.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The model has an accuracy of 50 %, recall is at 70 % and precision at 63 %.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The model has an accuracy of 60 %, recall is at 63 % and precision at 70 %.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "Your colleague shows you following confusion matrix of her new model on the test data. She asks you if you would use accuracy as a metric in this case. What do you answer?",
+        "code": "                   Predicted\n                   negative | positive\n Actual negative |   710    |    25    \n        positive |    35    |    30    ",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Yes, accuracy of 93 % is very good.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Yes, you should always choose a metric that is easy understandable by the stakeholder.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "No, if you are interested in the minority class in an imbalanced dataset, high accuracy often hides how poorly your classifier works for this class.",
+                "correct": true,
+                "feedback": "That's right. To check if your model is performing well, you need to compare your model with a baseline model or the model you used before, otherwise you cannot tell if an accuracy value is good or not. The metric you use should be easy for the stakeholder to understand as you explain it to them in an intuitive way. That said, it is important that the valuation metric reflects your particular business case well. Although the model has an accuracy of 93%, the recall is only 46%, this is a typical problem when dealing with unbalanced data. Therefore, it might be advisable to use/ optimise a different evaluation metric, especially if you are interested in the minority class. It was noted that the confusion matrix was calculated for the test data, so one has no information about the accuracy on the training data."
+            },
+            {
+                "answer": "You should train the model further, because you should get an accuracy of 100% on the train data set, otherwise your model is biased.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The evaluation metric to use always depends on your specific business case. You need to know which classification error is worse and choose the metric accordingly.",
+                "correct": true,
+                "feedback": "That's right. To check if your model is performing well, you need to compare your model with a baseline model or the model you used before, otherwise you cannot tell if an accuracy value is good or not. The metric you use should be easy for the stakeholder to understand as you explain it to them in an intuitive way. That said, it is important that the valuation metric reflects your particular business case well. Although the model has an accuracy of 93%, the recall is only 46%, this is a typical problem when dealing with unbalanced data. Therefore, it might be advisable to use/ optimise a different evaluation metric, especially if you are interested in the minority class. It was noted that the confusion matrix was calculated for the test data, so one has no information about the accuracy on the training data."
+            }
+        ]
+    },
+    {
+        "question": "Suppose you have trained a classifier which has as output the probability of the instance to be class 1. Currently you predict class 1 if your probability is >= to 0.5. Suppose you increase the threshold to 0.7. Which of the following statements are true? Check all that apply.",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "The classifier is likely to now have higher precision.",
+                "correct": true,
+                "feedback": "That's right. Increasing the threshold means that potentially more instances are predicted to belong to class 0. This will result in lower number of FP and higher numbers of FN. Therefore, we can expect the precision to increase, but the recall to decrease."
+            },
+            {
+                "answer": "The classifier is likely to now have lower precision.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The classifier is likely to have unchanged precision and recall, but higher accuracy.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The classifier is likely to have unchanged precision and recall, and thus the same F1 score.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The classifier is likely to now have higher recall.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The classifier is likely to now have lower recall.",
+                "correct": true,
+                "feedback": "That's right. Increasing the threshold means that potentially more instances are predicted to belong to class 0. This will result in lower number of FP and higher numbers of FN. Therefore, we can expect the precision to increase, but the recall to decrease."
+            }
+        ]
+    },    {
+        "question": "Explain Recall and Precision, and give as an example of each a business case in which this metric should be used.",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+            "answer": "Click here to see the answer.",
+            "correct": true,
+            "feedback": "Recall measures how many of the positive values are correctly predicted by your model. If it is important to detect all instances of the positive class, then this is the metric you should choose. An example would be a pre-diagnosis of cancer. You want to make sure that your model does not miss any individuals who have cancer. The error of missing individuals who have cancer is valued higher than the error of further testing for cancer in individuals who do not have cancer. Precision measures the percentage of correctly predicted positives (how many of the predicted positives were truly positive). An example of the use of precision is the detection of email spam. It's okay for a spam email (positive case) to not be detected by the model, but the error is worse if the model predicts an email to be spam when it is not. You could miss important e-mails."
+            }
+        ]
+    }
+]

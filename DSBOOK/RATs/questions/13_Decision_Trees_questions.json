@@ -1,0 +1,111 @@
+[
+    {
+        "question": "For which problems can decision trees be used?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "only for classification",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "only for regression",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "for both, classification and regression",
+                "correct": true,
+                "feedback": "That is correct. Decision trees can be used for both, classification and regression. For classification, the majority class of a leaf is the predicted class. For regression, the mean of all observations in the leaf is the predicted target value."
+            },
+            {
+                "answer": "none of the above, it's a unsupervised method",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "Decision trees carry the risk of overfitting. Which regularization method can be used to overcome overfitting in Decision Trees? ",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "L2 Regularization",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "L1 Regularization",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Lasso",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "All of the above",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "None of the above",
+                "correct": true,
+                "feedback": "That is correct. L2 and L1 (== Lasso) Regularization will help to keep the parameters (thetas/slopes and intercept) of models in check. These regularization can be used for example in Linear and Logistic Regression. You can regularize decision trees for example by setting a maximal depth of the tree or by pruning it."
+            }
+        ]
+    },
+    {
+        "question": "Your customer wants to detect customers that will seemingly buy a certain product on his website. He needs an algorithm that explains the outcomes best. Which algorithms can you suggest to him?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "Logistic Regression",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Decision Trees",
+                "correct": true,
+                "feedback": "That is correct. Decision Tree works in the same manner as simple if-else statements which are very easy to understand. The output of a Decision Tree can be easily interpreted by humans."
+            },
+            {
+                "answer": "Gradient Descent",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "All of the above",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "State at least 2 advantages and 2 disadvantages of decision trees.",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+            "answer": "Click here to see the answer.",
+            "correct": true,
+            "feedback": "Advantages: Decision trees are simple to understand, interpret and visualize. They can be used for both classification and regression problems. They can handle both continuous and categorical variables. They require no feature scaling (for Decision trees scale doesn't matter, they are just making ... by rank). Decision Trees are quite robust to outliers and can handle missing values. Disadvantages: Decision Trees have a major problem of overfitting. You really should consider regularization! Instability: Even a small change in input data can at times, cause large changes in the tree. Due to the overfitting, there is more likely a chance of high variance in the output which leads to many errors in the final predictions and shows high inaccuracy in the results. They are not suitable for large datasets: If the data size is large, then one single Tree may grow complex and lead to overfitting. Decision trees often involves higher time to train the model (esp. for deep trees and then pruning it). They are not good for regression: Decision Tree can be used for regression but decision tree won't perform well."
+            }
+        ]
+    },
+    {
+        "question": "In Decision Trees, is a node's Gini impurity generally lower or greater than its parent's? Is it generally lower/greater, or always lower/greater?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+            "answer": "Click here to see the answer.",
+            "correct": true,
+            "feedback": "A node's Gini impurity is generally lower than that of its parent as the CART training algorithm cost function splits each of the nodes in a way that minimizes the weighted sum of its children's Gini impurities. But if one child is smaller than the other, it is possible for it to have a higher Gini score than its parent. The increase is more than compensated by a decrease in the other child's impurity."
+            }
+        ]
+    }
+]
+
+

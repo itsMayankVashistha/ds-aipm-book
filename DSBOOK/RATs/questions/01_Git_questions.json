@@ -1,0 +1,159 @@
+[
+    {
+        "question": "How do you supply a commit message to a commit?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "git message 'My first commit'",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "code": " git add 'My first commit'",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "code": "git commit -c 'My first commit'",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "code": "git commit -m 'My first commit'",
+                "correct": true,
+                "feedback": "That's correct. git commit -m 'message' is used when committing changes to a git repository with a commit message."
+            }
+        ]
+    },
+    {
+        "question": "You are working on a software project which provides services to Hotels. It helps them booking rooms and track the prices for different rooms etc. Now you want to add a new feature to this software which helps hotel employees in checking availability of rooms. How should you name the new branch so that everyone in your team can understand and work on it.",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "git switch -c team_branch",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "code": "git switch -c room_availability",
+                "correct": true,
+                "feedback": "That's correct. Naming a branch e.g. 'room_availability' will make everyone understand what the branch is about and not only just your team."
+            },
+            {
+                "code": "git switch -c feature_availability_room",
+                "correct": true,
+                "feedback": "That's correct. Naming a branch e.g. 'feature_availability_room' will make everyone understand what the branch is about and not only just your team."
+            },
+            {
+                "code": "git switch -c new_feature",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            }
+        ]
+    },
+    {
+        "question": "Which one of them is an incorrect command?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "code": "git add test.txt",
+                "correct": false,
+                "feedback": "That's not the correct answer. We are looking for an incorrect command. Try again!"
+            },
+            {
+                "code": "git pull origin main",
+                "correct": false,
+                "feedback": "That's not the correct answer. We are looking for an incorrect command. Try again!"
+            },
+            {
+                "code": "git push origin main",
+                "correct": false,
+                "feedback": "That's not the correct answer. We are looking for an incorrect command. Try again!"
+            },
+            {
+                "answer": "All of the commands",
+                "correct": false,
+                "feedback": "That's not the correct answer. We are looking for an incorrect command. Try again!"
+            },
+            {
+                "answer": "None of the commands",
+                "correct": true,
+                "feedback": "Nice job! All commands were valid commands"
+            }
+        ]
+    },
+    {
+        "question": "You found an interesting project on GitHub and you want to try it on your own machine. After running the project on your machine you decided to add some small changes to the project. Select all options you think you should do from starting till the end.",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Clone the main repository",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "Fork the main repository",
+                "correct": true,
+                "feedback": "Great Job! Forking the main repository is the first step."
+            },
+            {
+                "answer": "Create a new branch",
+                "correct": true,
+                "feedback": "Yes! Creating a new branch is the third step."
+            },
+            {
+                "answer": "Clone the forked repository",
+                "correct": true,
+                "feedback": "Excellent. Cloning the forked repository is the second step."
+            },
+            {
+                "answer": "Commit changes to main repository",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "Commit changes to a branch of your repository",
+                "correct": true,
+                "feedback": "Good job. Committing your changes to a branch of your repository is the fourth step."
+            },
+            {
+                "answer": "Merge branch to main repository",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "Create a pull request to main repository",
+                "correct": true,
+                "feedback": "Well done. Creating a pull request is the last step."
+            }
+        ]
+    },
+    {
+        "question": "While working on a git repository, you want to push some changes but you get an error, which says 'you need to pull the repository before you can push your changes'. How can you pull the changes without losing your local changes.",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "git pull followed by git push",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "git stash followed by git pull",
+                "correct": true,
+                "feedback": "Great Job! git stash followed by git pull. git stash helps you to store your changes so you can pull the new version of the repository."
+            },
+            {
+                "answer": "git push followed by git stash and git pull",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "deleting whole local folder and starting from zero",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            }
+        ]
+    }
+]

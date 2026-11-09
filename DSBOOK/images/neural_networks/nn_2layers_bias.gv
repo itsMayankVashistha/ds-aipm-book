@@ -1,0 +1,55 @@
+digraph G {
+        graph [fontname = "helvetica"];
+        node [fontname = "helvetica"];
+        edge [fontname = "helvetica" color=lightgrey arrowsize=.7];
+        rankdir=LR
+	splines=line
+        
+        node [fixedsize=true, label=""];
+
+        subgraph cluster_0 {
+		color=white;
+		node [style=solid,color=black, shape=circle,];
+		x3 x2 x1 x0;
+		x3[label=<b>]
+		x2[label=<x<SUB>1</SUB>>]
+		x1[label=<x<SUB>2</SUB>>]
+		x0[label=<x<SUB>3</SUB>>]
+		label= <<font color="#FF4A11">input layer</font>>
+		#label = "input layer";
+	}
+
+	subgraph cluster_1 {
+		color=white;
+		node [style=solid,color="#FF4A11", shape=circle];
+		a12 #a22 a32;
+		a12[label=<h<SUB>w</SUB>(x)>]
+		label = <<font color="#FF4A11">layer 1 <BR /> (output layer)</font>>;
+	}
+
+	#subgraph cluster_2 {
+#		color=white;
+#		node [style=solid,color=transparent, shape=circle];
+#		O;
+#		O[label=<h<SUB>w</SUB>(x)>]
+#		label= <<font color="#FF4A11">Output</font>>
+#		#label=<<font color="#FF4A11">layer 1 <BR /> (output layer)</font>>;
+	#}
+
+
+        x1 -> a12;
+        #x1 -> a22;
+        #x1 -> a32;
+        x2 -> a12;
+        #x2 -> a22;
+        #x2 -> a32;
+        x3 -> a12[label= <bias unit b >];
+        #x3 -> a22;
+        #x3 -> a32;
+        x0 ->a12;
+
+        #a12 -> O
+        #a22 -> O
+        #a32 -> O
+
+}

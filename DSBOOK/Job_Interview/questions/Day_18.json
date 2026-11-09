@@ -1,0 +1,26 @@
+[
+    {
+        "question": "How do you select your success metrics?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Selecting success metrics involves aligning them with the specific goals and characteristics of the problem at hand. For classification tasks, precision, recall, F1 score, and AUC-ROC are relevant, with the choice depending on the importance of false positives or false negatives. In regression, metrics like mean absolute error (MAE), mean squared error (MSE), or R-squared gauge predictive accuracy. Consideration of business objectives, stakeholder preferences, and the nature of the data guides the selection, ensuring that success metrics accurately reflect the model's performance in a way that is meaningful and actionable for the intended audience."
+            }
+        ]
+    },
+    {
+        "question": "What is the confusion matrix?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "The confusion matrix is a table that summarizes the performance of a classification model, displaying the counts of true positives, true negatives, false positives, and false negatives. Often times, a confusion matrix is represented with normalized count values and/or as a heatmap to enable easier visual interpretation. From the confusion matrix, various metrics like accuracy, precision, recall, and F1 score can be calculated. It provides a comprehensive view of the model's ability to correctly classify instances and identify areas for improvement. The interpretation of the confusion matrix is vital in understanding the model's strengths and weaknesses, allowing for informed adjustments and optimizations during the model development process."
+            }
+        ]
+    }
+]

@@ -1,0 +1,62 @@
+name: Reveal scheduled topic from calendar
+
+on:
+  schedule:
+    # Two candidate times to cover Berlin's DST shift — the script itself
+    # checks the real local Berlin time and only proceeds on the one that
+    # actually matches 17:00 local, so this never double-fires.
+    
+    # 15:00 UTC = 17:00 CEST (summer, UTC+2)
+    - cron: '0 15 * * *'
+    # 16:00 UTC = 17:00 CET (winter, UTC+1)
+    - cron: '0 16 * * *'
+    
+  workflow_dispatch:
+    inputs:
+      test_date:
+        description: 'Override date to check (YYYY-MM-DD). Leave blank for the next weekday.'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run (preview only, do not write to _toc.yml)'
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  reveal-topic:
+    if: github.repository != 'neuefische/ds-book-template'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r .github/scripts/requirements.txt
+
+      - name: Check calendar and reveal topic
+        env:
+          GCAL_ICS_URL: ${{ secrets.GCAL_ICS_URL }}
+          COHORT_TRACK: ${{ vars.COHORT_TRACK }}
+          TARGET_DATE: ${{ github.event.inputs.test_date }}
+          DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: python .github/scripts/reveal_topic.py
+
+      - name: Commit and push if changed
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add DSBOOK/_toc.yml
+          git diff --cached --quiet || git commit -m "Auto-reveal topic from calendar event"
+          git push

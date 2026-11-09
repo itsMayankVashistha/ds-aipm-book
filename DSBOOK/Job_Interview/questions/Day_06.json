@@ -1,0 +1,26 @@
+[
+    {
+        "question": "Why are we doing a train/test/validation split? How are we typically doing it?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "The train/test/validation split is a crucial step in model development, ensuring robust evaluation, and preventing overfitting to training data. The training set is used to build the model, the validation set is employed for hyperparameter tuning, and the test set evaluates the model's generalization to unseen data. For the iterative validation used in training neural networks, a common split ratio is 70/15/15 or 80/10/10 (train/test/val). The rationale behind this division is to train the model on a sufficiently large dataset, validate its performance on a separate dataset for fine-tuning, and assess its unbiased generalization on a distinct test set in the end. This three-way split provides a balance between model training, refinement, and evaluation. Distinct from the iterative validation used in neural network training is the K-fold Cross-Validation, which is used for hyperparameter tuning of simpler machine learning models via e.g. a grid search approach. There, the validation split is defined by the 'k'-fold of the cross-validation (e.g. k=5 splits the training set into 5 equally sized validation sets used for 5 different cross-validations). "
+            }
+        ]
+    },
+    {
+        "question": "What is scaling? What different approaches do you know, when is it important?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Scaling is a preprocessing technique that ensures numerical features are on a similar scale, preventing certain features from dominating others during model training. It is particularly important for algorithms sensitive to feature magnitudes, such as k-Nearest Neighbors (k-NN) or Support Vector Machines (SVM) or gradient descent. Common scaling approaches include Min-Max scaling, which normalizes values to a specified range (e.g., [0, 1]), and Standard scaling, which transforms data to have a mean of 0 and a standard deviation of 1. Scaling enhances the convergence of gradient-based optimization algorithms, improves model interpretability, and ensures fair contributions from all features, promoting stable and effective model training across various machine learning applications."
+            }
+        ]
+    }
+]

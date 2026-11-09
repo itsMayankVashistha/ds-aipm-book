@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What is SQL? What is the basic structure of an SQL query?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "SQL (Structured Query Language) is a standard language for managing and manipulating relational databases. Its primary purpose is to query databases, retrieve data, and perform operations such as insertion, updating, and deletion. The basic structure of an SQL query involves several key clauses written in the specific following order. The SELECT clause specifies the columns to be retrieved from the database table, the FROM clause indicates the table from which the data is selected, the WHERE clause sets conditions for filtering the data, the GROUP BY clause groups rows based on specified columns, the HAVING clause filters group results, and the ORDER BY clause sorts the result set based on specified columns. SQL provides a powerful and intuitive way to interact with relational databases, making it a fundamental skill for data professionals and analysts working with structured data."
+            }
+        ]
+    },
+    {
+        "question": "What is a relational database? What roles do primary and foreign keys play?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "A relational database is a structured collection of data organized into tables, where each table represents a specific entity, and relationships between tables are defined. Primary keys uniquely identify records within a table, ensuring each row has a unique identifier. Foreign keys establish relationships between tables by referencing the primary key of another table, creating links between related data. The primary key ensures data integrity by preventing duplicate or null values, while foreign keys enforce referential integrity, maintaining consistency between linked tables. Together, primary and foreign keys play a pivotal role in relational database design, facilitating efficient data retrieval, integrity maintenance, and supporting complex queries involving multiple tables. Understanding and appropriately using these keys are essential skills for database administrators and developers working with relational databases in diverse applications."
+            }
+        ]
+    }
+]

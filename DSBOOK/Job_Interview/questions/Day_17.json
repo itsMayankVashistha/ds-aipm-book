@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What is the normal/gaussian distribution? Why is it important in machine learning?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "The normal or Gaussian distribution is a symmetric, bell-shaped probability distribution characterized by its mean and standard deviation. It is crucial in statistics and machine learning due to the Central Limit Theorem, stating that the sum of independent random variables, regardless of each their individual distribution, tends to be normally distributed.  In regression, the normal distribution is often assumed for the errors or residuals which enables techniques like ordinary least squares (OLS) for estimating model parameters. Similarly, some time series models, such as autoregressive integrated moving average (ARIMA) models assume that the residuals are normally distributed. Lastly, many machine learning algorithms benefit from data standardization, where features are scaled to have a mean of zero and a standard deviation of one. This standardization is often based on the assumption of normality in the data distribution. So, normal distributions simplify analysis, aid in understanding data characteristics and facilitate the application of various statistical and machine learning techniques."
+            }
+        ]
+    },
+    {
+        "question": "What is skewness or a skewed distribution? What can you do about it?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Skewness measures the asymmetry of a distribution (histogram or probability density function). A positive skew (also 'right-skewness') indicates a tail (unusually high values) on the right side, while a negative skew (also 'left-skewness') has a tail on the left. Skewed distributions can affect model performance, and techniques like log transformations or Box-Cox transformations can mitigate skewness, making the data more suitable for machine learning models. Choosing the appropriate transformation depends on the specific characteristics of the data and the requirements of the modeling task. Addressing skewness ensures that models are not influenced by unintended outliers and that they can make accurate predictions across the entire range of the data."
+            }
+        ]
+    }
+]

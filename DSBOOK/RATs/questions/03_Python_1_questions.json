@@ -1,0 +1,90 @@
+[
+    {
+        "question": "What will the following code return?",
+        "code": "my_string = 'DS-Bootcamp'\nmy_string[3:7]",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "Bootc",
+                "correct": false,
+                "feedback": "Sorry. That is wrong. Please try again."
+            },
+            {
+                "answer": "Boot",
+                "correct": true,
+                "feedback": "Correct. In the first line the string 'DS-Bootcamp' is stored in a variable called my_string. In the second line we use slicing to access a substring. [3:7] will return the fourth to seventh letter from the string. Python uses zero-indexing, so we start counting with 0. In this example it will not return the letter 'c', since the ending index is always excluded."
+            },
+            {
+                "answer": "-Boo",
+                "correct": false,
+                "feedback": "Sorry. That is wrong. Please try again."
+            },
+            {
+                "answer": "-Boot",
+                "correct": false,
+                "feedback": "Sorry. That is wrong. Please try again."
+            }
+        ]
+    },
+    {
+        "question": "What will the following code return?",
+        "code": "x = 8\n4 > x or not x <= 13",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "True",
+                "correct": false,
+                "feedback": "Sorry. That is wrong. Please try again."
+            },
+            {
+                "answer": "False",
+                "correct": true,
+                "feedback": "That's correct. Python will evaluate 'not x <= 13' at first. Because of the 'not' the result will be 'False'. '4 > x' is also 'False' and the expression 'False or False' will eventually evaluate also to 'False'."
+            },
+            {
+                "answer": "Raise an error",
+                "correct": false,
+                "feedback": "Sorry. That is wrong. Please try again."
+            }
+        ]
+    },
+    {
+        "question": "How often will the following for loop run through?",
+        "code": "for i in range(5, 13):\n    print(i)",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "7 times",
+                "correct": false,
+                "feedback": "Sorry. That is wrong. Please try again."
+            },
+            {
+                "answer": "9 times",
+                "correct": false,
+                "feedback": "Sorry. That is wrong. Please try again."
+            },
+            {
+                "answer": "8 times",
+                "correct": true,
+                "feedback": "That's right. The loop will run through 8 times and print the numbers from 5 to 12. 'range(5, 13)' will start at 5 and end at 13-1."
+            },
+            {
+                "answer": "It will not work.",
+                "correct": false,
+                "feedback": "Sorry. That is wrong. Please try again."
+            }
+        ]
+    },
+    {
+        "question": "What effect can you achieve by using the 'break' or 'continue' statement inside a loop?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "answer": "Click here to see the answer.",
+                "correct": true,
+                "feedback": "'break' and 'continue' statements can alter the flow of a normal loop. 'break' can be used to terminate the loop before it has gone through all cycles. With 'continue' you can skip the rest of the code inside a loop for the current iteration. The loop will not terminate, it will just start with the next iteration."
+            }
+        ]
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What is supervised vs unsupervised ML. Give examples, pros and cons for both.",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Supervised machine learning involves training a model using labeled data, where the algorithm learns the relationship between input features and corresponding target labels. Examples include linear regression for predicting continuous outcomes and classification algorithms like logistic regression for binary outcomes. Pros of supervised learning include the ability to predict outcomes for new, unseen data, but cons may arise when labeled data is scarce or expensive to obtain. In contrast, unsupervised learning deals with unlabeled data, seeking patterns and relationships without predefined target labels. Examples include clustering algorithms like K-means and dimensionality reduction techniques like Principal Component Analysis (PCA). Pros of unsupervised learning include uncovering hidden patterns, but challenges include the lack of clear evaluation metrics and the subjective interpretation of results."
+            }
+        ]
+    },
+    {
+        "question": "Why is data cleaning crucial? What are the most important steps for data cleaning?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Data cleaning is a critical step in the data preprocessing phase of machine learning, aiming to enhance the quality and reliability of the dataset according to the 'Garbage in, garbage out' (GIGO) principle. It involves identifying and rectifying errors, inconsistencies, and inaccuracies in the data, ensuring a solid foundation for model training. The most important steps in data cleaning include handling missing values, where strategies such as imputation or deletion are employed based on the extent and impact of missingness. Removing duplicates is essential to maintain data integrity, and outlier detection and treatment are crucial to prevent skewed model outcomes. Standardizing or normalizing numerical features ensures a consistent scale, mitigating biases introduced by disparate magnitudes. Additionally, encoding categorical variables and addressing any format inconsistencies contribute to a clean, uniform dataset, promoting accurate model training and robust performance."
+            }
+        ]
+    }
+]

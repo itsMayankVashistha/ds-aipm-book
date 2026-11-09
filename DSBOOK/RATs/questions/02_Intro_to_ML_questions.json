@@ -1,0 +1,76 @@
+[
+    {
+        "question": "Which statement applies to supervised learning?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "The training data (known data) does NOT include the desired output (response)",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "Training data (known data) includes SOME of the desired output (response)",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "An example of Supervised Learning is the grouping of customers by purchasing behavior",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "Training data (known data) includes the desired output (response) as well",
+                "correct": true,
+                "feedback": "That's correct. The training data also includes the desired output (response). "
+            }
+        ]
+    },
+    {
+        "question": "What are the applications for unsupervised learning?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Clustering",
+                "correct": true,
+                "feedback": "That's correct. "
+            },
+            {
+                "answer": "Regression",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "Classification",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "Dimensionality Reduction",
+                "correct": true,
+                "feedback": "That's correct."
+            },
+            {
+                "answer": "Predicting house prices based on given features",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "Recommender systems",
+                "correct": true,
+                "feedback": "That's correct. "
+            }
+        ]
+    },
+    {
+        "question": "Name two fields each in which AI can be beneficial or maleficial!",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "answer": "Click here to see the answer.",
+                "correct": true,
+                "feedback": "AI can be beneficial in the fields of e.g. smarter weather prediction and agriculture, energy optimization, self-driving cars, healthcare or on-demand language translation. But it can also be malicious in the fields of autonomous weapons, social manipulation, invasion of privacy and social grading, or recruiting. It can also amplify discrimination."
+            }
+        ]
+    }
+]

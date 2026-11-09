@@ -1,0 +1,107 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: Coding fundamentals & Introduction
+    chapters:
+    - file: sessions/01_Orientation
+    - file: sessions/02_Git_Workflows
+    - file: sessions/03_Intro_to_Data_Science_ML
+    - file: sessions/aipm_sessions/Intro_to_AIPM
+    - file: sessions/04_Ethics_Data_Science
+    - file: sessions/05.1_Intro_to_Databases
+    - file: sessions/05.2_Intro_to_SQL
+    - file: sessions/06.1_Gestalt_Principles
+    - file: sessions/06.2_Fantastic_Charts
+    - file: sessions/07_Intro_EDA
+    - file: sessions/07.2_EDA_process
+    
+  - caption: Machine Learning Basics
+    chapters:
+    - file: sessions/08_Linear_Regression
+    - file: sessions/aipm_sessions/Linear_Regression_AIPM
+    - file: sessions/09.1_Bias_Variance_Tradeoff
+    - file: sessions/aipm_sessions/Bias_Variance_Tradeoff_AIPM
+    - file: sessions/09.2_Regularization
+    - file: sessions/10_Gradient_Descent
+    - file: sessions/11_Evaluation_Metrics
+    - file: sessions/aipm_sessions/Evaluation_Metrics_AIPM
+    - file: sessions/12_Logistic_Regression
+    - file: sessions/aipm_sessions/Logistic_Regression_AIPM
+    - file: sessions/13_KNN_Distance_Metrics
+    - file: sessions/14_Testing
+    - file: sessions/15_Decision_Tree
+    - file: sessions/aipm_sessions/Decision_Tree_AIPM
+    - file: sessions/Recap
+
+  - caption: More Machine Learning
+    chapters:
+    - file: sessions/16_Ensemble_Methods_part1
+    - file: sessions/16_Ensemble_Methods_part2
+    - file: sessions/aipm_sessions/Ensemble_Methods_AIPM
+    - file: sessions/17_Data_Products
+    - file: sessions/18_Neural_Networks
+    - file: sessions/aipm_sessions/ANN_AIPM
+    - file: sessions/19_Image_Modelling
+    - file: sessions/20_Capstone_Phase
+    - file: sessions/21_Time_Series_Analysis_Intro
+    - file: sessions/22_Dimensionality_Reduction
+    - file: sessions/23_Clustering
+    - file: sessions/24_NLP_Intro
+    - file: sessions/aipm_sessions/NLP_AIPM
+    - file: sessions/25.1_Prompt_Engineering
+    - file: sessions/25.2_RAG_Systems
+    - file: sessions/26_AI_Agents
+    # - file: sessions/26.2_ai_agents_advanced
+    - file: sessions/27_Distributions_CI
+    - file: sessions/28_Hypothesis_Testing
+    - file: sessions/29_Recommender_Systems
+    - file: sessions/30_MCP
+    - file: sessions/31_Streamlit
+    - file: sessions/aipm_sessions/Streamlit_AIPM
+
+
+  - caption: Rapid Assessment Test
+    chapters:
+    - file: RATs/01_Git_RAT
+    - file: RATs/02_Intro_to_ML_RAT
+    - file: RATs/03_Python_Part_1_RAT
+    - file: RATs/04_Python_Part_2_RAT
+    - file: RATs/05_pandas_NumPy
+    - file: RATs/06_EDA_RAT
+    - file: RATs/07_Linear_Regression_RAT
+    - file: RATs/08_Bias_Variance_RAT
+    - file: RATs/09_Gradient_Descent_RAT
+    - file: RATs/10_Evaluation_Metrics_RAT
+    - file: RATs/11_Logistic_Regression_RAT    
+    - file: RATs/12_KNN_RAT
+    - file: RATs/13_Decision_Trees_RAT
+    - file: RATs/14_Ensemble_Methods_RAT
+    - file: RATs/15_CNNs_RAT
+    - file: RATs/16_Clustering_RAT
+
+  - caption: Job Interview Questions
+    chapters:
+    - file: Job_Interview/Day_01
+    - file: Job_Interview/Day_02
+    - file: Job_Interview/Day_03
+    - file: Job_Interview/Day_04
+    - file: Job_Interview/Day_05
+    - file: Job_Interview/Day_06
+    - file: Job_Interview/Day_07
+    - file: Job_Interview/Day_08
+    - file: Job_Interview/Day_09
+    - file: Job_Interview/Day_10
+    - file: Job_Interview/Day_11
+    - file: Job_Interview/Day_12
+    - file: Job_Interview/Day_13
+    - file: Job_Interview/Day_14
+    - file: Job_Interview/Day_15
+    - file: Job_Interview/Day_16
+    - file: Job_Interview/Day_17
+    - file: Job_Interview/Day_18
+    - file: Job_Interview/Day_19                                    
+
+    

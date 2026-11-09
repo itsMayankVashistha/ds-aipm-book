@@ -1,0 +1,160 @@
+digraph G {
+        graph [fontname = "helvetica", splines=line];
+        node [fontname = "helvetica"];
+        edge [fontname = "helvetica", color=lightgrey arrowsize=.7];
+        rankdir=LR
+	splines=line
+        
+        node [fixedsize=true, label=""];
+
+        subgraph cluster_0 {
+		color=white;
+		node [style=solid,color=black, shape=circle,];
+		x0 x1 x2 x3;
+		x3[label=<x<SUB>3</SUB>>]
+		x2[label=<x<SUB>2</SUB>>]
+		x1[label=<x<SUB>1</SUB>>]
+		x0[label=<b<SUP>(1)</SUP>>, fontsize=11]
+		#label= <<font color="#FF4A11">Inputs</font>>
+		label = <<font color="#FF4A11">input layer</font>>;
+	}
+
+	subgraph cluster_1 {
+		color=white;
+		node [style=solid,color="#FF4A11", shape=circle];
+        a01 a11 a21 a31;
+		a01[label=<b<SUP>(2)</SUP>>, fontsize=11]
+		a11[label=<a<SUB>2</SUB><SUP>(1)</SUP>>, fontsize=11]
+		a21[label=<a<SUB>3</SUB><SUP>(1)</SUP>>, fontsize=11]
+		a31[label=<a<SUB>1</SUB><SUP>(1)</SUP>>, fontsize=11]
+		label = <<font color="#FF4A11">[1]</font>>;
+	}
+
+	subgraph cluster_2 {
+		color=white;
+		node [style=solid,color="#FF4A11", shape=circle];
+        a02 a12 a22 a32;
+		a02[label=<b<SUP>(3)</SUP>>, fontsize=11]
+		a12[label=<a<SUB>2</SUB><SUP>(2)</SUP>>, fontsize=11]
+		a22[label=<a<SUB>3</SUB><SUP>(2)</SUP>>, fontsize=11]
+		a32[label=<a<SUB>1</SUB><SUP>(2)</SUP>>, fontsize=11]
+		label = <<font color="#FF4A11">[2]</font>>;
+	}
+
+	subgraph cluster_3 {
+		color=white;
+		node [style=solid,color="#FF4A11", shape=circle];
+        a03 a13 a23 a33;
+		a03[label=<b<SUP>(4)</SUP>>, fontsize=11]
+		a13[label=<a<SUB>2</SUB><SUP>(3)</SUP>>, fontsize=11]
+		a23[label=<a<SUB>3</SUB><SUP>(3)</SUP>>, fontsize=11]
+		a33[label=<a<SUB>1</SUB><SUP>(3)</SUP>>, fontsize=11]
+		#label= <<font color="#FF4A11">Output</font>>
+		label=<<font color="#FF4A11">[3]</font>>;
+	}
+	
+	subgraph cluster_4 {
+		color=white;
+		node [style=solid,color="#FF4A11", shape=circle];
+        a04 a14 a24 a34;
+		a04[label=<b<SUP>(5)</SUP>>, fontsize=11]
+		a14[label=<a<SUB>1</SUB><SUP>(4)</SUP>>, fontsize=11]
+		a24[label=<a<SUB>2</SUB><SUP>(4)</SUP>>, fontsize=11]
+		a34[label=<a<SUB>3</SUB><SUP>(4)</SUP>>, fontsize=11]
+		#label= <<font color="#FF4A11">Output</font>>
+		label=<<font color="#FF4A11">[4]</font>>;
+	}
+
+	subgraph cluster_5 {
+		color=white;
+		node [style=solid,color="#FF4A11", shape=circle];
+        a15;
+		a15[label=<a<SUB>1</SUB><SUP>(5)</SUP>> fontsize=11]
+        label=<<font color="#FF4A11">[5]</font>>;
+	}
+
+	subgraph cluster_6 {
+		color=white;
+		node [style=solid,color=transparent, shape=circle, fixedsize=true, width=1,];
+		O;
+		O[label="output \n & error"]
+		#label= <<font color="#FF4A11">output</font>>
+		#label="layer 3 (output layer)";
+	}
+        
+        #backpropagation
+        x0 ->a11[dir=back, color="#FF4A11", penwidth="3.5"]
+        x0 ->a21[dir=back, color="#FF4A11", penwidth="3.5"]
+        x0 ->a31[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+        x1 -> a11[dir=back, color="#FF4A11", penwidth="3.5"]
+        x1 -> a21[dir=back, color="#FF4A11", penwidth="3.5"]
+        x1 -> a31[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+        x2 -> a11[dir=back, color="#FF4A11", penwidth="3.5"]
+        x2 -> a21[dir=back, color="#FF4A11", penwidth="3.5"]
+        x2 -> a31[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+        x3 -> a11[dir=back, color="#FF4A11", penwidth="3.5"]
+        x3 -> a21[dir=back, color="#FF4A11", penwidth="3.5"]
+        x3 -> a31[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+        a01 -> a12[dir=back, color="#FF4A11", penwidth="3.5"]
+        a01 -> a22[dir=back, color="#FF4A11", penwidth="3.5"]
+        a01 -> a32[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+        a11 -> a12[dir=back, color="#FF4A11", penwidth="3.5"]
+        a11 -> a22[dir=back, color="#FF4A11", penwidth="3.5"]
+        a11 -> a32[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+        a21 -> a12[dir=back, color="#FF4A11", penwidth="3.5"]
+        a21 -> a22[dir=back, color="#FF4A11", penwidth="3.5"]
+        a21 -> a32[dir=back, color="#FF4A11", penwidth="3.5"]
+    
+        a31 -> a12[dir=back, color="#FF4A11", penwidth="3.5"]
+        a31 -> a22[dir=back, color="#FF4A11", penwidth="3.5"]
+        a31 -> a32[dir=back, color="#FF4A11", penwidth="3.5"]
+
+
+        a02 -> a13[dir=back, color="#FF4A11", penwidth="3.5"]
+        a02 -> a23[dir=back, color="#FF4A11", penwidth="3.5"]
+        a02 -> a33[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+        a12 -> a13[dir=back, color="#FF4A11", penwidth="3.5"]
+        a12 -> a23[dir=back, color="#FF4A11", penwidth="3.5"]
+        a12 -> a33[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+        a22 -> a13[dir=back, color="#FF4A11", penwidth="3.5"]
+        a22 -> a23[dir=back, color="#FF4A11", penwidth="3.5"]
+        a22 -> a33[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+        a32 -> a13[dir=back, color="#FF4A11", penwidth="3.5"]
+        a32 -> a23[dir=back, color="#FF4A11", penwidth="3.5"]
+        a32 -> a33[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+        
+        a03 -> a14[dir=back, color="#FF4A11", penwidth="3.5"]
+        a03 -> a24[dir=back, color="#FF4A11", penwidth="3.5"]
+        a03 -> a34[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+        a13 -> a14[dir=back, color="#FF4A11", penwidth="3.5"]
+        a13 -> a24[dir=back, color="#FF4A11", penwidth="3.5"]
+        a13 -> a34[dir=back, color="#FF4A11", penwidth="3.5"]
+    
+        a23 -> a14[dir=back, color="#FF4A11", penwidth="3.5"]
+        a23 -> a24[dir=back, color="#FF4A11", penwidth="3.5"]
+        a23 -> a34[dir=back, color="#FF4A11", penwidth="3.5"]
+    
+        a33 -> a14[dir=back, color="#FF4A11", penwidth="3.5"]
+        a33 -> a24[dir=back, color="#FF4A11", penwidth="3.5"]
+        a33 -> a34[dir=back, color="#FF4A11", penwidth="3.5"]
+
+        
+        a04 -> a15[dir=back, color="#FF4A11", penwidth="3.5"]
+        a14 -> a15[dir=back, color="#FF4A11", penwidth="3.5"]
+        a24 -> a15[dir=back, color="#FF4A11", penwidth="3.5"]
+        a34 -> a15[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+        a15 -> O[dir=back, color="#FF4A11", penwidth="3.5"]
+        
+}

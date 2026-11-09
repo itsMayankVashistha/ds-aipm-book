@@ -1,0 +1,64 @@
+[
+    {
+        "question": "Let J be some cost-function so that J(b0, b1) outputs a cost (number). For this problem, J is some arbitrary/unknown smooth function and **may have local optima**. Suppose we use gradient descent to try to minimize J(b0, b1) as a function of b0 and b1. Which of the following statements are true? (Check all that apply.)",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Even if the learning rate \u03b1 is very large, every iteration of gradient descent will decrease the value of J(b0, b1).",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again. If the learning rate is too large, one step of gradient descent can actually vastly \"overshoot\" and actually increase the value of f(b0, b1)."
+            },
+            {
+                "answer": "If the learning rate is too small, then gradient descent may take a very long time to converge.",
+                "correct": true,
+                "feedback": "That's right. If the learning rate is small, gradient descent ends up taking an extremely small step on each iteration, and therefor can take a long time to converge."
+            },
+            {
+                "answer": "If b0 and b1 are initialized at a local minimum, then one iteration will not change their values.",
+                "correct": true,
+                "feedback": "That's right. At a local minimum, the derivative (gradient) is zero, so gradient descent will not change the parameters."
+            },
+            {
+                "answer": "If b0 and b1 are initialized so that b0=b1, then by symmetry (because we do simultaneous updates to the two parameters), after one iteration of gradient descent, we will still have b0=b1.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. The updates to b0 and b1 are different (even though we're doing simultaneous updates), so there's no particular reason to update them to be same after one iteration of gradient descent."
+            }
+        ]
+    },
+    {
+        "question": "A colleague states that no matter how b0 and b1 are initialized for Gradient Descent (same example as above), so long as learning rate is sufficiently small, we can safely expect gradient descent to converge to the same solution. Is he correct? Explain your answer.",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+            "answer": "Click here to see the answer.",
+            "correct": true,
+            "feedback": "This is not true. In our example is stated, that the cost function may have local minima. Depending on the initial condition, gradient descent may end up at different local optima."
+            }
+        ]
+    },
+    {
+        "question": "Your colleague complains about very long training periods for each step in his gradient descent algorithm. What kind of gradient descent implementation is he most probably using? Could you advise him some other implementations. Your colleague is very suspicious and want to know the pros and cons of those other algorithms. Please name them as well.",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+            "answer": "Click here to see the answer.",
+            "correct": true,
+            "feedback": "Your colleague is most probably using batch gradient descent (for each step, all data are used to calculate the gradient). A drawback is that this is often slow, but on the positive side it reaches an optimum of the cost function. He can alternatively use stochastic gradient descent (for each step, only one observation is used to calculate the gradient). This performs very fast and the bouncing back and forth can help to not get stuck at a local minima. A drawback is that in the end the optimum will be close but usually never reached. Another possibility would be mini-batch gradient descent (for each step, only a small part of the data is used to calculate the gradient). It is ~medium fast and performs usually better than SGD."
+            }
+        ]
+    },
+    {
+        "question": " You and your colleague develop a linear regression model on a very large dataset. Using the normal equations is not an option and you turn to gradient descent. The algorithm appears to not converge. Your colleague is on the opinion that gradient descent reached a plateau. Is he right? If not, what is possibly happening here?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+            "answer": "Click here to see the answer.",
+            "correct": true,
+            "feedback": "The cost function of a linear regression model is a convex function, so plateaus don't exist. Probably, the step size is too large so the model can't converge to the minimum or you forgot to rescale the data so it takes a lot of time till the algorithm converges."
+            }
+        ]
+    }
+]

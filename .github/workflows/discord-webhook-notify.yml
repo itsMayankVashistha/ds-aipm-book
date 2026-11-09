@@ -1,0 +1,154 @@
+name: Notify Discord on GitHub Events
+
+on:
+  push:
+  pull_request:
+    types: [opened, reopened, closed]
+  issues:
+  issue_comment:
+  release:
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord Embed
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        shell: bash
+        run: |
+          python3 - <<'PY' | curl -sS -X POST "$DISCORD_WEBHOOK" -H "Content-Type: application/json" -d @-
+          import os, json, datetime
+
+          event_name = os.environ.get("GITHUB_EVENT_NAME", "")
+          actor = os.environ.get("GITHUB_ACTOR", "")
+          repo = os.environ.get("GITHUB_REPOSITORY", "")
+          repo_url = f"https://github.com/{repo}"
+
+          # Load full event payload safely (handles quotes/newlines correctly)
+          with open(os.environ["GITHUB_EVENT_PATH"], "r", encoding="utf-8") as f:
+              ev = json.load(f)
+
+          def trunc(s, n):
+              s = (s or "").strip()
+              return s if len(s) <= n else s[: n - 1] + "…"
+
+          title = "📌 Unknown event"
+          url = repo_url
+          color = 10070709
+          lines = []
+
+          if event_name == "push":
+              branch = os.environ.get("GITHUB_REF_NAME") or (ev.get("ref", "").split("/")[-1] if ev.get("ref") else "")
+              msg = ev.get("head_commit", {}).get("message", "")
+              compare_url = ev.get("compare") or repo_url
+
+              title = "📦 Push Event"
+              url = compare_url
+              color = 3447003
+              lines = [
+                  f"👤 By: {actor}",
+                  f"📁 Repo: {repo}",
+                  f"🌿 Branch: {branch}",
+                  f"📝 Message: {trunc(msg, 300)}",
+                  f"🔗 {repo_url}",
+              ]
+
+          elif event_name == "pull_request":
+              pr = ev.get("pull_request", {})
+              action = ev.get("action", "")
+              pr_title = pr.get("title", "")
+              pr_url = pr.get("html_url", repo_url)
+              merged = bool(pr.get("merged"))
+              head = pr.get("head", {}).get("ref", "")
+              base = pr.get("base", {}).get("ref", "")
+
+              if action == "closed" and merged:
+                  title = "✅ Pull Request Merged"
+                  color = 3066993
+              else:
+                  title = f"🔀 Pull Request ({action})"
+                  color = 15105570
+
+              url = pr_url
+              lines = [
+                  f"👤 By: {actor}",
+                  f"📁 Repo: {repo}",
+                  f"🔀 {head} → {base}",
+                  f"📝 PR Title: {trunc(pr_title, 300)}",
+                  f"🔗 {pr_url}",
+              ]
+
+          elif event_name == "issues":
+              issue = ev.get("issue", {})
+              action = ev.get("action", "")
+              issue_title = issue.get("title", "")
+              issue_url = issue.get("html_url", repo_url)
+
+              title = f"🐞 Issue ({action})"
+              url = issue_url
+              color = 10181046
+              lines = [
+                  f"👤 By: {actor}",
+                  f"📁 Repo: {repo}",
+                  f"📝 Issue: {trunc(issue_title, 300)}",
+                  f"🔗 {issue_url}",
+              ]
+
+          elif event_name == "issue_comment":
+              issue = ev.get("issue", {})
+              comment = ev.get("comment", {})
+              issue_title = issue.get("title", "")
+              issue_url = issue.get("html_url", repo_url)
+              comment_url = comment.get("html_url", issue_url)
+              body = comment.get("body", "")
+
+              # Detect if comment is on PR (GitHub adds issue.pull_request key)
+              is_pr_comment = "pull_request" in issue
+              title = "💬 PR Comment" if is_pr_comment else "💬 Issue Comment"
+              url = comment_url
+              color = 7419530
+              lines = [
+                  f"👤 By: {actor}",
+                  f"📁 Repo: {repo}",
+                  f"🧾 On: {trunc(issue_title, 200)}",
+                  f"💭 Comment: {trunc(body, 600)}",
+                  f"🔗 {comment_url}",
+              ]
+
+          elif event_name == "release":
+              rel = ev.get("release", {})
+              rel_name = rel.get("name") or rel.get("tag_name") or ""
+              rel_url = rel.get("html_url", repo_url)
+
+              title = "🚀 Release Published"
+              url = rel_url
+              color = 15844367
+              lines = [
+                  f"👤 By: {actor}",
+                  f"📁 Repo: {repo}",
+                  f"🏷️ Release: {trunc(rel_name, 300)}",
+                  f"🔗 {rel_url}",
+              ]
+
+          payload = {
+              "username": "GitHub Notifier",
+              "avatar_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+              "embeds": [
+                  {
+                      "title": title,
+                      "url": url,  
+                      "description": "\n".join(lines),
+                      "color": color,
+                      "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+                      "author": {
+                          "name": actor,
+                          "icon_url": f"https://github.com/{actor}.png",
+                      },
+                      "footer": {"text": repo},
+                  }
+              ],
+          }
+
+          print(json.dumps(payload, ensure_ascii=False))
+          PY

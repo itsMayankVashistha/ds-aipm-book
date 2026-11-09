@@ -1,0 +1,14 @@
+[
+    {
+        "question": "How are Time-series problems different from other regression problems?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Time-series problems involve predicting future values based on historical data, presenting unique challenges compared to standard regression problems. Temporal dependencies, seasonality, and trends are critical considerations. Additionally, time-series data often requires special preprocessing, such as handling missing values and addressing autocorrelation. Traditional regression models may overlook these temporal patterns, while specialized techniques like autoregressive integrated moving average (ARIMA) or long short-term memory (LSTM) networks are designed to capture the sequential nature of time-series data, making them more suitable for forecasting future values. Overall, time-series problems require specialized techniques and considerations to effectively model and analyze temporal data, accounting for dependencies, patterns, and dynamics over time. Traditional regression problems, in contrast, focus on predicting a target variable without the explicit consideration of temporal dependencies."
+            }
+        ]
+    }
+]

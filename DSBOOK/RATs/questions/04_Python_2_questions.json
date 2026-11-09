@@ -1,0 +1,114 @@
+[
+    {
+        "question": "Two of the following answers will give you the same result. Can you figure out which?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "x = my_dictionary['Python']",
+                "correct": true,
+                "feedback": "That's correct. "
+            },
+            {
+                "code": " x = my_dictionary.items('Python')",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!'.items()'  takes no argument and will return  all keys and values."
+            },
+            {
+                "code": "x = my_dictionary.keys('Python')",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!  '.keys' takes no argument and will return only all keys."
+            },
+            {
+                "code": "x = my_dictionary.get('Python')",
+                "correct": true,
+                "feedback": "That's correct. "
+            }
+        ]
+    },
+    {
+        "question": "Choose the correct statements about lists, sets, dictionaries and tuples.",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Lists and tuples are ordered and mutable data structures.",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again! :)"
+            },
+            {
+                "answer": "Dictionaries and sets are unordered whereas lists and tuples are ordered data structures.",
+                "correct": true,
+                "feedback": "That's correct."
+            },
+            {
+                "answer": "Lists and dictionaries are mutable whereas tuples are immutable.",
+                "correct": true,
+                "feedback": "That's correct."
+            },
+            {
+                "answer": "Accessing elements via indexing only works for lists.",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again! :)"
+            }
+        ]
+    },
+    {
+        "question": "What is the output of the following code snippet?",
+        "code": "my_list = [['Hello', 'World', '!'], 42, (4, '9'), 'BAM!']\nmy_list[3][1]",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "4",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "'!'",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "42",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "'A'",
+                "correct": true,
+                "feedback": "Nice job! The code snippet will return 'A'. '[3]' points to the string 'BAM!'. '[1]' selects the second element of that string (remember zero-indexing!)."
+            }
+        ]
+    },
+    {
+        "question": "Select all answers which are a valid way to call the following function.",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "my_function('Merlin', 'Atlantic')",
+                "correct": true,
+                "feedback": "Well done! "
+            },
+            {
+                "code": "my_function('Shark', ocean='Indian Ocean')",
+                "correct": true,
+                "feedback": "Well done! "
+            },
+            {
+                "code": "my_function(fish='Nemo', 'Atlantic')",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again! This won't work since a positional argument follows a key-word argument. It only works if key-word arguments follow positional arguments."
+            },
+            {
+                "code": "my_function('Dori')",
+                "correct": true,
+                "feedback": "Well done! "
+            },
+            {
+                "code": "my_function(ocean='Mediterranean sea', fish='Khan')",
+                "correct": true,
+                "feedback": "Well done!"
+            }
+        ]
+    }
+]

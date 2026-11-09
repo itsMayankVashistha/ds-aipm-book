@@ -1,0 +1,96 @@
+[
+    {
+        "question": "What is the main objective of the K-means clustering algorithm?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "Minimize the distance between points within clusters",
+                "correct": true,
+                "feedback": "That's correct! The main objective of the K-means clustering algorithm is to minimize the distance between points within clusters."
+            },
+            {
+                "answer": "Maximize the distance between points within clusters",
+                "correct": false,
+                "feedback": "Sorry, that is incorrect. Please try again."
+            },
+            {
+                "answer": "Minimize the number of clusters",
+                "correct": false,
+                "feedback": "Nope, that is incorrect. Please try again."
+            },
+            {
+                "answer": "Maximize the number of clusters",
+                "correct": false,
+                "feedback": "Sorry, that is incorrect. Another try?"
+            }
+        ]
+    },
+    {
+        "question": "Which of the following 2 statements is true about Hierarchical Clustering?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "It creates a single flat partition of the data",
+                "correct": false,
+                "feedback": "Sorry, that is incorrect. Please try again."
+            },
+            {
+                "answer": "It requires the number of clusters to be defined at the start",
+                "correct": false,
+                "feedback": "Sorry, that's false. Please try again."
+            },
+            {
+                "answer": "It builds a tree-like structure of clusters",
+                "correct": true,
+                "feedback": "Absolutely, you're right! Hierarchical clustering builds a tree-like structure of clusters."
+            },
+            {
+                "answer": "It cannot be visualized using a dendrogram",
+                "correct": false,
+                "feedback": "Sorry, that is incorrect. Hierarchical clustering can be visualized using a dendrogram."
+            },
+            {
+                "answer": "You can set the number of clusters to visualize the hierarchical clustering in a dendrogram",
+                "correct": true,
+                "feedback": "Awesome, that's correct! You can set the number of clusters to visualize the hierarchical clustering in a dendrogram by cutting the dendrogram at the desired level."
+            }
+        ]
+    },
+    {
+        "question": "In the DBSCAN algorithm, what is the role of the parameter 'eps'?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "The minimum number of points required to form a dense region",
+                "correct": false,
+                "feedback": "Sorry, that is incorrect. The minimum number of points required to form a dense region is controlled by the 'min_samples' parameter."
+            },
+            {
+                "answer": "The maximum distance between two points to be considered neighbors",
+                "correct": true,
+                "feedback": "Yes, that's correct! The 'eps' parameter defines the maximum distance between two points to be considered neighbors in the DBSCAN algorithm."
+            },
+            {
+                "answer": "The maximum number of iterations to run the algorithm",
+                "correct": false,
+                "feedback": "Sorry, that is incorrect. Please try again."
+            },
+            {
+                "answer": "The minimum distance between two clusters",
+                "correct": false,
+                "feedback": "Sorry, that is incorrect. Please try again."
+            }
+        ]
+    },
+    {
+       "question": "Your colleagues suspect that their clustering model might not be performing well. How can you evaluate the performance of a clustering model, and what method can be used to improve it if the performance is not satisfactory?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+            "answer": "Click here to see the answer.",
+            "correct": true,
+            "feedback": "To evaluate the performance of a clustering model, you can use metrics such as the Silhouette Score, Davies-Bouldin Index, or the Calinski-Harabasz Index. Visual inspection of clusters can also be helpful, especially after applying dimensionality reduction techniques like PCA or t-SNE for high-dimensional data. If the performance is not satisfactory, you can try different clustering algorithms, adjust the number of clusters (for algorithms like K-Means, using methods like the elbow method), or tune specific hyperparameters relevant to the clustering algorithm being used (such as eps and min_samples for DBSCAN, or n_clusters for K-Means). "
+            }
+        ]
+    }
+]

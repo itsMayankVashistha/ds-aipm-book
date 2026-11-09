@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What is the Bias-Variance Tradeoff? And how does it relate to over-/underfitting",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Bias is the part of the modeling error introduced by approximating data with a too simplified model under wrong assumptions about features and target relations. Variance is the part of the modeling error introduced by a model's sensitivity to slight differences in the training data. The bias-variance tradeoff is a crucial concept in machine learning, representing a delicate balance between model simplicity (bias) and flexibility (variance). When a model is too simple, it may fail to capture the underlying patterns in the data, leading to underfitting. On the other hand, an overly complex model may capture noise and specifics of the training data, resulting in overfitting. Striking the right balance is essential for creating a model that generalizes well to unseen data, optimizing predictive performance and avoiding the pitfalls of underfitting or overfitting."
+            }
+        ]
+    },
+    {
+        "question": "What is Regularization and why are you using it? Can you give some examples for different kinds of regularization?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Regularization is a fundamental technique in machine learning used to prevent overfitting by adding penalty terms to the model's cost function. Overfitting occurs when a model learns the training data too well, including noise and outliers, leading to poor generalization on new data. Regularization helps control the complexity of a model, discouraging overly intricate relationships within the data. Examples of regularization methods include L1 regularization (Lasso - adding the absolute sum of coefficients to the cost function) and L2 regularization (Ridge - adding the  squared sum of coefficients to the cost function), each imposing constraints on the model parameters to mitigate overfitting and enhance robustness, particularly in scenarios with limited data or high-dimensional feature spaces."
+            }
+        ]
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What is Data Science? (How is it different from DA/DE etc.)",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Data Science is a multidisciplinary field that encompasses the extraction of meaningful insights and knowledge from data using a combination of statistical analysis, machine learning, programming, and domain expertise. It involves the entire data lifecycle, from problem formulation and data collection to model deployment and maintenance. Distinct from Data Analytics (DA), which primarily focuses on analyzing historical data to extract actionable insights and inform decision-making, Data Science encompasses a broader scope by incorporating predictive modeling, machine learning, and algorithm development to derive future-oriented insights. It also differs from Data Engineering (DE), which is concerned with building and maintaining data infrastructure, ensuring efficient data storage, retrieval, and processing. While Data Engineers focus on the foundational aspects of data architecture, Data Scientists delve into the analytical aspects, seeking patterns and trends to make informed business decisions and drive innovation."
+            }
+        ]
+    },
+    {
+        "question": "What is Gradient Descent and why is it important? What is the benefit of SGD.",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Gradient Descent is an iterative optimization algorithm widely used in machine learning to minimize the cost function during model training. It works by adjusting model parameters in the direction of the steepest decrease (negative gradient) in the cost function, iteratively reaching a minimum. The importance of Gradient Descent lies in its ability to optimize complex models efficiently, updating parameters to improve predictive performance. Stochastic Gradient Descent (SGD) is a variant of this algorithm that uses a random subset of training data for each iteration, enhancing computational efficiency and speeding up convergence. This is particularly advantageous when dealing with large datasets, as it reduces the computational burden associated with processing the entire dataset in each iteration. The benefit of SGD includes faster convergence, making it suitable for training models on extensive datasets or in scenarios where computational resources are limited."
+            }
+        ]
+    }
+]

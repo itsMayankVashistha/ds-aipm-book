@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What is your favorite ML-model? Explain it!",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "My favorite ML model is the Random Forest (, e.g. because I used it in project X for a case Y and made Z experience with it). It is an ensemble learning method that leverages the strength of multiple decision trees (weak learners) for improved predictive performance and robustness. Each decision tree is constructed on a subset of the dataset, and the final prediction is determined by aggregating the predictions of individual trees. The 'random' aspect comes from the introduction of randomness in both the selection of training data and features for each tree, mitigating overfitting and enhancing generalization to unseen data. Random Forests excel in handling high-dimensional data, nonlinear relationships, and outliers. Moreover, they provide valuable insights into feature importance, aiding in feature selection and interpretability. The versatility and resilience of Random Forests make them my preferred choice across various applications, from classification to regression tasks."
+            }
+        ]
+    },
+    {
+        "question": "What is your least favorite ML-model? Why?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Choosing a least favorite machine learning model is tough as each model has its strengths and weaknesses, making them suitable for different scenarios. However, if I were to choose, decision trees might be on the lower end for me. While they're intuitive and easy to understand, they can overfit easily, especially with deep trees, leading to poor generalization on unseen data. Their hierarchical structure might struggle to capture more complex relationships present in certain datasets, requiring ensemble methods or more sophisticated models for improved performance. Despite these limitations, decision trees serve as a foundational concept for powerful ensemble techniques like Random Forests and Gradient Boosting, which address many of the shortcomings of individual decision trees."
+            }
+        ]
+    }
+]

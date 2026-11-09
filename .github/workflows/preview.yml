@@ -1,0 +1,38 @@
+# .github/workflows/preview.yml
+name: Deploy PR previews
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency: preview-${{ github.ref }}
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+
+    - name: Install dependencies
+      run: uv sync
+
+    # Build the book
+    - name: Build the book
+      run: |
+        uv run jupyter-book build DSBOOK
+        mv ./DSBOOK/images/ ./DSBOOK/_build/html/
+
+    - name: Deploy PR Preview
+      uses: rossjrw/pr-preview-action@v1.3.0
+      with:
+        source-dir: ./DSBOOK/_build/html

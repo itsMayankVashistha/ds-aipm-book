@@ -1,0 +1,130 @@
+[
+    {
+        "question":"What type of task are CNNs particularly effective at?",
+        "type": "multiple_choice",
+        "answers":[
+            {
+                "answer":"Natural language processing",
+                "correct":false,
+                "feedback":"Sorry, that was wrong. Please try again"
+
+            },
+            {
+                "answer": "Image recognition and classification",
+                "correct": true,
+                "feedback": "That is correct.  CNNs are particularly effective in image recognition because they can automatically learn and detect hierarchical patterns and features in images, making them well-suited for tasks like object recognition and classification."
+            },
+            {
+                "answer": "Stock market prediction",
+                "correct": false,
+                "feedback":"Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Quantum computing",
+                "correct": false,
+                "feedback":"Sorry, that was wrong. Please try again"
+            }
+        ]
+
+    },
+    {
+        "question": "What is the primary purpose of convolutional layers in a CNN?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "To reduce the size of the input image",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "To apply filters and detect local patterns",
+                "correct": true,
+                "feedback": "That is correct. Convolutional layers are responsible for applying filters to input images to detect local patterns, such as edges, textures, and simple features. These layers help the network learn meaningful features from the input data."
+            },
+            {
+                "answer": "To fully connect all neurons in the network",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "To calculate the final classification score",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "In a CNN, what is the purpose of pooling layers?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "To increase the size of feature maps",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "To add more convolutional filters",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "To calculate the final prediction",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "To reduce the spatial dimensions of feature maps",
+                "correct": true,
+                "feedback": "That is correct. Pooling layers reduce the spatial dimensions of feature maps and decrease the number of parameters in the network. This helps make the network more computationally efficient and provides some degree of translation invariance."
+            }
+        ]
+    },
+    {
+        "question": "What is the term for preventing overfitting in a CNN by randomly deactivating some neurons during training?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "Early stopping",
+                "correct": false,
+                "feedback": "Sorry, that was wrong but it is also used to prevent overfitting. Early stopping stops training when performance on a validation set plateaus. Please try again"
+            },
+            {
+                "answer": "Dropout",
+                "correct": true,
+                "feedback": "That is correct."
+            },
+            {
+                "answer": "Data augmentation",
+                "correct": false,
+                "feedback": "Sorry, that was wrong but it is also used to prevent overfitting. Data augmentation introduces variations in the training data to improve generalization. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "How does transfer learning benefit CNNs?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "It allows them to start with larger initial weights",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "It makes CNNs run faster during training",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer":"It enables the use of pre-trained models to improve performance on new tasks",
+                "correct": true,
+                "feedback": "That is correct. Transfer learning is the practice of using a pre-trained model as a starting point for a new task. It's useful in CNNs because it saves time and resources. By leveraging a pre-trained model's learned features, you can fine-tune it for a specific task with a relatively small amount of new data, often achieving good results."
+            },
+            {
+                "answer":"It reduces the need for convolutional layers",
+                "correct": false,
+                "feedback":"Sorry, that was wrong. Please try again"
+            }
+        ]
+    }
+    
+]

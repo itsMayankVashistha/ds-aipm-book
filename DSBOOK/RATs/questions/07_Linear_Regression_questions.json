@@ -1,0 +1,113 @@
+[
+    {
+        "question": "What are the important assumptions of Linear Regression?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Linearity & Normality",
+                "correct": true,
+                "feedback": "That's correct. The major assumptions of linear regression are linearity, normality, independence and homoscedasticity."
+            },
+            {
+                "answer": "Skewness & Kurtosis",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Independence & Heteroscedasticity",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Homoscedasticity & Independence",
+                "correct": true,
+                "feedback": "That's correct. The major assumptions of linear regression are linearity, normality, independence and homoscedasticity."
+            },
+            {
+                "answer": "Normality & Non-linearity",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "You train a linear regression model with three features and get the following regression equation. How can you interpret the intercept and coefficient for feature 1?",
+        "code": "$\\hat_{y} = 1.04 + 0.61*feature_{1} - 0.59*feature_{2} + 0.56*feature_{3}",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "We would expect that our target variable (y) increases by 0.61 when we increase feature_1 by 1 unit. This applies regardless of whether we change the value for other features as well.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Feature_1 is the most important feature because it has the highest coefficient.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The intercept of 1.04 is the value for our target variable (y) when all our explanatory variables (features) are 0.",
+                "correct": true,
+                "feedback": "Correct. The first value in the equation is the intercept and it tells us the expected value for our target variable if all the features are 0. "
+            },
+            {
+                "answer": "We would expect that feature_1 changes by 0.61 when we increase our target variable by 1 unit. Provided that we keep all other features constant.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "We would expect that our target variable (y) increases by 0.61 when we increase feature_1 by 1 unit. Provided that we keep all other features constant.",
+                "correct": true,
+                "feedback": "Correct. The coefficient for feature_1 (slope) tells us what change in our target variable we would expect if we increase this feature by 1 unit holding all other features constant. In this case it would be an increase of 0.61."
+            },
+            {
+                "answer": "The intercept of 1.04 is the value for our target variable (y) when all our explanatory variables (features) are 1.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "If you would calculate the adjusted R-squared for this model. What do you expect?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "The adjusted r-squared should be lower or as high as the r-squared.",
+                "correct": true,
+                "feedback": "Correct. The adjusted r-squared penalizes us for adding more features that actually don't improve the model."
+            },
+            {
+                "answer": "The adjusted r-squared should be higher as the r-squared.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The adjusted r-squared should be higher or as high as the r-squared.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The adjusted r-squared should be lower as the r-squared.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "There are not enough information to make an assumption.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "The r-squared for this model is 0.52 What does it tell you? ",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+            "answer": "Click here to see the answer.",
+            "correct": true,
+            "feedback": "We can interpret the r-squared as the proportion of the variance in the target variable that can be explained by our model. In this particular case our linear model with the three features can account 'only' for 52% of the variation in our target variable. Nearly half of the variation is still unexplained. That indicates that the model is probably missing some important information (e.g. more features, non-linear relationship...)."
+            }
+        ]
+    }
+]

@@ -1,0 +1,123 @@
+[
+    {
+        "question": "This is the typical function of logistic regression. What's the name of this function? ",
+        "code": "$\\hat{p} = \\frac{1}{1+e^{-b^Tx}}$",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Cost function of logistic regression.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Sigma-Function",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Logistic Function",
+                "correct": true,
+                "feedback": "That's right."
+            },
+            {
+                "answer": "Sigmoid Function",
+                "correct": true,
+                "feedback": "That's right."
+            },
+            {
+                "answer": "Logit Function",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "Why is the function above (function of logistic regression) suitable for binary classification? ",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "All values lie in the range of -1 and 1.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "All values lie in a range of 0 and 1.",
+                "correct": true,
+                "feedback": "That's right. If you set \"b^Tx\" to be a very high number, the function asymptotes to 1, if you set \"b^Tx\" to be a high negative number (-\u221e), the function asymptotes to 0. "
+            },
+            {
+                "answer": "Exponential functions prevent over-fitting.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Values can be interpreted as probabilities.",
+                "correct": true,
+                "feedback": "Due to the range between 0 and 1 for the output of the logistic regression, the result can also be interpreted as the probability of being part of class 1. Overfitting of logistic regression can be avoided by adding a regularization term to the cost function."
+            }
+        ]
+    },
+    {
+        "question": "Which of the following statements about b is true? Check all that apply.",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "b is a hyperparameter that can be tuned with Grid-Search.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The dimension of the vector b is equal to the number of variables of the model.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "The dimension of the vector b is equal to the number of variables of the model + 1.",
+                "correct": true,
+                "feedback": "That's right. b always refers to the parameters learned by the machine learning algorithm during training. In the case of logistic regression, you usually get a weight for each variable you use as input plus an additional weight, usually called \"b zero\", which is also called \"bias\" or \"intercept\"."
+            },
+            {
+                "answer": "The values for the vector b are obtained by training the model.",
+                "correct": true,
+                "feedback": "That's right. b always refers to the parameters learned by the machine learning algorithm during training. In the case of logistic regression, you usually get a weight for each variable you use as input plus an additional weight, usually called \"b zero\", which is also called \"bias\" or \"intercept\"."
+            }
+        ]
+    },
+    {
+        "question": "You trained 2 logistic regression models, one where you set the hyperparameter \u03bb = 0, and one where you set the hyperparameter \u03bb = 10 (same as alpha in scikit-learn). You forgot which model used \u03bb = 0 and which \u03bb = 10. Can you use the thetas below to draw conclusions about lambda? Check all statements that are true.",
+        "code": "b_A = [0.29, 8.34, 0.02].T\nb_B = [42.95, 68.03, 2.68].T",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "Model A used \u03bb = 0, model B used \u03bb = 10.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Model B used \u03bb = 0, model A used \u03bb = 10.",
+                "correct": true,
+                "feedback": "That's right. \u03bb influences how much high values for b are penalized. Using a large value for \u03bb result in smaller values for b. Therefore, you used \u03bb = 0 for model B and for model A \u03bb = 10. "
+            },
+            {
+                "answer": "\u03bb just influences the step-size of Gradient Descent and therefore does not influence the learned \u03b8.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Most probably \u03bb was used with a L1 regularization term.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Most probably \u03bb was used with a L2 regularization term.",
+                "correct": true,
+                "feedback": "Lasso or L1 Regularization has the property to shrink some of the coefficients (bs) to zero (--> the variable is not used for prediction at all). With L2 regularization (ridge), bs are likely to have values close to 0, but rarely 0; it only reduces the influence of a variable for prediction without eliminating the variable altogether. Therefore, in this example, you most likely used L2 regularization."
+            },
+            {
+                "answer": "None of the above. Logistic Regression is not using hyper-parameters to calculate \u03b8.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    }
+]

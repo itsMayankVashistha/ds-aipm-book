@@ -1,0 +1,35 @@
+[project]
+name = "ds-book-template"
+version = "0.1.0"
+description = "neuefische Data Science course material — Jupyter Book, slides (RISE) and RATs."
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    # --- classic-notebook slide/extension stack (do NOT bump to notebook 7) ---
+    "notebook==6.5.4",     # RISE + hide-code + splitcell only work on notebook < 7
+    "rise==5.7.1",         # reveal.js slideshows
+    "hide-code==0.7.0",    # hide code/prompts/outputs in slides
+    "traitlets==5.9.0",    # constraint: traitlets > 5.9 breaks the notebook 6.5.4 stack
+    "ipywidgets==8.1.5",
+    # --- book / quiz ---
+    "jupyter-book==1.0.2",
+    "JupyterQuiz==2.6.3",
+    # --- data science stack used across the notebooks ---
+    "pandas==2.2.3",
+    "scikit-learn==1.5.2",
+    "seaborn==0.13.2",
+    "plotly==5.24.1",
+    "kaleido==0.2.1",      # static image export for plotly
+    "yellowbrick==1.5",
+    "statsmodels==0.14.3",
+    "scipy==1.12.0",       # constraint: gensim 4.3.3 breaks on scipy >= 1.13
+    # --- NLP ---
+    "nltk==3.9.1",
+    "spacy==3.6.1",
+    "gensim==4.3.3",
+]
+
+# This is a course-material repo, not an installable package: only install the
+# dependencies, don't try to build/install the project itself.
+[tool.uv]
+package = false

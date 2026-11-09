@@ -1,0 +1,13 @@
+.venv
+.ipynb_checkpoints
+google2jupyter/*/.ipynb_checkpoints
+.DS_Store
+
+
+# Jupyter book stuff
+DSBOOK/_build/
+DSBOOK/sessions/plot_colors_nf.json
+DSBOOK/sessions/plot_colors_spiced.json
+DSBOOK/sessions/__pycache__/
+
+

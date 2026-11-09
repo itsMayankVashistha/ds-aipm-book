@@ -1,0 +1,114 @@
+[
+    {
+        "question": "Which measure of central tendency can be used for categorical variables?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Median",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. The median can be only calculated for numerical variables. Please try again"
+            },
+            {
+                "answer": "Mean",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. The mean can be only calculated for numerical variables. Please try again"
+            },
+            {
+                "answer": "Mode",
+                "correct": true,
+                "feedback": "That's right. The Mode can be used as measures of central tendency for categorical variables. The mode is the most commonly occurring category."
+            },
+            {
+                "answer": "Expected Value",
+                "correct": true,
+                "feedback": "That's right. The expected value can be used as measures of central tendency for categorical variables. It is a form of a weighted mean where the weights are probabilities."
+            }
+        ]
+    },
+    {
+        "question": "When should you prefer the median instead of the mean? ",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "when the data is distributed symmetrically",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "when the dataset contains outliers",
+                "correct": true,
+                "feedback": "That is correct. The Mean is sensitive to extreme values while the Median is more robust. In case of outliers, it's preferred to use the median."
+            },
+            {
+                "answer": "when the dataset has no outliers",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "when the data is skewed",
+                "correct": true,
+                "feedback": "That is correct. The Mean is sensitive to extreme values while the Median is more robust. Skewed data has extreme values at the tail, therefore, the median is the better choice for this case."
+            },
+            {
+                "answer": "None of the other answers. Mean is always the best choice.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "If variable A and B are linearly correlated,",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "it could be that this just happened by coincidence.",
+                "correct": true,
+                "feedback": "That's correct. Without further knowledge you cannot conclude the reason for the correlation, it could be pure coincidence."
+            },
+            {
+                "answer": "it means that A causes B.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Correlation does not imply causation! Please try again"
+            },
+            {
+                "answer": "it means that when A increases, also B increases.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. From the statement that A and B correlate we do not yet know whether it is a positive correlation or a negative correlation."
+            },
+            {
+                "answer": "it could be possible that the relationship between A and B are caused by an other variable C",
+                "correct": true,
+                "feedback": "That's correct. Without further knowledge you cannot conclude the reason for the correlation, it could be caused by a further variable C."
+            },
+            {
+                "answer": "the pearson correlation coefficient is close to 0.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. In case of a positive linear correlation, the Pearson's correlation coefficient is close to 1, in case of a negative correlation it is close to -1."
+            }
+        ]
+    },
+    {
+        "question": "What is an outlier?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers":  [
+            {
+                "answer": "Click here to see the answer.",
+                "correct": true,
+                "feedback": "In statistics, an outlier is a data point that differs significantly from other observations. An outlier may be due to variability in the measurement or it may indicate experimental error. The choice of how to deal with an outlier should depend on the cause. There is no rigid mathematical definition of what constitutes an outlier; determining whether or not an observation is an outlier is ultimately a subjective exercise."
+            }
+        ]
+    },
+    {
+        "question": " What is a deviation?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+            "answer": "Click here to see the answer.",
+            "correct": true,
+            "feedback": "The deviation is the difference between an observation and the estimate of location. A deviation that is a difference between an observed value and the true value of a quantity of interest (where true value denotes the Expected Value, such as the population mean) is an 'error'. A deviation that is the difference between the observed value and an estimate of the true value (e.g. the sample mean; the Expected Value of a sample can be used as an estimate of the Expected Value of the population) is a 'residual'."
+            }
+        ]
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "question": "Explain random forest? What is random in random forests?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Random Forest is an ensemble learning technique that combines multiple decision trees to enhance predictive accuracy and control overfitting. The 'random' element in Random Forest involves training each tree on a random subset of the dataset and considering a random subset of features for each split. This randomness injects diversity among the individual trees, leading to a more robust and generalizable model. Random Forests excel in capturing complex relationships within data, making them effective for both classification and regression tasks. The aggregation of predictions from multiple trees results in a more stable and accurate overall model."
+            }
+        ]
+    },
+    {
+        "question": "What is a blackbox vs whitebox model? Can you give some examples?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "The distinction between blackbox and whitebox models lies in their interpretability. Blackbox models, such as neural networks, are complex and challenging to interpret due to their intricate architectures. In contrast, whitebox models, like linear regression or decision trees, are transparent and offer clear insights into how they make predictions. Choosing between them involves a trade-off: blackbox models often achieve higher accuracy but sacrifice interpretability, whereas whitebox models provide interpretability at the expense of potential accuracy. The selection depends on the specific requirements and constraints of the given problem."
+            }
+        ]
+    }
+]

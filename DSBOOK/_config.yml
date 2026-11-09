@@ -1,0 +1,42 @@
+# Book settings
+# Learn more at https://jupyterbook.org/customize/config.html
+
+title: DS Course Material
+author: The DS Coach Team
+logo: images/nf_logo_orange.png
+
+# Force re-execution of notebooks on each build.
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: force
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: ds_book.tex
+
+## Information about where the book exists on the web
+#repository:
+#  url: https://github.com/neuefische/ds-book-template  # Online location of your book
+#  path_to_book: DSBOOK  # Optional path to your book, relative to the repository root
+#  branch: main  # Which branch of the repository should be used when creating links (optional)
+
+# Add GitHub buttons to your book
+# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+html:
+#  use_issues_button: true
+  favicon: images/favicon.ico
+
+# Only build files listed in table of contents
+only_build_toc_files: true
+
+copyright: "2025"
+
+sphinx:
+    config:
+      html_theme_options:
+        use_download_button: false
+
+execute:
+  exclude_tags: ["skip-execution"]
+

@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What is Cross-validation?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Cross-validation is a crucial technique for assessing a model's performance by partitioning the dataset into multiple subsets. The model is trained on a subset and validated on the remaining data, repeating this process multiple times. A common type is k-fold cross-validation, where the data is divided into k subsets (also called 'folds'). The model is then trained k times, each time using a different fold as the validation set and the remaining folds as the training set. The performance of the model is then averaged over the k iterations to obtain an overall assessment of its performance. Cross-validation helps in estimating how well a model will generalize to new, unseen data by providing a more robust evaluation of its performance compared to a single train-test split. It also helps in identifying potential overfitting or underfitting, as the model is evaluated across multiple subsets of the training data. Due to its robust evaluation properties, cross-validation is typically used during hyperparameter tuning of a model, e.g. in gridsearches. Overall, cross-validation is a valuable technique for evaluating and fine-tuning machine learning models, providing more reliable estimates of their performance and generalization capabilities."
+            }
+        ]
+    },
+    {
+        "question": "What is hyperparameter tuning?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Hyperparameter tuning involves optimizing the hyperparameters of a machine learning model to improve its performance. Hyperparameters are external configurations that cannot be learned from the data, such as learning rate or the number of hidden layers in a neural network. Techniques like grid search or random search are commonly employed to explore the hyperparameter space systematically. This process is vital for achieving optimal model performance, preventing overfitting, and ensuring the model's adaptability to different datasets. Hyperparameter tuning is an essential step in the machine learning pipeline to fine-tune model behavior and enhance its predictive capabilities."
+            }
+        ]
+    }
+]

@@ -1,0 +1,107 @@
+# topic_mapping.yml
+#
+# Maps the exact "topic of the day" text from the Google Calendar all-day
+# event to the corresponding `file:` path in _toc.yml.
+#
+# The calendar title must match EXACTLY (case-sensitive) as it appears in
+# the calendar event summary.
+#
+# This repo serves BOTH the AIPM and Data Science tracks. Which track is
+# "live" is set via the COHORT_TRACK repo variable (aipm | ds) — update
+# that once per cohort, same as you'd update GCAL_ICS_URL.
+#
+# Three entry formats are supported:
+#   1. Plain string  -> same file for both tracks (topic doesn't diverge)
+#        "Bias Variance Tradeoff": sessions/09.1_Bias_Variance_Tradeoff
+#
+#   2. List of strings -> multiple files for both tracks
+#        "Topic": [sessions/part1, sessions/part2]
+#
+#   3. Dict with aipm/ds keys -> tracks diverge, pick based on COHORT_TRACK
+#        "Linear Regression":
+#          aipm: sessions/aipm_sessions/Linear_Regression_AIPM
+#          ds: sessions/08_Linear_Regression
+#
+# Topics with no slide at all (career sessions, non-technical activities,
+# etc.) should simply be left out — the script skips them silently.
+
+mappings:
+  "Bootcamp Introduction, Learning components, Tech Industry Overview": sessions/01_Orientation
+  "Command line tutorial + Intro to Git": sessions/02_Git_Workflows
+  "Introduction to ML + Python basics":
+    ds: sessions/03_Intro_to_Data_Science_ML
+  "Introduction to AIPM + Python Basics":
+    aipm: sessions/aipm_sessions/Intro_to_AIPM
+  "Intro to SQL": sessions/05.2_Intro_to_SQL
+  "EDA Intro & Data Cleaning": sessions/07_Intro_EDA
+  "EDA project": sessions/07.2_EDA_process
+  "EDA Project + Presentations": sessions/07.2_EDA_process
+  "Linear Regression":
+    aipm: sessions/aipm_sessions/Linear_Regression_AIPM
+    ds: sessions/08_Linear_Regression
+  "Bias Variance Tradeoff":
+    aipm: sessions/aipm_sessions/Bias_Variance_Tradeoff_AIPM
+  "Bias Variance Tradeoff + Regularization":
+    ds:
+      - sessions/09.1_Bias_Variance_Tradeoff
+      - sessions/09.2_Regularization
+  "Gradient Descent": sessions/10_Gradient_Descent
+  "Evaluation Metrics": 
+    aipm: sessions/aipm_sessions/Evaluation_Metrics_AIPM
+    ds: sessions/11_Evaluation_Metrics
+  "Logistic Regression":
+    aipm: sessions/aipm_sessions/Logistic_Regression_AIPM
+    ds: sessions/12_Logistic_Regression
+  "Distance Metrics + KNN": sessions/13_KNN_Distance_Metrics
+  "Decision Trees":
+    aipm: sessions/aipm_sessions/Decision_Tree_AIPM
+    ds: sessions/15_Decision_Tree
+  "Ensemble Methods": 
+    aipm: sessions/aipm_sessions/Ensemble_Methods_AIPM
+    ds: 
+      - sessions/16_Ensemble_Methods_part1
+      - sessions/16_Ensemble_Methods_part2
+  "ANN":
+    aipm: sessions/aipm_sessions/ANN_AIPM
+    ds: 
+      - sessions/18_Neural_Networks
+      - sessions/19_Image_Modelling
+  "Time Series":
+    ds: sessions/21_Time_Series_Analysis_Intro
+  "Dimensionality Reduction":
+    ds: sessions/22_Dimensionality_Reduction
+  "Clustering":
+    ds: sessions/23_Clustering
+  "NLP":
+    aipm: sessions/aipm_sessions/NLP_AIPM
+    ds: sessions/24_NLP_Intro
+  "Prompt Engineering": sessions/25.1_Prompt_Engineering
+  "RAGs": sessions/25.2_RAG_Systems
+  "AI Agents": sessions/26_AI_Agents
+  "Distributions CI":
+    ds: sessions/27_Distributions_CI
+  "Hypothesis Testing":
+    ds: sessions/28_Hypothesis_Testing
+  "Recommender Systems":
+    ds: sessions/29_Recommender_Systems
+  "MCP": sessions/30_MCP
+  "Capstone kick-off & Data Product Scoping": sessions/20_Capstone_Phase
+  "Streamlit":
+    aipm: sessions/aipm_sessions/Streamlit_AIPM
+    ds: sessions/31_Streamlit
+  "Testing": sessions/14_Testing
+  
+
+  # --- TODO: no corresponding file exists yet in _toc.yml ---
+  # "ML Project kick off + Data Products": sessions/17_Data_Products
+  # "Data visualization": ???              # maybe 06.2_Fantastic_Charts?
+  # "Feature Engineering": ???             # no matching file in toc
+  # "Software Architecture Fundamentals 1": ???
+  # "Software Architecture Fundamentals 2": ???
+  # "GDPR-greendata - AI Act": ???
+  # "A/B Testing PM activity + ML Project Retro": ???
+  # "Setup Local LLMs": ???
+  # "Applied LLMs for Business Cases": ???
+  # "AI Architecture Basics 1": ???
+  # "AI Architecture Basics 2 + Vibe coding": ???
+

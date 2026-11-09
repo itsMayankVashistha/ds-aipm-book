@@ -1,0 +1,143 @@
+[
+    {
+        "question": "What voting mechanisms do exist?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Soft Voting",
+                "correct": true,
+                "feedback": "That's right. Soft Voting is one of them, which aggregates the output of multiple models to one output."
+            },
+            {
+                "answer": "Bagging",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Hard Voting",
+                "correct": true,
+                "feedback": "That's right. Hard Voting is one of them, which aggregates the output of multiple models to one output."
+            },
+            {
+                "answer": "Stacking",
+                "correct": true,
+                "feedback": "That's right. Stacking is one of them, which aggregates the output of multiple models to one output."
+            },
+            {
+                "answer": "Best Voting",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "(Bilbo) Bagging(s) does reduce",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "Variance",
+                "correct": true,
+                "feedback": "That's correct. Bagging reduces variance."
+            },
+            {
+                "answer": "Bias",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Variance and Bias",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Parameters",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "What does boosting do different from bagging?",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "Weak learners can only be regression models.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "It uses strong learners.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Mom?",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Weak learners are applied sequentially.",
+                "correct": true,
+                "feedback": "That's correct. Weak learners are applied sequentially."
+            },
+            {
+                "answer": "It limits the number of weak learners to be included.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": " What is true for random forests?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "It uses random choice of features.",
+                "correct": true,
+                "feedback": "That's right."
+            },
+            {
+                "answer": "It relies on bagging.",
+                "correct": true,
+                "feedback": "That's right."
+            },
+            {
+                "answer": "It ensembles decision trees.",
+                "correct": true,
+                "feedback": "That's right."
+            },
+            {
+                "answer": "It uses log-loss.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "It uses a random depth for weak learners.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "It reduces variance.",
+                "correct": true,
+                "feedback": "That's right."
+            },
+            {
+                "answer": "It is a white-box model.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": " Give a basic definition of ensembling in machine learning",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+            "answer": "Click here to see the answer.",
+            "correct": true,
+            "feedback": "Ensemble learning is a general meta approach to machine learning that seeks better predictive performance by combining the predictions from multiple models."
+            }
+        ]
+    }
+]

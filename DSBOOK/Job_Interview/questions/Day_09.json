@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What evaluation metrics do you know? give an example where each is useful?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Evaluation metrics are crucial for assessing model performance. Different metrics focus on different parts of the model performance, for instance, accuracy provides a general overview of correct predictions, precision is vital in scenarios like fraud detection to minimize false positives, recall becomes essential in healthcare applications where identifying all relevant cases is crucial, and the F1 score strikes a balance between precision and recall. Additionally, the AUC-ROC metric is valuable for classification tasks, offering a comprehensive understanding of the trade-off between true positive rate and false positive rate. Common evaluation metrics for a regression problem include Mean Squared Error (MSE), which quantifies the average squared difference between predicted and actual values. Mean Absolute Error (MAE) calculates the average absolute difference between predicted and actual values. R-squared (coefficient of determination) assesses the proportion of variance in the dependent variable explained by the model. These metrics provide a quantitative measure of how well the regression model performs in terms of minimizing prediction errors. Choosing the appropriate metric depends on the specific goals and characteristics of the regression task."
+            }
+        ]
+    },
+    {
+        "question": "What is the roc curve and how do you interpret it? what is roc auc?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "The Receiver Operating Characteristic (ROC) curve is a graphical representation illustrating the performance of a classification model across different threshold settings. It plots the trade-off between the true positive rate (y-axis) and false positive rate (x-axis). For reference, typically a diagonal line with intersection at (0,0) and slope 0.5 is depicted, which represents the performance of a classifier that makes random guesses. A classifier should perform better (above) than this diagonal line to be considered effective in distinguishing between classes. The Area Under the ROC Curve (AUC-ROC) quantifies the model's discriminative ability, with a higher AUC indicating superior performance. It provides a robust assessment of classification models, especially in scenarios with imbalanced datasets."
+            }
+        ]
+    }
+]

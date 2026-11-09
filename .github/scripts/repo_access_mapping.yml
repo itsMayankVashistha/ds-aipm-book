@@ -1,0 +1,129 @@
+# repo_access_mapping.yml
+#
+# Maps a calendar "topic of the day" title DIRECTLY to the internal
+# GitHub repo(s) that should be granted to the current cohort's team.
+#
+# IMPORTANT: this is intentionally keyed by the exact calendar topic text —
+# the SAME keys used in topic_mapping.yml — not by _toc.yml file paths.
+# Some days have a repo but no slide yet (no _toc.yml entry exists), so
+# tying repo access to slide existence would silently skip those days.
+# This file and topic_mapping.yml are two independent lookups off the same
+# calendar topic text; a topic can appear in one, both, or neither.
+#
+# Entry formats:
+#   1. Plain string  -> same repo for both tracks
+#        "Bias Variance Tradeoff": neuefische/ds-predictive-regression
+#
+#   2. List          -> multiple repos, same for both tracks
+#        "Data visualization":
+#          - neuefische/ds-visualisation
+#          - neuefische/ds-vizualization_libs-intro
+#
+#   3. Dict with aipm/ds keys -> tracks need DIFFERENT repos (e.g. a PM
+#      framing session on the AIPM side vs. a hands-on technical repo on
+#      the DS side for the same calendar day)
+#        "Introduction to AIPM":
+#          aipm: neuefische/aipm-course-curriculum
+#          ds: neuefische/ds-python-basics
+#
+# Purely non-technical days (career sessions, "Time for Career", GDPR/AI Act
+# policy discussion, Graduation, personal-reflection exercises like
+# "Manual of Me", etc.) have no repo and are simply left out — the script
+# skips them with a log line, which is correct.
+
+repos:
+  "Set up and Installation": neuefische/ds-getting-started
+  "Introduction to ML + Python basics": neuefische/ds-python-basics
+  "Introduction to AIPM + Python Basics": neuefische/ds-python-basics
+  "Python Basics": neuefische/ds-python-basics
+  "Python coding challenge (tic tac toe)": neuefische/ds-coding-tic-tac-toe
+
+  # --- Data fundamentals ---
+  "Pandas Numpy": neuefische/ds-pandas-numpy
+  "Intro to SQL":
+    - neuefische/ds-sql-intro
+    - neuefische/learning-games
+  "Data visualization":
+    - neuefische/ds-visualisation
+    - neuefische/ds-vizualization_libs-intro
+    - neuefische/ds-visualisation-group-work
+  "EDA Intro & Data Cleaning": neuefische/ds-data-cleaning
+  "EDA project": neuefische/ds-eda-project-template
+
+  # --- Machine Learning Basics ---
+  "Linear Regression": neuefische/ds-linear-regression
+  "Bias Variance Tradeoff": neuefische/ds-predictive-regression
+  "Bias Variance Tradeoff + Regularization": neuefische/ds-predictive-regression
+  "Gradient Descent": neuefische/ds-gradient-descent
+  "Evaluation Metrics": neuefische/ds-evaluation-metrics
+  "Logistic Regression": neuefische/ds-logistic-regression
+  "Distance Metrics + KNN": neuefische/ds-distance-metrics-knn
+  "Decision Trees": neuefische/ds-decision-tree
+  "Feature Engineering": neuefische/ds-feature-engineering
+  "Hands on ML":
+    ds: neuefische/ds-hands-on-ml
+    aipm: neuefische/aipm-hands-on-ml
+  "Ensemble Methods":
+    - neuefische/ds-ensemble-methods
+    - neuefische/ds-random-forest
+  "Diabetes Challenge": neuefische/ds-diabetes-challenge
+
+  # --- ML Project ---
+  "ML Project kick off + Data Products": neuefische/ds-ml-project-template
+  "ML Project": neuefische/ds-ml-project-template
+  "Intro to A/B Testing": 
+    - neuefische/ds-ab-testing
+    - neuefische/ds-chatbot-abtest
+
+  "ANN": neuefische/ds-artificial-neural-networks
+  "NLP": neuefische/ds-intro-to-NLP
+  "Prompt Engineering": neuefische/ds-prompt-engineering
+  "RAGs": neuefische/ds-rag-pipeline
+  "AI Agents": neuefische/ds-ai-agent
+  "MCP": neuefische/ds-mcp
+  "Streamlit": neuefische/ds-streamlit
+  "Time Series": neuefische/ds-time-series
+  "Hypothesis Testing": neuefische/ds-hypothesis-testing
+  "Hypothesis Testing and A/B Testing": 
+    - neuefische/ds-hypothesis-testing
+    - neuefische/ds-ab-testing
+  "Distributions and Confidence Intervals": neuefische/ds-distributions-ci
+  "Recommender Systems": neuefische/ds-recommender-systems
+  "Clustering": neuefische/ds-clustering
+  "Dimensionality Reduction": neuefische/ds-dimensionality-reduction
+  "Unit Testing": neuefische/ds-unit-testing
+
+  # --- Capstone ---
+  "Capstone kick-off & Data Product Scoping":
+    - neuefische/ds-capstone-project-template
+    - neuefische/ds-modeling-pipeline-template
+  "Capstone":
+    - neuefische/ds-capstone-project-template
+    - neuefische/ds-modeling-pipeline-template
+
+  # --- PM foundations (AIPM track) ---
+  "Intro To PM world: Agile, Scrum, Kanban, Lean": neuefische/aipm-intro-to-pm
+  "Stakeholder Management & Storytelling": neuefische/aipm-stakeholder-management
+  "Objectives: OKRs and KPIs": neuefische/aipm-kpi-okr
+  "User Stories: Definition of Ready (DoR), Definition of Done (DoD)": neuefische/aipm-user-stories
+  "Design Thinking": neuefische/aipm-design-thinking
+  "Feasibility Analysis & Work Break Down": neuefische/aipm-feasibility-analysis-work-breakdown
+  "Estimation, Prioritization": neuefische/aipm-estimation-prioritization
+  "Roadmapping": neuefische/aipm-roadmapping
+  "Data Product Scoping": neuefische/aipm-product-discovery-scoping
+  "Discovery": neuefische/aipm-product-discovery-framework
+  "Prototyping": neuefische/aipm-product-discovery-prototyping
+  "User Research": neuefische/aipm-product-discovery-user-research
+  "Roadmap": neuefische/aipm-product-discovery-planning
+  
+  "Software Architecture Fundamentals 1": neuefische/aipm-software-architecture-fundamentals
+  "Setup Local LLMs": neuefische/aipm-local-llm
+  "Applied LLMs for Business Cases": neuefische/aipm-applied-llms-business-cases
+
+  "GDPR-greendata - AI Act": neuefische/aipm-GDPR-greendata-aiact
+  "A/B Testing PM activity + ML Project Retro": neuefische/aipm-ml-project-retrospective
+  "AI Architecture Basics 1": neuefische/aipm-ai-architecture
+  "Vibe Coding": neuefische/aipm-vibe-coding-project
+  "Discovery + Prototyping":
+  - neuefische/aipm-product-discovery-framework
+  - neuefische/aipm-product-discovery-prototyping

@@ -1,0 +1,26 @@
+[
+    {
+        "question": "How do you deal with unbalanced data?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Managing unbalanced data is crucial to prevent model bias towards the majority class. Techniques include resampling methods like oversampling the minority class or undersampling the majority class. Additionally, algorithmic approaches like adjusting class weights during training (e.g., in SVM or random forests) help mitigate imbalance. Using evaluation metrics such as precision, recall, or F1 score instead of accuracy provides a more comprehensive understanding of model performance in unbalanced scenarios. Employing advanced methods like synthetic data generation or ensemble techniques further enhances the model's ability to handle class imbalances effectively."
+            }
+        ]
+    },
+    {
+        "question": "How do you deal with outliers?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Outliers can significantly impact model performance, and addressing them is crucial. Techniques to identify outliers include visual exploration, statistical methods like Z-score or IQR, and applying transformations like logarithmic scaling. Outliers can be treated by removing them, transforming them, or assigning them to the nearest inlier value (Winsorization) and add regularization methods. Changing the error metric to a more robust one (for example: MSE to MAE) is another method for handling outliers. Robust models, such as Random Forests or Support Vector Machines, are less sensitive to outliers. Striking a balance between outlier removal and preserving valuable information is essential to ensure model robustness and accurate predictions in the presence of extreme values."
+            }
+        ]
+    }
+]

@@ -1,0 +1,136 @@
+[
+    {
+        "question": " Which of the following are pandas data structures?",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "SpreadSheet",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "DataDict",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "answer": "DataFrame",
+                "correct": true,
+                "feedback": "That's correct! "
+            },
+            {
+                "answer": "Series",
+                "correct": true,
+                "feedback": "That's correct! "
+            }
+        ]
+    },
+    {
+        "question": " Which of the following ways to grab a subset of your dataframe is correct? ",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "df.loc[15:25, ['sepal_length', 'sepal_width']]",
+                "correct": true,
+                "feedback": "That's right! If you use \".loc\" you have to use the labels/column names to address the specific columns."
+            },
+            {
+                "code": "df.ilcoc[15:20, 'petal_length']",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "code": "df.loc[0:10, 2]",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "code": "df.iloc[20:30, 4]",
+                "correct": true,
+                "feedback": "That's right!  \".iloc\" works purely integer-location based, that means you need to pass it the index of the columns."
+            }
+        ]
+    },
+    {
+        "question": "Assuming you have a DataFrame called \"df\" with several columns. Which of the following commands returns the count of unique values for each column?",
+        "code": "",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "code": "df.value_counts()",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "code": "df.unique()",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "code": "df.count()",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "code": "df.nunique()",
+                "correct": true,
+                "feedback": "That's correct! \".unique()\" can only be applied to a Pandas Series. \".count()\" will return the amount of entries for each column and \".value_counts()\" returns the counts of unique rows in the DataFrame."
+            }
+        ]
+    },
+    {
+        "question": "Let's say you have a NumPy array a. Which of the following commands will return this output?",
+        "code": "a = np.array([1, 2, 3, 4, 5, 6, 7, 8])\n\noutput:\narray([[[1, 2,],\n        [3, 4]],\n\n       [[5, 6],\n        [7, 8]]])",
+        "type": "many_choice",
+        "answers": [
+            {
+                "code": "a.resize(2, 2, 2)",
+                "correct": true,
+                "feedback": "That's correct."
+            },
+            {
+                "code": "a.reshape(2, 2, -1)",
+                "correct": true,
+                "feedback": "Well done. "
+            },
+            {
+                "code": "a.reshape(2, 2)",
+                "correct": false,
+                "feedback": "That's not the correct answer. An array of size 8 cannot be reshaped into shape (2,2)."
+            },
+            {
+                "code": "a.reshape(2, 2, 2)",
+                "correct": true,
+                "feedback": "Well done."
+            }
+        ]
+    },
+    {
+        "question": " Assuming we have two arrays what would the result look like, if you filter array a with the array b?",
+        "code": "a = np.array([1, 2, 3, 4])\nb = np.array([False, True, True, False])\na[b]",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "code": "array([1, 4])",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "code": "array([2, 3])",
+                "correct": true,
+                "feedback": "Correct! Filtering a with b returns only the values where b is \"True\"."
+            },
+            {
+                "code": "array([True, True])",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            },
+            {
+                "code": "array(2, 3)",
+                "correct": false,
+                "feedback": "That's not the correct answer. Try again!"
+            }
+        ]
+    }
+]

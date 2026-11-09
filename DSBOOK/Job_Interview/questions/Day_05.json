@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What is the Data Science Lifecycle ?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Different sources may show different versions of the Data Science Lifecycle, e.g. by differing subdivision of steps in the cycle or slightly different orders of steps. However, the over-arching concept is, that the Data Science Lifecycle encompasses a structured and iterative process that guides practitioners through the various stages of solving real-world problems using data-driven approaches. It begins with Problem Formulation, where the objectives and goals of the project are defined, followed by Data Collection, involving the gathering of relevant data from diverse sources. Exploratory Data Analysis (EDA) is a crucial phase where the dataset is analyzed to gain insights into its structure and characteristics, guiding subsequent decisions in the modeling process. Feature Engineering involves selecting and transforming relevant features to improve model performance. The Model Training stage utilizes machine learning algorithms to build predictive models, followed by Evaluation, where model performance is assessed using appropriate metrics. Deployment involves integrating the model into a production environment, and Maintenance ensures continuous performance monitoring and updates. The lifecycle is iterative, with feedback from each stage informing refinements and improvements, contributing to a comprehensive and effective data-driven solution. "
+            }
+        ]
+    },
+    {
+        "question": "How do you deal with missing data?",
+        "type": "many_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Handling missing data is a crucial aspect of data preprocessing, requiring thoughtful strategies to maintain data integrity and model performance. Imputation is a common approach, involving the replacement of missing values with estimated values based on other available data. Techniques like mean imputation replace missing values with the mean of the observed values for that variable, maintaining the overall distribution. Another method is predictive imputation, where machine learning models, such as regression, are employed to predict missing values based on other features. Deletion is an alternative strategy, involving the removal of rows or columns with missing values. However, this approach is selective and should be used cautiously, as it may lead to information loss and biased results. The choice of strategy depends on the extent and pattern of missingness, as well as the impact on downstream analyses and model performance, requiring a careful and context-specific approach to ensure accurate and reliable results."
+            }
+        ]
+    }
+]

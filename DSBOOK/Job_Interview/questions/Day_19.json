@@ -1,0 +1,26 @@
+[
+    {
+        "question": "What is correlation and what is it useful for?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "Correlation is a statistical measure that quantifies the degree of association between two variables.  The widely used Pearson (linear) Correlation ranges from -1 to 1, where 1 signifies a perfect positive linear relationship, -1 denotes a perfect negative linear relationship, and 0 indicates no linear correlation. Another commonly used correlation is the Spearman's Rank Correlation which measures the strength and direction of the monotonic relationship between two variables. It is based on the ranks of the data rather than the actual values and ranges from -1 to 1, but it is not limited to linear relationships. Many other kinds of correlations can deal with more exotic data relationships. In general, correlation is valuable for understanding the direction and strength of relationships between variables, aiding in the identification of patterns and trends in data. It is commonly used in exploratory data analysis to reveal potential connections between features, guiding further investigation and hypothesis generation. Additionally, correlation matrices are employed in feature selection to identify redundant variables, enhancing the efficiency of machine learning models by considering only relevant features."
+            }
+        ]
+    },
+    {
+        "question": "What is the difference between correlation and causality? And what can machine learning do about it?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+                "code": "Click here for answer!",
+                "correct": true,
+                "feedback": "While correlation measures the statistical association between two variables, causality explores the cause-and-effect relationship between them. Correlation does not imply causation; a significant correlation merely indicates that changes in one variable are associated with changes in another. Causality, on the other hand, requires demonstrating that changes in one variable directly cause changes in the other, ruling out alternative explanations. Machine learning alone can identify associations between variables (correlation), but not causality. Establishing causality typically involves experimental design, controlled studies, domain knowledge, and causal modeling techniques that go beyond standard machine learning approaches. Understanding this distinction is crucial to avoid drawing incorrect conclusions from observed correlations and emphasizes the importance of rigorous experimentation and study design when making causal claims in data analysis and scientific research."
+            }
+        ]
+    }
+]

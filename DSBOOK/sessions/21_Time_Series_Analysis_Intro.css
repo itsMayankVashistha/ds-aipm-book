@@ -1,0 +1,83 @@
+/*
+
+.box_green {
+    background-color: lightgreen;
+    width: 400px;
+    height: 200px;
+    padding: 10px;
+    margin: 30px;
+    border: 2px grey solid;
+}
+
+.box_grey {
+    background-color: lightgrey;
+    width: 400px;
+    height: 200px;
+    padding: 10px;
+    margin: 30px;
+    border: 2px grey solid;
+}
+
+.box_grey_double {
+    background-color: lightgrey;
+    width: 800px;
+    height: 200px;
+    padding: 10px;
+    margin: 30px;
+    border: 2px grey solid;
+}
+
+*/
+
+.box1_store {
+  width: 500px;
+  height: 200px;
+  background: lightgreen;
+  position: absolute;
+  left: 0px;
+  top: 150px;
+}
+
+.box2_production {
+  width: 1000px;
+  height: 200px;
+  background: lightgrey;
+  position: absolute;
+  left: 550px;
+  top: 150px;
+}
+
+.box3_thieves {
+  width: 500px;
+  height: 200px;
+  background: lightgrey;
+  position: absolute;
+  left: 0px;
+  top: 400px;
+}
+
+.box4_sales1 {
+  width: 500px;
+  height: 200px;
+  background: lightgrey;
+  position: absolute;
+  left: 550px;
+  top: 400px;
+}
+
+.box5_sales2 {
+  width: 500px;
+  height: 200px;
+  background: lightgrey;
+  position: absolute;
+  left: 1053px;
+  top: 400px;
+}
+
+.box6_cake_image_equation {
+  width: 1550px;
+  height: 300px;
+  position: absolute;
+  left: 0px;
+  top: 700px;
+}

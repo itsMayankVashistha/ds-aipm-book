@@ -1,0 +1,132 @@
+[
+    {
+        "question": " How do you know if your supervised learning model has high or low bias?",
+        "code": "",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "You look at the error metric",
+                "correct": true,
+                "feedback": "That's right. Bias, by simplifying assumptions, make the mapping function easier to learn and understand. Linear algorithms with high bias are often less flexible because of their low predictive capability on complex data samples/problems. Such low predictive performance arises due to simplifying assumptions inherent in bias. Bias can also be defined as the difference between the average predictions of a model and the correct values the model is trying to predict. High biased models are oversimplified and pay little attention to the training data causing high errors in training and test data. Therefore looking at the error metric or the average error metric over several runs can indicate wether your model has high bias."
+            },
+            {
+                "answer": "You compare the error metric on different train test splits",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "You run different experiments (train/test splits) and get the average error metric",
+                "correct": true,
+                "feedback": "That's right. Bias, by simplifying assumptions, make the mapping function easier to learn and understand. Linear algorithms with high bias are often less flexible because of their low predictive capability on complex data samples/problems. Such low predictive performance arises due to simplifying assumptions inherent in bias. Bias can also be defined as the difference between the average predictions of a model and the correct values the model is trying to predict. High biased models are oversimplified and pay little attention to the training data causing high errors in training and test data. Therefore looking at the error metric or the average error metric over several runs can indicate wether your model has high bias."
+            },
+            {
+                "answer": "You run different experiments (train/test splits) and look at the standard deviation of the error metric",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            }
+        ]
+    },
+    {
+        "question": "How do you know if your supervised learning model has high or low variance?",
+        "code": "",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "You look at the error metric",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "You compare the error metric on different train test splits",
+                "correct": true,
+                "feedback": "That's right. Variance is the variability of model prediction for a given data point or a value that tells us the spread of our data. It implies the change in the estimation of the mapping function due to variations in the training data. Since in supervised ML algorithms, the mapping function is approximately determined from the training data, there will be some amount of variance. If our model picks out the underlying patterns of mapping the data, the model shouldn't differ considerably from one training set to another. This means having a high variance will significantly influence the behavior of the model due to even smaller variations in the training data. The number and types of parameters to identify the mapping function are greatly influenced by the data when the variance is high. Models with high variance pay a lot of attention to training data and do not generalize on the data which it hasn\u2019t seen before. As a result, such models perform very well on training data but have high error rates on test data. The standard deviation of the error metric will show you how much different training data influence the estimation of the mapping function."
+            },
+            {
+                "answer": "You run different experiments (train/test splits) and get the average error metric",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "You run different experiments (train/test splits) and look at the standard deviation of the error metric",
+                "correct": true,
+                "feedback": "That's right. Variance is the variability of model prediction for a given data point or a value that tells us the spread of our data. It implies the change in the estimation of the mapping function due to variations in the training data. Since in supervised ML algorithms, the mapping function is approximately determined from the training data, there will be some amount of variance. If our model picks out the underlying patterns of mapping the data, the model shouldn't differ considerably from one training set to another. This means having a high variance will significantly influence the behavior of the model due to even smaller variations in the training data. The number and types of parameters to identify the mapping function are greatly influenced by the data when the variance is high. Models with high variance pay a lot of attention to training data and do not generalize on the data which it hasn\u2019t seen before. As a result, such models perform very well on training data but have high error rates on test data. The standard deviation of the error metric will show you how much different training data influence the estimation of the mapping function."
+            }
+        ]
+    },
+    {
+        "question": "What would be more trustworthy.",
+        "code": "",
+        "type": "multiple_choice",
+        "answers": [
+            {
+                "answer": "a model with low bias and high variance",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "a model with low bias and moderate variance",
+                "correct": true,
+                "feedback": "High variance is usually a very bad thing.. as you do not know what to expect on new data. With high bias but low variance, although you do not have a lot of confidence in your predictions at least you know it's consistent. So you can look for a better model if needed."
+            },
+            {
+                "answer": "a model with moderate bias and moderate variance",
+                "correct": true,
+                "feedback": "High variance is usually a very bad thing.. as you do not know what to expect on new data. With high bias but low variance, although you do not have a lot of confidence in your predictions at least you know it's consistent. So you can look for a better model if needed."
+            },
+            {
+                "answer": "a model with moderate bias and low variance",
+                "correct": true,
+                "feedback":"High variance is usually a very bad thing.. as you do not know what to expect on new data. With high bias but low variance, although you do not have a lot of confidence in your predictions at least you know it's consistent. So you can look for a better model if needed."
+            },
+            {
+                "answer": "a model with high bias and low variance",
+                "correct": true,
+                "feedback": "High variance is usually a very bad thing.. as you do not know what to expect on new data. With high bias but low variance, although you do not have a lot of confidence in your predictions at least you know it's consistent. So you can look for a better model if needed."
+            }
+        ]
+    },
+    {
+        "question": "What can be done to avoid over-fitting?",
+        "code": "",
+        "type": "many_choice",
+        "answers": [
+            {
+                "answer": "Use regularization (l1, l2, or other specific to the model)",
+                "correct": true,
+                "feedback": "Well done! Usually you would try regularization to penalize over fitting. Or changing the model, a simple model with fewer parameters has high bias and low variance. In contrast, a model with many parameters has high variance and low bias. For any supervised model, a search for a right/good balance without overfitting and underfitting the data is required. An optimal balance of bias and variance prevents both overfitting and underfitting of the model."
+            },
+            {
+                "answer": "Add more assumptions to your model, or user a more complex model",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Get more data",
+                "correct": true,
+                "feedback": "Well done! Usually you would try regularization to penalize over fitting. Or changing the model, a simple model with fewer parameters has high bias and low variance. In contrast, a model with many parameters has high variance and low bias. For any supervised model, a search for a right/good balance without overfitting and underfitting the data is required. An optimal balance of bias and variance prevents both overfitting and underfitting of the model."
+            },
+            {
+                "answer": "Use a different evaluation metric.",
+                "correct": false,
+                "feedback": "Sorry, that was wrong. Please try again"
+            },
+            {
+                "answer": "Simplify the assumptions, or use a simpler model",
+                "correct": true,
+                "feedback": "Well done! Usually you would try regularization to penalize over fitting. Or changing the model, a simple model with fewer parameters has high bias and low variance. In contrast, a model with many parameters has high variance and low bias. For any supervised model, a search for a right/good balance without overfitting and underfitting the data is required. An optimal balance of bias and variance prevents both overfitting and underfitting of the model."
+            }
+        ]
+    },
+    {
+        "question": " What is the bias variance tradeoff?",
+        "type": "multiple_choice",
+        "answer_cols": 1,
+        "answers": [
+            {
+            "answer": "Click here to see the answer.",
+            "correct": true,
+            "feedback": "Supervised ML algorithms want to achieve low bias and low variance ensuring good prediction on test set. Whereas linear ML algorithms often have a high bias but a low variance, nonlinear ML algorithms often have a low bias but a high variance. So we see a battle to balance out bias and variance with no escape from the relationship between bias and variance. If we increase the bias, the variance will decrease. If we increase the variance, the bias will decrease."
+            }
+        ]
+    }
+]
